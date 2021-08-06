@@ -1,0 +1,78 @@
+.primary_color{
+    background-color: #28804B;
+}
+.white_color{
+    color: white;
+    
+}
+.navbar-brand {
+    color: white;
+}
+a.a-menu{
+    color: #28804B;
+    text-decoration: none;
+}
+.btn-full {
+    color: white;
+    background-color: transparent;
+    border: 1px solid #28804B;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #28804B;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+}
+.btn-outline {
+    color: #28804B;
+    background-color: transparent;
+    border: 1px solid #28804B;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+}
+.menu-nav{
+    position:absolute;
+}
+
+
+
+
+//MEDIAS SCREEN DESKTOP
+@media screen and (min-width:1024px){
+    .btn-light {
+        color: #28804B  
+    }
+    .btn-outline {
+        color: white;
+        background-color: transparent;
+        border: 1px solid white;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        border-radius: 0.25rem;
+    }
+ }
