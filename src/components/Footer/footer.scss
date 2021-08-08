@@ -1,0 +1,33 @@
+.footer-background{
+    background-color: #28804B;
+}
+
+.footer-info{
+    p{
+        color: #FFF;
+        text-align: center;
+        font-style: normal;
+        font-weight: lighter;
+        font-size: 16px;
+        line-height: 27px;
+
+    }
+    p.followus{
+        font-weight: normal;
+    }
+}
+//LISTA DE ICONOS
+.social-network{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+@media screen and (min-width:1024px){
+    .footer-info-lg{
+        p{
+            text-align: left;
+        }
+        
+    }
+
+}
