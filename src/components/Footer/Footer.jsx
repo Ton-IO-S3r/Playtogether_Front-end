@@ -25,8 +25,8 @@ const Footer = () => {
                             <Col md="12" lg="6" className="footer-info ">
                                 <p className="mt-3 mt-lg-5 followus">Siguenos</p>
                                 <ul className="d-flex mt-3 justify-content-around justify-content-md-center social-network">
-                                    <li class="me-5"><img src={fb}/></li>
-                                    <li class="me-5 "><img src={tw}/></li>
+                                    <li className="me-5"><img src={fb}/></li>
+                                    <li className="me-5 "><img src={tw}/></li>
                                     <li><img src={ig}/></li>
                                 </ul>
                             </Col>
