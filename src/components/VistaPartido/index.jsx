@@ -12,16 +12,6 @@ const VistaPartido = () => {
   const [showA, setShowA] = useState(true);
   const toggleShowA = () => setShowA(!showA);
   return (
-    // <div className="container-fluid vista-partido-container" >
-    //   <div className="row">
-    //     <div className="col">
-    //       <h1 className="py-5">Detalles del Partido</h1>
-    //       <DetalleCancha />
-    //     </div>
-    //   </div>
-      
-    // </div>
-
     <Container fluid={true} className="vista-partido-container" style={{backgroundImage: `url(${background})`}}>
         <Container>
           <h1 className="py-3">Detalles del partido</h1>
