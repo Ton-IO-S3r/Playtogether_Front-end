@@ -1,0 +1,42 @@
+header{
+    // background-image: url('../assets/img/hero-mobile.png');
+    background: url(/assets/images/hero-mobile.png),no-repeat;
+    background-size: cover;
+    height: 50vh;
+    background-position: center,center;
+}
+.title{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 48px;
+    text-align: center;
+    color: #fff;
+    margin-top: 60px;
+    text-shadow: 5px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+//MEDIAS SCREEN DESKTOP
+@media screen and (min-width:768px){
+    header{
+        // background-image: url('../assets/img/hero-mobile.png');
+        background: url(/assets/images/hero_img.png),no-repeat;
+        height: 70vh;
+    }
+}
+@media screen and (min-width:1024px){
+    // header{
+    //     // background-image: url('../assets/img/hero-mobile.png');
+    //     background: url(/assets/images/hero_img.png),no-repeat;
+    //     height: 70vh;
+    // }
+    .hero-img{
+        height: 100%;
+        width: 100%;
+    }
+    .title{
+        font-size: 45px;
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+}

@@ -1,5 +1,7 @@
 import React, {Fragment} from 'react'
 import { Spin as Hamburger} from 'hamburger-react'
+//RUTAS
+import { Link } from 'react-router-dom'
 //IMAGENES
 import logo from 'assets/icons/PT_Logo.svg'
 //ESTILOS
@@ -15,20 +17,21 @@ const Navbar = () => {
                         <a className="navbar-brand m-0" href="#">
                             <img src={logo} alt=""  className="d-inline-block align-text-top"/>
                         </a>
-                        <a className="navbar-brand me-auto p-2 bd-highlight playtogether" href="#">PlayTogether!</a>
+                        <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to='/'>PlayTogether!</Link>
+                        {/* <a className="navbar-brand me-auto p-2 bd-highlight playtogether" href="#">PlayTogether!</a> */}
                         <button className="navbar-toggler p-0" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <Hamburger color="white"/>
                         </button>
                         <div className="d-none d-md-none d-lg-block nav-menu">
                                 <ul className="navbar-nav">
                                     <li className="nav-item align-self-center">
-                                        <a className="search-games" href="#">Buscar Partidos</a>
+                                        <Link className="search-games" to='/search-games'>Buscar Partidos</Link>
                                     </li>
                                     <li className="nav-item align-self-center ms-5">
-                                        <a type="button" className="btn-outline" href="#">Iniciar Sesion</a>
+                                        <Link type="button" className="btn-outline" to='/login'>Iniciar Sesion</Link>
                                     </li>
                                     <li className="nav-item align-self-center ms-5">
-                                        <a type="button" className="btn-join"  href="#">Unete!</a>
+                                        <Link type="button" className="btn-join" to='/sign-in'>Unete!</Link>
                                     </li>
                                 </ul>
                         </div>
@@ -41,14 +44,14 @@ const Navbar = () => {
                     <div className="navbar-nav">
                                     
                         <div className="nav-item align-self-center mt-4 ">
-                            <a className="a-menu" href="#">Buscar Partidos</a>
+                            <Link className="a-menu" to='/search-games'>Buscar Partidos</Link>
                         </div>
                         <div className="d-flex justify-content-between mt-5 mb-4">
                             <div className="nav-item align-self-center ">
-                                <button type="button" className="btn-outline" href="#">Iniciar Sesion</button>
+                                <Link type="button" className="btn-outline" to='/login'>Iniciar Sesion</Link>
                             </div>
                             <div className="nav-item align-self-center ">
-                                <a type="button" className="btn-full" href="#">Unete!</a>
+                                <Link type="button" className="btn-full" to='/sign-in'>Unete!</Link>
                             </div>
                         </div>
                                     

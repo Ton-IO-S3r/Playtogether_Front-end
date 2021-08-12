@@ -1,15 +1,20 @@
 import React from 'react'
-import Header from 'components/Header/Header'
-import Footer from 'components/Footer/Footer'
+//RUTAS
+import {BrowserRouter as Router, Switch, Route}   from 'react-router-dom'
+//ESTILO BOOTSTRAP
 import 'bootstrap/dist/css/bootstrap.css'
+//PAGINAS-COMPONENTES
+import Landing from 'pages/Landing'
 
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Footer/>
-      
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Landing}/>
+        </Switch>
+      </Router>
       
     </div>
   );
