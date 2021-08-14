@@ -1,0 +1,35 @@
+.container-login{
+    // background-image: url('../assets/img/hero-mobile.png');
+    background: url(/assets/images/back-login.jpg),no-repeat;
+    background-size: cover;
+    background-position: center,center;
+    height: 100vh
+}
+.col-login{
+    margin-top: 30%;
+}
+.h1-login{
+    text-align: center;
+    color: #32A77A;
+}
+.btn-login{
+    background-color: #32A77A;
+    border-color: #32A77A;
+    color: #fff;
+}
+.p-login{
+    font-size: 12px;
+    text-align: center;
+}
+
+@media screen and (min-width:768px){
+    .col-login{
+        margin-top: 20%;
+    }
+}
+
+@media screen and (min-width:1440px){
+    .col-login{
+        margin-top: 10%;
+    }
+}

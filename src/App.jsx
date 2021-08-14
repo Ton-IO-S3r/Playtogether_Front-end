@@ -1,6 +1,7 @@
 import React from 'react'
-import Header from 'components/Header/Header'
-import Footer from 'components/Footer/Footer'
+//RUTAS
+import {BrowserRouter as Router, Switch, Route}   from 'react-router-dom'
+//ESTILO BOOTSTRAP
 import 'bootstrap/dist/css/bootstrap.css'
 import CardPerfil from 'components/CardPerfil';
 import { useState } from 'react';
@@ -8,6 +9,10 @@ import avatar from 'assets/user3.jpg'
 import VistaPartido from 'components/VistaPartido';
 import UserMatches from 'components/UserMatches';
 import VistaPerfil from 'components/VistaPerfil';
+//PAGINAS-COMPONENTES
+import Landing from 'pages/Landing'
+import Login from 'pages/Login'
+
 
 function App() {
   const [user, setUser] = useState(
@@ -104,10 +109,12 @@ function App() {
     })
   return (
     <div className="App">
-      <Header/>
-      <VistaPerfil user={user}/>
-      <Footer/>
-      
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Landing}/>
+          <Route path="/login" component={Login}/>
+        </Switch>
+      </Router>
       
     </div>
   );

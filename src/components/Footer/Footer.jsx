@@ -8,10 +8,12 @@ import ig from 'assets/icons/ig-icon.svg'
 //IMPORT ESTILO DEL COMPONENTE
 import './footer.scss'
 
-const Footer = () => {
+const Footer = (props) => {
+
+    const {mt} = props
     return (
         <div >
-            <footer>
+            <footer className={mt}>
                 <Container fluid className="footer-background">
                     <Container>
                         <Row className="justify-content-center">

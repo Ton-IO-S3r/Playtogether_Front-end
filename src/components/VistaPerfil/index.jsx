@@ -6,7 +6,7 @@ import Navbar from 'components/Navbar/Navbar';
 import Footer from 'components/Footer/Footer';
 import CardPerfil from 'components/CardPerfil';
 import UserMatches from 'components/UserMatches';
-import avatar from 'assets/user4.jpg'
+import avatar from 'assets/images/user4.jpg'
 import background from 'assets/images/nathan-rogers-ObhCU6Vhoe8-unsplash.jpg'
 
 const VistaPerfil = ({user}) => {

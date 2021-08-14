@@ -16,8 +16,10 @@
   .button-call-to-mobile{
     background-color: #32A77A ;
     color: #FFF;
-    width: 80%;
     font-style: normal;
     font-weight: bold;
   
   }
+  .form-control:focus{
+    border-color: #32A77A ;
+}
