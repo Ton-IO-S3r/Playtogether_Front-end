@@ -105,7 +105,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <VistaPartido/>
+      <VistaPerfil user={user}/>
       <Footer/>
       
       
