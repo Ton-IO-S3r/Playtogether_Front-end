@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './detallecancha.scss'
 import { useState } from 'react';
 import cancha from 'assets/images/ligaesp_sauces.png'
 import regaderas from 'assets/icons/regaderas.svg'
@@ -12,7 +12,7 @@ import calendar from 'assets/icons/calendar.svg'
 import time from 'assets/icons/time.svg'
 import genre from 'assets/icons/genre.svg'
 import { Card } from 'react-bootstrap';
-import UnirseBtn from './UnirseBtn';
+import UnirseBtn from '../ActionBtn';
 
 
 const DetalleCancha = () => {
@@ -92,7 +92,7 @@ const DetalleCancha = () => {
             </div>
           </div>
         </div>
-        <UnirseBtn />
+        <UnirseBtn action="Unirse"/>
       </Card.Body>
     </Card>
     

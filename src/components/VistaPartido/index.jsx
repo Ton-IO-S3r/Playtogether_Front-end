@@ -2,11 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './vistapartido.scss'
 import background from 'assets/images/joshua-hoehne-kl6VSadl5mA-unsplash.jpg'
 import { Container, Row, Col } from 'react-bootstrap';
-import DetalleCancha from './DetalleCancha';
+import DetalleCancha from '../DetalleCancha/DetalleCancha';
 import { useState } from 'react';
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from 'react-bootstrap/ToastContainer'
-import Equipos from './Equipos';
+import Equipos from '../Equipos/Equipos';
 
 const VistaPartido = () => {
   const [showA, setShowA] = useState(true);

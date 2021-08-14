@@ -1,6 +1,6 @@
 import './equipos.scss'
-import JugadorEquipo from './JugadorEquipo'
-import UnirseBtn from './UnirseBtn'
+import JugadorEquipo from '../JugadorEquipo'
+import UnirseBtn from '../ActionBtn'
 
 const Equipos = () => {
   return (
@@ -70,7 +70,7 @@ const Equipos = () => {
           <JugadorEquipo team="white"/>
         </div>
       </div>
-      <UnirseBtn />
+      <UnirseBtn action="Unirse" />
     </div>
   )
 }

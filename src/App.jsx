@@ -2,9 +2,12 @@ import React from 'react'
 import Header from 'components/Header/Header'
 import Footer from 'components/Footer/Footer'
 import 'bootstrap/dist/css/bootstrap.css'
-import CardPerfil from 'components/PerfilUsuario/CardPerfil';
+import CardPerfil from 'components/CardPerfil';
 import { useState } from 'react';
-import avatar from 'assets/user_avatar2.jpg'
+import avatar from 'assets/user3.jpg'
+import VistaPartido from 'components/VistaPartido';
+import UserMatches from 'components/UserMatches';
+import VistaPerfil from 'components/VistaPerfil';
 
 function App() {
   const [user, setUser] = useState(
@@ -18,48 +21,81 @@ function App() {
           "position": "Delantero",
           "matches": [
               {
-                  "field": "sEZ",
-                  "date": "2020-08-10"
+                  "field": "Deportivo Santa Cruz Meyehualco",
+                  "date": "2020-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2021-02-10"
+                  "date": "2021-02-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2021-02-10"
+                  "date": "2021-02-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2021-08-10"
+                  "date": "2021-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2021-08-10"
+                  "date": "2021-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2021-08-10"
+                  "date": "2021-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "fb99",
-                  "date": "2021-08-10"
+                  "date": "2021-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2021-08-10"
+                  "date": "2021-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "fb99",
-                  "date": "2021-08-10"
+                  "date": "2021-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2021-08-10"
+                  "date": "2021-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               },
               {
                   "field": "sEZ",
-                  "date": "2022-08-10"
+                  "date": "2022-08-10",
+                  "time": "5:00 pm",
+                  "match_type": "7 vs 7",
+                  "category": "Varonil"
               }
           ],
           "matches_count": 11,
@@ -69,7 +105,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <CardPerfil avatar={avatar} user={user}/>
+      <VistaPartido/>
       <Footer/>
       
       
