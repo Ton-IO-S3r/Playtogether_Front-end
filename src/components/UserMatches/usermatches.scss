@@ -12,7 +12,7 @@
 @media only screen and (min-width: 768px) {
   .user-matches-container{
     .matches-list-container{
-      height: 50vh;
+      max-height: 50vh;
       overflow:scroll;
       border-radius: 10px;
     }

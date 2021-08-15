@@ -16,9 +16,9 @@ const UserMatches = ({matches, fields, num_matches}) => {
       <hr />
       <div className="matches-list-container">
         {
-          matches.map((match) => (
+          matches.map((match, index) => (
             
-            <MatchResume date={match.date} time={match.time} field_name={match.field} category={match.category} match_type={match.match_type}/>
+            <MatchResume key={index.toString()} date={match.date} field_name={match.field.name} match_type={match.field.football_type}/>
           ))
         }
       </div>
