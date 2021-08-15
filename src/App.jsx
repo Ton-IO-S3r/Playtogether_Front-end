@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 //PAGINAS-COMPONENTES
 import Landing from 'pages/Landing'
 import Login from 'pages/Login'
+import CreateGame from 'pages/CreateGame/CreateGame'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing}/>
           <Route path="/login" component={Login}/>
+          <Route path="/search-games" component={CreateGame}/>
         </Switch>
       </Router>
       
