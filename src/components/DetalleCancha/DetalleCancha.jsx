@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './detallecancha.scss'
 import { useState } from 'react';
-import cancha from 'assets/images/ligaesp_sauces.png'
+import cancha from 'assets/images/vienna-reyes-Zs_o1IjVPt4-unsplash.jpg'
 import regaderas from 'assets/icons/regaderas.svg'
 import arbitraje from 'assets/icons/arbitraje.svg'
 import estacionamiento from 'assets/icons/estacionamiento.svg'

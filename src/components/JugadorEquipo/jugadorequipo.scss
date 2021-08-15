@@ -1,3 +1,11 @@
 .jugador{
   width: 40%;
+  .user-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }

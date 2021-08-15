@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Landing from 'pages/Landing'
 import Login from 'pages/Login'
 import PerfilUsuario from 'pages/Perfil';
+import VistaPartido from 'pages/VistaPartido'
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing}/>
           <Route path="/login" component={Login}/>
-          <Route path="/users/:id" component={PerfilUsuario}/>
+          <Route path="/usuarios/:id" component={PerfilUsuario}/>
+          <Route path="/partidos/:id" component={VistaPartido}/>
         </Switch>
       </Router>
       
