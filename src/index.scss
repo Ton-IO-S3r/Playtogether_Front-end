@@ -16,8 +16,19 @@
   .button-call-to-mobile{
     background-color: #32A77A ;
     color: #FFF;
-    width: 80%;
     font-style: normal;
     font-weight: bold;
   
   }
+  .form-control:focus{
+    border-color: #32A77A ;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #28804B ;
+  border-color: #28804B ;
+}
+.alert-danger {
+  font-size: 10px;
+}
