@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Header = () => {
     return (
             <header>
-                <Navbar/>
+                <Navbar isLogin={false}/>
                 <Hero/>
 
             </header>
