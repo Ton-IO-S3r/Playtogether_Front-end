@@ -19,7 +19,7 @@ const UserMatches = ({matches, fields, num_matches}) => {
         {
           matches.map((match, index) => (
             
-            <MatchResume key={index.toString()} date={match.date} field_name={match.field.name} match_type={match.field.football_type} /* category={match.field.category} *//>
+            <MatchResume key={index.toString()} date={match.date} field_name={match.field.name} match_type={match.field.football_type} category={match.category}/>
           ))
         }
       </div>
