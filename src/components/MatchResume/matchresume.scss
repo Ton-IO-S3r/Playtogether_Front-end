@@ -1,0 +1,27 @@
+.match-resume-cont{
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 6px #C4C4C4;
+  border-radius: 10px;
+  .date-container{
+    border-radius: 10px 0 0 10px;
+    height: max-content;
+  }
+  .match-details-container{
+    max-width: 250px;
+    div{
+      h5{
+        font-size: 16px;
+        &.field{
+          text-align: left;
+          text-overflow:ellipsis;
+          overflow:hidden;
+          white-space:nowrap;
+        }
+      }
+      img{
+        height: 20px;
+      }
+    }
+    
+  }
+}
