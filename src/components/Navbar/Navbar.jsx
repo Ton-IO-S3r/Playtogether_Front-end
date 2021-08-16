@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 import { Spin as Hamburger} from 'hamburger-react'
 //RUTAS
 import { Link } from 'react-router-dom'
@@ -7,7 +7,8 @@ import logo from 'assets/icons/PT_Logo.svg'
 //ESTILOS
 import './navbar.scss'
 
-const Navbar = () => {
+const Navbar = (props) => {
+    const {isLogin} = props
     return (
         <Fragment>
         {/* AQUI INICIA LA NAVBAR */}
@@ -23,6 +24,8 @@ const Navbar = () => {
                             <Hamburger color="white"/>
                         </button>
                         <div className="d-none d-md-none d-lg-block nav-menu">
+                            { 
+                             isLogin === false ? (
                                 <ul className="navbar-nav">
                                     <li className="nav-item align-self-center">
                                         <Link className="search-games" to='/search-games'>Buscar Partidos</Link>
@@ -34,6 +37,25 @@ const Navbar = () => {
                                         <Link type="button" className="btn-join" to='/sign-in'>Unete!</Link>
                                     </li>
                                 </ul>
+                                )
+                                :
+                                (
+                                    <ul className="navbar-nav">
+                                    <li className="nav-item align-self-center">
+                                        <Link className="search-games" to='/search-games'>Buscar Partidos</Link>
+                                    </li>
+                                    <li className="nav-item align-self-center ms-5">
+                                        <Link type="button" className="d-none btn-outline" to='/login'>Iniciar Sesion</Link>
+                                    </li>
+                                    <li className="nav-item align-self-center ms-5">
+                                        <Link type="button" className="btn-join" to='/sign-in'>Unete!</Link>
+                                    </li>
+                                    </ul>
+                                )
+
+                            
+                            }
+                                
                         </div>
                 </nav>
             </div>
@@ -41,22 +63,43 @@ const Navbar = () => {
         {/* MENU DESPEGABLE */}
         <div className="container-fluid bg-light  d-lg-none menu-nav">
             <div className="collapse navbar-collapse bg-light " id="navbarSupportedContent">
-                    <div className="navbar-nav">
-                                    
-                        <div className="nav-item align-self-center mt-4 ">
-                            <Link className="a-menu" to='/search-games'>Buscar Partidos</Link>
-                        </div>
-                        <div className="d-flex justify-content-between mt-5 mb-4">
-                            <div className="nav-item align-self-center ">
-                                <Link type="button" className="btn-outline" to='/login'>Iniciar Sesion</Link>
-                            </div>
-                            <div className="nav-item align-self-center ">
-                                <Link type="button" className="btn-full" to='/sign-in'>Unete!</Link>
-                            </div>
-                        </div>
-                                    
-                                    
+            {isLogin === false ? (
+                <div className="navbar-nav">
+                    <div className="nav-item align-self-center mt-4 ">
+                        <Link className="a-menu" to='/search-games'>Buscar Partidos</Link>
                     </div>
+                    <div className="d-flex justify-content-between mt-5 mb-4">
+                        <div className="nav-item align-self-center ">
+                            <Link type="button" className="btn-outline" to='/login'>Iniciar Sesion</Link>
+                        </div>
+                        <div className="nav-item align-self-center ">
+                            <Link type="button" className="btn-full" to='/sign-in'>Unete!</Link>
+                        </div>
+                    </div>
+                </div>
+
+
+            )
+            :
+            (
+
+
+                <div className="navbar-nav">
+                    <div className="nav-item align-self-center mt-4 ">
+                        <Link className="a-menu" to='/search-games'>Buscar Partidos</Link>
+                    </div>
+                    <div className="d-flex justify-content-center mt-5 mb-4">
+                        <div className="nav-item align-self-center ">
+                            <Link type="button" className="d-none btn-outline" to='/login'>Iniciar Sesion</Link>
+                        </div>
+                        <div className="nav-item align-self-center ">
+                            <Link type="button" className="btn-full" to='/sign-in'>Unete!</Link>
+                        </div>
+                    </div>
+                </div>
+            )
+            }
+                    
             </div>
         </div>
         </Fragment>
