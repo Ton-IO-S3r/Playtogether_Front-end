@@ -1,37 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cardperfil.scss'
-import gear from 'assets/icons/edit_profile.svg'
 import background from 'assets/images/image7.png'
-import { Modal } from 'react-bootstrap';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { Button } from 'react-bootstrap';
 import { useState } from 'react';
-import ActionBtn from 'components/ActionBtn'
-// import background from 'assets/images/bruno-aguirre-yJBMbQgw9mg-unsplash.jpg'
-
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header className="border-0" closeButton />
-      <Modal.Title id="contained-modal-title-vcenter" className="text-center">
-        Edita tu perfil
-      </Modal.Title>
-      <Modal.Body>
-        
-      </Modal.Body>
-      <Modal.Footer className="justify-content-center w-100">
-        <ActionBtn action="Cerrar" onClick={props.onHide}>Close</ActionBtn>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
+import ModalPerfil from 'components/PerfilModal'
 
 const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined}) => {
   const [modalShow, setModalShow] = useState(false);
@@ -58,7 +31,7 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
         <p className="date-joined-p">Jugando fútbol desde: <strong>{user_date_joined}</strong></p>
       </div>
 
-      <MyVerticallyCenteredModal
+      <ModalPerfil
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
