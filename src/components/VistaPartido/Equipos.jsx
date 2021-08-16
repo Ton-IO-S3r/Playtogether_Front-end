@@ -10,7 +10,7 @@ const Equipos = () => {
       <div>
         <span>Equipo negro</span>
         <span className="fs-5 mx-4"><strong>VS</strong></span>
-        <span>Equipo blanco</span>
+        <span>Equipo blanco1</span>
       </div>
       <div className="teams-container my-4">
         <div className="d-flex flex-row justify-content-around flex-nowrap">

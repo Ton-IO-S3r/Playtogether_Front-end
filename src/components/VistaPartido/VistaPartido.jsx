@@ -24,7 +24,7 @@ const VistaPartido = () => {
 
     <Container fluid={true} className="vista-partido-container" style={{backgroundImage: `url(${background})`}}>
         <Container>
-          <h1 className="py-3">Detalles del partido</h1>
+          <h1 className="py-3">Detalles del partido1</h1>
           <Row className="gy-3">
             <Col sm={12} md={6}>
               <DetalleCancha />

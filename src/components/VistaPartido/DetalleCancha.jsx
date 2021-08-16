@@ -24,7 +24,7 @@ const DetalleCancha = () => {
     <Card className="border-light rounded overflow-auto">
       <Card.Img variant="top" src={cancha} alt="liga_española_sauces" />
       <Card.Body>
-        <Card.Title className="fs-3 fw-bolder text-dark">Liga española - Los Sauces</Card.Title>
+        <Card.Title className="fs-3 fw-bolder text-dark">Liga española 1 - Los Sauces</Card.Title>
         <div className="d-flex flex-wrap justify-content-around align-items-start my-4">
           <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
             <img className="match-icon" src={arbitraje} alt="arbitraje" />
