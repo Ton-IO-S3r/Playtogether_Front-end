@@ -6,15 +6,20 @@ import 'bootstrap/dist/css/bootstrap.css'
 //PAGINAS-COMPONENTES
 import Landing from 'pages/Landing'
 import Login from 'pages/Login'
+import PerfilUsuario from 'pages/Perfil';
+import VistaPartido from 'pages/VistaPartido'
 
 
 function App() {
+  
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/" component={Landing}/>
           <Route path="/login" component={Login}/>
+          <Route path="/usuarios/:id" component={PerfilUsuario}/>
+          <Route path="/partidos/:id" component={VistaPartido}/>
         </Switch>
       </Router>
       

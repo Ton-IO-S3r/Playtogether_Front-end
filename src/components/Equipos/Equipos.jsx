@@ -1,6 +1,6 @@
 import './equipos.scss'
-import JugadorEquipo from './JugadorEquipo'
-import UnirseBtn from './UnirseBtn'
+import JugadorEquipo from '../JugadorEquipo'
+import UnirseBtn from '../ActionBtn'
 
 const Equipos = () => {
   return (
@@ -10,7 +10,7 @@ const Equipos = () => {
       <div>
         <span>Equipo negro</span>
         <span className="fs-5 mx-4"><strong>VS</strong></span>
-        <span>Equipo blanco1</span>
+        <span>Equipo blanco</span>
       </div>
       <div className="teams-container my-4">
         <div className="d-flex flex-row justify-content-around flex-nowrap">
@@ -70,7 +70,7 @@ const Equipos = () => {
           <JugadorEquipo team="white"/>
         </div>
       </div>
-      <UnirseBtn />
+      <UnirseBtn action="Unirse" />
     </div>
   )
 }

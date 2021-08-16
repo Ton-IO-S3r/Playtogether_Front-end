@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './detallecancha.scss'
 import { useState } from 'react';
-import cancha from 'assets/images/ligaesp_sauces.png'
+import cancha from 'assets/images/vienna-reyes-Zs_o1IjVPt4-unsplash.jpg'
 import regaderas from 'assets/icons/regaderas.svg'
 import arbitraje from 'assets/icons/arbitraje.svg'
 import estacionamiento from 'assets/icons/estacionamiento.svg'
@@ -12,7 +12,7 @@ import calendar from 'assets/icons/calendar.svg'
 import time from 'assets/icons/time.svg'
 import genre from 'assets/icons/genre.svg'
 import { Card } from 'react-bootstrap';
-import UnirseBtn from './UnirseBtn';
+import UnirseBtn from '../ActionBtn';
 
 
 const DetalleCancha = () => {
@@ -24,7 +24,7 @@ const DetalleCancha = () => {
     <Card className="border-light rounded overflow-auto">
       <Card.Img variant="top" src={cancha} alt="liga_española_sauces" />
       <Card.Body>
-        <Card.Title className="fs-3 fw-bolder text-dark">Liga española 1 - Los Sauces</Card.Title>
+        <Card.Title className="fs-3 fw-bolder text-dark">Liga española - Los Sauces</Card.Title>
         <div className="d-flex flex-wrap justify-content-around align-items-start my-4">
           <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
             <img className="match-icon" src={arbitraje} alt="arbitraje" />
@@ -92,7 +92,7 @@ const DetalleCancha = () => {
             </div>
           </div>
         </div>
-        <UnirseBtn />
+        <UnirseBtn action="Unirse"/>
       </Card.Body>
     </Card>
     
