@@ -26,26 +26,57 @@ const user =
     }
   }
   
-  
+const userProfile = 
+  {
+    "user_data": {
+        "username": "test",
+        "first_name": "",
+        "last_name": "",
+        "email": ""
+    },
+    "player_data": {
+        "photo": "",
+        "gender": "",
+        "nationality": "",
+        "position": 1
+    }
+  }
   
 
 const PerfilUsuario = () => {
   const {id} = useParams();
   const [userData, setUserData] = useState(user);
+  const [userProfileData, setUserProfileData] = useState(userProfile);
  
   useEffect(() => {
     const getUserData = async () => {
-      const dataFromServer = await fetchUser()
+      const dataFromServer = await getUser()
       setUserData(dataFromServer)
+    }
+    const getUserProfileData = async () => {
+      const dataFromServer = await getUser4Update()
+      setUserProfileData(dataFromServer)
     } 
     // setTimeout(() => {
       getUserData()
+      getUserProfileData()
     // }, 2000);
     
   }, [])
-  const fetchUser = async ()=>{
+  const getUser = async ()=>{
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/players/${id}`);
+      const data = await response.json();
+      
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const getUser4Update = async ()=>{
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/players/update/${id}`);
       const data = await response.json();
       
       return data
@@ -70,6 +101,7 @@ const PerfilUsuario = () => {
                 user_position={userData.players.position}
                 user_dominant_foot={userData.players.dominant_food}
                 user_date_joined={userData.date_joined.split("T")[0].split("-").reverse().join("/")}
+                user_to_update = {userProfileData}
               />
             </Col>
             <Col sm={12} md={6} lg={5}>

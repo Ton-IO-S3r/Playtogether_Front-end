@@ -4,9 +4,9 @@ import background from 'assets/images/image7.png'
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useState } from 'react';
-import ModalPerfil from 'components/PerfilModal'
+import ModalPerfil from 'components/PerfilModal/PerfilModal'
 
-const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined}) => {
+const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, user_to_update}) => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <div className="card-perfil text-center mx-auto d-flex flex-column justify-content-end" style={{backgroundImage: `url(${background})`}}>
@@ -34,6 +34,8 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
       <ModalPerfil
         show={modalShow}
         onHide={() => setModalShow(false)}
+        user_data = {user_to_update.user_data}
+        player_data = {user_to_update.player_data}
       />
     </div>
   )

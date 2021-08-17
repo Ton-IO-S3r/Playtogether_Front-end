@@ -3,7 +3,7 @@ import './usermatches.scss'
 import MatchResume from "components/MatchResume"
 
 const UserMatches = ({matches, fields, num_matches}) => {
-  console.log(matches)
+  
   return (
     <div className="user-matches-container text-center py-4 px-2 mx-auto">
       <div className="d-flex flex-row justify-content-between align-items-center p-3">
