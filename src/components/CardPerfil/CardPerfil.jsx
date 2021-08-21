@@ -2,11 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './cardperfil.scss'
 import background from 'assets/images/image7.png'
 import IconButton from '@material-ui/core/IconButton';
-import SettingsIcon from '@material-ui/icons/Settings';
+import EditIcon from '@material-ui/icons/Edit';
 import { useState } from 'react';
 import ModalPerfil from 'components/PerfilModal/PerfilModal'
 
-const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, user_to_update}) => {
+const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, user_to_update, setUser_to_update}) => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <div className="card-perfil text-center mx-auto d-flex flex-column justify-content-end" style={{backgroundImage: `url(${background})`}}>
@@ -14,9 +14,8 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
         <div className="head d-flex flex-column align-items-center">
           <div className="avatar mt" style={{backgroundImage: `url(${avatar})`}}></div>
           <div className="edit-profile-icon">
-            {/* <a href=""><img src={gear} alt="edit_profile" /></a> */}
             <IconButton onClick={() => setModalShow(true)}>
-              <SettingsIcon/>
+              <EditIcon/>
             </IconButton>
           </div>
           <h5>{user_first_name} {user_last_name}</h5>
@@ -34,8 +33,7 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
       <ModalPerfil
         show={modalShow}
         onHide={() => setModalShow(false)}
-        user_data = {user_to_update.user_data}
-        player_data = {user_to_update.player_data}
+
       />
     </div>
   )
