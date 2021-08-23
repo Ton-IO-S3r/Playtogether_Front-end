@@ -16,7 +16,7 @@ const VistaPartido = () => {
   return (
     <>
       <Navbar/>
-      <Container fluid={true} className="vista-partido-container" style={{backgroundImage: `url(${background})`}}>
+      <Container fluid={true} className="vista-partido-container pb-5" style={{backgroundImage: `url(${background})`}}>
         <Container>
           <h1 className="py-3">Detalles del partido</h1>
           <Row className="gy-3">

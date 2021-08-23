@@ -1,0 +1,35 @@
+.list-games{
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  max-width: 400px;
+  .matches-list-container{
+    .game-link{
+      color: #000;
+      .match-resume-cont{
+        .date-container{
+          background-color: rgb(0, 0, 0) !important;
+            h2{
+              color: rgb(255,193,7);
+            }
+        }
+        // &:hover{
+        //   background-color: rgba(0, 0, 0, .8);
+        //   color:rgb(255,193,7) !important;
+        //   svg {
+        //     path{
+        //       fill: rgb(255,193,7);
+        //     }
+            
+        //   }
+        //   .date-container{
+        //     background-color: rgba(0, 0, 0, .1) !important;
+        //     h2{
+        //       color: #2C785B;
+        //     }
+        //   }
+        // }
+
+      }
+    }
+  }
+}
