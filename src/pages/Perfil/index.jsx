@@ -55,7 +55,7 @@ const PerfilUsuario = () => {
   return (
     <>
       <Navbar />
-      <Container fluid={true} className="vista-perfil-container" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${background}), no-repeat,fixed, center`}}>
+      <Container fluid={true} className="vista-perfil-container py-5" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${background}), no-repeat,fixed, center`}}>
         <Container>
         <h1 className="py-3">Perfil de usuario</h1>
         <Row className="gy-3 justify-content-center pb-5">
