@@ -1,7 +1,7 @@
 import InitialDateFilter from 'components/InitialDateFilter'
 import FinalDateFilter from 'components/FinalDateFilter'
 import { useRef } from 'react'
-import { useState } from 'react'
+// import { useState } from 'react'
 import './buscar.scss'
 import { Form } from 'react-bootstrap'
 

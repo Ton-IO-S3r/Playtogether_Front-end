@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './detallecancha.scss'
-import { useState } from 'react';
+// import { useState } from 'react';
 import cancha from 'assets/images/vienna-reyes-Zs_o1IjVPt4-unsplash.jpg'
 import regaderas from 'assets/icons/regaderas.svg'
 import arbitraje from 'assets/icons/arbitraje.svg'
@@ -17,8 +17,8 @@ import UnirseBtn from '../ActionBtn';
 
 const DetalleCancha = () => {
   
-  const [showA, setShowA] = useState(true);
-  const toggleShowA = () => setShowA(!showA);
+  // const [showA, setShowA] = useState(true);
+  // const toggleShowA = () => setShowA(!showA);
   
   return (
     <Card className="border-light rounded overflow-auto">

@@ -18,17 +18,15 @@ const UserMatches = ({matches, fields, num_matches}) => {
       <div className="matches-list-container">
         {
           matches.map((match, index) => (
-            <>
-              <MatchResume 
-                key={index.toString()} 
-                date={match.date} 
-                field_name={match.field.name} 
-                match_type={match.field.football_type} 
-                category={match.category} 
-                time={''}
-              />
-            <hr />
-            </>
+            <MatchResume 
+              key={index.toString()} 
+              date={match.date} 
+              field_name={match.field.name} 
+              match_type={match.field.football_type} 
+              category={match.category} 
+              time={''}
+            />
+            
           ))
         }
       </div>

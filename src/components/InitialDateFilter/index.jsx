@@ -1,7 +1,6 @@
 import './initialdatefilter.scss'
 import "flatpickr/dist/themes/dark.css";
 import Flatpickr from "react-flatpickr";
-import { Component } from "react";
 import { useState } from "react";
 
 const InitialDateFilter = ({fromValue, toValue}) => {

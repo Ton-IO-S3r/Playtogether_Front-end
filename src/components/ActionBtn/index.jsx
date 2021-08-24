@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import './actionbtn.scss'
 const ActionBtn = ({action, btn_type, btn_disable}) => {
   
