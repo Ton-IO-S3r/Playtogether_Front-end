@@ -37,14 +37,14 @@ const BuscarPartido = () => {
   return (
     <>
       <Navbar />
-      <Container fluid={true} className="buscar-partidos-container pb-5" style={{backgroundImage: `url(${background})`}}>
+      <Container fluid={true} className="buscar-partidos-container py-5" style={{backgroundImage: `url(${background})`}}>
         <Container>
-          <h1 className="py-3 px-0 mb-3 text-start">Partidos</h1>
-          <Row className="gy-3">
-            <Col sm={12} md={6}>
+          <h1 className="py-3 mb-5">Partidos</h1>
+          <Row className="gy-3 justify-content-center pb-5">
+            <Col sm={12} md={6} lg={5}>
               <Buscar/>
             </Col>
-            <Col sm={12} md={6}>
+            <Col sm={12} md={6} lg={5}>
               <ListaPartidos games={games}/>
             </Col>
           </Row>

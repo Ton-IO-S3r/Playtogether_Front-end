@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
+import SpinnerPT from 'components/Spinner';
 
 const userProfile = {
   "user_data": {
@@ -26,7 +27,6 @@ const PerfilModal = (props) => {
   
   const [userData, setUserData] = useState(userProfile.user_data)
   const [playerData, setPlayerData] = useState(userProfile.player_data)
-  
   useEffect(() => {
     const getUserProfileData = async () => {
       const dataFromServer = await getUser4Update()
@@ -36,7 +36,7 @@ const PerfilModal = (props) => {
     
     getUserProfileData()
   }, [])
-  
+
 
   const getUser4Update = async ()=>{
     try {
@@ -64,20 +64,26 @@ const PerfilModal = (props) => {
       formdata.append('player_data.gender', playerData.gender)
       formdata.append('player_data.nationality', playerData.nationality)
       formdata.append('player_data.position', playerData.position)
-      formdata.append('player_data.photo', playerData.photo[0])
       
-      if (typeof playerData.photo[0] !== "object") {
-        props.onHide()
-        return
+      if (typeof playerData.photo[0] === "object") {
+        formdata.append('player_data.photo', playerData.photo[0])
       }
+
       axios
         .patch(url, formdata, config)
         .then((res) =>{
-          window.location.reload();
+          props.onHide()
+          props.toast_params.setShowProfileUpdateToast(true)
+          props.toast_params.setToastContent({
+            theme:"warning",
+            message: "¡Tu perfil se actualizó correctamente!"
+          })
+          props.setProfile_check(true)
         })
         .catch((error) => console.log(error)
       );
-        
+      
+      
     }
     updateProfile(id)
   }
@@ -194,14 +200,17 @@ const PerfilModal = (props) => {
                 </Form.Group>
                 <div className="w-100 text-center">
                   <ActionBtn action="Actualizar" btn_type="submit" btn_disable={false} />
+                  
                 </div>
                 
               </Form>
               
             </Col>
+            
           </Row>
         </Container>
       </Modal.Body>
+      
     </Modal>
   )
 }

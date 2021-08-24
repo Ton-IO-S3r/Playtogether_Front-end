@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { useState } from 'react';
 import ModalPerfil from 'components/PerfilModal/PerfilModal'
 
-const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, user_to_update, setUser_to_update}) => {
+const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, user_to_update, setUser_to_update, toast_data,profileCheck, setProfileCheck}) => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <div className="card-perfil text-center mx-auto d-flex flex-column justify-content-end" style={{backgroundImage: `url(${background})`}}>
@@ -21,10 +21,10 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
           <h5>{user_first_name} {user_last_name}</h5>
           <p>@ {user_username}</p>
         </div>
-        <div className="d-flex justify-content-between position-container">
+        <div className="d-flex justify-content-around position-container">
           <p>Posición:</p> <h6 className="text-capitalize">{user_position}</h6>
         </div>
-        <div className="d-flex justify-content-between foot-container">
+        <div className="d-flex justify-content-around foot-container">
           <p>Perfil:</p> <h6 className="text-capitalize">{user_dominant_foot}</h6>
         </div>
         <p className="date-joined-p">Jugando fútbol desde: <strong>{user_date_joined}</strong></p>
@@ -33,7 +33,9 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
       <ModalPerfil
         show={modalShow}
         onHide={() => setModalShow(false)}
-
+        toast_params={toast_data}
+        profile_check={profileCheck}
+        setProfile_check={setProfileCheck}
       />
     </div>
   )

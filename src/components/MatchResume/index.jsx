@@ -26,7 +26,7 @@ const MatchResume = ({date, time, field_name, match_type, category}) => {
             {/* <img src={hora} alt="hora" /> */}
             <Hora className="icon-cancha"/>
             <h5 className="ms-1 my-0">{time}</h5>
-          </div>) : (<div></div>)}
+          </div>) : (<></>)}
           <div className="category d-flex flex-column justify-content-center align-items-center me-1 flex-wrap">
             {/* <img src={categoria} alt="categoria" /> */}
             <Categoria className="icon-cancha"/>
