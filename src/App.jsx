@@ -8,6 +8,8 @@ import Landing from 'pages/Landing'
 import Login from 'pages/Login'
 import PerfilUsuario from 'pages/Perfil';
 import VistaPartido from 'pages/VistaPartido'
+import CreateGame from 'pages/CreateGame/CreateGame'
+import 'rsuite/lib/styles/index.less';
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/usuarios/:id" component={PerfilUsuario}/>
           <Route path="/partidos/:id" component={VistaPartido}/>
+          <Route path="/crear-partido" component={CreateGame}/>
         </Switch>
       </Router>
       
