@@ -66,10 +66,14 @@ const PerfilModal = (props) => {
       formdata.append('player_data.position', playerData.position)
       formdata.append('player_data.photo', playerData.photo[0])
       
+      if (typeof playerData.photo[0] !== "object") {
+        props.onHide()
+        return
+      }
       axios
         .patch(url, formdata, config)
         .then((res) =>{
-          window.location.reload(true);
+          window.location.reload();
         })
         .catch((error) => console.log(error)
       );
