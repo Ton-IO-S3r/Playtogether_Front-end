@@ -1,0 +1,18 @@
+.date-picker-container{
+  border: 2px solid #32A77A;
+  border-radius: 10px;
+  width: 45%;
+  max-width: 150px;
+  min-width: 95px;
+  .date-pick{
+    border: none;
+    color:#32A77A;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    &:focus{
+      border: none;
+    }
+  }
+  
+}

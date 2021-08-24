@@ -28,7 +28,7 @@ const Navbar = (props) => {
                              isLogin === false ? (
                                 <ul className="navbar-nav">
                                     <li className="nav-item align-self-center">
-                                        <Link className="search-games" to='/search-games'>Buscar Partidos</Link>
+                                        <Link className="search-games" to='/partidos'>Buscar Partidos</Link>
                                     </li>
                                     <li className="nav-item align-self-center ms-5">
                                         <Link type="button" className="btn-outline" to='/login'>Iniciar Sesion</Link>
@@ -42,7 +42,7 @@ const Navbar = (props) => {
                                 (
                                     <ul className="navbar-nav">
                                     <li className="nav-item align-self-center">
-                                        <Link className="search-games" to='/search-games'>Buscar Partidos</Link>
+                                        <Link className="search-games" to='/partidos'>Buscar Partidos</Link>
                                     </li>
                                     <li className="nav-item align-self-center ms-5">
                                         <Link type="button" className="d-none btn-outline" to='/login'>Iniciar Sesion</Link>
