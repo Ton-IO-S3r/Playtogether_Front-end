@@ -1,11 +1,11 @@
-import React from 'react'
 import './actionbtn.scss'
-const index = ({action}) => {
+const ActionBtn = ({action, btn_type, btn_disable}) => {
+  
   return (
     <div className="text-center w-100">
-      <button type="button" className="action-btn btn ml-auto mr-auto" >{action}</button>
+      <button type={btn_type} className="action-btn align-self-center mt-4 btn ml-auto mr-auto" disabled={btn_disable}>{action}</button>
     </div>
   )
 }
 
-export default index
+export default ActionBtn

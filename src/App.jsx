@@ -8,6 +8,7 @@ import Landing from 'pages/Landing'
 import Login from 'pages/Login'
 import PerfilUsuario from 'pages/Perfil';
 import VistaPartido from 'pages/VistaPartido'
+import BuscarPartido from 'pages/BuscarPartido'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/usuarios/:id" component={PerfilUsuario}/>
           <Route path="/partidos/:id" component={VistaPartido}/>
+          <Route path="/partidos/" component={BuscarPartido}/>
         </Switch>
       </Router>
       
