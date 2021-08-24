@@ -9,8 +9,8 @@ const cardCancha = (props) => {
         <>
             
             <Card className={style}>
-                <Card.Img variant="top" src={img} alt="..."/>
-                <Card.Body className="d-flex flex-column">
+                <Card.Img className="card-img" variant="top" src={img} alt="..."/>
+                <Card.Body className="d-flex flex-column card-body">
                     <Card.Title>{name}</Card.Title>
                     <Card.Text>
                         {address}

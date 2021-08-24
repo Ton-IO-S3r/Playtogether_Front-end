@@ -85,7 +85,8 @@ const CreateGame = (props) => {
                     <Col md="1" lg="1" xl="1" className="d-none d-md-block"></Col>
                     <Col md="10" lg="10" xl="10">
                     <h1 className="py-3 h1-create-game">Crea tu partido</h1>
-                    <Carousel className="carrousel-create" breakPoints={breakPoints} renderArrow={myArrow} enableAutoPlay autoPlaySpeed={5000} >
+                    <Carousel className="carrousel-create" breakPoints={breakPoints} renderArrow={myArrow}  >
+                    {/* enableAutoPlay autoPlaySpeed={5000} */}
                     
 
                     {fields.map(item => (

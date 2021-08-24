@@ -62,7 +62,7 @@ const handleSubmit = async(e) => {
       //SE ALMACENA EL TOKEN EN LOCALSTORAGE
 	  	localStorage.setItem("token", response.token);
       //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
-    	window.location.href = "/create-game";
+    	window.location.href = "/crear-partido";
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
       setCampoVacio("Nombre de usuario o contaseña incorrectos")

@@ -29,6 +29,12 @@
   background-color: #28804B ;
   border-color: #28804B ;
 }
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+  color: #fff;
+  background-color: #28804B;
+  border-color: #28804b;
+  box-shadow: 0 0 0 0.25rem #22e67037;
+}
 .alert-danger {
   font-size: 10px;
 }
@@ -104,4 +110,9 @@
 .form-check-input:checked {
   background-color: #32a77a;
   border-color: #32a77a;
+}
+//toast
+
+.Toastify__toast--success {
+  background-color: #32A77A;
 }
