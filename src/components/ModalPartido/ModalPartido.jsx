@@ -1,16 +1,15 @@
 import {React, useState,useEffect, useRef} from 'react'
 import {Col, Form,Modal, Row } from 'react-bootstrap';
-//elementos del FORM
+
+//API
 import {API_URL} from 'Constants/API'
-import "flatpickr/dist/themes/dark.css";
-import Flatpickr from "react-flatpickr";
+//elementos del FORM
 import Divider from '@material-ui/core/Divider';
 import DatePicker,{registerLocale} from "react-datepicker";
 import TimePicker from 'rc-time-picker';
 import moment from 'moment';
 //NOTIFICACIONES
 import Toast from 'components/Toast/Toast'
-//
 import {notifyWarning,notifySuccess} from 'Functions/toastFunc'
 import 'react-toastify/dist/ReactToastify.css'
 import Btn from 'components/Buttons/CallActionBtn'
@@ -19,7 +18,6 @@ import es from 'date-fns/locale/es';
 import "react-datepicker/dist/react-datepicker.css";
 import './ModalPartido.scss'
 import 'rc-time-picker/assets/index.css';
-import { Container } from '@material-ui/core';
 registerLocale("es", es)
 
 
@@ -41,8 +39,6 @@ const ModalPartido = (props) => {
   const imgField = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/field"
   const gameDate = useRef()
   const timeRef = useRef()
-  //API
-  
 
   //RETRIEVE FIELD
   const getFieldDetail = async () => {
@@ -56,16 +52,8 @@ const ModalPartido = (props) => {
       console.log(error);
     }
   };
-  
-
-const handleValueTime = (time) =>{
-    setTime(time && time.format('HH:mm'));
-  };
 
 //POST PARTIDO
-
-  
-
 const createGame = async(field,date,time,category)=> {
   try{
     const response = await fetch(`${API_URL}matches/create/`, {
@@ -126,6 +114,11 @@ const handleSubmit = async(e) => {
       }
 
   }
+
+//ESTABLECER HORA
+const handleValueTime = (time) =>{
+  setTime(time && time.format('HH:mm'));
+};
 
   useEffect(async ()=>{
     await getFieldDetail()
