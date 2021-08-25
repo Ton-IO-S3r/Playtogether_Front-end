@@ -5,8 +5,8 @@ import Footer from 'components/Footer/Footer'
 import CardsLanding from 'components/CardLanding/CardsLanding'
 //RECURSOS
 import find_games from 'assets/images/find_games.png'
-import perfil_example from 'assets/images/perfil_example.png'
-import meet_people from 'assets/images/meet_people.png'
+import perfil_example from 'assets/icons/perfil_example.svg'
+import meet_people from 'assets/icons/meet_people.svg'
 
 const Landing = () => {
     return (

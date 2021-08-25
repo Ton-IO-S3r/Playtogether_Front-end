@@ -7,12 +7,13 @@ import { Col, Container, Row } from 'react-bootstrap'
 import ModalPartido from 'components/ModalPartido/ModalPartido'
 import arrowR from 'assets/icons/arrow-right.svg'
 import './createGame.scss'
+import {API_URL} from 'Constants/API'
 
 const CreateGame = (props) => {
     const [modalShow, setModalShow] = useState(false);
     const [id,setId] = useState()
     const [fields,setFields] = useState([])
-    const API_URL = "http://localhost:8000/api/";
+    const imgField = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/field"
 
     const getFields = async () => {
       try {
@@ -90,7 +91,7 @@ const CreateGame = (props) => {
                     
 
                     {fields.map(item => (
-                      <Card style="mx-md-3" img={item.photo} name={item.name} address={item.address} onClick={()=>handleModal(item.id)}/>
+                      <Card style="mx-md-3" img={`${imgField}_${item.id}/img`} name={item.name} address={item.address} onClick={()=>handleModal(item.id)}/>
                     ))}
                     </Carousel>    
                     </Col>

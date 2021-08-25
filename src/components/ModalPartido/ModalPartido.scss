@@ -22,12 +22,15 @@ p.address{
 }
 
 @media screen and (min-width: 992px){
-    .col-img{
-        margin-top: 10%;
+    .img-modal{
+        
+        height: 400px;
+        
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background-size: 100%;   }
     }
-    .col-lg-7 {
-        background-color: #f0f0f0;
-        border-radius: 8px;
-    }
-    
+   
 }

@@ -8,15 +8,19 @@ import Footer from 'components/Footer/Footer'
 import { Col, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import './login.scss'
+//NOTIFICACIONES
+import Toast from 'components/Toast/Toast'
+//
+import {notifyWarning} from 'Functions/toastFunc'
+import {API_URL} from 'Constants/API'
 
 const Login = () => {
 //DIRECCION DE LA API
-const API_URL = "http://localhost:8000/api/";
+// const API_URL = "http://localhost:8000/api/";
 //REFERECIA DE LOS INPUTS
 const usernRef = useRef()
 const pwdRef = useRef()
-//ESTADO DE LA ALERTA DEL CAMPO VACIO
-const [campoVacio, setCampoVacio] = useState(null)
+
 
 
 //FUNCION PARA HACER LOGIN A LA API (POST)
@@ -47,8 +51,8 @@ const handleSubmit = async(e) => {
 
   //VALIDAR CAMPOS VACIOS
   if (username === '' || password === ''){
-    //CAMBAIR EL ESATDO DEL CAMPO VACIO CON UNA ALERTA
-    setCampoVacio("Nombre de usuario o contaseña incorrectos")
+    //ALERTA
+    notifyWarning("Nombre de usuario o contaseña incorrectos")
     return
   }
     // console.log(await JSON.stringify(username,password))
@@ -65,7 +69,7 @@ const handleSubmit = async(e) => {
     	window.location.href = "/crear-partido";
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
-      setCampoVacio("Nombre de usuario o contaseña incorrectos")
+      notifyWarning("Nombre de usuario o contaseña incorrectos")
       usernRef.current.value = null
       pwdRef.current.value = null
       return
@@ -84,8 +88,6 @@ const handleSubmit = async(e) => {
                   <Card className="flex-column p-3 mt-5 mb-5" content={
                     <Fragment>
                       <h1 className="h1-login mt-4 mb-4">Inicia Sesión</h1>
-                      {/* ALERTA DEL CAMPO VACIO O CREDENCIALES INCORRECTAS */}
-                      {campoVacio != null ? (<div className="alert alert-danger">{campoVacio}</div>) : (<div></div>)}
                       <Form className="d-flex flex-column" onSubmit={handleSubmit} >
                         <Form.Group className="mb-4" controlId="formBasicEmail">
                           <Form.Label>Nombre de Usuario:</Form.Label>
@@ -112,7 +114,9 @@ const handleSubmit = async(e) => {
               </Container>
             </Row>
           </Container>
-          <Footer/>    
+          <Footer/>
+              {/* ALERTS */}
+          <Toast/>
         </div>
     )
 }
