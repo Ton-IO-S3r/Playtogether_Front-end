@@ -1,14 +1,34 @@
 import React, {Fragment, useState} from 'react'
 import { Spin as Hamburger} from 'hamburger-react'
+import Button from 'components/Buttons/CallActionBtn'
 //RUTAS
 import { Link } from 'react-router-dom'
 //IMAGENES
 import logo from 'assets/icons/PT_Logo.svg'
+import {photoAPI} from 'Constants/API'
 //ESTILOS
 import './navbar.scss'
 
 const Navbar = (props) => {
-    const {isLogin} = props
+    const [photo, setPhoto] = useState(null)
+    const AUTH_TOKEN = localStorage.getItem("token");
+    const AUTH_ID = localStorage.getItem("id")
+    let isLogin = false
+     
+    if (!AUTH_TOKEN && !AUTH_ID) {
+	    isLogin = false
+    }else{
+        isLogin = true
+    }
+
+    const handleLogOut = () =>{
+       
+        localStorage.removeItem('token')
+        localStorage.removeItem('id')
+        window.location.href = "/";
+
+    }
+    
     return (
         <Fragment>
         {/* AQUI INICIA LA NAVBAR */}
@@ -34,7 +54,7 @@ const Navbar = (props) => {
                                         <Link type="button" className="btn-outline" to='/login'>Iniciar Sesion</Link>
                                     </li>
                                     <li className="nav-item align-self-center ms-5">
-                                        <Link type="button" className="btn-join" to='/sign-in'>Unete!</Link>
+                                        <Link type="button" className="btn-join" to='/unirse/'>Unete!</Link>
                                     </li>
                                 </ul>
                                 )
@@ -47,10 +67,16 @@ const Navbar = (props) => {
                                     <li className="nav-item align-self-center ms-5">
                                         <Link type="button" className="d-none btn-outline" to='/login'>Iniciar Sesion</Link>
                                     </li>
-                                    <li className="nav-item align-self-center ms-5">
-                                        <Link type="button" className="btn-join" to='/sign-in'>Unete!</Link>
-                                    </li>
+                                    {/* <li className="nav-item align-self-center ms-5">
+                                        <Link type="button" className="btn-join" to='/unirse/'>Unete!</Link>
+                                    </li> */}
+                                    <div className="nav-photo">
+                                    <Link to={`/usuarios/${AUTH_ID}`}><img src={`${photoAPI}${AUTH_ID}/avatar`}/></Link>
+                                    
+
+                                    </div>
                                     </ul>
+
                                 )
 
                             
@@ -73,7 +99,7 @@ const Navbar = (props) => {
                             <Link type="button" className="btn-outline" to='/login'>Iniciar Sesion</Link>
                         </div>
                         <div className="nav-item align-self-center ">
-                            <Link type="button" className="btn-full" to='/sign-in'>Unete!</Link>
+                            <Link type="button" className="btn-full" to='/unirse/'>Unete!</Link>
                         </div>
                     </div>
                 </div>
@@ -86,15 +112,20 @@ const Navbar = (props) => {
 
                 <div className="navbar-nav">
                     <div className="nav-item align-self-center mt-4 ">
-                        <Link className="a-menu" to='/search-games'>Buscar Partidos</Link>
+                        <Link className="a-menu" to={`/usuarios/${AUTH_ID}`}>Ver Perfil</Link>
                     </div>
-                    <div className="d-flex justify-content-center mt-5 mb-4">
+                    <div className="nav-item align-self-center mt-4 ">
+                        <Link className="a-menu" to='/partidos/'>Buscar Partidos</Link>
+                    </div>
+                    <div className="nav-item align-self-center mt-4 ">
+                        <Link className="a-menu" to='/crear-partido/'>Crear Partidos</Link>
+                    </div>
+                    <div className="d-flex justify-content-center mt-4 mb-4">
                         <div className="nav-item align-self-center ">
-                            <Link type="button" className="d-none btn-outline" to='/login'>Iniciar Sesion</Link>
+                            {/* <Link type="button" className=" btn-outline" >Cerrar Sesion</Link> */}
+                            <Button onClick={handleLogOut} text="Cerrar Sesion"/>
                         </div>
-                        <div className="nav-item align-self-center ">
-                            <Link type="button" className="btn-full" to='/sign-in'>Unete!</Link>
-                        </div>
+                        
                     </div>
                 </div>
             )

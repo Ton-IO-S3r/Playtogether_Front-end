@@ -86,7 +86,16 @@ a.btn-outline:hover{
     position:absolute;
 }
 
-
+.nav-photo{
+    height: 45px;
+    width: 45px;
+    border-radius: 100%;
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+    }
+}
 
 
 //MEDIA SCREEN DESKTOP

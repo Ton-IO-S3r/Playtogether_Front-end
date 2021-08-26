@@ -110,7 +110,7 @@ const handleSubmit = async(e) => {
         notifyWarning("Fecha No disponible, elige otra")
     }else{
       notifySuccess("Partido creado con exito")
-        setTimeout(function(){window.location.href=`partidos/${response.id}`} , 11000); 
+        setTimeout(function(){window.location.href=`/partidos/${response.id}`} , 11000); 
       }
 
   }
