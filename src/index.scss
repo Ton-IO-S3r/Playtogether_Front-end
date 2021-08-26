@@ -29,6 +29,90 @@
   background-color: #28804B ;
   border-color: #28804B ;
 }
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+  color: #fff;
+  background-color: #28804B;
+  border-color: #28804b;
+  box-shadow: 0 0 0 0.25rem #22e67037;
+}
 .alert-danger {
   font-size: 10px;
+}
+//VISTA CREAR PARTIDO
+.carousel-item.active,.carousel-item {
+  padding:  30px;
+}
+.card{
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .card-img-top{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+}
+.price-container{
+  border-radius: 0 10px 10px 0;
+}
+.fs-6{
+  font-size: 14px;
+}
+
+//datepicker
+.react-datepicker__day--selected{
+  background-color: #32A77A;
+}
+.react-datepicker__day-name{
+  color:#FFF;
+}
+.react-datepicker__header {
+  background-color: #32A77A;
+  border-bottom: #28804B;
+}
+.react-datepicker__current-month{
+  color:#FFF;
+}
+.react-datepicker{
+  border-color: #28804B;
+  border-radius: 8px;
+}
+.react-datepicker__navigation:hover *::before, .react-datepicker__navigation-icon::before{
+  border-color: #FFF;
+}
+.rc-time-picker-input{
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: .25rem;
+  transition: #32A77A 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+
+}
+
+.rc-time-picker-input:focus{
+  border-color: #32A77A ;
+}
+
+.rc-time-picker {
+  width: 100%;
+}
+
+.form-check-input:checked {
+  background-color: #32a77a;
+  border-color: #32a77a;
+}
+//toast
+
+.Toastify__toast--success {
+  background-color: #32A77A;
 }
