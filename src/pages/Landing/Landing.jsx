@@ -14,7 +14,7 @@ const Landing = () => {
     <Hero/>
     <div className="container-fluid">
       <div className="container">
-        <div className="row mt-3 mb-3">
+        <div className="row mt-4 mt-lg-5 mb-3">
           <CardsLanding image={find_games} text="Juega en donde quieras y cuando quieras."/>
          
           <CardsLanding image={perfil_example} text="Genera tu perfil y crea partidos."/>
