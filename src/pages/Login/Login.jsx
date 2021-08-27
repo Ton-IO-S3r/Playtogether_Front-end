@@ -8,6 +8,8 @@ import Footer from 'components/Footer/Footer'
 import { Col, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import './login.scss'
+//RUTAS
+import { Link } from 'react-router-dom'
 //NOTIFICACIONES
 import Toast from 'components/Toast/Toast'
 //
@@ -15,8 +17,7 @@ import {notifyWarning} from 'Functions/toastFunc'
 import {API_URL} from 'Constants/API'
 
 const Login = () => {
-//DIRECCION DE LA API
-// const API_URL = "http://localhost:8000/api/";
+
 //REFERECIA DE LOS INPUTS
 const usernRef = useRef()
 const pwdRef = useRef()
@@ -65,6 +66,7 @@ const handleSubmit = async(e) => {
 	  if (response.token) {
       //SE ALMACENA EL TOKEN EN LOCALSTORAGE
 	  	localStorage.setItem("token", response.token);
+      localStorage.setItem("id", response.user_id);
       //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
     	window.location.href = "/crear-partido";
 	  }else{
@@ -78,7 +80,7 @@ const handleSubmit = async(e) => {
   }
     return (
         <div>
-          <Nav isLogin={true}/>
+          <Nav />
           <Container fluid className="container-login">
             <Row>
               <Container>
@@ -105,7 +107,7 @@ const handleSubmit = async(e) => {
                           Iniciar Sesión
                         </Button>
                       </Form> 
-                      <p className="mt-4 p-login">No tienes cuenta?, Registrate <strong>aqui</strong></p>  
+                      <p className="mt-4 p-login">No tienes cuenta?, Registrate <Link to='/unirse/' style={{color:"#28804B"}}><strong>aqui</strong></Link></p>  
                     </Fragment>
                   }/>
                 </Col>

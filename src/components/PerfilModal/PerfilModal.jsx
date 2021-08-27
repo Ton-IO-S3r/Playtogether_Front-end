@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
+import SpinnerPT from 'components/Spinner';
+import {AUTH_TOKEN,AUTH_ID,photoAPI} from 'Constants/API'
 
 const userProfile = {
   "user_data": {
@@ -41,7 +43,12 @@ const PerfilModal = (props) => {
 
   const getUser4Update = async ()=>{
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/players/update/${id}`);
+      const response = await fetch(`http://127.0.0.1:8000/api/players/update/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${AUTH_TOKEN}`,
+        },
+      });
       const data = await response.json();
       
       return data
@@ -143,7 +150,7 @@ const PerfilModal = (props) => {
             <Col>
               <Form className="form-user-profile" onSubmit={updateUserProfile}>
                 <Form.Group controlId="formFileSm" className="profile-pic mb-3 d-flex flex-column justify-content -center align-items-center">
-                 <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${playerData.photo})`}}></div>
+                 <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${photoAPI}${AUTH_ID}/avatar)`}}></div>
                  <input type="file" hidden={true} size="sm" ref={inputFile} name="photo" className="align-self-center" onChange={handleImageChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
