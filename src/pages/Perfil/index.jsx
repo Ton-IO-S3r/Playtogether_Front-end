@@ -28,7 +28,10 @@ const user =
   }
 
 const PerfilUsuario = () => {
+  const BACKGROUND_IMG_URL = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/nathan-rogers-ObhCU6Vhoe8-unsplash.jpg"
+  
   const {id} = useParams();
+  const profileImgURL = `https://django-playtogether-media.s3.us-east-2.amazonaws.com/user_${id}/avatar`
   const [userData, setUserData] = useState(user);
   const [profileUpdated,setProfileUpdated] = useState(false);
   const [toastContent, setToastContent] = useState({
@@ -66,7 +69,7 @@ const PerfilUsuario = () => {
   return (
     <>
       <Navbar />
-      <Container fluid={true} className="vista-perfil-container py-5" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${background}), no-repeat,fixed, center`}}>
+      <Container fluid={true} className="vista-perfil-container py-5" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUND_IMG_URL}), no-repeat,fixed, center`}}>
         <ToastContainer position="top-end" className="p-3">
           <Toast show={showProfileUpdateToast} onClose={toggleShowProfileUpdateToast} bg={toastContent.theme} delay={3000} autohide>
             <Toast.Header>
@@ -81,7 +84,8 @@ const PerfilUsuario = () => {
         <Row className="gy-5 justify-content-center pb-5">
             <Col sm={12} md={6} lg={5}>
               <CardPerfil 
-                avatar={userData.players.photo} 
+                // avatar={userData.players.photo}
+                avatar={profileImgURL} 
                 user_first_name={userData.first_name}
                 user_last_name={userData.last_name}
                 user_username={userData.username}
@@ -94,8 +98,8 @@ const PerfilUsuario = () => {
                   toastContent,
                   setToastContent
                 }}
-                profileCheck = {profileUpdated}
-                setProfileCheck = {setProfileUpdated}
+                profileUpdated = {profileUpdated}
+                setProfileUpdated = {setProfileUpdated}
                 
               />
             </Col>

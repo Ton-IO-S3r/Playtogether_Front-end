@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
-import SpinnerPT from 'components/Spinner';
+import { useRef } from 'react';
 
 const userProfile = {
   "user_data": {
@@ -24,6 +24,7 @@ const userProfile = {
 
 const PerfilModal = (props) => {
   const {id} = useParams();
+  const inputFile = useRef()
   
   const [userData, setUserData] = useState(userProfile.user_data)
   const [playerData, setPlayerData] = useState(userProfile.player_data)
@@ -78,7 +79,8 @@ const PerfilModal = (props) => {
             theme:"warning",
             message: "¡Tu perfil se actualizó correctamente!"
           })
-          props.setProfile_check(true)
+          props.setProfileUpdated(!props.profileUpdated)
+          
         })
         .catch((error) => console.log(error)
       );
@@ -140,9 +142,9 @@ const PerfilModal = (props) => {
           <Row>
             <Col>
               <Form className="form-user-profile" onSubmit={updateUserProfile}>
-                <Form.Group controlId="formFileSm" className="mb-3 profile-pic d-flex flex-column justify-content -center align-items-center">
-                 <div className="avatar my-2" style={{backgroundImage: `url(${playerData.photo})`}}></div>
-                 <input type="file" size="sm" name="photo" className="align-self-center" onChange={handleImageChange}/>
+                <Form.Group controlId="formFileSm" className="profile-pic mb-3 d-flex flex-column justify-content -center align-items-center">
+                 <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${playerData.photo})`}}></div>
+                 <input type="file" hidden={true} size="sm" ref={inputFile} name="photo" className="align-self-center" onChange={handleImageChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
                   <Form.Label className="mb-0">Nombre</Form.Label>
