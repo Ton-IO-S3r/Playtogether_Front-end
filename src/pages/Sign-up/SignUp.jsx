@@ -69,20 +69,14 @@ const loginSignUp = async(username,name,lastName,email,password) => {
       const response = await loginSignUp(username,name,lastName,email,password);
 
       console.log(response)
-      //VALIDAR SI SE RECIBE UN TOKEN DE ACCESO
-        if (response[0] = 'Created successfully') {
-        //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
-          window.location.href = "/login";
-        }else{
-        //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
-        notifyWarning("Datos incorrectos")
-        username = null
-        name = null
-        lastName = null
-        email = null
-        password = null
-        return
-      }
+      //VALIDAR SI SE RECIBE UN USUARIO EXISTENTE
+        if (response.username[0] === "A user with that username already exists.") {
+          notifyWarning("El nombre de usuario ya existe, intenta con otro")
+          usernRef.current.value = null
+        } else if (response.username === username) {
+          //SE REDIRIGE A LA PAGINA DE LOGIN
+            window.location.href = "/login";
+         }
   
     }
     return (
@@ -136,6 +130,7 @@ const loginSignUp = async(username,name,lastName,email,password) => {
         
             <Footer/>
             <Toast/>
+            
         </div>
     )
 }

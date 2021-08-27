@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import './callActionBtn.scss'
 
 const CallActionBtn = (props) => {
-    const {text,onClick} = props
+    const {text,onClick, className, style} = props
     return (
         <Fragment>
-            <Button  className="align-self-center mt-4 btn-login"  onClick={onClick} >{text}</Button>
+            <Button  className={`align-self-center mt-4 btn-login ${className}`}  onClick={onClick} style={style} >{text}</Button>
         </Fragment>
     )
 }

@@ -5,14 +5,13 @@ import Button from 'components/Buttons/CallActionBtn'
 import { Link } from 'react-router-dom'
 //IMAGENES
 import logo from 'assets/icons/PT_Logo.svg'
-import {photoAPI} from 'Constants/API'
+import {photoAPI, AUTH_TOKEN, AUTH_ID} from 'Constants/API'
 //ESTILOS
 import './navbar.scss'
 
 const Navbar = (props) => {
-    const [photo, setPhoto] = useState(null)
-    const AUTH_TOKEN = localStorage.getItem("token");
-    const AUTH_ID = localStorage.getItem("id")
+    const [show, setShow] = useState(false)
+    
     let isLogin = false
      
     if (!AUTH_TOKEN && !AUTH_ID) {
@@ -61,17 +60,19 @@ const Navbar = (props) => {
                                 :
                                 (
                                     <ul className="navbar-nav">
-                                    <li className="nav-item align-self-center">
+                                    <li className="nav-item align-self-center mx-3">
                                         <Link className="search-games" to='/partidos'>Buscar Partidos</Link>
                                     </li>
-                                    <li className="nav-item align-self-center ms-5">
-                                        <Link type="button" className="d-none btn-outline" to='/login'>Iniciar Sesion</Link>
+                                    <li className="nav-item align-self-center mx-4">
+                                        <Link className="search-games" to='/crear-partido/'>Crear Partido</Link>
                                     </li>
                                     {/* <li className="nav-item align-self-center ms-5">
                                         <Link type="button" className="btn-join" to='/unirse/'>Unete!</Link>
                                     </li> */}
-                                    <div className="nav-photo">
-                                    <Link to={`/usuarios/${AUTH_ID}`}><img src={`${photoAPI}${AUTH_ID}/avatar`}/></Link>
+                                    <div className="nav-photo" onClick={()=>{setShow(!show)}}>
+                                    {/* <Link to={`/usuarios/${AUTH_ID}`}> */}
+                                    <img src={`${photoAPI}${AUTH_ID}/avatar`}/>
+                                    {/* </Link> */}
                                     
 
                                     </div>
@@ -120,10 +121,10 @@ const Navbar = (props) => {
                     <div className="nav-item align-self-center mt-4 ">
                         <Link className="a-menu" to='/crear-partido/'>Crear Partidos</Link>
                     </div>
-                    <div className="d-flex justify-content-center mt-4 mb-4">
+                    <div className="d-flex justify-content-center mt-3 mb-3">
                         <div className="nav-item align-self-center ">
                             {/* <Link type="button" className=" btn-outline" >Cerrar Sesion</Link> */}
-                            <Button onClick={handleLogOut} text="Cerrar Sesion"/>
+                            <Button onClick={handleLogOut} style={{backgroundColor: "transparent",color: "#28804B"}} text="Cerrar Sesion"/>
                         </div>
                         
                     </div>
@@ -133,6 +134,20 @@ const Navbar = (props) => {
                     
             </div>
         </div>
+        {show ? (
+            <div className="floating-menu d-none d-lg-block" >
+                <div className="d-flex flex-column">
+                    <Link className="align-self-center mt-4 a-menu" to={`/usuarios/${AUTH_ID}`}>Ver Perfil</Link>
+                    <div className="align-self-center ">
+                        {/* <Link type="button" className=" btn-outline" >Cerrar Sesion</Link> */}
+                        <Button className="btn-outline" style={{backgroundColor: "transparent",color: "#28804B"}} onClick={handleLogOut} text="Cerrar Sesion"/>
+                    </div>
+                </div>
+            </div>
+      ) : (
+        <div></div>
+      )}
+        
         </Fragment>
         
     )

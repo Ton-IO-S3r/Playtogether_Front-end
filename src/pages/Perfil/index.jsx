@@ -11,7 +11,7 @@ import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from 'react-bootstrap/ToastContainer'
-
+import {AUTH_TOKEN,photoAPI,AUTH_ID} from 'Constants/API'
 const user = 
   {
     "username": "",
@@ -52,12 +52,18 @@ const PerfilUsuario = () => {
 
   const getUser = async ()=>{
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/players/${id}`);
+      const response = await fetch(`http://127.0.0.1:8000/api/players/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${AUTH_TOKEN}`,
+        },
+      });
       const data = await response.json();
       
       return data
       
     } catch (error) {
+      console.log(AUTH_TOKEN)
       console.log(error);
     }
   }
@@ -81,7 +87,7 @@ const PerfilUsuario = () => {
         <Row className="gy-5 justify-content-center pb-5">
             <Col sm={12} md={6} lg={5}>
               <CardPerfil 
-                avatar={userData.players.photo} 
+                avatar={`${photoAPI}${AUTH_ID}/avatar`} 
                 user_first_name={userData.first_name}
                 user_last_name={userData.last_name}
                 user_username={userData.username}

@@ -32,10 +32,10 @@ const ModalPartido = (props) => {
   const [time, setTime] = useState(moment())
 
   //VARIABLES
-  console.log(startDate)
+ 
   const date = `${startDate.getDate()}-${(startDate.getMonth() + 1)}-${startDate.getFullYear()}`
   // const [date, setDate] = useState(formattedDateModel)
-  console.log(date)
+  
   const imgField = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/field"
   const gameDate = useRef()
   const timeRef = useRef()
@@ -45,7 +45,7 @@ const ModalPartido = (props) => {
     try {
       const response = await fetch(`${API_URL}fields/${id}/`);
       const field = await response.json();
-      console.log(field)
+      
       setField(field)
       setServices(field.services)
     } catch (error) {
@@ -70,11 +70,10 @@ const createGame = async(field,date,time,category)=> {
       }),
     });
     if (response.ok === true){
-      console.log("Partido creado con exito")
+      
       
       
     }else{
-      console.log("mal")
       notifyWarning("No se creo el partido con los datos proporcionados")
     }
     return await response.json();
@@ -103,8 +102,6 @@ const handleSubmit = async(e) => {
 
     //Se pasan los valores de los inputs a la funcion del POST
    const response = await createGame(id,date,time,gender);
-
-   console.log(response.id)
    
     if (response[0] == "Ese horario en la cancha seleccionada ya esta ocupado, selecciona otro horario!"){
         notifyWarning("Fecha No disponible, elige otra")

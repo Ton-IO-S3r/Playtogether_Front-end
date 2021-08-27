@@ -6,7 +6,7 @@
     height: 100vh
 }
 .carrousel-create{
-    margin-top: 40%;
+    margin-top: 30%;
 }
 h1.h1-create-game{
     color: #FFFFFF;
@@ -32,6 +32,12 @@ h1.h1-create-game{
     height: 214px;
 }
 
+p.p-create{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 5px 3px 4px rgba(0, 0, 0, 0.25);
+}
 
 @media screen and (min-width:768px){
     .container-create{
@@ -51,6 +57,13 @@ h1.h1-create-game{
 @media screen and (min-width:1444px){
     .carrousel-create{
         margin-top: 5%;
+    }
+    p.p-create{
+        
+        font-weight: normal;
+        font-size: 30px;
+       
+        
     }
 }
 
