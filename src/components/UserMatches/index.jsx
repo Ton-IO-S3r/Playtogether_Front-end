@@ -15,7 +15,7 @@ const UserMatches = ({matches, fields, num_matches}) => {
         <h4>{fields}</h4>
       </div>
       <hr />
-      <div className="matches-list-container">
+      <div className="matches-list-container text-center">
         {
           matches.map((match, index) => (
             <MatchResume 

@@ -1,7 +1,7 @@
 .list-games{
-  background-color: #F2F2F2;
+  background-color: #FFFFFF;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 450px;
   .matches-list-container{
     .game-link{
       color: #000;
@@ -12,23 +12,6 @@
               color: rgb(255,193,7);
             }
         }
-        // &:hover{
-        //   background-color: rgba(0, 0, 0, .8);
-        //   color:rgb(255,193,7) !important;
-        //   svg {
-        //     path{
-        //       fill: rgb(255,193,7);
-        //     }
-            
-        //   }
-        //   .date-container{
-        //     background-color: rgba(0, 0, 0, .1) !important;
-        //     h2{
-        //       color: #2C785B;
-        //     }
-        //   }
-        // }
-
       }
     }
   }

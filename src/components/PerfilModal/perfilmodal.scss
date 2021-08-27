@@ -5,13 +5,18 @@
         .col{
           .profile-pic{
             .avatar{
-              filter: drop-shadow(-4px 3px 10px rgba(0, 0, 0, 0.25));
+              
               background-position: top center;
               background-repeat: no-repeat;
               background-size: cover;
               width: 100px;
               height: 100px;
               border-radius: 50%;
+              &:hover{
+                filter: drop-shadow(0px 0px 7px rgba(46, 73, 57, .5));
+                cursor: pointer;
+                
+              }
             }
           }
           .form-user-profile{
