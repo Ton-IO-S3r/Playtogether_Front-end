@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import axios from 'axios';
+import { API_URL } from 'Constants/API'
+
 //CSS BASE, SETEO DE MARGENES Y BODY
 import './index.scss'
 
+axios.defaults.baseURL= API_URL;
 
 ReactDOM.render(
   <React.StrictMode>

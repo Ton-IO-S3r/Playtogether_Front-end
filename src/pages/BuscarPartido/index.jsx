@@ -8,29 +8,25 @@ import './index.scss'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-
-
 const BuscarPartido = () => {
   
   const [games,setGames] = useState([])
-  const [searchParams,setSearchParams]=useState({})
+  const [searchParams,setSearchParams]=useState(new URLSearchParams())
   useEffect(() => {
     const getGamesData = async () => {
       const dataFromServer = await getGamesList()
       setGames(dataFromServer)
+
     }
     getGamesData()
   }, [searchParams])
 
-  
-
   const getGamesList = async ()=> {
     try {
-      // const response = await fetch(`http://127.0.0.1:8000/api/matches/`);
-      // const data = await response.json();
-      // // console.log(data)
-      // return data
-      const res = await axios.get('http://127.0.0.1:8000/api/matches/', searchParams);
+      const request = {
+        params: searchParams
+      }
+      const res = await axios.get('matches/', request);
       return res.data
       
     } catch (error) {
@@ -47,7 +43,7 @@ const BuscarPartido = () => {
           <h1 className="py-3 mb-5">Partidos</h1>
           <Row className="gy-3 justify-content-center pb-5">
             <Col sm={12} md={6} lg={5}>
-              <Buscar searchParams={searchParams} setSearchParams={setSearchParams}/>
+              <Buscar searchParams={searchParams} setSearchParams={setSearchParams} />
             </Col>
             <Col sm={12} md={6} lg={5}>
               <ListaPartidos games={games}/>
