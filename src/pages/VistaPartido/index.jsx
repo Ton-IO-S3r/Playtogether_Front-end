@@ -1,18 +1,98 @@
+import {React, useState,useEffect, useRef} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './vistapartido.scss'
 import background from 'assets/images/joshua-hoehne-kl6VSadl5mA-unsplash.jpg'
 import { Container, Row, Col } from 'react-bootstrap';
 import DetalleCancha from '../../components/DetalleCancha/DetalleCancha';
-import { useState } from 'react';
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Equipos from '../../components/Equipos/Equipos';
 import Navbar from 'components/Navbar/Navbar';
 import Footer from 'components/Footer/Footer';
+import {useParams} from 'react-router-dom'
+//API URL
+import {API_URL, imgField} from 'Constants/API'
 
 const VistaPartido = () => {
+  const data = {
+    "id": 26,
+    "field": {
+        "id": 1,
+        "name": "kodemiaFut",
+        "rent_cost": 1400,
+        "address": "Delegacion: Benito juarez - Calle: alguna - Exterior: 123",
+        "football_type": "7vs7",
+        "services": [
+            "Arbitraje",
+            "Estacionamiento",
+            "Regaderas"
+        ]
+    },
+    "date": "2021-12-16",
+    "time": "12:00:00",
+    "category": "masculino",
+    "team": [
+        {
+            "id": 35,
+            "name": "26_2021-12-16_12:00:00_b",
+            "players": [
+                {
+                    "player_id": "4",
+                    "user_data": {
+                        "username": "AaronMendoza",
+                        "first_name": "Aaron",
+                        "last_name": "Mendoza",
+                        "email": "aaronmendoza@gmail.com"
+                    },
+                    "gender": "masculino",
+                    "position": "Defensa"
+                }
+            ]
+        },
+        {
+            "id": 34,
+            "name": "26_2021-12-16_12:00:00_a",
+            "players": [
+                {
+                    "player_id": "1",
+                    "user_data": {
+                        "username": "brafer",
+                        "first_name": "Ferdinand",
+                        "last_name": "Bracho",
+                        "email": "ferdinandb@gmail.com"
+                    },
+                    "gender": "femenino",
+                    "position": "Delantero"
+                }
+            ]
+        }
+    ]
+}
+  
   const [showA, setShowA] = useState(true);
   const toggleShowA = () => setShowA(!showA);
+  const [match, setMatch] = useState(data)
+  const {id} = useParams()
+
+ 
+  const getMatch = async () => {
+    try{
+      const response = await fetch(`${API_URL}matches/${id}/`);
+      const match = await response.json();
+      console.log(match)
+      setMatch(match)
+    }catch (error){
+      console.log(error)
+    }
+  }
+ 
+  console.log(match)
+  
+  useEffect( ()=>{
+    getMatch()
+},[])
+ 
+
   return (
     <>
       <Navbar/>
@@ -20,25 +100,26 @@ const VistaPartido = () => {
         <Container>
           <h1 className="py-3">Detalles del partido</h1>
           <Row className="gy-3">
-            <Col sm={12} md={6}>
-              <DetalleCancha />
+            <Col className="p-0" sm={12} md={5}>
+              <DetalleCancha 
+              imgField={`${imgField}_${match.field.id}/img`}
+              nameField={match.field.name}
+              servicesField={match.field.services.map(item=>(<p className="p-services mx-1">{item}</p>))}
+              typeField={match.field.football_type.name}
+              priceField={match.field.rent_cost}
+              directionField={match.field.address}
+
+              dateMatch={match.date}
+              timeMatch={match.time}
+              categoryMatch={match.category}
+
+              />
             </Col>
-            <Col sm={12} md={6}>
-              <Equipos />
+            <Col className="p-0" sm={12} md={6}>
+              <Equipos typeMatch={match.field.football_type.id}/>
             </Col>
           </Row>
         </Container>
-        <ToastContainer position="top-end" className="p-3">
-          <Toast show={showA} onClose={toggleShowA} bg="warning" delay={3000} autohide>
-            <Toast.Header>
-              <strong className="me-auto">Playtogether</strong>
-              <small>11 mins ago</small>
-            </Toast.Header>
-            <Toast.Body>
-              ¡Te has unido con éxito al partido!
-            </Toast.Body>
-          </Toast>
-        </ToastContainer>
       </Container>
       <Footer />
     </>

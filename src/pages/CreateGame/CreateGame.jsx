@@ -7,14 +7,13 @@ import { Col, Container, Row } from 'react-bootstrap'
 import ModalPartido from 'components/ModalPartido/ModalPartido'
 import arrowR from 'assets/icons/arrow-right.svg'
 import './createGame.scss'
-import {API_URL} from 'Constants/API'
+import {API_URL, imgField} from 'Constants/API'
 
 const CreateGame = (props) => {
   //CONSTANTES
     const [modalShow, setModalShow] = useState(false);
     const [id,setId] = useState()
     const [fields,setFields] = useState([])
-    const imgField = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/field"
   
     //BREKAPOINT PARA EL CARROUSEL
  const breakPoints = [
