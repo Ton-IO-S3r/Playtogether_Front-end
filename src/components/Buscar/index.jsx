@@ -114,23 +114,23 @@ const Buscar = ({searchParams, setSearchParams}) => {
   const handleSubmit = (e) =>{
     e.preventDefault()
     const queryParams = new URLSearchParams();
-    for (var key of Object.keys(categoryCheckedItems)) {
-      if(categoryCheckedItems[key]){
-        queryParams.append('category', key)
+    for (var key_c of Object.keys(categoryCheckedItems)) {
+      if(categoryCheckedItems[key_c]){
+        queryParams.append('category', key_c)
       }
     }
-    for (var key of Object.keys(football_typeCheckedItems)) {
-      if(football_typeCheckedItems[key]){
-        queryParams.append('football_type', key)
+    for (var key_t of Object.keys(football_typeCheckedItems)) {
+      if(football_typeCheckedItems[key_t]){
+        queryParams.append('football_type', key_t)
       }
     }
-    for (var key of Object.keys(field_name_CheckedItems)) {
-      if(field_name_CheckedItems[key]){
-        queryParams.append('field', key)
+    for (var key_n of Object.keys(field_name_CheckedItems)) {
+      if(field_name_CheckedItems[key_n]){
+        queryParams.append('field', key_n)
       }
     }
-    for (var key of Object.keys(selected_dates)) {
-      queryParams.append(key, selected_dates[key])
+    for (var key_d of Object.keys(selected_dates)) {
+      queryParams.append(key_d, selected_dates[key_d])
     }
     setSearchParams(queryParams)
   }
