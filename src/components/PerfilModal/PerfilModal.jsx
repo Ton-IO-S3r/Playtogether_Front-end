@@ -7,7 +7,7 @@ import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
 import SpinnerPT from 'components/Spinner';
-import {AUTH_TOKEN,AUTH_ID,photoAPI} from 'Constants/API'
+import {AUTH_TOKEN,AUTH_ID,photoAPI, API_URL} from 'Constants/API'
 
 const userProfile = {
   "user_data": {
@@ -35,6 +35,7 @@ const PerfilModal = (props) => {
       const dataFromServer = await getUser4Update()
       setUserData(dataFromServer.user_data)
       setPlayerData(dataFromServer.player_data)
+      // setProfileImg(playerData.photo)
     } 
     
     getUserProfileData()
@@ -43,14 +44,14 @@ const PerfilModal = (props) => {
 
   const getUser4Update = async ()=>{
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/players/update/${id}`, {
+      const response = await fetch(`${API_URL}players/update/${id}/`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Token ${AUTH_TOKEN}`,
+          'Authorization': `Token ${AUTH_TOKEN}`,
         },
       });
       const data = await response.json();
-      
+      console.log(data)
       return data
       
     } catch (error) {
@@ -58,12 +59,19 @@ const PerfilModal = (props) => {
     }
   }
 
+  // const [profileImg, setProfileImg] = useState('https://django-playtogether-media.s3.us-east-2.amazonaws.com/avatar_default.png')
+
   const updateUserProfile = (event) => {
     event.preventDefault();
     const updateProfile = async (id)=>{
       
-      const config = {headers: { 'Content-Type': 'multipart/form-data'}};
-      const url =`http://127.0.0.1:8000/api/players/update/${id}`;
+      const config = {
+        headers: { 
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Token ${AUTH_TOKEN}`
+        }
+      };
+      const url =`${API_URL}players/update/${id}/`;
       const formdata = new FormData();
       formdata.append('user_data.username', userData.username)
       formdata.append('user_data.first_name', userData.first_name)
@@ -86,7 +94,7 @@ const PerfilModal = (props) => {
             theme:"warning",
             message: "¡Tu perfil se actualizó correctamente!"
           })
-          props.setProfileUpdated(!props.profileUpdated)
+          window.location.reload()
           
         })
         .catch((error) => console.log(error)
@@ -125,6 +133,8 @@ const PerfilModal = (props) => {
       ...playerData,
       [e.target.name]: e.target.files
     })
+    // console.log(e.target.files)
+    // setProfileImg(playerData.photo)
   }
 
 
@@ -151,6 +161,7 @@ const PerfilModal = (props) => {
               <Form className="form-user-profile" onSubmit={updateUserProfile}>
                 <Form.Group controlId="formFileSm" className="profile-pic mb-3 d-flex flex-column justify-content -center align-items-center">
                  <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${photoAPI}${AUTH_ID}/avatar)`}}></div>
+                 {/* <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${profileImg})`}}></div> */}
                  <input type="file" hidden={true} size="sm" ref={inputFile} name="photo" className="align-self-center" onChange={handleImageChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
