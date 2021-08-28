@@ -6,12 +6,11 @@ import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 import CardPerfil from 'components/CardPerfil';
 import UserMatches from 'components/UserMatches';
-import background from 'assets/images/nathan-rogers-ObhCU6Vhoe8-unsplash.jpg'
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from 'react-bootstrap/ToastContainer'
-import {AUTH_TOKEN,photoAPI,AUTH_ID} from 'Constants/API'
+import {AUTH_TOKEN,photoAPI,AUTH_ID, API_URL} from 'Constants/API'
 const user = 
   {
     "username": "",
@@ -31,7 +30,6 @@ const PerfilUsuario = () => {
   const BACKGROUND_IMG_URL = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/nathan-rogers-ObhCU6Vhoe8-unsplash.jpg"
   
   const {id} = useParams();
-  const profileImgURL = `https://django-playtogether-media.s3.us-east-2.amazonaws.com/user_${id}/avatar`
   const [userData, setUserData] = useState(user);
   const [profileUpdated,setProfileUpdated] = useState(false);
   const [toastContent, setToastContent] = useState({
@@ -55,14 +53,14 @@ const PerfilUsuario = () => {
 
   const getUser = async ()=>{
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/players/${id}`, {
+      const response = await fetch(`${API_URL}players/${id}/`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Token ${AUTH_TOKEN}`,
+          "Authorization": `Token ${AUTH_TOKEN}`,
         },
       });
       const data = await response.json();
-      
+
       return data
       
     } catch (error) {
