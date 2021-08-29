@@ -53,7 +53,7 @@ const handleSubmit = async(e) => {
   //VALIDAR CAMPOS VACIOS
   if (username === '' || password === ''){
     //ALERTA
-    notifyWarning("Nombre de usuario o contaseña incorrectos")
+    notifyWarning("Nombre de usuario o contraseña incorrectos")
     return
   }
     // console.log(await JSON.stringify(username,password))
@@ -74,7 +74,7 @@ const handleSubmit = async(e) => {
     	window.location.href = `/usuarios/${id}`;
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
-      notifyWarning("Nombre de usuario o contaseña incorrectos")
+      notifyWarning("Nombre de usuario o contraseña incorrectos")
       usernRef.current.value = null
       pwdRef.current.value = null
       return
