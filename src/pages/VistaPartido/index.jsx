@@ -117,7 +117,7 @@ const VistaPartido = () => {
               />
             </Col>
             <Col className="p-0" sm={12} md={6}>
-              <Equipos typeMatch={match.field.football_type.id}/>
+              <Equipos typeMatch={match.field.football_type.id} teams={match.team} maxPlayers={match.field.football_type.max_players}/>
             </Col>
           </Row>
         </Container>
