@@ -75,18 +75,15 @@ const VistaPartido = () => {
     try{
       const response = await fetch(`${API_URL}matches/${id}/`);
       const match = await response.json();
-      console.log(match)
       setMatch(match)
     }catch (error){
       console.log(error)
     }
   }
- 
-  console.log(match)
-  
+   
   useEffect( ()=>{
     getMatch()
-},[])
+  },[])
  
 
   return (
@@ -117,7 +114,7 @@ const VistaPartido = () => {
               />
             </Col>
             <Col className="p-0" sm={12} md={6}>
-              <Equipos typeMatch={match.field.football_type.id} teams={match.team} maxPlayers={match.field.football_type.max_players}/>
+              <Equipos match={match}/>
             </Col>
           </Row>
         </Container>

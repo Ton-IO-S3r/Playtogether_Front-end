@@ -1,25 +1,29 @@
 import './equipos.scss'
 import JugadorEquipo from '../JugadorEquipo'
 import UnirseBtn from '../ActionBtn'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Equipos = (props) => {
-  const {typeMatch, teams, maxPlayers } = props
+  const { field, team } = props.match
   const players = []
 
-  const [teamW, setTeamW] = useState(teams[0])
-  const [teamB, setTeamB] = useState(teams[1])
-  console.log(teamW)
-  const playersByTeam = maxPlayers/2
+  const [teamW, setTeamW] = useState(team[0])
+  const [teamB, setTeamB] = useState(team[1])
+  useEffect(()=>{
+    setTeamW(team[0])
+    setTeamB(team[1])
+  },[props.match])
+
+  const playersByTeam = field.football_type.max_players/2
   
-  const setTeamWPlayers = (playersList) =>{
+  const setTeamPlayers = (playersList) =>{
     const players=[]
     if(playersList.length > 0 && playersList.length < playersByTeam ){
       playersList.map((team_player)=>{
         console.log(team_player)
         players.push(
           <div className="d-flex flex-row justify-content-around flex-nowrap">
-            <JugadorEquipo team="white" player_gender={team_player}/>
+            <JugadorEquipo player_data={team_player} />
           </div>
         )
       })
@@ -27,72 +31,35 @@ const Equipos = (props) => {
     for (let i = playersList.length; i < playersByTeam; i++) {
       players.push(
         <div className="d-flex flex-row justify-content-around flex-nowrap">
-          <p>Lugar Disponible</p>  
+          <JugadorEquipo player_data={{}} />
         </div>
       )
       
     }
-    console.log(players)
     return players
     
   }
-  // if (typeMatch === 1){
-  //   for (let i = 1 ; i<=10 ; i++){
-  //     players.push( 
-  //       <div className="d-flex flex-row justify-content-around flex-nowrap">
-  //         <JugadorEquipo team="black"/>
-  //         <JugadorEquipo team="white"/>
-  //       </div>
-  //     )
-  //   }
-  // }else if (typeMatch === 2){
-  //   for (let i = 1 ; i<=8 ; i++){
-  //     players.push(
-  //       <div className="d-flex flex-row justify-content-around flex-nowrap">
-  //         <JugadorEquipo team="black"/>
-  //         <JugadorEquipo team="white"/>
-  //       </div>
-  //     )
-  //   }
-  // }else if (typeMatch === 3){
-  //   for (let i = 1 ; i<=14 ; i++){
-  //     players.push(
-  //       <div className="d-flex flex-row justify-content-around flex-nowrap">
-  //         <JugadorEquipo team="black"/>
-  //         <JugadorEquipo team="white"/>
-  //       </div>
-  //     )
-  //   }
-  // }
-
   
-
-
   return (
     <div className="match-container p-3">
       <h5 className="fs-5 fw-bolder my-4">1 lugar disponible</h5>
       <hr />
-      {/* <div>
-        <span>Equipo negro</span>
-        
-        <span>Equipo blanco</span>
-      </div>
-      <div className="teams-container my-4">
-        
-      </div> */}
       <div className="container">
         <div className="row">
           <div className="col-5">
-          <span>Equipo negro</span>
-          {
-            setTeamWPlayers(teamW.players)
-          }
-          </div>
+            <span>Equipo blanco</span>
+            {
+              setTeamPlayers(teamW.players)
+            }
+            </div>
           <div className="col-2">
             <span className="fs-5 mx-4"><strong>VS</strong></span>
           </div>
           <div className="col-5">
-
+            <span>Equipo negro</span>
+            {
+              setTeamPlayers(teamB.players)
+            }
           </div>
         </div>
       </div>
