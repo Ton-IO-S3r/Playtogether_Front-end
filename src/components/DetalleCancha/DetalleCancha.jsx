@@ -20,7 +20,7 @@ import Btn from 'components/Buttons/CallActionBtn'
 
 const DetalleCancha = (props) => {
 
-  const {imgField,nameField,servicesField,typeField, priceField, directionField, dateMatch, timeMatch, categoryMatch} = props
+  const {imgField,nameField,servicesField,typeField, priceField, directionField, dateMatch, timeMatch, categoryMatch, onClick} = props
   
   // const [showA, setShowA] = useState(true);
   // const toggleShowA = () => setShowA(!showA);
@@ -83,7 +83,7 @@ const DetalleCancha = (props) => {
           </div>
         </div>
       </div>
-      <Btn className="mb-3" text="Unirse"/>
+      <Btn className="mb-3" text="Unirse" onClick={onClick}/>
     </div>
     
   )

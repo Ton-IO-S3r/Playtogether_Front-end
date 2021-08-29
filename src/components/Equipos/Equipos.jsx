@@ -1,9 +1,9 @@
 import './equipos.scss'
 import JugadorEquipo from '../JugadorEquipo'
 import UnirseBtn from '../ActionBtn'
-
+import Btn from 'components/Buttons/CallActionBtn'
 const Equipos = (props) => {
-  const {typeMatch } = props
+  const {typeMatch, onClick } = props
   const players = []
 
   if (typeMatch === 1){
@@ -44,7 +44,7 @@ const Equipos = (props) => {
       <div className="teams-container my-4">
         {players}
       </div>
-      <UnirseBtn action="Unirse" />
+      <Btn text="Unirse" onClick={onClick}/>
     </div>
   )
 }

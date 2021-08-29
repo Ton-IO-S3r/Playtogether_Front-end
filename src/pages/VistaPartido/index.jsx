@@ -8,6 +8,7 @@ import Equipos from '../../components/Equipos/Equipos';
 import Navbar from 'components/Navbar/Navbar';
 import Footer from 'components/Footer/Footer';
 import {useParams} from 'react-router-dom'
+import ModalTeam from 'components/ModalTeam/ModalTeam'
 //API URL
 import {API_URL, imgField, fieldServicesIconURL} from 'Constants/API'
 
@@ -69,6 +70,10 @@ const VistaPartido = () => {
   
   const [match, setMatch] = useState(data)
   const {id} = useParams()
+  const [modalShow, setModalShow] = useState(false);
+  const [nameBlack, setBlack] = useState("")
+  const [nameWhite, setWhite] = useState("")
+  const [matchId,setId] = useState("")
 
  
   const getMatch = async () => {
@@ -77,17 +82,25 @@ const VistaPartido = () => {
       const match = await response.json();
       console.log(match)
       setMatch(match)
+      setBlack(match.team[0].name)
+  setWhite(match.team[1].name)
     }catch (error){
       console.log(error)
     }
   }
- 
-  console.log(match)
   
+  const handleModal = () => {
+    setModalShow(true)
+    setBlack(match.team[0].name)
+    setWhite(match.team[1].name)
+    setId(match.id)
+  } 
+
   useEffect( ()=>{
     getMatch()
 },[])
  
+console.log(nameBlack)
 
   return (
     <>
@@ -96,7 +109,7 @@ const VistaPartido = () => {
         <Container>
           <h1 className="py-3">Detalles del partido</h1>
           <Row className="gy-3 justify-content-center">
-            <Col className="" sm={12} md={6} lg={5}>
+            <Col className="p-0" sm={12} md={6} lg={5}>
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
@@ -114,15 +127,17 @@ const VistaPartido = () => {
               timeMatch={match.time}
               categoryMatch={match.category}
 
+              onClick={()=>handleModal()}
               />
             </Col>
             <Col className="p-0" sm={12} md={6}>
-              <Equipos typeMatch={match.field.football_type.id}/>
+              <Equipos typeMatch={match.field.football_type.id} onClick={()=>handleModal()}/>
             </Col>
           </Row>
         </Container>
       </Container>
       <Footer />
+      <ModalTeam show={modalShow} onHide={() => setModalShow(false)} nameBlack={nameBlack} nameWhite={nameWhite} matchId={matchId}/>
     </>
     
   )
