@@ -66,9 +66,12 @@ const handleSubmit = async(e) => {
 	  if (response.token) {
       //SE ALMACENA EL TOKEN EN LOCALSTORAGE
 	  	localStorage.setItem("token", response.token);
+      sessionStorage.setItem("token", response.token);
       localStorage.setItem("id", response.user_id);
+      const id=localStorage.getItem("id")
+      console.log(response.token)
       //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
-    	window.location.href = "/crear-partido";
+    	window.location.href = `/usuarios/${id}`;
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
       notifyWarning("Nombre de usuario o contaseña incorrectos")

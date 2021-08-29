@@ -2,7 +2,7 @@ import {React, useState,useEffect, useRef} from 'react'
 import {Col, Form,Modal, Row } from 'react-bootstrap';
 
 //API
-import {API_URL} from 'Constants/API'
+import {API_URL,fieldServicesIconURL} from 'Constants/API'
 //elementos del FORM
 import Divider from '@material-ui/core/Divider';
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -24,9 +24,10 @@ registerLocale("es", es)
 const ModalPartido = (props) => {
   //CONSTANTES
   const {id,show} = props
-  const [field,setField] = useState({})
-  const [icons,setIncons] = useState(null)
-  const [gender, setGender] = useState("masculino")
+  const [field,setField] = useState({"football_type":{
+    "name":""
+  }})
+  const [gender, setGender] = useState("varonil")
   const [services, setServices] = useState([])
   const [startDate, setStartDate] = useState(new Date());
   const [time, setTime] = useState(moment())
@@ -47,6 +48,7 @@ const ModalPartido = (props) => {
       const field = await response.json();
       
       setField(field)
+      console.log(field.football_type)
       setServices(field.services)
     } catch (error) {
       console.log(error);
@@ -119,11 +121,11 @@ const handleValueTime = (time) =>{
 
   useEffect(async ()=>{
     await getFieldDetail()
+    
     if (show){
      await getFieldDetail()
   }
 },[show])
-
 
     return (
         <div>
@@ -149,10 +151,15 @@ const handleValueTime = (time) =>{
           <Col lg="7">
           <h1 className="text-center fs-5 mt-2 mb-4 fw-bold">{field.name}</h1>
         <div className="d-flex justify-content-around flex-wrap mt-5">
-          {services.map(item=>(<p className="p-services mx-1">{item}</p>))}
+          {services.map(item=>(
+                <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
+                  <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
+                  <p className="p-services mx-1">{item}</p>
+                </div>
+              ))}
         </div>
         <div className="d-flex justify-content-between justify-content-md-around align-items-center mt-3 mb-3">
-          <h2 className="create-type fw-bold">{field.football_type}</h2>
+          <h2 className="create-type fw-bold">{field.football_type.name}</h2> 
           <div className= "d-flex flex-row justify-content-center align-items-center bg-dark text-warning price-container">
               <h2 className="my-1 mx-1 ">{`$${field.rent_cost}`}</h2>
               <span className="my-1 mx-2 fw-light fs-6">Precio /<br/>Jugador</span>
@@ -178,8 +185,8 @@ const handleValueTime = (time) =>{
             </div>
             
             <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around" onChange={(e)=>{setGender(e.target.value)}}>
-            <Form.Check value="masculino" as='input' label="Masculino" name="gender" type="radio" id="masc" checked={gender === "masculino" ? true : false}/>
-            <Form.Check value="femenino" as='input' label="Femenino" name="gender" type="radio" id="fem" checked={gender === "femenino" ? true : false}/>
+            <Form.Check value="varonil" as='input' label="Varonil" name="gender" type="radio" id="masc" checked={gender === "varonil" ? true : false}/>
+            <Form.Check value="femenil" as='input' label="Femenil" name="gender" type="radio" id="fem" checked={gender === "femenil" ? true : false}/>
             <Form.Check value="mixto" as='input' label="Mixto" name="gender" type="radio" id="mix" checked={gender === "mixto" ? true : false}/>
 
             </div>

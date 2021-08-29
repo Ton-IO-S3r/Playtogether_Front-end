@@ -30,24 +30,25 @@ const DetalleCancha = (props) => {
   
   return (
     <div className="d-flex flex-column card-partido">
-      <div class=" img-cancha-partido ">
+      <div className=" img-cancha-partido ">
         <img src={imgField}/>
       </div>
-      <div className="card-content">
-      <h1 className="text-center fs-1 fw-bold field-title mt-3">{nameField}</h1>
-        <div className="d-flex justify-content-around flex-wrap mt-5">
+      <div className="card-content p-2 p-md-4">
+        <h5 className="text-center fs-3 fw-bold field-title mt-3">{nameField}</h5>
+        <hr />
+        <div className="d-flex justify-content-around flex-wrap mt-4">
           {/* {services.map(item=>(<p className="p-services mx-1">{item}</p>))} */}
           {servicesField}
         </div>
-        <div className="d-flex justify-content-around justify-content-md-around align-items-center mt-3 mb-3">
-          <h2 className="create-type fw-bold">{typeField}</h2>
-          <div className= "d-flex flex-row justify-content-center align-items-center bg-dark text-warning price-container">
+        <div className="d-flex justify-content-around justify-content-md-around align-items-center my-3">
+          <h2 className="create-type fw-bold p-1 m-0">{typeField}</h2>
+          <div className= "d-flex flex-row justify-content-center align-items-center bg-dark text-warning price-container p-1">
               <h2 className="my-1 mx-1 ">{priceField}</h2>
-              <span className="my-1 mx-2 fw-light fs-6">Precio /<br/>Jugador</span>
+              <span className="my-1 mx-2 fw-light fs-6">Precio /<br/>Cancha</span>
           </div>
         </div>
         <Divider className="mb-4" variant="middle"/>
-        <div className="d-flex justify-content-around align-items-center mt-4 mb-4">
+        <div className="d-flex justify-content-around align-items-center m-3">
           <img src={location}/>
           <p className="mb-0 address">{directionField}</p>
         </div>
