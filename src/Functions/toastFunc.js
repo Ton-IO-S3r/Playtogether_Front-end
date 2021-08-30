@@ -11,10 +11,10 @@ const notifyWarning = (text)  =>{
         });
 };
 
-const notifySuccess = (text)  =>{
+const notifySuccess = (text,autoClose)  =>{
     toast.success(`${text}`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: autoClose,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

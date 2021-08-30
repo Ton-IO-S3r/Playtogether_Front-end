@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row, Modal , Form} from 'react-bootstrap'
 import Btn from 'components/Buttons/CallActionBtn'
 import {API_URL, AUTH_TOKEN} from 'Constants/API'
+import './ModalTeam.scss'
 
 const ModalLeave = (props) => {
 
@@ -57,8 +58,8 @@ console.log(inTeam)
         <Container>
             <Row>
             <div className="d-flex flex-column">
-            <h1>Deseas abandonar este equipo?</h1>
-            <Btn className="mb-4" text="Aabandonar" onClick={handleUpdate}/>
+            <h1 className="text-leave">¿Seguro que deseas abandonar el partido?</h1>
+            <Btn className="mb-4" text="Abandonar" style={{backgroundColor: "transparent",color: "#28804B"}} onClick={handleUpdate}/>
             
             </div>
             

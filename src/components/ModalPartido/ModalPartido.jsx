@@ -108,8 +108,8 @@ const handleSubmit = async(e) => {
     if (response[0] == "Ese horario en la cancha seleccionada ya esta ocupado, selecciona otro horario!"){
         notifyWarning("Fecha No disponible, elige otra")
     }else{
-      notifySuccess("Partido creado con exito")
-        setTimeout(function(){window.location.href=`/partidos/${response.id}`} , 11000); 
+      notifySuccess("Partido creado con exito",3000)
+        setTimeout(function(){window.location.href=`/partidos/${response.id}`} , 3000); 
       }
 
   }
