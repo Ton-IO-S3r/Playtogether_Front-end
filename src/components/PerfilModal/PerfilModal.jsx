@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
-import SpinnerPT from 'components/Spinner';
 import {AUTH_TOKEN,AUTH_ID,photoAPI, API_URL} from 'Constants/API'
 
 const userProfile = {
@@ -161,7 +160,6 @@ const PerfilModal = (props) => {
               <Form className="form-user-profile" onSubmit={updateUserProfile}>
                 <Form.Group controlId="formFileSm" className="profile-pic mb-3 d-flex flex-column justify-content -center align-items-center">
                  <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${photoAPI}${AUTH_ID}/avatar)`}}></div>
-                 {/* <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${profileImg})`}}></div> */}
                  <input type="file" hidden={true} size="sm" ref={inputFile} name="photo" className="align-self-center" onChange={handleImageChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
@@ -212,10 +210,10 @@ const PerfilModal = (props) => {
                 <Form.Group className="mb-2">
                   <Form.Label className="mb-0">Posición:</Form.Label>
                   <Form.Select size="sm" name="position" defaultValue={playerData.position} onChange={handlePlayerInputChange}>
-                    <option value="1">Delantero</option>
-                    <option value="2">Portero</option>
+                    <option value="1">Portero</option>
+                    <option value="2">Delantero</option>
                     <option value="3">Defensa</option>
-                    <option value="4">Medio Campo</option>
+                    <option value="4">Medio</option>
                   </Form.Select>
                 </Form.Group>
                 <div className="w-100 text-center">
