@@ -2,17 +2,43 @@ import './equipos.scss'
 import JugadorEquipo from '../JugadorEquipo'
 import UnirseBtn from '../ActionBtn'
 import { useEffect, useState } from 'react'
+import Btn from 'components/Buttons/CallActionBtn'
+import { AUTH_ID } from 'Constants/API'
 
 const Equipos = (props) => {
   const { field, team } = props.match
+  const {onClick,showButton,onClickLeave} = props
   const players = []
 
   const [teamW, setTeamW] = useState(team[0])
   const [teamB, setTeamB] = useState(team[1])
+  const [modalShow, setModalShow] = useState(false);
+  // const [teamW, setTeamW] = useState(team[0])
+  // const [teamB, setTeamB] = useState(team[1])
+  // useEffect(()=>{
+  //   setTeamW(team[0])
+  //   setTeamB(team[1])
+  // },[props.match])
+
   useEffect(()=>{
-    setTeamW(team[0])
-    setTeamB(team[1])
-  },[props.match])
+    if (team[0].name.includes("a")){
+      setTeamW(team[0])
+    }else{
+      setTeamW(team[1])
+    }
+
+    if (team[1].name.includes("b")){
+      setTeamB(team[1])
+    }else{
+      setTeamB(team[0])
+    }
+      
+      
+    },[props.match])
+
+
+    console.log(teamB)
+    console.log(teamW)
 
   const playersByTeam = field.football_type.max_players/2
   
@@ -39,6 +65,10 @@ const Equipos = (props) => {
     return players
     
   }
+
+  const handleLeave = () =>{
+
+  }
   
   return (
     <div className="match-container p-3">
@@ -63,8 +93,11 @@ const Equipos = (props) => {
           </div>
         </div>
       </div>
-
-      <UnirseBtn action="Unirse" />
+      {
+        showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
+      }
+      
+      
     </div>
   )
 }

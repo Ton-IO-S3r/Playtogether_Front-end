@@ -38,6 +38,7 @@ const loginUser = async(username,password) => {
       }),
     });
     return await response.json();
+    console.log(response)
   } catch (error){
     console.log(error)
   }
@@ -66,12 +67,13 @@ const handleSubmit = async(e) => {
 	  if (response.token) {
       //SE ALMACENA EL TOKEN EN LOCALSTORAGE
 	  	localStorage.setItem("token", response.token);
-      sessionStorage.setItem("token", response.token);
       localStorage.setItem("id", response.user_id);
+      localStorage.setItem("player_photo", response.player_photo)
       const id=localStorage.getItem("id")
-      console.log(response.token)
+      console.log(response)
       //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
-    	window.location.href = `/usuarios/${id}`;
+    	// window.location.href = `/usuarios/${id}`;
+      setTimeout(function(){window.location.href = `/usuarios/${id}`} , 11000); 
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
       notifyWarning("Nombre de usuario o contraseña incorrectos")

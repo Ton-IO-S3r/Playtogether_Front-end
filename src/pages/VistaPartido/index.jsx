@@ -8,8 +8,11 @@ import Equipos from '../../components/Equipos/Equipos';
 import Navbar from 'components/Navbar/Navbar';
 import Footer from 'components/Footer/Footer';
 import {useParams} from 'react-router-dom'
+import ModalTeam from 'components/ModalTeam/ModalTeam'
+import ModalLeave from 'components/ModalTeam/ModalLeave'
 //API URL
-import {API_URL, imgField, fieldServicesIconURL} from 'Constants/API'
+import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
+import { StepButton } from '@material-ui/core';
 
 const VistaPartido = () => {
   const data = {
@@ -69,22 +72,73 @@ const VistaPartido = () => {
   
   const [match, setMatch] = useState(data)
   const {id} = useParams()
-
+  const [modalShow, setModalShow] = useState(false);
+  const [modalShowLeave, setModalShowLeave] = useState(false)
+  const [nameBlack, setBlack] = useState("")
+  const [nameWhite, setWhite] = useState("")
+  const [matchId,setId] = useState("")
+  const [inTeam, setTeam] = useState("")
+  // const [showButton, setButton] = useState(false)
+  let showButton = false
  
   const getMatch = async () => {
     try{
       const response = await fetch(`${API_URL}matches/${id}/`);
       const match = await response.json();
       setMatch(match)
+      console.log(match)
+      setBlack(match.team[0].name)
+  setWhite(match.team[1].name)
     }catch (error){
       console.log(error)
     }
   }
-   
+  
+  const handleModal = () => {
+    setModalShow(true)
+    if (match.team[0].name.includes("a")){
+      setWhite(match.team[0].name)
+    }else{
+      setWhite(match.team[1].name)
+    }
+
+    if (match.team[1].name.includes("b")){
+      setBlack(match.team[1].name)
+    }else{
+      setBlack(match.team[0].name)
+    }
+    
+    setId(match.id)
+  } 
+
   useEffect( ()=>{
     getMatch()
   },[])
  
+
+  let result = ""
+ match.team.forEach(item => (
+  item.players.find(item => (item.user_data.user_id === AUTH_ID)) ? result = item.name  : ""
+  ))
+/////////
+  if (result !== "") {
+    // setTeam(result)
+    showButton = true
+  }else{
+    // setTeam("")
+    showButton = false
+  }
+  const handleLeave = () => {
+    setModalShowLeave(true)
+    if (result !== "") {
+      setTeam(result)
+    }else{
+      setTeam("")
+    }
+    setId(match.id)
+  }
+
+  console.log(result)
 
   return (
     <>
@@ -93,7 +147,7 @@ const VistaPartido = () => {
         <Container>
           <h1 className="py-3">Detalles del partido</h1>
           <Row className="gy-3 justify-content-center">
-            <Col className="" sm={12} md={6} lg={5}>
+            <Col className="p-0" sm={12} md={6} lg={5}>
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
@@ -111,15 +165,26 @@ const VistaPartido = () => {
               timeMatch={match.time}
               categoryMatch={match.category}
 
+              onClick={()=>handleModal()}
+
+              showButton={showButton}
+              onClickLeave={()=>handleLeave()}
               />
             </Col>
-            <Col className="p-0" sm={12} md={6}>
-              <Equipos match={match}/>
+            <Col  sm={12} md={6}>
+              <Equipos match={match}
+                onClick={()=>handleModal()}
+                showButton={showButton}
+                onClickLeave={()=>handleLeave()}
+                
+              />
             </Col>
           </Row>
         </Container>
       </Container>
       <Footer />
+      <ModalTeam show={modalShow} onHide={() => setModalShow(false)} nameBlack={nameBlack} nameWhite={nameWhite} matchId={matchId}/>
+      <ModalLeave show={modalShowLeave} onHide={() => setModalShowLeave(false)} inTeam={inTeam} matchId={matchId}/>
     </>
     
   )
