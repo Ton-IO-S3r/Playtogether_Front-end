@@ -3,7 +3,8 @@ import { Container, Row, Modal , Form} from 'react-bootstrap'
 import Btn from 'components/Buttons/CallActionBtn'
 import './ModalTeam.scss'
 import {API_URL, AUTH_TOKEN} from 'Constants/API'
-import ModalLeave from 'components/ModalTeam/ModalLeave'
+import Toast from 'components/Toast/Toast'
+import {notifySuccess} from 'Functions/toastFunc'
 
 const ModalTeam = (props) => {
     const {matchId,nameBlack,nameWhite,show,onHide} = props
@@ -36,8 +37,9 @@ const ModalTeam = (props) => {
         e.preventDefault()
 
         const response = await updateMatch(team)
+        notifySuccess("Te has unido con exito",1000)
+        setTimeout(function(){window.location.reload()} , 1000); 
         
-        window.location.reload()
         console.log(response)
 
     }
@@ -61,16 +63,16 @@ const ModalTeam = (props) => {
             <Row>
             <div className="d-flex flex-column">
             <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around mt-5 mb-4" onChange={(e)=>{setTeam(e.target.value)}} >
-                <div className="d-flex align-items-center" >
-                    <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
-                    <img className="me-2" src={teamBlack}/>
-                    <p className="m-0 fw-bold team">Negro</p>
-                </div>
             
                 <div className="d-flex align-items-center">
                     <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
                     <img className="me-2" src={teamWhite}/>
                     <p className="m-0  fw-bold team">Blanco</p>
+                </div>
+                <div className="d-flex align-items-center" >
+                    <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
+                    <img className="me-2" src={teamBlack}/>
+                    <p className="m-0 fw-bold team">Negro</p>
                 </div>
             
             </div>
@@ -82,6 +84,7 @@ const ModalTeam = (props) => {
         </Container>
       </Modal.Body>
     </Modal>
+    <Toast/>
     </>
     )
 }

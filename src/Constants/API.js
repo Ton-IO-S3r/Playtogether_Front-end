@@ -5,4 +5,5 @@ const fieldServicesIconURL = "https://django-playtogether-media.s3.us-east-2.ama
 const AUTH_TOKEN = localStorage.getItem("token");
 const AUTH_ID = localStorage.getItem("id")
 const AUTH_PHOTO = localStorage.getItem("player_photo")
-export {API_URL, photoAPI,AUTH_TOKEN,AUTH_ID,imgField, fieldServicesIconURL, AUTH_PHOTO}
+const isAuthenticated = localStorage.getItem("token");
+export {API_URL, photoAPI,AUTH_TOKEN,AUTH_ID,imgField, fieldServicesIconURL, AUTH_PHOTO,isAuthenticated}

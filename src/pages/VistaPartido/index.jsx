@@ -15,6 +15,8 @@ import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
 import { StepButton } from '@material-ui/core';
 
 const VistaPartido = () => {
+
+  //CONSTANTE PARA INICALIZAR EL OBJETO
   const data = {
     "id": 0,
     "field": {
@@ -69,18 +71,26 @@ const VistaPartido = () => {
         }
     ]
 }
-  
+  //CONSTANTES
+
+  //Alamcenar objeto
   const [match, setMatch] = useState(data)
+  //Params
   const {id} = useParams()
+  //Estado de los modales
   const [modalShow, setModalShow] = useState(false);
   const [modalShowLeave, setModalShowLeave] = useState(false)
+  //Almacenar nombre de los equipos
   const [nameBlack, setBlack] = useState("")
   const [nameWhite, setWhite] = useState("")
+  //Almacenar Id del partido
   const [matchId,setId] = useState("")
+  //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
-  // const [showButton, setButton] = useState(false)
+  // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
   let showButton = false
  
+  //OBTENER EL PARTIDO
   const getMatch = async () => {
     try{
       const response = await fetch(`${API_URL}matches/${id}/`);
@@ -94,8 +104,10 @@ const VistaPartido = () => {
     }
   }
   
+  //Funcion callback para abir el modal
   const handleModal = () => {
     setModalShow(true)
+    //Valida el nombre del equipo y lo alacena
     if (match.team[0].name.includes("a")){
       setWhite(match.team[0].name)
     }else{
@@ -115,19 +127,20 @@ const VistaPartido = () => {
     getMatch()
   },[])
  
-
-  let result = ""
+//VALIDA EN QUE EQUIPO SE ENCUENTRA EL USURIO
+let result = ""
  match.team.forEach(item => (
   item.players.find(item => (item.user_data.user_id === AUTH_ID)) ? result = item.name  : ""
   ))
-/////////
+
+//Cambia el valor del boton
   if (result !== "") {
-    // setTeam(result)
     showButton = true
   }else{
-    // setTeam("")
     showButton = false
   }
+
+//Mostrar modal del abandonar partido
   const handleLeave = () => {
     setModalShowLeave(true)
     if (result !== "") {
@@ -137,9 +150,6 @@ const VistaPartido = () => {
     }
     setId(match.id)
   }
-
-  console.log(result)
-
   return (
     <>
       <Navbar/>
@@ -171,7 +181,7 @@ const VistaPartido = () => {
               onClickLeave={()=>handleLeave()}
               />
             </Col>
-            <Col  sm={12} md={6}>
+            <Col className="p-0"  sm={12} md={6}>
               <Equipos match={match}
                 onClick={()=>handleModal()}
                 showButton={showButton}
