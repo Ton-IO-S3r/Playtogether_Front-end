@@ -5,7 +5,7 @@ import Button from 'components/Buttons/CallActionBtn'
 import { Link } from 'react-router-dom'
 //IMAGENES
 import logo from 'assets/icons/PT_Logo.svg'
-import {photoAPI, AUTH_TOKEN, AUTH_ID} from 'Constants/API'
+import {photoAPI, AUTH_TOKEN, AUTH_ID, AUTH_PHOTO} from 'Constants/API'
 //ESTILOS
 import './navbar.scss'
 
@@ -24,6 +24,7 @@ const Navbar = (props) => {
        
         localStorage.removeItem('token')
         localStorage.removeItem('id')
+        localStorage.removeItem('player_photo')
         window.location.href = "/";
 
     }
@@ -71,7 +72,7 @@ const Navbar = (props) => {
                                     </li> */}
                                     <div className="nav-photo" onClick={()=>{setShow(!show)}}>
                                     {/* <Link to={`/usuarios/${AUTH_ID}`}> */}
-                                    <img src={`${photoAPI}${AUTH_ID}/avatar`}/>
+                                    <img src={`${photoAPI}${AUTH_PHOTO}`}/>
                                     {/* </Link> */}
                                     
 

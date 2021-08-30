@@ -3,17 +3,14 @@ import { Container, Row, Modal , Form} from 'react-bootstrap'
 import Btn from 'components/Buttons/CallActionBtn'
 import './ModalTeam.scss'
 import {API_URL, AUTH_TOKEN} from 'Constants/API'
+import ModalLeave from 'components/ModalTeam/ModalLeave'
 
 const ModalTeam = (props) => {
     const {matchId,nameBlack,nameWhite,show,onHide} = props
     const teamBlack = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/teamBlack.svg"
     const teamWhite = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/teamWhite.svg"
-    const nameB = nameBlack
-    const nameW = nameWhite
-    const [team, setTeam] = useState(nameB)
-    const [showModal, setShow] = useState(true)
+    const [team, setTeam] = useState(nameBlack)
     const updateMatch = async (name) =>{
-    
         try{
             const response = await fetch(`${API_URL}matches/${matchId}/`,{
                 method: "PATCH",
@@ -32,23 +29,20 @@ const ModalTeam = (props) => {
             console.log(response)
         }catch (error){
             console.log(error)
-        }
-        
+        }   
     }
 
     const handleUpdate = async (e) => {
         e.preventDefault()
 
         const response = await updateMatch(team)
+        
         window.location.reload()
         console.log(response)
 
     }
-
-
-
-console.log(showModal)
     return (
+        <>
     <Modal
     //   {...props}
     show={show}
@@ -68,20 +62,19 @@ console.log(showModal)
             <div className="d-flex flex-column">
             <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around mt-5 mb-4" onChange={(e)=>{setTeam(e.target.value)}} >
                 <div className="d-flex align-items-center" >
-                    <Form.Check value={nameB} as='input' name="team" type="radio" id="black" checked={team === nameB ? true : false} />
+                    <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
                     <img className="me-2" src={teamBlack}/>
                     <p className="m-0 fw-bold team">Negro</p>
                 </div>
             
                 <div className="d-flex align-items-center">
-                    <Form.Check value={nameW} as='input' name="team" type="radio" id="black"  checked={team === nameW ? true : false}/>
+                    <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
                     <img className="me-2" src={teamWhite}/>
                     <p className="m-0  fw-bold team">Blanco</p>
                 </div>
             
             </div>
             <Btn className="mb-4" text="Unirse" onClick={handleUpdate}/>
-            <p>{team}</p>
             </div>
             
            
@@ -89,6 +82,7 @@ console.log(showModal)
         </Container>
       </Modal.Body>
     </Modal>
+    </>
     )
 }
 

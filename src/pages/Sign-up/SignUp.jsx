@@ -25,7 +25,7 @@ const emailRef = useRef()
 const pwdRef = useRef()
 
 //FUNCION PARA HACER REGISTRO A LA API (POST)
-const loginSignUp = async(username,name,lastName,email,password) => {
+const loginSignUp = async(username,first_name,last_name,email,password) => {
     try{
       const response = await fetch(`${API_URL}signup/`, {
         method: "POST",
@@ -34,8 +34,8 @@ const loginSignUp = async(username,name,lastName,email,password) => {
         },
         body: JSON.stringify({
           username,
-          name,
-          lastName,
+          first_name,
+          last_name,
           email,
           password
         }),
@@ -65,6 +65,9 @@ const loginSignUp = async(username,name,lastName,email,password) => {
       // console.log(await JSON.stringify(username,password))
       // console.log(await loginUser(username,password))
   
+      console.log(name)
+      console.log(lastName)
+
       //Se pasan los valores de los inputs a la funcion del POST
       const response = await loginSignUp(username,name,lastName,email,password);
 
@@ -114,7 +117,7 @@ const loginSignUp = async(username,name,lastName,email,password) => {
                           <Form.Control ref={pwdRef}  type="password" placeholder="Contraseña" />
                         </Form.Group>
                         <Button className="align-self-center mt-4 btn-login" type="submit" >
-                          Iniciar Sesión
+                          Unete
                         </Button>
                       </Form> 
                       <p className="mt-4 p-login">Ya tienes cuenta?, Inicia Sesión <Link to='/login' style={{color:"#28804B"}}><strong>aqui</strong></Link></p>  
