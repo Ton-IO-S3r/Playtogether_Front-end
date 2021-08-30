@@ -73,7 +73,7 @@ const handleSubmit = async(e) => {
       console.log(response)
       //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
     	// window.location.href = `/usuarios/${id}`;
-      setTimeout(function(){window.location.href = `/usuarios/${id}`} , 11000); 
+      window.location.href = `/usuarios/${id}`;
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
       notifyWarning("Nombre de usuario o contraseña incorrectos")
