@@ -16,7 +16,7 @@
     background-color: #32A77A;
     border-color: #32A77A;
     color: #fff;
-    font-size: 20px;
+    
 }
 .p-login{
     font-size: 12px;
@@ -28,6 +28,9 @@
 @media screen and (min-width:768px){
     .col-login{
         margin-top: 20%;
+    }
+    .btn-login{
+        font-size: 20px;
     }
 }
 

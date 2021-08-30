@@ -14,6 +14,7 @@ import genre from 'assets/icons/genre.svg'
 import UnirseBtn from '../ActionBtn';
 import Divider from '@material-ui/core/Divider';
 import Btn from 'components/Buttons/CallActionBtn'
+import {isAuthenticated} from 'Constants/API'
 
 
 
@@ -84,8 +85,13 @@ const DetalleCancha = (props) => {
         </div>
       </div>
       {
+        !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+        (
         showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> :  <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
+      )
       }
+      
       
     </div>
     

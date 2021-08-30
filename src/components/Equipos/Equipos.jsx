@@ -3,7 +3,7 @@ import JugadorEquipo from '../JugadorEquipo'
 import UnirseBtn from '../ActionBtn'
 import { useEffect, useState } from 'react'
 import Btn from 'components/Buttons/CallActionBtn'
-import { AUTH_ID } from 'Constants/API'
+import { isAuthenticated } from 'Constants/API'
 
 const Equipos = (props) => {
   const { field, team } = props.match
@@ -93,9 +93,12 @@ const Equipos = (props) => {
         </div>
       </div>
       {
+        !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+        (
         showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
+      )
       }
-      
       
     </div>
   )

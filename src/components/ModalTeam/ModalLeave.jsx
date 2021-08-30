@@ -3,10 +3,15 @@ import { Container, Row, Modal , Form} from 'react-bootstrap'
 import Btn from 'components/Buttons/CallActionBtn'
 import {API_URL, AUTH_TOKEN} from 'Constants/API'
 import './ModalTeam.scss'
+import Toast from 'components/Toast/Toast'
+import {notifyWarning} from 'Functions/toastFunc'
 
 const ModalLeave = (props) => {
 
+    //PROPIEDADES DEL COMPONENTE
     const {matchId,show,onHide,inTeam} = props
+
+    //FETCH HACIA LA IP PARA ABANDONAR EL PARTIDO
     const updateMatch = async (name) =>{
         try{
             const response = await fetch(`${API_URL}matches/${matchId}/`,{
@@ -33,12 +38,11 @@ const ModalLeave = (props) => {
         e.preventDefault()
 
         const response = await updateMatch(inTeam)
-        window.location.reload()
+        notifyWarning("Abandonaste el Partido")
+        setTimeout(function(){window.location.reload()} , 2000); 
         console.log(response)
 
     }
-
-console.log(inTeam)
 
     return (
         <Modal
@@ -67,6 +71,7 @@ console.log(inTeam)
             </Row>
         </Container>
       </Modal.Body>
+      <Toast/>
     </Modal>
     )
 }
