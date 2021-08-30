@@ -72,9 +72,6 @@ const VistaPartido = () => {
   
   const [match, setMatch] = useState(data)
   const {id} = useParams()
-<<<<<<< HEAD
-  console.log(id)
-=======
   const [modalShow, setModalShow] = useState(false);
   const [modalShowLeave, setModalShowLeave] = useState(false)
   const [nameBlack, setBlack] = useState("")
@@ -83,7 +80,6 @@ const VistaPartido = () => {
   const [inTeam, setTeam] = useState("")
   // const [showButton, setButton] = useState(false)
   let showButton = false
->>>>>>> develop
  
   const getMatch = async () => {
     try{
