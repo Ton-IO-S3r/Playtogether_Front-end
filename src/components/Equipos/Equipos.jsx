@@ -46,7 +46,6 @@ const Equipos = (props) => {
     const players=[]
     if(playersList.length > 0 && playersList.length < playersByTeam ){
       playersList.map((team_player)=>{
-        console.log(team_player)
         players.push(
           <div className="d-flex flex-row justify-content-around flex-nowrap">
             <JugadorEquipo player_data={team_player} />
