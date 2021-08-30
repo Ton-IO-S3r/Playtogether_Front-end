@@ -13,54 +13,54 @@ import {API_URL, imgField, fieldServicesIconURL} from 'Constants/API'
 
 const VistaPartido = () => {
   const data = {
-    "id": 26,
+    "id": 0,
     "field": {
-        "id": 1,
-        "name": "kodemiaFut",
-        "rent_cost": 1400,
-        "address": "Delegacion: Benito juarez - Calle: alguna - Exterior: 123",
-        "football_type": "7vs7",
-        "services": [
-            "Arbitraje",
-            "Estacionamiento",
-            "Regaderas"
-        ]
+        "id": 0,
+        "name": "",
+        "rent_cost": 0,
+        "address": "",
+        "football_type": "",
+        "services": []
     },
-    "date": "2021-12-16",
-    "time": "12:00:00",
-    "category": "masculino",
+    "date": "",
+    "time": "",
+    "category": "",
     "team": [
         {
-            "id": 35,
-            "name": "26_2021-12-16_12:00:00_b",
+            "id": 0,
+            "name": "",
             "players": [
                 {
-                    "player_id": "4",
+                    "player_id": "0",
                     "user_data": {
-                        "username": "AaronMendoza",
-                        "first_name": "Aaron",
-                        "last_name": "Mendoza",
-                        "email": "aaronmendoza@gmail.com"
+                        "user_id":0,
+                        "username": "",
+                        "first_name": "",
+                        "last_name": "",
+                        "email": ""
                     },
-                    "gender": "masculino",
-                    "position": "Defensa"
+                    "gender": "",
+                    "position": "",
+                    "photo":""
                 }
             ]
         },
         {
-            "id": 34,
-            "name": "26_2021-12-16_12:00:00_a",
+            "id": 0,
+            "name": "",
             "players": [
                 {
-                    "player_id": "1",
+                    "player_id": "0",
                     "user_data": {
-                        "username": "brafer",
-                        "first_name": "Ferdinand",
-                        "last_name": "Bracho",
-                        "email": "ferdinandb@gmail.com"
+                      "user_id":0,
+                        "username": "",
+                        "first_name": "",
+                        "last_name": "",
+                        "email": ""
                     },
-                    "gender": "femenino",
-                    "position": "Delantero"
+                    "gender": "",
+                    "position": "",
+                    "photo": ""
                 }
             ]
         }
@@ -69,7 +69,7 @@ const VistaPartido = () => {
   
   const [match, setMatch] = useState(data)
   const {id} = useParams()
-
+  console.log(id)
  
   const getMatch = async () => {
     try{

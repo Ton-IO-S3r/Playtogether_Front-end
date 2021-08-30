@@ -212,10 +212,10 @@ const PerfilModal = (props) => {
                 <Form.Group className="mb-2">
                   <Form.Label className="mb-0">Posición:</Form.Label>
                   <Form.Select size="sm" name="position" defaultValue={playerData.position} onChange={handlePlayerInputChange}>
-                    <option value="1">Delantero</option>
-                    <option value="2">Portero</option>
+                    <option value="1">Portero</option>
+                    <option value="2">Delantero</option>
                     <option value="3">Defensa</option>
-                    <option value="4">Medio Campo</option>
+                    <option value="4">Medio</option>
                   </Form.Select>
                 </Form.Group>
                 <div className="w-100 text-center">
