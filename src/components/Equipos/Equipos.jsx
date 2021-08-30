@@ -13,6 +13,7 @@ const Equipos = (props) => {
   const [teamW, setTeamW] = useState(team[0])
   const [teamB, setTeamB] = useState(team[1])
   const [modalShow, setModalShow] = useState(false);
+  const [availablePlaces, setAvailablePlaces] = useState(0)
   // const [teamW, setTeamW] = useState(team[0])
   // const [teamB, setTeamB] = useState(team[1])
   // useEffect(()=>{
@@ -32,16 +33,12 @@ const Equipos = (props) => {
     }else{
       setTeamB(team[0])
     }
-      
-      
-    },[props.match])
-
-
-    console.log(teamB)
-    console.log(teamW)
+    setAvailablePlaces(field.football_type.max_players - team[0].players.length - team[1].players.length)
+  },[props.match])
 
   const playersByTeam = field.football_type.max_players/2
-  
+  let available = field.football_type.max_players
+
   const setTeamPlayers = (playersList) =>{
     const players=[]
     if(playersList.length > 0 && playersList.length < playersByTeam ){
@@ -51,7 +48,9 @@ const Equipos = (props) => {
             <JugadorEquipo player_data={team_player} />
           </div>
         )
+        
       })
+      
     }
     for (let i = playersList.length; i < playersByTeam; i++) {
       players.push(
@@ -71,7 +70,7 @@ const Equipos = (props) => {
   
   return (
     <div className="match-container p-3">
-      <h5 className="fs-5 fw-bolder my-4">1 lugar disponible</h5>
+      <h5 className="fs-5 fw-bolder my-4">{`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`}</h5>
       <hr />
       <div className="container">
         <div className="row">
