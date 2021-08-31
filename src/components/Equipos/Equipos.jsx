@@ -1,6 +1,5 @@
 import './equipos.scss'
 import JugadorEquipo from '../JugadorEquipo'
-import UnirseBtn from '../ActionBtn'
 import { useEffect, useState } from 'react'
 import Btn from 'components/Buttons/CallActionBtn'
 import { isAuthenticated } from 'Constants/API'
@@ -14,12 +13,6 @@ const Equipos = (props) => {
   const [teamB, setTeamB] = useState(team[1])
   const [modalShow, setModalShow] = useState(false);
   const [availablePlaces, setAvailablePlaces] = useState(0)
-  // const [teamW, setTeamW] = useState(team[0])
-  // const [teamB, setTeamB] = useState(team[1])
-  // useEffect(()=>{
-  //   setTeamW(team[0])
-  //   setTeamB(team[1])
-  // },[props.match])
 
   useEffect(()=>{
     if (team[0].name.includes("a")){
@@ -37,14 +30,13 @@ const Equipos = (props) => {
   },[props.match])
 
   const playersByTeam = field.football_type.max_players/2
-  let available = field.football_type.max_players
 
   const setTeamPlayers = (playersList) =>{
     const players=[]
     if(playersList.length > 0 && playersList.length < playersByTeam ){
-      playersList.map((team_player)=>{
+      playersList.map((team_player, index)=>{
         players.push(
-          <div className="d-flex flex-row justify-content-around flex-nowrap">
+          <div key={index.toString()} className="d-flex flex-row justify-content-around flex-nowrap">
             <JugadorEquipo player_data={team_player} />
           </div>
         )
@@ -54,7 +46,7 @@ const Equipos = (props) => {
     }
     for (let i = playersList.length; i < playersByTeam; i++) {
       players.push(
-        <div className="d-flex flex-row justify-content-around flex-nowrap">
+        <div key={i.toString()} className="d-flex flex-row justify-content-around flex-nowrap">
           <JugadorEquipo player_data={{}} />
         </div>
       )

@@ -27,7 +27,6 @@ const BuscarPartido = () => {
         params: searchParams
       }
       const res = await axios.get('matches/', request);
-      console.log(res.data)
       return res.data
       
     } catch (error) {

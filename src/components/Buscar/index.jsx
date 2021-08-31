@@ -38,7 +38,6 @@ const Buscar = ({searchParams, setSearchParams}) => {
   const getFieldsList = async ()=> {
     try {
       const res = await axios.get(`fields/`);
-      console.log(res.data)
       return res.data
       
     } catch (error) {

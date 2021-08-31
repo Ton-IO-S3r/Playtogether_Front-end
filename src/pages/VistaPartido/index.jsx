@@ -96,7 +96,6 @@ const VistaPartido = () => {
       const response = await fetch(`${API_URL}matches/${id}/`);
       const match = await response.json();
       setMatch(match)
-      console.log(match)
       setBlack(match.team[0].name)
   setWhite(match.team[1].name)
     }catch (error){
@@ -161,8 +160,8 @@ let result = ""
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
-              servicesField={match.field.services.map(item=>(
-                <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
+              servicesField={match.field.services.map((item,index)=>(
+                <div key={index.toString()} className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
                   <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
                   <p className="p-services mx-1">{item}</p>
                 </div>

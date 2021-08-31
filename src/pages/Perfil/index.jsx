@@ -64,7 +64,6 @@ const PerfilUsuario = () => {
       return data
       
     } catch (error) {
-      console.log(AUTH_TOKEN)
       console.log(error);
     }
   }

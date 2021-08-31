@@ -50,7 +50,6 @@ const PerfilModal = (props) => {
         },
       });
       const data = await response.json();
-      console.log(data)
       return data
       
     } catch (error) {
@@ -136,7 +135,6 @@ const PerfilModal = (props) => {
       ...playerData,
       [e.target.name]: e.target.files
     })
-    console.log(e.target.files)
     setProfileImg(URL.createObjectURL(e.target.files[0]))
   }
 

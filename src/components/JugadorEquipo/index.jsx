@@ -1,6 +1,5 @@
 import './jugadorequipo.scss'
 const JugadorEquipo = ({player_data}) => {
-  console.log(player_data.photo)
   const user_noPicURL ="https://django-playtogether-media.s3.us-east-2.amazonaws.com/avatar_default.png"
   const user_pic_URL=player_data.photo
   
