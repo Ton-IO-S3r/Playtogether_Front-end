@@ -88,7 +88,7 @@ const PerfilUsuario = () => {
         <Row className="gy-5 justify-content-center pb-5">
             <Col sm={12} md={6} lg={5}>
               <CardPerfil 
-                avatar={`${photoAPI}${AUTH_ID}/avatar`} 
+                avatar={`${userData.players.photo}`} 
                 user_first_name={userData.first_name}
                 user_last_name={userData.last_name}
                 user_username={userData.username}

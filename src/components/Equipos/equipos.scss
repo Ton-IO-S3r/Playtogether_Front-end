@@ -2,8 +2,13 @@
   background-color: #F2F2F2;
   border-radius: 10px;
   text-align: center;
-  span{
-    font-size: 16px;
+  .container{
+    .row{
+      span.team-name{
+        font-size: 16px;
+        margin-top: 25px;
+      }
+    }
   }
   
 }

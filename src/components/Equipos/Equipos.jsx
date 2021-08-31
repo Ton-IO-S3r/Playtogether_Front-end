@@ -75,7 +75,7 @@ const Equipos = (props) => {
       <div className="container">
         <div className="row">
           <div className="col-5">
-            <span>Equipo blanco</span>
+            <span className="team-name">Equipo blanco</span>
             {
               setTeamPlayers(teamW.players)
             }
@@ -84,7 +84,7 @@ const Equipos = (props) => {
             <span className="fs-5 mx-4"><strong>VS</strong></span>
           </div>
           <div className="col-5">
-            <span>Equipo negro</span>
+            <span className="team-name">Equipo negro</span>
             {
               setTeamPlayers(teamB.players)
             }
