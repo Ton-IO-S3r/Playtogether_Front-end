@@ -34,7 +34,7 @@ const PerfilModal = (props) => {
       const dataFromServer = await getUser4Update()
       setUserData(dataFromServer.user_data)
       setPlayerData(dataFromServer.player_data)
-      // setProfileImg(playerData.photo)
+      
     } 
     
     getUserProfileData()
@@ -59,6 +59,10 @@ const PerfilModal = (props) => {
   }
 
   // const [profileImg, setProfileImg] = useState('https://django-playtogether-media.s3.us-east-2.amazonaws.com/avatar_default.png')
+  const [profileImg, setProfileImg] = useState(playerData.photo)
+  useEffect(()=>{
+    setProfileImg(playerData.photo)
+  },[playerData])
 
   const updateUserProfile = (event) => {
     event.preventDefault();
@@ -132,8 +136,8 @@ const PerfilModal = (props) => {
       ...playerData,
       [e.target.name]: e.target.files
     })
-    // console.log(e.target.files)
-    // setProfileImg(playerData.photo)
+    console.log(e.target.files)
+    setProfileImg(URL.createObjectURL(e.target.files[0]))
   }
 
 
@@ -159,7 +163,7 @@ const PerfilModal = (props) => {
             <Col>
               <Form className="form-user-profile" onSubmit={updateUserProfile}>
                 <Form.Group controlId="formFileSm" className="profile-pic mb-3 d-flex flex-column justify-content -center align-items-center">
-                 <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${playerData.photo})`}}></div>
+                 <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${profileImg})`}}></div>
                  <input type="file" hidden={true} size="sm" ref={inputFile} name="photo" className="align-self-center" onChange={handleImageChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
