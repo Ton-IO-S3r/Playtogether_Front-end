@@ -21,7 +21,21 @@ import {isAuthenticated} from 'Constants/API'
 
 const DetalleCancha = (props) => {
 
-  const {imgField,nameField,servicesField,typeField, priceField, directionField, dateMatch, timeMatch, categoryMatch, onClick,showButton,onClickLeave} = props
+  const {
+    imgField,
+    nameField,
+    servicesField,
+    typeField, 
+    priceField, 
+    directionField, 
+    dateMatch, 
+    timeMatch, 
+    categoryMatch, 
+    onClick,
+    showButton,
+    onClickLeave,
+    isActivate
+  } = props
   
   // const [showA, setShowA] = useState(true);
   // const toggleShowA = () => setShowA(!showA);
@@ -84,13 +98,22 @@ const DetalleCancha = (props) => {
           </div>
         </div>
       </div>
+
       {
-        !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        isActivate === false ? (<div></div>) :
+        (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
         : 
         (
         showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> :  <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
-      )
+      ))
       }
+      {/* {
+        (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+        (
+        showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> :  <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
+      ))
+      } */}
       
       
     </div>

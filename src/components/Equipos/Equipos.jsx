@@ -7,7 +7,7 @@ import { isAuthenticated } from 'Constants/API'
 
 const Equipos = (props) => {
   const { field, team } = props.match
-  const {onClick,showButton,onClickLeave} = props
+  const {onClick,showButton,onClickLeave,isActivate} = props
   const players = []
 
   const [teamW, setTeamW] = useState(team[0])
@@ -93,12 +93,20 @@ const Equipos = (props) => {
         </div>
       </div>
       {
-        !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        isActivate === false ? (<div></div>) :
+        (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
         : 
         (
         showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
-      )
+      ))
       }
+      {/* {
+        (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+        (
+        showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
+      ))
+      } */}
       
     </div>
   )

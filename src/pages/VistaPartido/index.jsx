@@ -10,6 +10,8 @@ import Footer from 'components/Footer/Footer';
 import {useParams} from 'react-router-dom'
 import ModalTeam from 'components/ModalTeam/ModalTeam'
 import ModalLeave from 'components/ModalTeam/ModalLeave'
+import Toast from 'components/Toast/Toast'
+import {notifyWarning} from 'Functions/toastFunc'
 //API URL
 import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
 import { StepButton } from '@material-ui/core';
@@ -89,6 +91,7 @@ const VistaPartido = () => {
   const [inTeam, setTeam] = useState("")
   // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
   let showButton = false
+  let isActivate = true
  
   //OBTENER EL PARTIDO
   const getMatch = async () => {
@@ -140,6 +143,8 @@ let result = ""
     showButton = false
   }
 
+  
+
 //Mostrar modal del abandonar partido
   const handleLeave = () => {
     setModalShowLeave(true)
@@ -149,6 +154,14 @@ let result = ""
       setTeam("")
     }
     setId(match.id)
+  }
+
+  
+  if (match.active === false){
+    isActivate = false
+    notifyWarning("Partido Finalizado")
+  }else{
+    isActivate = true
   }
   return (
     <>
@@ -179,6 +192,8 @@ let result = ""
 
               showButton={showButton}
               onClickLeave={()=>handleLeave()}
+
+              isActivate={isActivate}
               />
             </Col>
             <Col className="p-0"  sm={12} md={6}>
@@ -186,6 +201,8 @@ let result = ""
                 onClick={()=>handleModal()}
                 showButton={showButton}
                 onClickLeave={()=>handleLeave()}
+
+                isActivate={isActivate}
                 
               />
             </Col>
@@ -195,6 +212,7 @@ let result = ""
       <Footer />
       <ModalTeam show={modalShow} onHide={() => setModalShow(false)} nameBlack={nameBlack} nameWhite={nameWhite} matchId={matchId}/>
       <ModalLeave show={modalShowLeave} onHide={() => setModalShowLeave(false)} inTeam={inTeam} matchId={matchId}/>
+      <Toast/>
     </>
     
   )
