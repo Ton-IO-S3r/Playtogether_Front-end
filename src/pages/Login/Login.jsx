@@ -8,15 +8,20 @@ import Footer from 'components/Footer/Footer'
 import { Col, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import './login.scss'
+//RUTAS
+import { Link } from 'react-router-dom'
+//NOTIFICACIONES
+import Toast from 'components/Toast/Toast'
+//
+import {notifyWarning} from 'Functions/toastFunc'
+import {API_URL} from 'Constants/API'
 
 const Login = () => {
-//DIRECCION DE LA API
-const API_URL = "http://localhost:8000/api/";
+
 //REFERECIA DE LOS INPUTS
 const usernRef = useRef()
 const pwdRef = useRef()
-//ESTADO DE LA ALERTA DEL CAMPO VACIO
-const [campoVacio, setCampoVacio] = useState(null)
+
 
 
 //FUNCION PARA HACER LOGIN A LA API (POST)
@@ -33,6 +38,7 @@ const loginUser = async(username,password) => {
       }),
     });
     return await response.json();
+    console.log(response)
   } catch (error){
     console.log(error)
   }
@@ -47,8 +53,8 @@ const handleSubmit = async(e) => {
 
   //VALIDAR CAMPOS VACIOS
   if (username === '' || password === ''){
-    //CAMBAIR EL ESATDO DEL CAMPO VACIO CON UNA ALERTA
-    setCampoVacio("Nombre de usuario o contaseña incorrectos")
+    //ALERTA
+    notifyWarning("Nombre de usuario o contraseña incorrectos")
     return
   }
     // console.log(await JSON.stringify(username,password))
@@ -61,11 +67,16 @@ const handleSubmit = async(e) => {
 	  if (response.token) {
       //SE ALMACENA EL TOKEN EN LOCALSTORAGE
 	  	localStorage.setItem("token", response.token);
+      localStorage.setItem("id", response.user_id);
+      localStorage.setItem("player_photo", response.player_photo)
+      const id=localStorage.getItem("id")
+      console.log(response)
       //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
-    	window.location.href = "/create-game";
+    	// window.location.href = `/usuarios/${id}`;
+      window.location.href = `/usuarios/${id}`;
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
-      setCampoVacio("Nombre de usuario o contaseña incorrectos")
+      notifyWarning("Nombre de usuario o contraseña incorrectos")
       usernRef.current.value = null
       pwdRef.current.value = null
       return
@@ -74,7 +85,7 @@ const handleSubmit = async(e) => {
   }
     return (
         <div>
-          <Nav isLogin={true}/>
+          <Nav />
           <Container fluid className="container-login">
             <Row>
               <Container>
@@ -84,8 +95,6 @@ const handleSubmit = async(e) => {
                   <Card className="flex-column p-3 mt-5 mb-5" content={
                     <Fragment>
                       <h1 className="h1-login mt-4 mb-4">Inicia Sesión</h1>
-                      {/* ALERTA DEL CAMPO VACIO O CREDENCIALES INCORRECTAS */}
-                      {campoVacio != null ? (<div className="alert alert-danger">{campoVacio}</div>) : (<div></div>)}
                       <Form className="d-flex flex-column" onSubmit={handleSubmit} >
                         <Form.Group className="mb-4" controlId="formBasicEmail">
                           <Form.Label>Nombre de Usuario:</Form.Label>
@@ -103,7 +112,7 @@ const handleSubmit = async(e) => {
                           Iniciar Sesión
                         </Button>
                       </Form> 
-                      <p className="mt-4 p-login">No tienes cuenta?, Registrate <strong>aqui</strong></p>  
+                      <p className="mt-4 p-login">No tienes cuenta?, Registrate <Link to='/unirse/' style={{color:"#28804B"}}><strong>aqui</strong></Link></p>  
                     </Fragment>
                   }/>
                 </Col>
@@ -112,7 +121,9 @@ const handleSubmit = async(e) => {
               </Container>
             </Row>
           </Container>
-          <Footer/>    
+          <Footer/>
+              {/* ALERTS */}
+          <Toast/>
         </div>
     )
 }

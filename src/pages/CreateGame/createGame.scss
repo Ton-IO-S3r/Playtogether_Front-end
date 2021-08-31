@@ -1,0 +1,70 @@
+.container-create{
+    // background-image: url('../assets/img/hero-mobile.png');
+    background: url(/assets/images/create-game-mobile.jpeg),no-repeat;
+    background-size: cover;
+    background-position: center,center;
+    height: 100vh
+}
+.carrousel-create{
+    margin-top: 30%;
+}
+h1.h1-create-game{
+    color: #FFFFFF;
+    font-weight: 600;
+    text-shadow: 5px 3px 4px rgba(0, 0, 0, 0.25);
+  }
+.card-create{
+    margin-left: 10px;
+}
+.arrow-carousel{
+    background-color: #ffffff00;
+    border: none;
+}
+
+.create-check{
+    font-size: 15px;
+}
+
+.card-img{
+    height: 170.40px;
+    object-fit: cover;
+}
+.card-body{
+    height: 214px;
+}
+
+p.p-create{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 5px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width:768px){
+    .container-create{
+        // background-image: url('../assets/img/hero-mobile.png');
+        background: url(/assets/images/create-game.jpeg),no-repeat;
+        background-size: cover;
+        background-position: center,center;
+        height: 100vh
+    }
+    .carrousel-create{
+        margin-top: 10%;
+    }
+}
+
+
+
+@media screen and (min-width:1444px){
+    .carrousel-create{
+        margin-top: 5%;
+    }
+    p.p-create{
+        
+        font-weight: normal;
+        font-size: 30px;
+       
+        
+    }
+}
+

@@ -1,0 +1,18 @@
+.list-games{
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  max-width: 450px;
+  .matches-list-container{
+    .game-link{
+      color: #000;
+      .match-resume-cont{
+        .date-container{
+          background-color: rgb(0, 0, 0) !important;
+            h2{
+              color: rgb(255,193,7);
+            }
+        }
+      }
+    }
+  }
+}

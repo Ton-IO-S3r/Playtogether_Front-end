@@ -1,10 +1,19 @@
 .match-resume-cont{
   background-color: #FFFFFF;
-  box-shadow: 0px 4px 6px #C4C4C4;
+  box-shadow: 0px 4px 4px #C1C1C1;
   border-radius: 10px;
+  max-width: 365px;
+  border: 1px solid #F2F2F2;
+  &:hover{
+    box-shadow: 0px 4px 10px #C4C4C4;
+    // h2{
+    //   font-weight: 700;
+    // }
+  }
   .date-container{
     border-radius: 10px 0 0 10px;
-    height: max-content;
+    height: auto;
+    align-self: stretch;
   }
   .match-details-container{
     max-width: 250px;
@@ -12,14 +21,35 @@
       h5{
         font-size: 16px;
         &.field{
+          font-weight: 700;
+        }
+          
+        &.field{
           text-align: left;
           text-overflow:ellipsis;
           overflow:hidden;
           white-space:nowrap;
         }
       }
-      img{
+      .icons-cancha{
         height: 20px;
+        &.field{
+          width: 30px;
+          
+        }
+        &.time{
+          width: 25px;
+          
+        }
+        &.category{
+          width: 23px;
+          
+        }
+        &.type{
+          width: 30px;
+          
+        }
+        
       }
     }
     
