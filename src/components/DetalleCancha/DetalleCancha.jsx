@@ -34,7 +34,9 @@ const DetalleCancha = (props) => {
     onClick,
     showButton,
     onClickLeave,
-    isActivate
+    isActivate,
+    teamsFull, 
+    inTeam
   } = props
   
   // const [showA, setShowA] = useState(true);
@@ -97,16 +99,42 @@ const DetalleCancha = (props) => {
             </div>
           </div>
         </div>
+        
+        
       </div>
 
-      {
-        isActivate === false ? (<div></div>) :
+    <div className="d-flex justify-content-center px-3">
+    {
+        isActivate === false ? (<div className="alert alert-warning flex-fill" style={{textAlign: "center"}}>Partido finalizado</div>) 
+        : (teamsFull === true && inTeam !== "" ? (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+          (
+          showButton === false ? <Btn className="mb-3"  text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
+          )) 
+        :
+        (
+          teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success flex-fill" style={{textAlign: "center"}}>Partido lleno</div> : (
+          showButton === false ? <Btn className="mb-3"  text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
+          )
+        )
+        
+         )
+        
+      }
+    </div>
+      
+      {/* {
+        isActivate === false ? (<div className="alert alert-warning" style={{textAlign: "center"}}>Partido finalizado</div>) :
         (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
         : 
         (
         showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> :  <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
       ))
-      }
+      } */}
+
+
+
+      
       {/* {
         (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
         : 
