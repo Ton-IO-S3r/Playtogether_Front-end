@@ -109,23 +109,31 @@ const Equipos = (props) => {
         
       } */}
 
-      {
+      {/* {
         isActivate === false ? (<div className="alert alert-warning">Partido finalizado</div>) 
         : (teamsFull === true && inTeam !== "" ? (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        
         : 
           (
           showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
           )) 
         :
         (
-          teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success" >Partido lleno</div> : (
-          showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
-          )
+          teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success" >Partido lleno</div> : (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
         )
         
          )
         
-      }
+      } */}
+
+      {
+        isActivate === false ? (<div className="alert alert-warning">Partido finalizado</div>) 
+        : 
+        (teamsFull === true && inTeam !== "" ? ( !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>)) 
+        :
+        (teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success" >Partido lleno</div> : ( !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>)) )
+        )
+      } 
 
       
     </div>
