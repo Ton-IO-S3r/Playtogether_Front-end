@@ -1,4 +1,4 @@
-import {React, useState,useEffect, useRef} from 'react'
+import {React, useState,useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './vistapartido.scss'
 import background from 'assets/images/joshua-hoehne-kl6VSadl5mA-unsplash.jpg'
@@ -11,12 +11,8 @@ import {useParams} from 'react-router-dom'
 import ModalTeam from 'components/ModalTeam/ModalTeam'
 import ModalLeave from 'components/ModalTeam/ModalLeave'
 import Toast from 'components/Toast/Toast'
-import {notifyWarning} from 'Functions/toastFunc'
 //API URL
 import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
-import { StepButton } from '@material-ui/core';
-import { setDefaultLocale } from 'react-datepicker';
-import { set } from 'date-fns';
 
 const VistaPartido = () => {
 
@@ -89,7 +85,6 @@ const VistaPartido = () => {
   const [nameWhite, setWhite] = useState("")
   //Almacenar Id del partido
   const [matchId,setId] = useState("")
-  const [teamFull, setTeamFull] = useState("")
   //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
   // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
@@ -156,8 +151,7 @@ let result = ""
 //VALIDA EQUIPOS LLENOS
 match.team.forEach((item) => {
 
-  // console.log(`${item.players.length} ${id}`)
-  if ((match.field.football_type.max_players === 16  && item.players.length == 8) || (match.field.football_type.max_players === 20  && item.players.length == 10) || (match.field.football_type.max_players === 28  && item.players.length == 14) ){
+  if ((match.field.football_type.max_players === 16  && item.players.length === 8) || (match.field.football_type.max_players === 20  && item.players.length === 10) || (match.field.football_type.max_players === 28  && item.players.length === 14) ){
     teamFullName = item.name
 
   }

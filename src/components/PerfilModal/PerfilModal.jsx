@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
-import {AUTH_TOKEN,AUTH_ID,photoAPI, API_URL} from 'Constants/API'
+import {AUTH_TOKEN, API_URL} from 'Constants/API'
 
 const userProfile = {
   "user_data": {

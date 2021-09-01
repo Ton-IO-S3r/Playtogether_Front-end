@@ -66,14 +66,14 @@ const ModalTeam = (props) => {
             <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around mt-5 mb-4" onChange={(e)=>{setTeam(e.target.value)}} >
             
             {
-                teamFull == '' ? (<><div className="d-flex align-items-center">
+                teamFull === '' ? (<><div className="d-flex align-items-center">
                     <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
-                    <img className="me-2" src={teamWhite}/>
+                    <img className="me-2" src={teamWhite} alt="TeamW"/>
                     <p className="m-0  fw-bold team">Blanco</p>
                 </div>
                 <div className="d-flex align-items-center" >
                     <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
-                    <img className="me-2" src={teamBlack}/>
+                    <img className="me-2" src={teamBlack} alt="teamB"/>
                     <p className="m-0 fw-bold team">Negro</p>
                 </div></>)
                 : 
@@ -81,34 +81,21 @@ const ModalTeam = (props) => {
                      teamFull.includes("a") ? 
                      (<div className="d-flex align-items-center" >
                     <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
-                    <img className="me-2" src={teamBlack}/>
+                    <img className="me-2" src={teamBlack} alt="teamB"/>
                     <p className="m-0 fw-bold team">Negro</p>
                 </div>)
                 
                 :
                 (<div className="d-flex align-items-center">
                     <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
-                    <img className="me-2" src={teamWhite}/>
+                    <img className="me-2" src={teamWhite} alt="teamW"/>
                     <p className="m-0  fw-bold team">Blanco</p>
                 </div>)
                 )
             }
-                {/* <div className="d-flex align-items-center">
-                    <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
-                    <img className="me-2" src={teamWhite}/>
-                    <p className="m-0  fw-bold team">Blanco</p>
-                </div>
-                <div className="d-flex align-items-center" >
-                    <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
-                    <img className="me-2" src={teamBlack}/>
-                    <p className="m-0 fw-bold team">Negro</p>
-                </div> */}
-            
             </div>
             <Btn className="mb-4" text="Unirse" onClick={handleUpdate}/>
             </div>
-            
-           
             </Row>
         </Container>
       </Modal.Body>

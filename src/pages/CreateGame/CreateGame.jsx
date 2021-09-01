@@ -1,11 +1,10 @@
-import {React, useState, useRef,useEffect} from 'react'
+import {React, useState, useEffect} from 'react'
 import Nav from 'components/Navbar/Navbar'
 import Footer from 'components/Footer/Footer'
 import Card from 'components/Cards/cardCancha'
 import Carousel, { consts } from 'react-elastic-carousel';
 import { Col, Container, Row } from 'react-bootstrap'
 import ModalPartido from 'components/ModalPartido/ModalPartido'
-import arrowR from 'assets/icons/arrow-right.svg'
 import './createGame.scss'
 import {API_URL, imgField} from 'Constants/API'
 
@@ -84,7 +83,7 @@ const CreateGame = (props) => {
                     
 
                     {fields.map(item => (
-                      <Card key={item.id} style="mx-md-3" img={`${imgField}_${item.id}/img`} name={item.name} address={item.address} onClick={()=>handleModal(item.id)}/>
+                      <Card key={item.id} card_style="mx-md-3" img={`${imgField}_${item.id}/img`} name={item.name} address={item.address} onClick={()=>handleModal(item.id)}/>
                     ))}
                     </Carousel>    
                     </Col>

@@ -10,7 +10,7 @@ import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from 'react-bootstrap/ToastContainer'
-import {AUTH_TOKEN,photoAPI,AUTH_ID, API_URL} from 'Constants/API'
+import {AUTH_TOKEN, API_URL} from 'Constants/API'
 const user = 
   {
     "username": "",

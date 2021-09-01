@@ -11,7 +11,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
   const finalValue = useRef();
   const [formData,setFormData]=useState({})
 
-  const [fieldsList, setFieldsList] = useState([]);
+  // const [fieldsList, setFieldsList] = useState([]);
   const [football_type_list,setFootball_type_list] = useState([])
   const [football_typeCheckedItems, setFootball_typeCheckedItems] = useState({})
   const [field_names_list,setField_name_list] = useState([])
@@ -25,7 +25,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
       const football_types = setFootballTypes(dataFromServer)
       const field_names = setFieldNames(dataFromServer)
 
-      setFieldsList(dataFromServer)
+      // setFieldsList(dataFromServer)
       
       setFootball_type_list(football_types)
       setFootballTypesCheckObject(football_types)

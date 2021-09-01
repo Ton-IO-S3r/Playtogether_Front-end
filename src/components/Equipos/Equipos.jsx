@@ -7,11 +7,10 @@ import { isAuthenticated } from 'Constants/API'
 const Equipos = (props) => {
   const { field, team } = props.match
   const {onClick,showButton,onClickLeave,isActivate,teamsFull, inTeam} = props
-  const players = []
 
   const [teamW, setTeamW] = useState(team[0])
   const [teamB, setTeamB] = useState(team[1])
-  const [modalShow, setModalShow] = useState(false);
+  // const [modalShow, setModalShow] = useState(false);
   const [availablePlaces, setAvailablePlaces] = useState(0)
 
   useEffect(()=>{
@@ -40,7 +39,7 @@ const Equipos = (props) => {
             <JugadorEquipo player_data={team_player} />
           </div>
         )
-        
+        return players
       })
       
     }
@@ -56,15 +55,10 @@ const Equipos = (props) => {
     
   }
 
-  const handleLeave = () =>{
-
-  }
-  
   return (
     <div className="match-container p-3">
       <h5 className="fs-5 fw-bolder my-4">
-      {`${availablePlaces === 0 ? 'Partido lleno': (`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`) }`}
-      {/* {`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`} */}
+      {`${availablePlaces === 0 ? 'Partido lleno': (`${availablePlaces} ${availablePlaces !== 1 ? 'lugares disponibles':'lugar disponible'}`) }`}
       </h5>
       <hr />
       <div className="container">
@@ -86,20 +80,6 @@ const Equipos = (props) => {
           </div>
         </div>
       </div>
-      {/* {
-        isActivate === false ? (<div className="alert alert-warning">Partido finalizado</div>) 
-        : (teamsFull === true ? <div className="alert alert-success" >Partido lleno</div> :
-        (
-          !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
-        : 
-          (
-          showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
-          )
-        )
-        
-         )
-        
-      } */}
 
       {
         isActivate === false ? (<div className="alert alert-warning">Partido finalizado</div>) 

@@ -13,6 +13,18 @@ const BuscarPartido = () => {
   const [games,setGames] = useState([])
   const [searchParams,setSearchParams]=useState(new URLSearchParams())
   useEffect(() => {
+    const getGamesList = async ()=> {
+      try {
+        const request = {
+          params: searchParams
+        }
+        const res = await axios.get('matches/', request);
+        return res.data
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }
     const getGamesData = async () => {
       const dataFromServer = await getGamesList()
       setGames(dataFromServer)
@@ -21,18 +33,7 @@ const BuscarPartido = () => {
     getGamesData()
   }, [searchParams])
 
-  const getGamesList = async ()=> {
-    try {
-      const request = {
-        params: searchParams
-      }
-      const res = await axios.get('matches/', request);
-      return res.data
-      
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
   
 
   return (
