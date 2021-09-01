@@ -20,10 +20,11 @@ header{
 @media screen and (min-width:768px){
     header{
         // background-image: url('../assets/img/hero-mobile.png');
-        background-image: url(/assets/images/hero_img.png);
+        background-image: url(/assets/images/hero_img.jpg);
         background-repeat: no-repeat;
         background-position: center;
         height: 70vh;
+        object-fit: cover;
     }
 }
 @media screen and (min-width:1024px){
