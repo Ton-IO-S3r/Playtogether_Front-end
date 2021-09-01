@@ -7,7 +7,7 @@ import Toast from 'components/Toast/Toast'
 import {notifySuccess} from 'Functions/toastFunc'
 
 const ModalTeam = (props) => {
-    const {matchId,nameBlack,nameWhite,show,onHide} = props
+    const {matchId,nameBlack,nameWhite,show,onHide,teamFull} = props
     const teamBlack = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/teamBlack.svg"
     const teamWhite = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/teamWhite.svg"
     const [team, setTeam] = useState(nameBlack)
@@ -37,6 +37,7 @@ const ModalTeam = (props) => {
         e.preventDefault()
 
         const response = await updateMatch(team)
+        console.log(response)
         notifySuccess("Te has unido con exito",1000)
         setTimeout(function(){window.location.reload()} , 1000); 
         
@@ -64,7 +65,8 @@ const ModalTeam = (props) => {
             <div className="d-flex flex-column">
             <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around mt-5 mb-4" onChange={(e)=>{setTeam(e.target.value)}} >
             
-                <div className="d-flex align-items-center">
+            {
+                teamFull == '' ? (<><div className="d-flex align-items-center">
                     <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
                     <img className="me-2" src={teamWhite}/>
                     <p className="m-0  fw-bold team">Blanco</p>
@@ -73,7 +75,34 @@ const ModalTeam = (props) => {
                     <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
                     <img className="me-2" src={teamBlack}/>
                     <p className="m-0 fw-bold team">Negro</p>
+                </div></>)
+                : 
+                (
+                     teamFull.includes("a") ? 
+                     (<div className="d-flex align-items-center" >
+                    <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
+                    <img className="me-2" src={teamBlack}/>
+                    <p className="m-0 fw-bold team">Negro</p>
+                </div>)
+                
+                :
+                (<div className="d-flex align-items-center">
+                    <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
+                    <img className="me-2" src={teamWhite}/>
+                    <p className="m-0  fw-bold team">Blanco</p>
+                </div>)
+                )
+            }
+                {/* <div className="d-flex align-items-center">
+                    <Form.Check value={nameWhite} as='input' name="team" type="radio" id="black"  checked={team === nameWhite ? true : false}/>
+                    <img className="me-2" src={teamWhite}/>
+                    <p className="m-0  fw-bold team">Blanco</p>
                 </div>
+                <div className="d-flex align-items-center" >
+                    <Form.Check value={nameBlack} as='input' name="team" type="radio" id="black" checked={team === nameBlack ? true : false} />
+                    <img className="me-2" src={teamBlack}/>
+                    <p className="m-0 fw-bold team">Negro</p>
+                </div> */}
             
             </div>
             <Btn className="mb-4" text="Unirse" onClick={handleUpdate}/>

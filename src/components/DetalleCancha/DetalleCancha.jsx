@@ -21,7 +21,23 @@ import {isAuthenticated} from 'Constants/API'
 
 const DetalleCancha = (props) => {
 
-  const {imgField,nameField,servicesField,typeField, priceField, directionField, dateMatch, timeMatch, categoryMatch, onClick,showButton,onClickLeave} = props
+  const {
+    imgField,
+    nameField,
+    servicesField,
+    typeField, 
+    priceField, 
+    directionField, 
+    dateMatch, 
+    timeMatch, 
+    categoryMatch, 
+    onClick,
+    showButton,
+    onClickLeave,
+    isActivate,
+    teamsFull, 
+    inTeam
+  } = props
   
   // const [showA, setShowA] = useState(true);
   // const toggleShowA = () => setShowA(!showA);
@@ -83,14 +99,49 @@ const DetalleCancha = (props) => {
             </div>
           </div>
         </div>
+        
+        
       </div>
-      {
-        !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+
+    <div className="d-flex justify-content-center px-3">
+    {
+        isActivate === false ? (<div className="alert alert-warning flex-fill" style={{textAlign: "center"}}>Partido finalizado</div>) 
+        : (teamsFull === true && inTeam !== "" ? (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+          (
+          showButton === false ? <Btn className="mb-3"  text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
+          )) 
+        :
+        (
+          teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success flex-fill" style={{textAlign: "center"}}>Partido lleno</div> : (
+          showButton === false ? <Btn className="mb-3"  text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
+          )
+        )
+        
+         )
+        
+      }
+    </div>
+      
+      {/* {
+        isActivate === false ? (<div className="alert alert-warning" style={{textAlign: "center"}}>Partido finalizado</div>) :
+        (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
         : 
         (
         showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> :  <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
-      )
-      }
+      ))
+      } */}
+
+
+
+      
+      {/* {
+        (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+        (
+        showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> :  <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>
+      ))
+      } */}
       
       
     </div>
