@@ -10,9 +10,13 @@ import Footer from 'components/Footer/Footer';
 import {useParams} from 'react-router-dom'
 import ModalTeam from 'components/ModalTeam/ModalTeam'
 import ModalLeave from 'components/ModalTeam/ModalLeave'
+import Toast from 'components/Toast/Toast'
+import {notifyWarning} from 'Functions/toastFunc'
 //API URL
 import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
 import { StepButton } from '@material-ui/core';
+import { setDefaultLocale } from 'react-datepicker';
+import { set } from 'date-fns';
 
 const VistaPartido = () => {
 
@@ -73,7 +77,7 @@ const VistaPartido = () => {
 }
   //CONSTANTES
 
-  //Alamcenar objeto
+  //Almacenar objeto
   const [match, setMatch] = useState(data)
   //Params
   const {id} = useParams()
@@ -85,10 +89,17 @@ const VistaPartido = () => {
   const [nameWhite, setWhite] = useState("")
   //Almacenar Id del partido
   const [matchId,setId] = useState("")
+  const [teamFull, setTeamFull] = useState("")
   //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
   // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
   let showButton = false
+  //variable del partido esta activo
+  let isActivate = true
+  //variable de los equipos llenos
+  let teamsFull = false
+  //variable del equipo lleno
+  let teamFullName = ""
  
   //OBTENER EL PARTIDO
   const getMatch = async () => {
@@ -122,11 +133,12 @@ const VistaPartido = () => {
     setId(match.id)
   } 
 
+  
   useEffect( ()=>{
     getMatch()
   },[])
  
-//VALIDA EN QUE EQUIPO SE ENCUENTRA EL USURIO
+//VALIDA EN QUE EQUIPO SE ENCUENTRA EL USUARIO
 let result = ""
  match.team.forEach(item => (
   item.players.find(item => (item.user_data.user_id === AUTH_ID)) ? result = item.name  : ""
@@ -139,6 +151,37 @@ let result = ""
     showButton = false
   }
 
+  
+
+//VALIDA EQUIPOS LLENOS
+match.team.forEach((item) => {
+
+  // console.log(`${item.players.length} ${id}`)
+  if ((match.field.football_type.max_players === 16  && item.players.length == 8) || (match.field.football_type.max_players === 20  && item.players.length == 10) || (match.field.football_type.max_players === 28  && item.players.length == 14) ){
+    teamFullName = item.name
+
+  }
+}
+)
+
+
+
+//VALIDA SI LOS EQUIPOS ESTAN LLENOS
+const validateNumOfTeam = () => {
+  let playersTeamB = match.team[1].players.length
+  let playersTeamW = match.team[0].players.length
+  let numOfplayers = playersTeamB + playersTeamW 
+
+  if (match.field.football_type.max_players === numOfplayers){
+    return teamsFull = true
+  }else{
+    return teamsFull = false
+  }
+}
+ 
+validateNumOfTeam ()
+
+
 //Mostrar modal del abandonar partido
   const handleLeave = () => {
     setModalShowLeave(true)
@@ -148,6 +191,14 @@ let result = ""
       setTeam("")
     }
     setId(match.id)
+  }
+
+
+//VALIDA SI EL PARTIDO ESTA ACTIVO
+  if (match.active === false){
+    isActivate = false
+  }else{
+    isActivate = true
   }
   return (
     <>
@@ -178,6 +229,10 @@ let result = ""
 
               showButton={showButton}
               onClickLeave={()=>handleLeave()}
+
+              isActivate={isActivate}
+              teamsFull ={teamsFull}
+              inTeam = {result}
               />
             </Col>
             <Col className="p-0"  sm={12} md={6}>
@@ -185,15 +240,19 @@ let result = ""
                 onClick={()=>handleModal()}
                 showButton={showButton}
                 onClickLeave={()=>handleLeave()}
-                
+
+                isActivate={isActivate}
+                teamsFull ={teamsFull}
+                inTeam = {result}
               />
             </Col>
           </Row>
         </Container>
       </Container>
       <Footer />
-      <ModalTeam show={modalShow} onHide={() => setModalShow(false)} nameBlack={nameBlack} nameWhite={nameWhite} matchId={matchId}/>
+      <ModalTeam show={modalShow} onHide={() => setModalShow(false)} nameBlack={nameBlack} nameWhite={nameWhite} matchId={matchId} teamFull={teamFullName}/>
       <ModalLeave show={modalShowLeave} onHide={() => setModalShowLeave(false)} inTeam={inTeam} matchId={matchId}/>
+      <Toast/>
     </>
     
   )

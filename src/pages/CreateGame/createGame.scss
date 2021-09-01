@@ -53,6 +53,14 @@ p.p-create{
     }
 }
 
+@media screen and (min-width:1024px){
+    .arrow-button{
+        background-color:#32a77aba  ;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+    }
+}
 
 
 @media screen and (min-width:1444px){

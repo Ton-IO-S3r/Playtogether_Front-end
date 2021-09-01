@@ -6,7 +6,7 @@ import { isAuthenticated } from 'Constants/API'
 
 const Equipos = (props) => {
   const { field, team } = props.match
-  const {onClick,showButton,onClickLeave} = props
+  const {onClick,showButton,onClickLeave,isActivate,teamsFull, inTeam} = props
   const players = []
 
   const [teamW, setTeamW] = useState(team[0])
@@ -62,7 +62,10 @@ const Equipos = (props) => {
   
   return (
     <div className="match-container p-3">
-      <h5 className="fs-5 fw-bolder my-4">{`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`}</h5>
+      <h5 className="fs-5 fw-bolder my-4">
+      {`${availablePlaces === 0 ? 'Partido lleno': (`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`) }`}
+      {/* {`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`} */}
+      </h5>
       <hr />
       <div className="container">
         <div className="row">
@@ -83,13 +86,39 @@ const Equipos = (props) => {
           </div>
         </div>
       </div>
-      {
-        !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
-        : 
+      {/* {
+        isActivate === false ? (<div className="alert alert-warning">Partido finalizado</div>) 
+        : (teamsFull === true ? <div className="alert alert-success" >Partido lleno</div> :
         (
-        showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
-      )
+          !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+          (
+          showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
+          )
+        )
+        
+         )
+        
+      } */}
+
+      {
+        isActivate === false ? (<div className="alert alert-warning">Partido finalizado</div>) 
+        : (teamsFull === true && inTeam !== "" ? (!isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) 
+        : 
+          (
+          showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
+          )) 
+        :
+        (
+          teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success" >Partido lleno</div> : (
+          showButton === false ? <Btn text="Unirse" onClick={onClick}/> : <Btn text="Dejar" onClick={onClickLeave}/>
+          )
+        )
+        
+         )
+        
       }
+
       
     </div>
   )
