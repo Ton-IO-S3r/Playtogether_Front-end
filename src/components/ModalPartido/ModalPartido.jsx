@@ -109,9 +109,9 @@ const ModalPartido = (props) => {
     }
     getFieldDetail()
     if (show){
-    getFieldDetail()
+      getFieldDetail()
     }
-  })
+  },[show])
   // useEffect(async ()=>{
   //   await getFieldDetail()
   //   if (show){
@@ -123,7 +123,7 @@ const ModalPartido = (props) => {
     <div>
       <Modal
         {...props}
-        size="lg"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >

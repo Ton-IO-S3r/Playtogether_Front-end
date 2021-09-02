@@ -14,19 +14,19 @@ const Footer = (props) => {
     return (
         <div >
             <footer className={mt}>
-                <Container fluid className="footer-background">
+                <Container fluid className="footer-background pt-5 pb-2">
                     <Container>
                         <Row className="justify-content-center">
-                            <Col md="12"  lg="6" className="footer-info footer-info-lg">  
+                            <Col md="12"  lg="6" className="footer-info footer-info-lg ps-md-5">  
                                 <p className="mt-3">Quienes Somos</p>
                                 <p>Preguntas Frecuentes</p>
                                 <p>Contacto</p>
                                 <p>Terminos y condiciones</p>
                                 
                             </Col>
-                            <Col md="12" lg="6" className="footer-info ">
+                            <Col md="12" lg="6" className="footer-info my-4">
                                 <p className="mt-3 mt-lg-5 followus">Síguenos</p>
-                                <ul className="d-flex mt-3 justify-content-around justify-content-md-center social-network">
+                                <ul className="d-flex mt-3 justify-content-center social-network">
                                     <li className="me-5"><img src={fb} alt="Facebook"/></li>
                                     <li className="me-5 "><img src={tw} alt="Twitter"/></li>
                                     <li><img src={ig} alt="Instagram"/></li>

@@ -12,7 +12,7 @@ import ModalTeam from 'components/ModalTeam/ModalTeam'
 import ModalLeave from 'components/ModalTeam/ModalLeave'
 import Toast from 'components/Toast/Toast'
 //API URL
-import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
+import {API_URL, imgField, fieldServicesIconURL, AUTH_ID, BACKGROUNDS_URL} from 'Constants/API'
 
 const VistaPartido = () => {
 
@@ -197,11 +197,12 @@ validateNumOfTeam ()
   return (
     <>
       <Navbar/>
-      <Container fluid={true} className="vista-partido-container py-5" style={{backgroundImage: `url(${background})`}}>
+      <Container fluid={true} className="vista-partido-container pt-2 pb-4" style={{backgroundImage: `url(${BACKGROUNDS_URL}background_4.jpg)`}}>
         <Container>
-          <h1 className="py-3">Detalles del partido</h1>
-          <Row className="gy-3 justify-content-center">
-            <Col className="p-0" sm={12} md={6} lg={5}>
+          <Row className="gy-3 justify-content-center pb-5">
+            <h1 className="py-3 mb-2">Detalles del partido</h1>
+            <p className="mt-4 p-create"></p>
+            <Col sm={12} md={5}>
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
@@ -229,7 +230,7 @@ validateNumOfTeam ()
               inTeam = {result}
               />
             </Col>
-            <Col className="p-0"  sm={12} md={6}>
+            <Col sm={12} md={7}>
               <Equipos match={match}
                 onClick={()=>handleModal()}
                 showButton={showButton}

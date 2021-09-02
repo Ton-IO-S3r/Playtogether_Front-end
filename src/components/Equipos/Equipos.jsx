@@ -32,7 +32,7 @@ const Equipos = (props) => {
 
   const setTeamPlayers = (playersList) =>{
     const players=[]
-    if(playersList.length > 0 && playersList.length < playersByTeam ){
+    if(playersList.length > 0 && playersList.length <= playersByTeam ){
       playersList.map((team_player, index)=>{
         players.push(
           <div key={index.toString()} className="d-flex flex-row justify-content-around flex-nowrap">

@@ -138,7 +138,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
 
   return (
     <Form className="filter-games p-3 mx-auto" onSubmit={(e)=>handleSubmit(e)}>
-      <h3 className="text-start">Busca tu partido ideal</h3>
+      <h3 className="text-start">Filtrar por:</h3>
       <hr />
       <div className="date-filter-container text-center d-flex flex-wrap justify-content-center w-100 mb-2">
         <h6 className="w-100 text-start">Fecha:</h6>

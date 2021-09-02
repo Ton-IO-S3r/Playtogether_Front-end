@@ -10,7 +10,7 @@ const cardCancha = (props) => {
             <Card className={card_style}>
                 <Card.Img className="card-img" variant="top" src={img} alt="..."/>
                 <Card.Body className="d-flex flex-column card-body">
-                    <Card.Title>{name}</Card.Title>
+                    <Card.Title className="fw-bold">{name}</Card.Title>
                     <Card.Text>
                         {address}
                     </Card.Text>
