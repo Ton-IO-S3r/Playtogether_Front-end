@@ -6,7 +6,6 @@ import { Col, Row, Container } from 'react-bootstrap'
 import './index.scss'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import PageContainer from 'components/PageContainer'
 import {BACKGROUNDS_URL} from 'Constants/API'
 
 const BuscarPartido = () => {
