@@ -1,13 +1,12 @@
-import {React, useState, useRef,useEffect} from 'react'
+import {React, useState, useEffect} from 'react'
 import Nav from 'components/Navbar/Navbar'
 import Footer from 'components/Footer/Footer'
 import Card from 'components/Cards/cardCancha'
 import Carousel, { consts } from 'react-elastic-carousel';
 import { Col, Container, Row } from 'react-bootstrap'
 import ModalPartido from 'components/ModalPartido/ModalPartido'
-import arrowR from 'assets/icons/arrow-right.svg'
 import './createGame.scss'
-import {API_URL, imgField} from 'Constants/API'
+import {API_URL, BACKGROUNDS_URL, imgField} from 'Constants/API'
 
 const CreateGame = (props) => {
   //CONSTANTES
@@ -71,28 +70,30 @@ const CreateGame = (props) => {
     return (
         <div>
         <Nav/>
-        <Container fluid className="container-create" >
-            <Row>
+        <Container fluid className="container-create" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUNDS_URL}background_5_mobile.jpeg), no-repeat,fixed,center`}}>
+            {/* <Row> */}
                 <Container>
                     <Row>
-                    <Col md="1" lg="1" xl="1" className="d-none d-md-block"></Col>
-                    <Col md="10" lg="10" xl="10">
-                    <h1 className="py-3 h1-create-game">Crea tu partido</h1>
-                    <p className="mt-4 p-create">Comienza seleccionando alguna de nuestras canchas</p>
-                    <Carousel className="carrousel-create" breakPoints={breakPoints} renderArrow={myArrow}  >
-                    {/* enableAutoPlay autoPlaySpeed={5000} */}
                     
+                      <h1 className="py-3 h1-create-game">Crea tu partido</h1>
+                      <p className="mt-4 p-create">Comienza seleccionando alguna de nuestras canchas</p>
+                      <Col md="1" lg="1" xl="1" className="d-none d-md-block"></Col>
+                      <Col md="10" lg="10" xl="10">
+                      
+                      <Carousel className="carrousel-create" breakPoints={breakPoints} renderArrow={myArrow}  >
+                      {/* enableAutoPlay autoPlaySpeed={5000} */}
+                      
 
-                    {fields.map(item => (
-                      <Card key={item.id} style="mx-md-3" img={`${imgField}_${item.id}/img`} name={item.name} address={item.address} onClick={()=>handleModal(item.id)}/>
-                    ))}
-                    </Carousel>    
-                    </Col>
-                    <Col md="1" lg="1" xl="1" className="d-none d-md-block"></Col>
-                    
+                      {fields.map(item => (
+                        <Card key={item.id} card_style="mx-md-3" img={`${imgField}_${item.id}/img`} name={item.name} address={item.address} onClick={()=>handleModal(item.id)}/>
+                      ))}
+                      </Carousel>    
+                      </Col>
+                      <Col md="1" lg="1" xl="1" className="d-none d-md-block"></Col>
+                      
                     </Row>
                 </Container>
-            </Row>
+            {/* </Row> */}
         </Container>
             <Footer/>
             <ModalPartido show={modalShow} onHide={() => setModalShow(false)} id={id}/>

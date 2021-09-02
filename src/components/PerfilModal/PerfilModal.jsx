@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
-import {AUTH_TOKEN,AUTH_ID,photoAPI, API_URL} from 'Constants/API'
+import {AUTH_TOKEN, API_URL} from 'Constants/API'
 
 const userProfile = {
   "user_data": {
@@ -50,7 +50,6 @@ const PerfilModal = (props) => {
         },
       });
       const data = await response.json();
-      console.log(data)
       return data
       
     } catch (error) {
@@ -136,7 +135,6 @@ const PerfilModal = (props) => {
       ...playerData,
       [e.target.name]: e.target.files
     })
-    console.log(e.target.files)
     setProfileImg(URL.createObjectURL(e.target.files[0]))
   }
 

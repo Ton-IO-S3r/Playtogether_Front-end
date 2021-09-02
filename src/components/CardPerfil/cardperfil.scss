@@ -5,8 +5,8 @@
   background-size: cover;
   // width: 90%;
   border-radius: 10px;
-  height: 420px;
-  max-width: 400px;
+  height: 550px;
+  // max-width: 400px;
   .data-container{
     width: 100%;
     background-color: #FFFFFF;
@@ -16,13 +16,13 @@
       position: relative;
       .avatar{
         position: absolute;
-        top: -50px;
+        top: -100px;
         filter: drop-shadow(-4px 3px 10px rgba(0, 0, 0, 0.25));
         background-position: top center;
         background-repeat: no-repeat;
         background-size: cover;
-        width: 100px;
-        height: 100px;
+        width: 175px;
+        height: 175px;
         border-radius: 50%;
       }
       .edit-profile-icon{
@@ -37,7 +37,7 @@
       h5{
         font-size: 24px;
         font-weight: 700;
-        margin-top: 15px;
+        margin-top: 45px;
       }
     }
     .position-container{
@@ -55,6 +55,32 @@
     p.date-joined-p{
       font-size: 16px;
       margin: 20px auto;
+    }
+  }
+}
+
+@media screen and (min-width:768px){
+  .card-perfil{
+    .data-container{
+      .head{
+        .avatar{
+          height: 150px;
+          width: 150px;
+        }
+      }
+    }
+  }
+  
+}
+@media screen and (min-width:1024px){
+  .card-perfil{
+    .data-container{
+      .head{
+        .avatar{
+          height: 175px;
+          width: 175px;
+        }
+      }
     }
   }
 }

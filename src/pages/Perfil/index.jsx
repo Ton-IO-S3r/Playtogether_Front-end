@@ -10,7 +10,7 @@ import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from 'react-bootstrap/ToastContainer'
-import {AUTH_TOKEN,photoAPI,AUTH_ID, API_URL} from 'Constants/API'
+import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
 const user = 
   {
     "username": "",
@@ -65,7 +65,6 @@ const PerfilUsuario = () => {
       return data
       
     } catch (error) {
-      console.log(AUTH_TOKEN)
       console.log(error);
     }
   }
@@ -74,7 +73,7 @@ const PerfilUsuario = () => {
   return (
     <>
       <Navbar />
-      <Container fluid={true} className="vista-perfil-container py-5" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUND_IMG_URL}), no-repeat,fixed, center`}}>
+      <Container fluid={true} className="vista-perfil-container pt-2 pb-4" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUNDS_URL}background_3.jpg), no-repeat,fixed, center`}}>
         <ToastContainer position="top-end" className="p-3">
           <Toast show={showProfileUpdateToast} onClose={toggleShowProfileUpdateToast} bg={toastContent.theme} delay={3000} autohide>
             <Toast.Header>
@@ -85,9 +84,10 @@ const PerfilUsuario = () => {
         </ToastContainer>
         
         <Container>
-        <h1 className="py-3 mb-5">Perfil de usuario</h1>
-        <Row className="gy-5 justify-content-center pb-5">
-            <Col sm={12} md={6} lg={5}>
+        <Row className="gy-3 justify-content-center pb-5">
+          <h1 className="py-3 mb-2">Perfil de usuario</h1>
+          <p className="mt-4 p-create"></p>
+            <Col sm={12} md={5} lg={5}>
               <CardPerfil 
                 avatar={`${userData.players.photo}`} 
                 user_first_name={userData.first_name}
@@ -107,7 +107,7 @@ const PerfilUsuario = () => {
                 
               />
             </Col>
-            <Col sm={12} md={6} lg={5}>
+            <Col sm={12} md={7} lg={7}>
               <UserMatches matches={userData.players.matches} fields={userData.players.fields_count} num_matches={userData.players.matches_count}/>
             </Col>
         </Row>

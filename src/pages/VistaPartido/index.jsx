@@ -1,4 +1,4 @@
-import {React, useState,useEffect, useRef} from 'react'
+import {React, useState,useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './vistapartido.scss'
 import background from 'assets/images/joshua-hoehne-kl6VSadl5mA-unsplash.jpg'
@@ -11,12 +11,8 @@ import {useParams} from 'react-router-dom'
 import ModalTeam from 'components/ModalTeam/ModalTeam'
 import ModalLeave from 'components/ModalTeam/ModalLeave'
 import Toast from 'components/Toast/Toast'
-import {notifyWarning} from 'Functions/toastFunc'
 //API URL
-import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
-import { StepButton } from '@material-ui/core';
-import { setDefaultLocale } from 'react-datepicker';
-import { set } from 'date-fns';
+import {API_URL, imgField, fieldServicesIconURL, AUTH_ID, BACKGROUNDS_URL} from 'Constants/API'
 
 const VistaPartido = () => {
 
@@ -89,7 +85,6 @@ const VistaPartido = () => {
   const [nameWhite, setWhite] = useState("")
   //Almacenar Id del partido
   const [matchId,setId] = useState("")
-  const [teamFull, setTeamFull] = useState("")
   //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
   // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
@@ -107,7 +102,6 @@ const VistaPartido = () => {
       const response = await fetch(`${API_URL}matches/${id}/`);
       const match = await response.json();
       setMatch(match)
-      console.log(match)
       setBlack(match.team[0].name)
   setWhite(match.team[1].name)
     }catch (error){
@@ -157,8 +151,7 @@ let result = ""
 //VALIDA EQUIPOS LLENOS
 match.team.forEach((item) => {
 
-  // console.log(`${item.players.length} ${id}`)
-  if ((match.field.football_type.max_players === 16  && item.players.length == 8) || (match.field.football_type.max_players === 20  && item.players.length == 10) || (match.field.football_type.max_players === 28  && item.players.length == 14) ){
+  if ((match.field.football_type.max_players === 16  && item.players.length === 8) || (match.field.football_type.max_players === 20  && item.players.length === 10) || (match.field.football_type.max_players === 28  && item.players.length === 14) ){
     teamFullName = item.name
 
   }
@@ -204,16 +197,17 @@ validateNumOfTeam ()
   return (
     <>
       <Navbar/>
-      <Container fluid={true} className="vista-partido-container py-5" style={{backgroundImage: `url(${background})`}}>
+      <Container fluid={true} className="vista-partido-container pt-2 pb-4" style={{backgroundImage: `url(${BACKGROUNDS_URL}background_4.jpg)`}}>
         <Container>
-          <h1 className="py-3">Detalles del partido</h1>
-          <Row className="gy-3 justify-content-center">
-            <Col className="p-0" sm={12} md={6} lg={5}>
+          <Row className="gy-3 justify-content-center pb-5">
+            <h1 className="py-3 mb-2">Detalles del partido</h1>
+            <p className="mt-4 p-create"></p>
+            <Col sm={12} md={5}>
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
-              servicesField={match.field.services.map(item=>(
-                <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
+              servicesField={match.field.services.map((item,index)=>(
+                <div key={index.toString()} className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
                   <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
                   <p className="p-services mx-1">{item}</p>
                 </div>
@@ -236,7 +230,7 @@ validateNumOfTeam ()
               inTeam = {result}
               />
             </Col>
-            <Col className="p-0"  sm={12} md={6}>
+            <Col sm={12} md={7}>
               <Equipos match={match}
                 onClick={()=>handleModal()}
                 showButton={showButton}

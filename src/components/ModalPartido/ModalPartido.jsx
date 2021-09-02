@@ -42,70 +42,45 @@ const ModalPartido = (props) => {
   const timeRef = useRef()
 
   //RETRIEVE FIELD
-  const getFieldDetail = async () => {
-    try {
-      const response = await fetch(`${API_URL}fields/${id}/`);
-      const field = await response.json();
-      
-      setField(field)
-      console.log(field.football_type)
-      setServices(field.services)
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
-//POST PARTIDO
-const createGame = async(field,date,time,category)=> {
-  try{
-    const response = await fetch(`${API_URL}matches/create/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        field,
-        date,
-        time,
-        category
+  //POST PARTIDO
+  const createGame = async(field,date,time,category)=> {
+    try{
+      const response = await fetch(`${API_URL}matches/create/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          field,
+          date,
+          time,
+          category
+          
+        }),
+      });
+      if (response.ok === true){
         
-      }),
-    });
-    if (response.ok === true){
+        
+        
+      }else{
+        notifyWarning("No se creo el partido con los datos proporcionados")
+      }
+      return await response.json();
       
-      
-      
-    }else{
-      notifyWarning("No se creo el partido con los datos proporcionados")
+    } catch (error){
+      console.log(error)
     }
-    return await response.json();
-    
-  } catch (error){
-    console.log(error)
   }
-}
 
-const handleSubmit = async(e) => {
-  e.preventDefault();
-  //INPUTS
-  const timeInput = timeRef.current.value
-  // if ( timeInput !== null){
-  //     notifyWarning("Necesitas llenar todos los campos")
-  //   return
-  // }
-  //VALIDAR CAMPOS VACIOS
-  // if (date === '' || time === ''){
-  //   //CAMBAIR EL ESATDO DEL CAMPO VACIO CON UNA ALERTA
-  //   setCampoVacio("Campos obligatorios")
-  //   return
-  // }
-    // console.log(await JSON.stringify(username,password))
-    // console.log(await loginUser(username,password))
-
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    //INPUTS
     //Se pasan los valores de los inputs a la funcion del POST
-   const response = await createGame(id,date,time,gender);
+    const response = await createGame(id,date,time,gender);
    
-    if (response[0] == "Ese horario en la cancha seleccionada ya esta ocupado, selecciona otro horario!"){
+    if (response[0] === "Ese horario en la cancha seleccionada ya esta ocupado, selecciona otro horario!"){
         notifyWarning("Fecha No disponible, elige otra")
     }else{
       notifySuccess("Partido creado con exito",3000)
@@ -114,101 +89,109 @@ const handleSubmit = async(e) => {
 
   }
 
-//ESTABLECER HORA
-const handleValueTime = (time) =>{
-  setTime(time && time.format('HH:mm'));
-};
+  //ESTABLECER HORA
+  const handleValueTime = (time) =>{
+    setTime(time && time.format('HH:mm'));
+  };
 
-  useEffect(async ()=>{
-    await getFieldDetail()
-    
+  useEffect(()=>{
+    const getFieldDetail = async () => {
+      try {
+        const response = await fetch(`${API_URL}fields/${id}/`);
+        const field = await response.json();
+        
+        setField(field)
+        console.log(field.football_type)
+        setServices(field.services)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getFieldDetail()
     if (show){
-     await getFieldDetail()
-  }
-},[show])
+      getFieldDetail()
+    }
+  },[show])
+  // useEffect(async ()=>{
+  //   await getFieldDetail()
+  //   if (show){
+  //    await getFieldDetail()
+  //   }
+  // },[show])
 
-    return (
-        <div>
-            <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header className="border-0" closeButton />
-      <Modal.Body>
-      <Modal.Title id="contained-modal-title-vcenter" className="text-center mb-4">
-        Crear Partido
-      </Modal.Title>
-      <div>
-        <Row>
-          <Col lg="5" className="col-img  ">
-          <div className="mt-2 img-modal">
-          <img src={`${imgField}_${id}/img`}/>
-        </div>
-        
-          </Col>
-          <Col lg="7">
-          <h1 className="text-center fs-5 mt-2 mb-4 fw-bold">{field.name}</h1>
-        <div className="d-flex justify-content-around flex-wrap mt-5">
-          {services.map(item=>(
-                <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
-                  <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
-                  <p className="p-services mx-1">{item}</p>
-                </div>
-              ))}
-        </div>
-        <div className="d-flex justify-content-between justify-content-md-around align-items-center mt-3 mb-3">
-          <h2 className="create-type fw-bold">{field.football_type.name}</h2> 
-          <div className= "d-flex flex-row justify-content-center align-items-center bg-dark text-warning price-container">
-              <h2 className="my-1 mx-1 ">{`$${field.rent_cost}`}</h2>
-              <span className="my-1 mx-2 fw-light fs-6">Precio /<br/>Jugador</span>
-          </div>
-        </div>
-        <div className="d-flex justify-content-around align-items-center mt-4 mb-4">
-          <img src={location}/>
-          <p className="mb-0 address">{field.address}</p>
-        </div>
-        <Divider className="mb-4" variant="middle"/>
+  return (
+    <div>
+      <Modal
+        {...props}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header className="border-0" closeButton />
+        <Modal.Body>
+          <Modal.Title id="contained-modal-title-vcenter" className="text-center mb-4">
+            Crear Partido
+          </Modal.Title>
           <div>
-        <Form>
-            <Form.Group className="mb-3 d-flex flex-column" controlId="createGame">
-            <div className="d-flex flex-column align-items-center">
-            <div className="d-flex align-items-center mb-3">
-              <Form.Label className="me-2">Fecha: </Form.Label>
-              <DatePicker disabledKeyboardNavigation  ref={gameDate} className="form-control"  dateFormat="dd-MMMM-yyyy" selected={startDate} locale="es" onChange={(date) => {setStartDate(date)}} minDate={new Date()} />  
-            </div>
-            <div className="d-flex align-items-center mb-4">
-              <Form.Label className="me-3">Hora: </Form.Label>
-              <TimePicker ref={timeRef} placeholder="--:--" disabledHours={() => [0, 1, 2, 3, 4, 5]} showSecond={false} minuteStep={30} hideDisabledOptions onChange={handleValueTime}/>
-            </div>
-            </div>
-            
-            <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around" onChange={(e)=>{setGender(e.target.value)}}>
-            <Form.Check value="varonil" as='input' label="Varonil" name="gender" type="radio" id="masc" checked={gender === "varonil" ? true : false}/>
-            <Form.Check value="femenil" as='input' label="Femenil" name="gender" type="radio" id="fem" checked={gender === "femenil" ? true : false}/>
-            <Form.Check value="mixto" as='input' label="Mixto" name="gender" type="radio" id="mix" checked={gender === "mixto" ? true : false}/>
-
-            </div>
-            <Btn text="Crear" onClick={handleSubmit}/>
-            </Form.Group>
-        </Form>
-        </div>
-          </Col>
-        </Row>
-        
-      </div>
-
-     
-        
-      <Toast/>
-      </Modal.Body>
-     
-    </Modal>
-        </div>
-
-        
-    )
+            <Row>
+              <Col lg="5" className="col-img  ">
+                <div className="mt-2 img-modal">
+                  <img src={`${imgField}_${id}/img`} alt={field.name}/>
+                </div>
+              </Col>
+              <Col lg="7">
+                <h1 className="text-center fs-5 mt-2 mb-4 fw-bold">{field.name}</h1>
+                <div className="d-flex justify-content-around flex-wrap mt-5">
+                  {services.map(item=>(
+                    <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
+                      <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
+                      <p className="p-services mx-1">{item}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="d-flex justify-content-between justify-content-md-around align-items-center mt-3 mb-3">
+                  <h2 className="create-type fw-bold">{field.football_type.name}</h2> 
+                  <div className= "d-flex flex-row justify-content-center align-items-center bg-dark text-warning price-container">
+                    <h2 className="my-1 mx-1 ">{`$${field.rent_cost}`}</h2>
+                    <span className="my-1 mx-2 fw-light fs-6">Precio /<br/>Jugador</span>
+                  </div>
+                </div>
+                <div className="d-flex justify-content-around align-items-center mt-4 mb-4">
+                  <img src={location} alt="ubicacion"/>
+                  <p className="mb-0 address">{field.address}</p>
+                </div>
+                <Divider className="mb-4" variant="middle"/>
+                <div>
+                  <Form>
+                      <Form.Group className="mb-3 d-flex flex-column" controlId="createGame">
+                      <div className="d-flex flex-column align-items-center">
+                      <div className="d-flex align-items-center mb-3">
+                        <Form.Label className="me-2">Fecha: </Form.Label>
+                        <DatePicker disabledKeyboardNavigation  ref={gameDate} className="form-control"  dateFormat="dd-MMMM-yyyy" selected={startDate} locale="es" onChange={(date) => {setStartDate(date)}} minDate={new Date()} />  
+                      </div>
+                      <div className="d-flex align-items-center mb-4">
+                        <Form.Label className="me-3">Hora: </Form.Label>
+                        <TimePicker ref={timeRef} placeholder="--:--" disabledHours={() => [0, 1, 2, 3, 4, 5]} showSecond={false} minuteStep={30} hideDisabledOptions onChange={handleValueTime}/>
+                      </div>
+                      </div>
+                      
+                      <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around" onChange={(e)=>{setGender(e.target.value)}}>
+                        <Form.Check value="varonil" as='input' label="Varonil" name="gender" type="radio" id="masc" checked={gender === "varonil" ? true : false}/>
+                        <Form.Check value="femenil" as='input' label="Femenil" name="gender" type="radio" id="fem" checked={gender === "femenil" ? true : false}/>
+                        <Form.Check value="mixto" as='input' label="Mixto" name="gender" type="radio" id="mix" checked={gender === "mixto" ? true : false}/>
+                      </div>
+                      <Btn text="Crear" onClick={handleSubmit}/>
+                      </Form.Group>
+                  </Form>
+                </div>
+              </Col>
+            </Row>
+          </div> 
+          <Toast/>
+        </Modal.Body>
+      </Modal>
+    </div> 
+  )
 }
 
 export default ModalPartido

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Modal , Form} from 'react-bootstrap'
+import { Container, Row, Modal} from 'react-bootstrap'
 import Btn from 'components/Buttons/CallActionBtn'
 import {API_URL, AUTH_TOKEN} from 'Constants/API'
 import './ModalTeam.scss'
