@@ -12,7 +12,7 @@ import ModalTeam from 'components/ModalTeam/ModalTeam'
 import ModalLeave from 'components/ModalTeam/ModalLeave'
 import Toast from 'components/Toast/Toast'
 //API URL
-import {API_URL, imgField, fieldServicesIconURL, AUTH_ID, BACKGROUNDS_URL} from 'Constants/API'
+import {API_URL, imgField, AUTH_ID, BACKGROUNDS_URL} from 'Constants/API'
 
 const VistaPartido = () => {
 
@@ -87,6 +87,7 @@ const VistaPartido = () => {
   const [matchId,setId] = useState("")
   //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
+  const fieldServices = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/"
   // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
   let showButton = false
   //variable del partido esta activo
@@ -202,13 +203,13 @@ validateNumOfTeam ()
           <Row className="gy-3 justify-content-center pb-5">
             <h1 className="py-3 mb-2">Detalles del partido</h1>
             <p className="mt-4 p-create"></p>
-            <Col sm={12} md={5}>
+            <Col sm={12} md={5} className="p-0 p-lg-3">
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
-              servicesField={match.field.services.map((item,index)=>(
-                <div key={index.toString()} className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
-                  <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
+              servicesField={match.field.services.map(item=>(
+                <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
+                  <img className="match-icon mb-1" src={`${fieldServices}${item.toLowerCase()}.svg`} alt="..." />
                   <p className="p-services mx-1">{item}</p>
                 </div>
               ))}
@@ -230,7 +231,7 @@ validateNumOfTeam ()
               inTeam = {result}
               />
             </Col>
-            <Col sm={12} md={7}>
+            <Col sm={12} md={7} className="p-0 p-lg-3">
               <Equipos match={match}
                 onClick={()=>handleModal()}
                 showButton={showButton}

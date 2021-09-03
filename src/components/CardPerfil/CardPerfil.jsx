@@ -3,11 +3,14 @@ import './cardperfil.scss'
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import { useState } from 'react';
+import {useParams} from 'react-router-dom'
 import ModalPerfil from 'components/PerfilModal/PerfilModal'
+import {AUTH_ID} from 'Constants/API'
 
 const background_img=Math.floor((Math.random() * 5)+1);
 const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, user_to_update, setUser_to_update, toast_data, profileUpdated, setProfileUpdated}) => {
-  
+  //Params
+  const {id} = useParams()
   const [modalShow, setModalShow] = useState(false);
   // const CARD_BACKGROUND_URL = `https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/profile_card_back${}.jpg`
   const CARD_BACKGROUND_URL = `https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/profile_card_back${background_img}.jpg`
@@ -16,11 +19,14 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
       <div className="data-container px-4">
         <div className="head d-flex flex-column align-items-center">
           <div className="avatar mt" style={{backgroundImage: `url(${avatar})`}}></div>
-          <div className="edit-profile-icon">
+          {
+            id === AUTH_ID ? (<div className="edit-profile-icon">
             <IconButton onClick={() => setModalShow(true)}>
               <EditIcon/>
             </IconButton>
-          </div>
+          </div>) :(<div className=" mb-4 edit-profile-icon"></div>)
+          }
+          
           <h5>{user_first_name} {user_last_name}</h5>
           <p>@ {user_username}</p>
         </div>

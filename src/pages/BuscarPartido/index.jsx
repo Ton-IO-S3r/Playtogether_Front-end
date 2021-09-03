@@ -28,6 +28,7 @@ const BuscarPartido = () => {
     const getGamesData = async () => {
       const dataFromServer = await getGamesList()
       setGames(dataFromServer)
+      console.log(games)
 
     }
     getGamesData()
