@@ -2,14 +2,17 @@ import './listapartidos.scss'
 import MatchResume from 'components/MatchResume'
 import { Link } from 'react-router-dom'
 
-const ListaPartidos = ({games}) => {
+const ListaPartidos = ({games, total}) => {
   return (
     <div className="list-games mx-auto p-3">
-      <h3>Partidos activos</h3>
+      <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
+        <h5>Partidos activos encontrados:</h5>
+        <h4 className="mx-3">{total}</h4>
+      </div>
       <hr />
       <div className="matches-list-container">
         {
-          games.map((game, index) => (
+          games.length>0 ? (games.map((game, index) => (
             <Link key={index.toString()} id={game.id} to={`/partidos/${game.id}`} className="game-link">
               <MatchResume 
                 date={game.date} 
@@ -20,7 +23,7 @@ const ListaPartidos = ({games}) => {
               />
             </Link>
             
-          ))
+          ))): (<></>)
         }
       </div>
     </div>

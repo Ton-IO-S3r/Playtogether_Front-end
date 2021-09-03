@@ -2,7 +2,7 @@ import {React, useState,useEffect, useRef} from 'react'
 import {Col, Form,Modal, Row } from 'react-bootstrap';
 
 //API
-import {API_URL,fieldServicesIconURL} from 'Constants/API'
+import {API_URL,ICONS_URL} from 'Constants/API'
 //elementos del FORM
 import Divider from '@material-ui/core/Divider';
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -145,7 +145,7 @@ const ModalPartido = (props) => {
         <div className="d-flex justify-content-around flex-wrap mt-5">
           {services.map(item=>(
                 <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
-                  <img className="match-icon mb-1" src={`${fieldServicesIconURL}${item.toLowerCase()}.svg`} alt="arbitraje" />
+                  <img className="match-icon mb-1" src={`${ICONS_URL}${item.toLowerCase()}.svg`} alt="arbitraje" />
                   <p className="p-services mx-1">{item}</p>
                 </div>
               ))}

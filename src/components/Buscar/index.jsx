@@ -2,7 +2,7 @@ import InitialDateFilter from 'components/InitialDateFilter'
 import FinalDateFilter from 'components/FinalDateFilter'
 import { useRef, useState, useEffect } from 'react'
 import './buscar.scss'
-import { Form } from 'react-bootstrap'
+import { Col, Container, Form, Row } from 'react-bootstrap'
 import ActionBtn from 'components/ActionBtn'
 import axios from 'axios'
 
@@ -140,94 +140,109 @@ const Buscar = ({searchParams, setSearchParams}) => {
     <Form className="filter-games p-3 mx-auto" onSubmit={(e)=>handleSubmit(e)}>
       <h3 className="text-start">Filtrar por:</h3>
       <hr />
-      <div className="date-filter-container text-center d-flex flex-wrap justify-content-center w-100 mb-2">
-        <h6 className="w-100 text-start">Fecha:</h6>
-        <div className="date-picker-container p-1 mb-3 mx-1 start">
-          <p className="text-start m-1">Desde:</p>
-          <InitialDateFilter toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
-          
-        </div>
-        <div className="date-picker-container p-1 mb-3 mx-1 end">
-          <p className="text-start m-1">Hasta:</p>
-          <FinalDateFilter toValue={finalValue} fromValue={initialValue} name="end_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
-        </div>
-      </div>
-      <div className="type-category-filter-container d-flex flex-wrap justify-content-around mb-2">
-        <div className="type-filter-container mb-2">
-          <Form.Group className="mb-2" controlId="formG">
-            <Form.Label className="mb-0">Tipo de partido:</Form.Label>
-            <div className="mb-3">
-            {football_type_list.map((type, index) => (
-              
-              <Form.Check
-                key={index.toString()}
-                label={type}
-                name="football_type"
-                type="checkbox"
-                id={`check-${type}`}
-                value={type}
-                checked={football_typeCheckedItems[`${type}`] || false}
-                onChange={handleTypeCheckboxItems}
-              />
-            ))}
+      <Container>
+        <Row>
+          <Col>
+            <Form.Group className="mb-2 d-flex flex-wrap justify-content-start date-filter-container" controlId="formG">
+              <Form.Label className="mb-0 w-100 fw-bold">Fecha:</Form.Label>
+              <div className="date-picker-container p-1 mb-3 mx-1 start">
+                <p className="text-start m-1">Desde:</p>
+                <InitialDateFilter toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
+                
+              </div>
+              <div className="date-picker-container p-1 mb-3 mx-1 end">
+                <p className="text-start m-1">Hasta:</p>
+                <FinalDateFilter toValue={finalValue} fromValue={initialValue} name="end_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
+              </div>
+            </Form.Group>
+            
+          {/* </div> */}
+            <div className="type-category-filter-container d-flex flex-wrap justify-content-between mb-2">
+              <div className="type-filter-container mb-2">
+                <Form.Group className="mb-2" controlId="formG">
+                  <Form.Label className="mb-1 fw-bold">Tipo de partido:</Form.Label>
+                  <div className="mb-3">
+                  {football_type_list.map((type, index) => (
+                    
+                    <Form.Check
+                      inline
+                      key={index.toString()}
+                      label={type}
+                      name="football_type"
+                      type="checkbox"
+                      id={`check-${type}`}
+                      value={type}
+                      checked={football_typeCheckedItems[`${type}`] || false}
+                      onChange={handleTypeCheckboxItems}
+                    />
+                  ))}
+                  </div>
+                </Form.Group>
+              </div>
+              <div className="category-filter-container mb-2">
+                <Form.Group className="mb-2" controlId="formG">
+                  <Form.Label className="mb-1 fw-bold">Categoria:</Form.Label>
+                  <div className="mb-3">
+                    <Form.Check
+                      inline
+                      label="Varonil"
+                      name="category"
+                      type="checkbox"
+                      id={`radio-male`}
+                      value="varonil"
+                      checked={categoryCheckedItems.varonil}
+                      onChange={handleCategoryCheckboxItems}
+                    />
+                    <Form.Check
+                      inline
+                      label="Femenil"
+                      name="category"
+                      type="checkbox"
+                      id={`radio-female`}
+                      value="femenil"
+                      checked={categoryCheckedItems.femenil}
+                      onChange={handleCategoryCheckboxItems}
+                    />
+                    <Form.Check
+                      inline
+                      label="Mixto"
+                      name="category"
+                      type="checkbox"
+                      id={`radio-mixed`}
+                      value="mixto"
+                      checked={categoryCheckedItems.mixto}
+                      onChange={handleCategoryCheckboxItems}
+                    />
+                  </div>
+                </Form.Group>
+              </div>
             </div>
-          </Form.Group>
-        </div>
-        <div className="category-filter-container mb-2">
-          <Form.Group className="mb-2" controlId="formG">
-            <Form.Label className="mb-0">Categoria:</Form.Label>
-            <div className="mb-3">
-              <Form.Check
-                label="Varonil"
-                name="category"
-                type="checkbox"
-                id={`radio-male`}
-                value="varonil"
-                checked={categoryCheckedItems.varonil}
-                onChange={handleCategoryCheckboxItems}
-              />
-              <Form.Check
-                label="Femenil"
-                name="category"
-                type="checkbox"
-                id={`radio-female`}
-                value="femenil"
-                checked={categoryCheckedItems.femenil}
-                onChange={handleCategoryCheckboxItems}
-              />
-              <Form.Check
-                label="Mixto"
-                name="category"
-                type="checkbox"
-                id={`radio-mixed`}
-                value="mixto"
-                checked={categoryCheckedItems.mixto}
-                onChange={handleCategoryCheckboxItems}
-              />
-            </div>
-          </Form.Group>
-        </div>
-      </div>
-      <div className="field-container mb-2">
-        <h6 className="text-start w-100">Nombre de la Cancha:</h6>
-        {field_names_list.map((field_name, index) => (
-              
-          <Form.Check
-            key={index.toString()}
-            label={field_name}
-            name="field"
-            type="checkbox"
-            id={`check-${field_name}`}
-            value={field_name}
-            checked={field_name_CheckedItems[`${field_name}`] || false}
-            onChange={handleFieldNameCheckboxItems}
-          />
+            <div className="field-container mb-2">
+              <h6 className="text-start w-100 fw-bold">Nombre de la Cancha:</h6>
+              {field_names_list.map((field_name, index) => (
+                    
+                <Form.Check
+                  key={index.toString()}
+                  label={field_name}
+                  name="field"
+                  type="checkbox"
+                  id={`check-${field_name}`}
+                  value={field_name}
+                  checked={field_name_CheckedItems[`${field_name}`] || false}
+                  onChange={handleFieldNameCheckboxItems}
+                />
 
-        ))}
-      </div> 
-      <div className="w-100 text-center">
-        <ActionBtn action="Filtrar" btn_type="submit" btn_disable={false} />
-      </div>
+              ))}
+            </div> 
+            <div className="w-100 text-center">
+              <ActionBtn action="Filtrar" btn_type="submit" btn_disable={false} />
+            </div>
+          </Col>
+        </Row>
+      </Container>
+      {/* <div className="date-filter-container text-center d-flex flex-wrap justify-content-start w-100 mb-2"> */}
+        {/* <h6 className="text-start">Fecha:</h6> */}
+        
       
     </Form>
     

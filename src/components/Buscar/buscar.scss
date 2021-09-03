@@ -4,7 +4,15 @@
   // max-width: 400px;
   .date-filter-container{
     .date-picker-container{
-      background-color: #FFF;
+      // background-color: #badbcc;
+      background-color: #fff;
+      .date-pick-container{
+        border-radius: 5px;
+      }
     }
+  }
+  .type-category-filter-container{
+    width: fit-content;
+    margin: 0 auto;
   }
 }
