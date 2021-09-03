@@ -203,7 +203,7 @@ validateNumOfTeam ()
           <Row className="gy-3 justify-content-center pb-5">
             <h1 className="py-3 mb-2">Detalles del partido</h1>
             <p className="mt-4 p-create"></p>
-            <Col sm={12} md={5}>
+            <Col sm={12} md={5} className="p-0 p-lg-3">
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
@@ -231,7 +231,7 @@ validateNumOfTeam ()
               inTeam = {result}
               />
             </Col>
-            <Col sm={12} md={7}>
+            <Col sm={12} md={7} className="p-0 p-lg-3">
               <Equipos match={match}
                 onClick={()=>handleModal()}
                 showButton={showButton}
