@@ -6,10 +6,9 @@ import { useState } from 'react';
 import ModalPerfil from 'components/PerfilModal/PerfilModal'
 
 const background_img=Math.floor((Math.random() * 5)+1);
-const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, user_to_update, setUser_to_update, toast_data, profileUpdated, setProfileUpdated}) => {
+const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, toastParams, setToastParams, profileUpdated, setProfileUpdated}) => {
   
   const [modalShow, setModalShow] = useState(false);
-  // const CARD_BACKGROUND_URL = `https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/profile_card_back${}.jpg`
   const CARD_BACKGROUND_URL = `https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/profile_card_back${background_img}.jpg`
   return (
     <div className="card-perfil text-center mx-auto d-flex flex-column justify-content-end" style={{backgroundImage: `url(${CARD_BACKGROUND_URL})`}}>
@@ -36,9 +35,11 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
       <ModalPerfil
         show={modalShow}
         onHide={() => setModalShow(false)}
-        toast_params={toast_data}
+        toastParams={toastParams}
+        setToastParams={setToastParams}
         profileUpdated={profileUpdated}
         setProfileUpdated={setProfileUpdated}
+
       />
     </div>
   )
