@@ -7,7 +7,8 @@ import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
 import {AUTH_TOKEN, API_URL} from 'Constants/API'
-
+import Toast from 'components/Toast/Toast'
+import {notifyWarning} from 'Functions/toastFunc'
 const userProfile = {
   "user_data": {
       "username": "test",
@@ -34,7 +35,6 @@ const PerfilModal = (props) => {
       const dataFromServer = await getUser4Update()
       setUserData(dataFromServer.user_data)
       setPlayerData(dataFromServer.player_data)
-      
     } 
     
     getUserProfileData()
@@ -56,17 +56,48 @@ const PerfilModal = (props) => {
       console.log(error);
     }
   }
+  
+  const [positions,setPositions] = useState([])
+  useEffect(()=>{
+    const getPositionsData = async () => {
+      const dataFromServer = await getPlayerPositions()
+      setPositions(dataFromServer)
+    } 
+    getPositionsData()
+  },[])
 
-  // const [profileImg, setProfileImg] = useState('https://django-playtogether-media.s3.us-east-2.amazonaws.com/avatar_default.png')
+  const getPlayerPositions = async () =>{
+    try {
+      const response = await axios(`${API_URL}players/position/`)
+      const data = await response.data;
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   const [profileImg, setProfileImg] = useState(playerData.photo)
   useEffect(()=>{
     setProfileImg(playerData.photo)
   },[playerData])
 
+  // FETCH A LA API PARA ACTUALIZAR LOS DATOS DEL USUARIO
   const updateUserProfile = (event) => {
     event.preventDefault();
     const updateProfile = async (id)=>{
       
+    //VALIDAR CAMPOS VACIOS
+    if (userData.username === '' || userData.first_name === '' || userData.last_name === '' || userData.email === ''){
+      //ALERTA
+      notifyWarning("Por favor no dejes campos vacios")
+      return
+    }
+    if(playerData.photo[0].size > 2097125){
+      notifyWarning("Solo se permite el uso de imagenes menores a 2MB")
+      return
+    }
+    
       const config = {
         headers: { 
           'Content-Type': 'multipart/form-data',
@@ -90,17 +121,25 @@ const PerfilModal = (props) => {
       axios
         .patch(url, formdata, config)
         .then((res) =>{
+          
           props.onHide()
-          props.toast_params.setShowProfileUpdateToast(true)
-          props.toast_params.setToastContent({
-            theme:"warning",
-            message: "¡Tu perfil se actualizó correctamente!"
+          props.setToastParams({
+            type: 'success',
+            msg:'¡Tu perfil se actualizó correctamente!',
+            time:2000,
+            activate: true
           })
-          window.location.reload()
+          props.setProfileUpdated(true)
+          // notifySuccess("¡Tu perfil se actualizó correctamente!",2000)
+          // window.location.reload()
           
         })
-        .catch((error) => console.log(error)
-      );
+        .catch((error) => {
+          if (error.response.data[0] === "Ese nombre de usuario ya fue tomado. Intenta nuevamente!"){
+            //ALERTA
+            notifyWarning(error.response.data[0])
+          }
+        });
       
       
     }
@@ -141,7 +180,6 @@ const PerfilModal = (props) => {
 
   return (
     <Modal
-      // {...props}
       show={props.show}
       onHide={props.onHide}
       user_data={props.user_data}
@@ -165,27 +203,27 @@ const PerfilModal = (props) => {
                  <input type="file" hidden={true} size="sm" ref={inputFile} name="photo" className="align-self-center" onChange={handleImageChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
-                  <Form.Label className="mb-0">Nombre</Form.Label>
-                  <Form.Control size="sm" type="text" name="first_name" placeholder="Nombre" defaultValue={userData.first_name} onChange={handleUserInputChange}/>
+                  <Form.Label className="text-secondary mb-0">Nombre</Form.Label>
+                  <Form.Control className="text-success" size="sm" type="text" name="first_name" placeholder="Nombre" defaultValue={userData.first_name} onChange={handleUserInputChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
-                  <Form.Label className="mb-0">Apellido</Form.Label>
-                  <Form.Control size="sm" type="text" name="last_name" placeholder="Apellido" defaultValue={userData.last_name} onChange={handleUserInputChange}/>
+                  <Form.Label className="text-secondary mb-0">Apellido</Form.Label>
+                  <Form.Control className="text-success" size="sm" type="text" name="last_name" placeholder="Apellido" defaultValue={userData.last_name} onChange={handleUserInputChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
-                  <Form.Label className="mb-0">Nombre de usuario</Form.Label>
-                  <Form.Control size="sm" type="text" name="username" placeholder="Nombre de usuario" defaultValue={userData.username} onChange={handleUserInputChange}/>
+                  <Form.Label className="text-secondary mb-0">Nombre de usuario</Form.Label>
+                  <Form.Control className="text-success" size="sm" type="text" name="username" placeholder="Nombre de usuario" defaultValue={userData.username} onChange={handleUserInputChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
-                  <Form.Label className="mb-0">Correo electrónico</Form.Label>
-                  <Form.Control size="sm" name="email" defaultValue={userData.email} plaintext readOnly/>
+                  <Form.Label className="text-secondary mb-0">Correo electrónico</Form.Label>
+                  <Form.Control  className="text-muted fst-italic" size="sm" name="email" defaultValue={userData.email} plaintext readOnly/>
                 </Form.Group>
                 <Form.Group className="mb-2" >
-                  <Form.Label className="mb-0">Nacionalidad</Form.Label>
-                  <Form.Control size="sm" type="text" name="nationality" placeholder="Nacionalidad" defaultValue={playerData.nationality} onChange={handlePlayerInputChange}/>
+                  <Form.Label className="text-secondary mb-0">Nacionalidad</Form.Label>
+                  <Form.Control className="text-success" size="sm" type="text" name="nationality" placeholder="Nacionalidad" defaultValue={playerData.nationality} onChange={handlePlayerInputChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" controlId="formG">
-                  <Form.Label className="mb-0">Género:</Form.Label>
+                  <Form.Label className="text-secondary mb-0">Género:</Form.Label>
                   <div key={`inline-radio`} className="mb-3">
                     <Form.Check
                       inline
@@ -210,12 +248,11 @@ const PerfilModal = (props) => {
                   </div>
                 </Form.Group>
                 <Form.Group className="mb-2">
-                  <Form.Label className="mb-0">Posición:</Form.Label>
+                  <Form.Label className="text-secondary mb-0">Posición:</Form.Label>
                   <Form.Select size="sm" name="position" defaultValue={playerData.position} onChange={handlePlayerInputChange}>
-                    <option value="1">Portero</option>
-                    <option value="2">Delantero</option>
-                    <option value="3">Defensa</option>
-                    <option value="4">Medio</option>
+                    {positions.map((position, index)=>{
+                      return (<option key={index.toString()} value={position.id}>{position.position_name}</option>)
+                    })}
                   </Form.Select>
                 </Form.Group>
                 <div className="w-100 text-center">
@@ -230,7 +267,7 @@ const PerfilModal = (props) => {
           </Row>
         </Container>
       </Modal.Body>
-      
+      <Toast/>
     </Modal>
   )
 }
