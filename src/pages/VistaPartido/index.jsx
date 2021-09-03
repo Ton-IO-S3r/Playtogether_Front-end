@@ -13,7 +13,7 @@ import ModalLeave from 'components/ModalTeam/ModalLeave'
 import Toast from 'components/Toast/Toast'
 import {notifyWarning} from 'Functions/toastFunc'
 //API URL
-import {API_URL, imgField, fieldServicesIconURL, AUTH_ID} from 'Constants/API'
+import {API_URL, imgField, AUTH_ID} from 'Constants/API'
 import { StepButton } from '@material-ui/core';
 import { setDefaultLocale } from 'react-datepicker';
 import { set } from 'date-fns';
@@ -92,6 +92,7 @@ const VistaPartido = () => {
   const [teamFull, setTeamFull] = useState("")
   //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
+  const fieldServices = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/"
   // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
   let showButton = false
   //variable del partido esta activo
@@ -214,7 +215,7 @@ validateNumOfTeam ()
               nameField={match.field.name}
               servicesField={match.field.services.map(item=>(
                 <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
-                  <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
+                  <img className="match-icon mb-1" src={`${fieldServices}${item.toLowerCase()}.svg`} alt="..." />
                   <p className="p-services mx-1">{item}</p>
                 </div>
               ))}

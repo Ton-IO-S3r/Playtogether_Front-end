@@ -40,7 +40,7 @@ const PerfilUsuario = () => {
     const getUserData = async () => {
       const dataFromServer = await getUser()
       setUserData(dataFromServer)
-      localStorage.setItem("player_photo",dataFromServer.players.photo.split(".com/")[1])
+      // localStorage.setItem("player_photo",dataFromServer.players.photo.split(".com/")[1])
     }
     
     getUserData()

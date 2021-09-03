@@ -2,7 +2,7 @@ import {React, useState,useEffect, useRef} from 'react'
 import {Col, Form,Modal, Row } from 'react-bootstrap';
 
 //API
-import {API_URL,fieldServicesIconURL} from 'Constants/API'
+import {API_URL,fieldServicesURL,AUTH_TOKEN} from 'Constants/API'
 //elementos del FORM
 import Divider from '@material-ui/core/Divider';
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -62,6 +62,7 @@ const createGame = async(field,date,time,category)=> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Token ${AUTH_TOKEN}`,
       },
       body: JSON.stringify({
         field,
@@ -153,20 +154,20 @@ const handleValueTime = (time) =>{
         <div className="d-flex justify-content-around flex-wrap mt-5">
           {services.map(item=>(
                 <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
-                  <img className="match-icon mb-1" src={`${fieldServicesIconURL}/${item.toLowerCase()}.svg`} alt="arbitraje" />
+                  <img className="match-icon mb-1" src={`${fieldServicesURL}${item.toLowerCase()}.svg`} alt="arbitraje" />
                   <p className="p-services mx-1">{item}</p>
                 </div>
               ))}
         </div>
         <div className="d-flex justify-content-between justify-content-md-around align-items-center mt-3 mb-3">
           <h2 className="create-type fw-bold">{field.football_type.name}</h2> 
-          <div className= "d-flex flex-row justify-content-center align-items-center bg-dark text-warning price-container">
+          <div className= "d-flex flex-row justify-content-center align-items-center price-container">
               <h2 className="my-1 mx-1 ">{`$${field.rent_cost}`}</h2>
-              <span className="my-1 mx-2 fw-light fs-6">Precio /<br/>Jugador</span>
+              <span className="my-1 mx-2 fw-light fs-6">Precio /<br/>Cancha</span>
           </div>
         </div>
-        <div className="d-flex justify-content-around align-items-center mt-4 mb-4">
-          <img src={location}/>
+        <div className="d-flex justify-content-center align-items-center mt-4 mb-4">
+          <img src="https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/location.svg"/>
           <p className="mb-0 address">{field.address}</p>
         </div>
         <Divider className="mb-4" variant="middle"/>
