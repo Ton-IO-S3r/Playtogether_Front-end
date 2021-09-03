@@ -30,13 +30,13 @@ const Equipos = (props) => {
 
   const playersByTeam = field.football_type.max_players/2
 
-  const setTeamPlayers = (playersList) =>{
+  const setTeamPlayers = (playersList,order) =>{
     const players=[]
     if(playersList.length > 0 && playersList.length <= playersByTeam ){
-      playersList.map((team_player, index)=>{
+      playersList.map((team_player)=>{
         players.push(
-          <div key={index.toString()} className="d-flex flex-row justify-content-around flex-nowrap">
-            <JugadorEquipo player_data={team_player} />
+          <div className="">
+            <JugadorEquipo player_data={team_player} order={order}/>
           </div>
         )
         return players
@@ -45,8 +45,8 @@ const Equipos = (props) => {
     }
     for (let i = playersList.length; i < playersByTeam; i++) {
       players.push(
-        <div key={i.toString()} className="d-flex flex-row justify-content-around flex-nowrap">
-          <JugadorEquipo player_data={{}} />
+        <div className="">
+          <JugadorEquipo player_data={{}} order={order}/>
         </div>
       )
       
@@ -55,13 +55,20 @@ const Equipos = (props) => {
     
   }
 
+  console.log(team)
   return (
-    <div className="match-container p-3">
-      <h5 className="fs-5 fw-bolder my-4">
-      {`${availablePlaces === 0 ? 'Partido lleno': (`${availablePlaces} ${availablePlaces !== 1 ? 'lugares disponibles':'lugar disponible'}`) }`}
+    <div className="match-container px-1 px-lg-1 pb-2 pt-2">
+      <h5 className="fs-3 fw-bolder my-4">
+      {`${availablePlaces === 0 ? 'Partido lleno': (`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`) }`}
+      {/* {`${availablePlaces} ${availablePlaces != 1 ? 'lugares disponibles':'lugar disponible'}`} */}
       </h5>
+      <div className="d-flex justify-content-around">
+      <span className="team-name">Equipo blanco</span>
+      <span className="versus">VS</span>
+      <span className="team-name">Equipo negro</span>
+      </div>
       <hr />
-      <div className="container">
+      {/* <div className="container">
         <div className="row">
           <div className="col-5">
             <span className="team-name">Equipo blanco</span>
@@ -79,6 +86,27 @@ const Equipos = (props) => {
             }
           </div>
         </div>
+      </div> */}
+
+      <div className="d-flex justify-content-around">
+        
+        <div className="d-flex flex-column">
+        
+            {
+              setTeamPlayers(teamW.players,"order-lg-3")
+            }
+        </div>
+            
+            
+          
+          <div className="d-flex flex-column">
+          
+            {
+              setTeamPlayers(teamB.players,"")
+            }
+          </div>
+            
+         
       </div>
 
       {/* {

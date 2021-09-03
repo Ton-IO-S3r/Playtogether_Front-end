@@ -1,11 +1,45 @@
 .jugador{
-  width: 40%;
+  // width: 40%;
   .user-img{
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.player-color{
+  color: black;
+  h5.username{
+    font-size: 17px;
+    font-weight: bold;
+  }
+  p.position{
+    font-size: 14px;
+  }
+}
+h5.username{
+  font-size: 17px;
+  font-weight: bold;
+}
+p.position{
+  font-size: 14px;
+}
+.player-color:hover{
+  color: black;
+}
+
+@media screen and (min-width:1024px){
+  .player-color{
+    h5.username{
+      font-size: 19px;
+      font-weight: bold;
+    }
+    p.position{
+      font-size: 17px;
+    }
   }
 }

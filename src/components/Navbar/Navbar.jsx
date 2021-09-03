@@ -33,7 +33,7 @@ const Navbar = (props) => {
         <Fragment>
         {/* AQUI INICIA LA NAVBAR */}
             <div className="container-fluid navbar_pt primary_color">
-                <div className="container p-0 primary_color">
+                <div className="container p-0 ">
                     <nav className="navbar navbar-expand-lg navbar-ligh primary_color p-0">
                         <a className="navbar-brand m-0" href="#">
                             <img src={logo} alt="Playtogether"  className="d-inline-block align-text-top"/>

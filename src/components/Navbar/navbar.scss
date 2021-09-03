@@ -2,6 +2,10 @@
 // COLOR DE LA NAVBAR
 .primary_color{
     background-color: #28804B;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 //COLORES DE LOS TEXTOS
 .white_color{
@@ -85,7 +89,9 @@ a.btn-outline:hover{
 
 //MENU DESPEGABLE
 .menu-nav{
-    position:absolute;
+    position: fixed;
+    top: 50px;
+    width: 100%;
     z-index: 1000;
 }
 
@@ -103,17 +109,7 @@ a.btn-outline:hover{
 
 
 //menu flotante
-.floating-menu{
-    height: 150px;
-    width: 220px;
-    background-color: #e9ecef;
-    position: fixed;
-    right: 5vw;
-    border-radius: 8px;
-    margin-top: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-}
 
 //MEDIA SCREEN DESKTOP
 @media screen and (min-width:1024px){
@@ -141,10 +137,23 @@ a.btn-outline:hover{
         font-weight: bold;
         font-size: 25px;
     }
+    .floating-menu{
+        height: 150px;
+        width: 220px;
+        background-color: #e9ecef;
+        position: fixed;
+        right: 5vw;
+        border-radius: 8px;
+        margin-top: 5%;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        z-index: 1000;
+    
+    }
  }
 
  @media screen and (min-width:1444px){
     .floating-menu{ 
         right: 15vw;
+        margin-top: 3%;
     }
  }
