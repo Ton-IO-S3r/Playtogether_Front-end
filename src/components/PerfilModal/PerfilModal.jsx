@@ -131,7 +131,7 @@ const PerfilModal = (props) => {
           })
           props.setProfileUpdated(true)
           // notifySuccess("¡Tu perfil se actualizó correctamente!",2000)
-          // window.location.reload()
+          window.location.reload()
           
         })
         .catch((error) => {

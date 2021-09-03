@@ -11,6 +11,7 @@ import {BACKGROUNDS_URL} from 'Constants/API'
 const BuscarPartido = () => {
   
   const [games,setGames] = useState([])
+  const [totalGamesFound, setTotalGamesFound]=useState(0)
   const [searchParams,setSearchParams]=useState(new URLSearchParams())
   useEffect(() => {
     const getGamesList = async ()=> {
@@ -27,8 +28,9 @@ const BuscarPartido = () => {
     }
     const getGamesData = async () => {
       const dataFromServer = await getGamesList()
+      setTotalGamesFound(dataFromServer.shift())
       setGames(dataFromServer)
-      console.log(games)
+      console.log(dataFromServer)
 
     }
     getGamesData()
@@ -49,7 +51,7 @@ const BuscarPartido = () => {
               <Buscar searchParams={searchParams} setSearchParams={setSearchParams} />
             </Col>
             <Col sm={12} md={7} lg={7}>
-              <ListaPartidos games={games}/>
+              <ListaPartidos games={games} total={totalGamesFound.total_matches}/>
             </Col>
             
           </Row>

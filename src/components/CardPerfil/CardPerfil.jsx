@@ -9,7 +9,8 @@ import {AUTH_ID} from 'Constants/API'
 
 const background_img=Math.floor((Math.random() * 5)+1);
 const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, toastParams, setToastParams, profileUpdated, setProfileUpdated}) => {
-  
+  //Params
+  const id = useParams().id
   const [modalShow, setModalShow] = useState(false);
   const CARD_BACKGROUND_URL = `https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/profile_card_back${background_img}.jpg`
   return (
