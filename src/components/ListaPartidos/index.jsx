@@ -10,7 +10,7 @@ const ListaPartidos = ({games}) => {
       <div className="matches-list-container">
         {
           games.map((game, index) => (
-            <Link key={index.toString()} id={game.id} to={`partidos/${game.id}`} className="game-link">
+            <Link key={index.toString()} id={game.id} to={`/partidos/${game.id}`} className="game-link">
               <MatchResume 
                 date={game.date} 
                 field_name={game.field.name} 

@@ -4,7 +4,6 @@ import Flatpickr from "react-flatpickr";
 import { useState } from "react";
 
 const FinalDateFilter = ({fromValue, toValue, handleDateChange}) => {
-  const today = new Date()
   const [date, setDate] = useState('')
   
   return (

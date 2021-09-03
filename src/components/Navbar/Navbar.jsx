@@ -36,9 +36,9 @@ const Navbar = (props) => {
                 <div className="container p-0 ">
                     <nav className="navbar navbar-expand-lg navbar-ligh primary_color p-0">
                         <a className="navbar-brand m-0" href="#">
-                            <img src={logo} alt=""  className="d-inline-block align-text-top"/>
+                            <img src={logo} alt="Playtogether"  className="d-inline-block align-text-top"/>
                         </a>
-                        <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to='/'>PlayTogether!</Link>
+                        <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to="/" >PlayTogether!</Link>
                         {/* <a className="navbar-brand me-auto p-2 bd-highlight playtogether" href="#">PlayTogether!</a> */}
                         <button className="navbar-toggler p-0" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <Hamburger color="white"/>
@@ -67,15 +67,8 @@ const Navbar = (props) => {
                                     <li className="nav-item align-self-center mx-4">
                                         <Link className="search-games" to='/crear-partido/'>Crear Partido</Link>
                                     </li>
-                                    {/* <li className="nav-item align-self-center ms-5">
-                                        <Link type="button" className="btn-join" to='/unirse/'>Unete!</Link>
-                                    </li> */}
                                     <div className="nav-photo" onClick={()=>{setShow(!show)}}>
-                                    {/* <Link to={`/usuarios/${AUTH_ID}`}> */}
-                                    <img src={`${photoAPI}${AUTH_PHOTO}`}/>
-                                    {/* </Link> */}
-                                    
-
+                                    <img src={`${photoAPI}${AUTH_PHOTO}`} alt="user"/>
                                     </div>
                                     </ul>
 

@@ -1,4 +1,4 @@
-import {React, Fragment, useRef, useState} from 'react'
+import {React, Fragment, useRef} from 'react'
 //COMPONENTES
 import Form from 'react-bootstrap/Form'
 import Card from 'components/Cards/Card'
@@ -12,9 +12,6 @@ import {notifyWarning} from 'Functions/toastFunc'
 import { Link } from 'react-router-dom'
 //API
 import {API_URL} from 'Constants/API'
-import context from 'react-bootstrap/esm/AccordionContext'
-
-
 
 const SignUp = () => {
     //REFERECIA DE LOS INPUTS

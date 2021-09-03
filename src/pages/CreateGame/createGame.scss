@@ -1,8 +1,11 @@
 .container-create{
     // background-image: url('../assets/img/hero-mobile.png');
-    background: url(/assets/images/create-game-mobile.jpeg),no-repeat;
-    background-size: cover;
-    background-position: center,center;
+    // background: url(/assets/images/create-game-mobile.jpeg),no-repeat;
+    // background-size: cover;
+    // background-position: center,center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover !important;
     height: 100vh
 }
 .carrousel-create{
@@ -43,13 +46,13 @@ p.p-create{
 @media screen and (min-width:768px){
     .container-create{
         // background-image: url('../assets/img/hero-mobile.png');
-        background: url(/assets/images/create-game.jpeg),no-repeat;
-        background-size: cover;
-        background-position: center,center;
+        // background: url(/assets/images/create-game.jpeg),no-repeat;
+        // background-size: cover;
+        // background-position: center,center;
         height: 100vh
     }
     .carrousel-create{
-        margin-top: 10%;
+        margin-top: 15%;
     }
 }
 

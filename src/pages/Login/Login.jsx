@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef} from 'react'
+import React, { Fragment, useRef} from 'react'
 //COMPONENTES
 import Form from 'react-bootstrap/Form'
 import Card from 'components/Cards/Card'
@@ -38,7 +38,6 @@ const loginUser = async(username,password) => {
       }),
     });
     return await response.json();
-    console.log(response)
   } catch (error){
     console.log(error)
   }

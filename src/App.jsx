@@ -25,10 +25,8 @@ function App() {
           <Route exact path="/" component={Landing}/>
           <Route path="/login" component={Login}/>
           <ProtectedRoute  path="/usuarios/:id" component={PerfilUsuario}/>
-          {/* <Route path="/usuarios/:id" component={PerfilUsuario}/> */}
           <Route path="/partidos/:id" component={VistaPartido}/>
           <Route path="/partidos/" component={BuscarPartido}/>
-          {/* <Route path="/crear-partido/" component={CreateGame}/> */}
           <ProtectedRoute path="/crear-partido/" component={CreateGame}/>
           <Route path="/unirse/" component={SignUp}/>
         </Switch>

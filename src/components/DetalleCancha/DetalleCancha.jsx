@@ -1,17 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './detallecancha.scss'
-import { useState , useEffect } from 'react';
-import cancha from 'assets/images/vienna-reyes-Zs_o1IjVPt4-unsplash.jpg'
-import regaderas from 'assets/icons/regaderas.svg'
-import arbitraje from 'assets/icons/arbitraje.svg'
-import estacionamiento from 'assets/icons/estacionamiento.svg'
-import bebederos from 'assets/icons/bebederos.svg'
-import techada from 'assets/icons/cancha.svg'
 import location from 'assets/icons/location.svg'
 import calendar from 'assets/icons/calendar.svg'
 import time from 'assets/icons/time.svg'
 import genre from 'assets/icons/genre.svg'
-import UnirseBtn from '../ActionBtn';
 import Divider from '@material-ui/core/Divider';
 import Btn from 'components/Buttons/CallActionBtn'
 import {isAuthenticated} from 'Constants/API'
@@ -42,20 +34,19 @@ const DetalleCancha = (props) => {
   
   // const [showA, setShowA] = useState(true);
   // const toggleShowA = () => setShowA(!showA);
-  const services = ["Estacionamiento","Regadera",
-    "Bebedero"
-  ]
+  // const services = ["Estacionamiento","Regadera",
+  //   "Bebedero"
+  // ]
   
   return (
     <div className="d-flex flex-column card-partido">
       <div className=" img-cancha-partido ">
-        <img src={imgField}/>
+        <img src={imgField} alt={nameField}/>
       </div>
       <div className="card-content p-2 p-md-4">
         <h5 className="text-center fs-3 fw-bold field-title mt-3">{nameField}</h5>
         <hr />
         <div className="d-flex justify-content-around flex-wrap mt-4">
-          {/* {services.map(item=>(<p className="p-services mx-1">{item}</p>))} */}
           {servicesField}
         </div>
         <div className="d-flex justify-content-around justify-content-md-around align-items-center my-3">

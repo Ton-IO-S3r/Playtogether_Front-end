@@ -1,6 +1,5 @@
 import  Button  from 'react-bootstrap/Button'
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
 import './callActionBtn.scss'
 
 const CallActionBtn = (props) => {

@@ -9,11 +9,16 @@ const MatchResume = ({date, time, field_name, match_type, category}) => {
   let [year,month,day] = date.split("-")
   return (
     <div className="match-resume-cont d-flex justify-content-start align-items-center mt-2 mb-3 mx-auto">
+<<<<<<< HEAD
       <div className="d-flex align-items-center justify-content-center  w-25 date-container py-1">
         <h2 className="text-wrap text-center p-2 m-0 px-0 px-sm-2 fs-5">{`${day} ${monthNames[parseInt(month)-1]}`} <br/> {`${year}`}</h2>
+=======
+      <div className="d-flex align-items-center justify-content-center bg-dark text-warning w-25 date-container py-1">
+        <h2 className="text-wrap text-center p-2 m-0 px-0 px-sm-2 fs-5">{`${day} ${monthNames[parseInt(month)-1]}`} {`${year}`}</h2>
+>>>>>>> develop
       </div>
       <div className="d-flex flex-column w-75 ms-2 pe-2 justify-content-center match-details-container">
-        <div className="d-flex flex-row justify-content-center align-items-center my-1 w-100">
+        <div className="d-flex flex-row justify-content-center align-items-center mt-3 mb-1 w-100">
           <img src={`${ICON_ASSETS_URL}/field_2.svg`} alt="tipo-partido" className="icons-cancha field" />
           <h5 className="ms-2 my-0 overflow-hidden field">{field_name}</h5>
         </div>
