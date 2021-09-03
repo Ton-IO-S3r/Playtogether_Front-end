@@ -8,9 +8,9 @@ import CardPerfil from 'components/CardPerfil';
 import UserMatches from 'components/UserMatches';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
-import Toast from "react-bootstrap/Toast";
-import ToastContainer from 'react-bootstrap/ToastContainer'
 import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
+import Toast from 'components/Toast/Toast';
+import { notifySuccess, notifyWarning } from 'Functions/toastFunc';
 const user = 
   {
     "username": "",
@@ -27,15 +27,11 @@ const user =
   }
 
 const PerfilUsuario = () => {
-  const BACKGROUND_IMG_URL = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/nathan-rogers-ObhCU6Vhoe8-unsplash.jpg"
   
   const {id} = useParams();
   const [userData, setUserData] = useState(user);
   const [profileUpdated,setProfileUpdated] = useState(false);
-  const [toastContent, setToastContent] = useState({
-    theme: "warning",
-    message: ""
-  })
+  
   useEffect(() => {
     const getUserData = async () => {
       const dataFromServer = await getUser()
@@ -46,11 +42,21 @@ const PerfilUsuario = () => {
     getUserData()
   },[profileUpdated])
 
-  const [showProfileUpdateToast, setShowProfileUpdateToast] = useState(false);
-  const toggleShowProfileUpdateToast = () => setShowProfileUpdateToast(!showProfileUpdateToast);  
-  
-  
-  
+  //SE DECLARAN PARAMETROS INCIALES PARA LA ACTIVACION DEL TOAST
+  const [toastParams, setToastParams] = useState({
+    type:'success',
+    msg:"",
+    time: 0,
+    activate:false
+  })
+  useEffect(() => {
+    if (toastParams.activate && toastParams.type === 'success') {
+      notifySuccess(toastParams.msg, toastParams.time)
+    }
+    if (toastParams.activate && toastParams.type === 'warning') {
+      notifyWarning(toastParams.msg, toastParams.time)
+    }
+  }, [toastParams])
 
   const getUser = async ()=>{
     try {
@@ -74,15 +80,6 @@ const PerfilUsuario = () => {
     <>
       <Navbar />
       <Container fluid={true} className="vista-perfil-container pt-2 pb-4" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUNDS_URL}background_3.jpg), no-repeat,fixed, center`}}>
-        <ToastContainer position="top-end" className="p-3">
-          <Toast show={showProfileUpdateToast} onClose={toggleShowProfileUpdateToast} bg={toastContent.theme} delay={3000} autohide>
-            <Toast.Header>
-              <strong className="me-auto">Playtogether</strong>
-            </Toast.Header>
-            <Toast.Body>{toastContent.message}</Toast.Body>
-          </Toast>
-        </ToastContainer>
-        
         <Container>
         <Row className="gy-3 justify-content-center pb-5">
           <h1 className="py-3 mb-2">Perfil de usuario</h1>
@@ -96,15 +93,10 @@ const PerfilUsuario = () => {
                 user_position={userData.players.position}
                 user_dominant_foot={userData.players.dominant_food}
                 user_date_joined={userData.date_joined.split("T")[0].split("-").reverse().join("/")}
-                toast_data={{
-                  showProfileUpdateToast, 
-                  setShowProfileUpdateToast,
-                  toastContent,
-                  setToastContent
-                }}
                 profileUpdated = {profileUpdated}
                 setProfileUpdated = {setProfileUpdated}
-                
+                toastParams={toastParams}
+                setToastParams = {setToastParams}
               />
             </Col>
             <Col sm={12} md={7} lg={7}>
@@ -114,6 +106,7 @@ const PerfilUsuario = () => {
         </Container>
       </Container>
       <Footer/>
+      <Toast />
     </>
   )
 }
