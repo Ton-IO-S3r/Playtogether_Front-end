@@ -92,7 +92,7 @@ const Navbar = (props) => {
             {isLogin === false ? (
                 <div className="navbar-nav">
                     <div className="nav-item align-self-center mt-4 ">
-                        <Link className="a-menu" to='/search-games'>Buscar Partidos</Link>
+                        <Link className="a-menu" to='/partidos'>Buscar Partidos</Link>
                     </div>
                     <div className="d-flex justify-content-between mt-5 mb-4">
                         <div className="nav-item align-self-center ">

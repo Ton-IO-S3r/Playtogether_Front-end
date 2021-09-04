@@ -3,10 +3,13 @@ import React from 'react'
 import './matchresume.scss'
 
 const MatchResume = ({date, time, field_name, match_type, category, available}) => {
+  let formatted_time=""
+  if(time !== '' && time !== undefined){
+    const time_array = time.split(':')
+    time_array.pop()
+    formatted_time = time_array.join(':')
+  }
   
-  const time_array = time.split(':')
-  time_array.pop()
-  const formatted_time = time_array.join(':')
   const monthNames = ["ene", "feb", "mar", "abr", "may", "jun",
   "jul", "ago", "sep", "oct", "nov", "dic"];
   let [year,month,day] = date.split("-")
@@ -16,7 +19,11 @@ const MatchResume = ({date, time, field_name, match_type, category, available}) 
         <h2 className="text-wrap text-center p-2 mt-2 mb-0 px-0 px-sm-2 fs-5">{`${day} ${monthNames[parseInt(month)-1]}`} {`${year}`}</h2>
       </div>
       <div className="d-flex flex-column w-75 ms-2 pe-2 justify-content-center match-details-container position-relative">
-      <span class={`badge bg-${available<=3 ? 'danger':'secondary'} position-absolute top-0 start-0 translate-middle-x`}>{available} {available===1?'lugar disponible':'lugares disponibles'}</span>
+        {available !== undefined ?
+          (<span className={`badge bg-${available<=3 ? 'danger':'secondary'} position-absolute top-0 start-0 translate-middle-x`}>{available} {available===1?'lugar disponible':'lugares disponibles'}</span>):(<></>)
+        }
+        
+
         <div className="d-flex flex-row justify-content-center align-items-center mt-4 mb-1 w-100">
           <img src={`${ICONS_URL}pitch.svg`} alt="tipo-partido" className="icons-cancha field" />
           <h5 className="ms-2 my-0 overflow-hidden field">{field_name}</h5>
