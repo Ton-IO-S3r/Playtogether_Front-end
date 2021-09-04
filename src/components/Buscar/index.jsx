@@ -140,28 +140,31 @@ const Buscar = ({searchParams, setSearchParams}) => {
     <Form className="filter-games p-3 mx-auto" onSubmit={(e)=>handleSubmit(e)}>
       <h3 className="text-start">Filtrar por:</h3>
       <hr />
-      <Container>
+      <Container fluid className="d-flex justify-content-center">
         <Row>
           <Col>
-            <Form.Group className="mb-2 d-flex flex-wrap justify-content-start date-filter-container" controlId="formG">
-              <Form.Label className="mb-0 w-100 fw-bold">Fecha:</Form.Label>
-              <div className="date-picker-container p-1 mb-3 mx-1 start">
-                <p className="text-start m-1">Desde:</p>
-                <InitialDateFilter toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
-                
+            <Form.Group controlId="formG">
+              <Form.Label for className="mb-0 fw-bold">Fecha:</Form.Label>
+              <div className="d-flex justify-content-between">
+                <div className="date-picker-container p-1 mb-3 start">
+                  <p className="text-start m-1">Desde:</p>
+                  <InitialDateFilter toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
+                  
+                </div>
+                <div className="date-picker-container p-1 mb-3 mx-1 end">
+                  <p className="text-start m-1">Hasta:</p>
+                  <FinalDateFilter toValue={finalValue} fromValue={initialValue} name="end_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
+                </div>
               </div>
-              <div className="date-picker-container p-1 mb-3 mx-1 end">
-                <p className="text-start m-1">Hasta:</p>
-                <FinalDateFilter toValue={finalValue} fromValue={initialValue} name="end_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
-              </div>
+              
             </Form.Group>
             
           {/* </div> */}
-            <div className="type-category-filter-container d-flex flex-wrap justify-content-between mb-2">
+            <div className="type-category-filter-container d-flex flex-column flex-wrap justify-content-between align-items-stretch mb-2">
               <div className="type-filter-container mb-2">
                 <Form.Group className="mb-2" controlId="formG">
                   <Form.Label className="mb-1 fw-bold">Tipo de partido:</Form.Label>
-                  <div className="mb-3">
+                  <div className="mb-3 d-flex justify-content-between w-100">
                   {football_type_list.map((type, index) => (
                     
                     <Form.Check
@@ -182,7 +185,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
               <div className="category-filter-container mb-2">
                 <Form.Group className="mb-2" controlId="formG">
                   <Form.Label className="mb-1 fw-bold">Categoria:</Form.Label>
-                  <div className="mb-3">
+                  <div className="mb-3 d-flex justify-content-between w-100">
                     <Form.Check
                       inline
                       label="Varonil"
