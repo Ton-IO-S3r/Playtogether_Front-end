@@ -188,6 +188,7 @@ validateNumOfTeam ()
     setId(match.id)
   }
 
+  console.log(match.time)
 
 //VALIDA SI EL PARTIDO ESTA ACTIVO
   if (match.active === false){
@@ -201,9 +202,9 @@ validateNumOfTeam ()
       <Container fluid={true} className="vista-partido-container pt-2 pb-4" style={{backgroundImage: `url(${BACKGROUNDS_URL}background_4.jpg)`}}>
         <Container>
           <Row className="gy-3 justify-content-center pb-5">
-            <h1 className="py-3 mb-2">Detalles del partido</h1>
+            <h1 className="py-3 mb-2 title-page">Detalles del partido</h1>
             <p className="mt-4 p-create"></p>
-            <Col sm={12} md={5} className="p-0 p-lg-3">
+            <Col sm={12} md={5} className="p-0 p-md-1 p-lg-3">
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
@@ -217,8 +218,8 @@ validateNumOfTeam ()
               priceField={match.field.rent_cost}
               directionField={match.field.address}
 
-              dateMatch={match.date}
-              timeMatch={match.time}
+              dateMatch={match.date.split("-").reverse().join("/")}
+              timeMatch={match.time.slice(0,-3)}
               categoryMatch={match.category}
 
               onClick={()=>handleModal()}

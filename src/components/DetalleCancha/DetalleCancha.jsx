@@ -78,7 +78,7 @@ const DetalleCancha = (props) => {
               <h5 className="my-0 ms-3">Horario:</h5>
             </div>
             <div>
-              <p className="my-0">{timeMatch}</p>
+              <p className="my-0">{`${timeMatch} Hrs`}</p>
             </div>
           </div>
           <div className="genre-container my-4 d-flex justify-content-between align-items-center">
