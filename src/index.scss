@@ -130,6 +130,9 @@
 .nav-link{
   color: #32A77A;
 }
+.nav-link:focus, .nav-link:hover {
+  color: #32A77A;
+}
 
 @media screen and (min-width: 768px){
   .title-page{
