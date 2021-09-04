@@ -4,7 +4,7 @@ import Btn from 'components/Buttons/CallActionBtn'
 import './ModalTeam.scss'
 import {API_URL, AUTH_TOKEN} from 'Constants/API'
 import Toast from 'components/Toast/Toast'
-import {notifySuccess} from 'Functions/toastFunc'
+import {notifySuccess,notifyWarning} from 'Functions/toastFunc'
 
 const ModalTeam = (props) => {
     const {matchId,nameBlack,nameWhite,show,onHide,teamFull} = props
@@ -35,6 +35,10 @@ const ModalTeam = (props) => {
 
     const handleUpdate = async (e) => {
         e.preventDefault()
+        if (team === ""){
+            notifyWarning("Debes de seleccionar un equipo")
+            return
+        }
 
         const response = await updateMatch(team)
         console.log(response)
