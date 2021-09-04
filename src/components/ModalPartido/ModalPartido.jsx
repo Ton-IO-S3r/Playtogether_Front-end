@@ -2,7 +2,7 @@ import {React, useState,useEffect, useRef} from 'react'
 import {Col, Form,Modal, Row } from 'react-bootstrap';
 
 //API
-import {API_URL,ICONS_URL} from 'Constants/API'
+import {API_URL,ICONS_URL,AUTH_TOKEN} from 'Constants/API'
 //elementos del FORM
 import Divider from '@material-ui/core/Divider';
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -51,6 +51,7 @@ const ModalPartido = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Token ${AUTH_TOKEN}`
         },
         body: JSON.stringify({
           field,
