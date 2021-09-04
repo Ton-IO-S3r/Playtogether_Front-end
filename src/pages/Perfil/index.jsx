@@ -31,6 +31,8 @@ const PerfilUsuario = () => {
   const {id} = useParams();
   const [userData, setUserData] = useState(user);
   const [profileUpdated,setProfileUpdated] = useState(false);
+  const [userCreatedMatch , setUserCreatedMatch] = useState({})
+  const [totalMatchCreated, setTotalMatchCreated] = useState({})
   
   useEffect(() => {
     const getUserData = async () => {
@@ -38,7 +40,14 @@ const PerfilUsuario = () => {
       setUserData(dataFromServer)
       // localStorage.setItem("player_photo",dataFromServer.players.photo.split(".com/")[1])
     }
+    const getUserMatches = async () =>{
+      const matchesCreated = await getUserCreatedMatches()
+      setTotalMatchCreated(matchesCreated.shift())
+      setUserCreatedMatch(matchesCreated)
+      
+    }
     
+    getUserMatches()
     getUserData()
   },[profileUpdated])
 
@@ -74,6 +83,23 @@ const PerfilUsuario = () => {
       console.log(error);
     }
   }
+  const getUserCreatedMatches = async ()=>{
+    try {
+      const response = await fetch(`${API_URL}players/organized/`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        },
+      });
+      const data = await response.json();
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log(userCreatedMatch)
 
   
   return (
@@ -82,9 +108,9 @@ const PerfilUsuario = () => {
       <Container fluid={true} className="vista-perfil-container pt-2 pb-4" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUNDS_URL}background_3.jpg), no-repeat,fixed, center`}}>
         <Container>
         <Row className="gy-3 justify-content-center pb-5">
-          <h1 className="py-3 mb-2">Perfil de usuario</h1>
+          <h1 className="py-3 mb-2 title-page">Perfil de usuario</h1>
           <p className="mt-4 p-create"></p>
-            <Col sm={12} md={5} lg={5}>
+            <Col sm={12} md={5} lg={5} className="p-0 p-md-1 p-lg-3">
               <CardPerfil 
                 avatar={`${userData.players.photo}`} 
                 user_first_name={userData.first_name}
@@ -99,8 +125,8 @@ const PerfilUsuario = () => {
                 setToastParams = {setToastParams}
               />
             </Col>
-            <Col sm={12} md={7} lg={7}>
-              <UserMatches matches={userData.players.matches} fields={userData.players.fields_count} num_matches={userData.players.matches_count}/>
+            <Col sm={12} md={7} lg={7} className="p-0 p-md-1 p-lg-3">
+              <UserMatches matches={userData.players.matches} fields={userData.players.fields_count} num_matches={userData.players.matches_count} matchCreated={userCreatedMatch} numOfMatchCreated={totalMatchCreated.total_matches_organized}/>
             </Col>
         </Row>
         </Container>

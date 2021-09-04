@@ -45,12 +45,12 @@ const BuscarPartido = () => {
       <Container fluid className="buscar-partidos-container pt-2 pb-4" style={{backgroundImage: `url(${BACKGROUNDS_URL}background_2.jpg)`}}>
         <Container>
           <Row className="gy-3 justify-content-around pb-5">
-            <h1 className="py-3 mb-2">Partidos</h1>
-            <p className="mt-4 p-create">Busta tu partido ideal</p>
-            <Col sm={12} md={5} lg={5}>
+            <h1 className="py-3 mb-2 title-page">Partidos</h1>
+            <p className="mt-4 p-create">Busca tu partido ideal</p>
+            <Col sm={12} md={5} lg={5} className="p-0 p-md-1 p-lg-3">
               <Buscar searchParams={searchParams} setSearchParams={setSearchParams} />
             </Col>
-            <Col sm={12} md={7} lg={7}>
+            <Col sm={12} md={7} lg={7} className="p-0 p-md-1 p-lg-3">
               <ListaPartidos games={games} total={totalGamesFound.total_matches}/>
             </Col>
             

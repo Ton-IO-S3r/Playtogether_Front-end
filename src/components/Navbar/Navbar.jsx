@@ -38,7 +38,12 @@ const Navbar = (props) => {
                         <a className="navbar-brand m-0" href="#">
                             <img src={logo} alt="Playtogether"  className="d-inline-block align-text-top"/>
                         </a>
-                        <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to="/" >PlayTogether!</Link>
+                        {
+                            !AUTH_TOKEN ? <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to="/" >PlayTogether!</Link>
+                            :
+                            <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to={`/usuarios/${AUTH_ID}`} >PlayTogether!</Link>
+                        }
+                        
                         {/* <a className="navbar-brand me-auto p-2 bd-highlight playtogether" href="#">PlayTogether!</a> */}
                         <button className="navbar-toggler p-0" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <Hamburger color="white"/>
