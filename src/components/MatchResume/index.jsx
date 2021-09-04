@@ -2,8 +2,13 @@ import { ICONS_URL } from 'Constants/API';
 import React from 'react'
 import './matchresume.scss'
 
-const MatchResume = ({date, time, field_name, match_type, category}) => {
-  
+const MatchResume = ({date, time, field_name, match_type, category, available}) => {
+  let formatted_time=""
+  if(time !== '' && time !== undefined){
+    const time_array = time.split(':')
+    time_array.pop()
+    formatted_time = time_array.join(':')
+  }
   
   const monthNames = ["ene", "feb", "mar", "abr", "may", "jun",
   "jul", "ago", "sep", "oct", "nov", "dic"];
@@ -11,18 +16,23 @@ const MatchResume = ({date, time, field_name, match_type, category}) => {
   return (
     <div className="match-resume-cont d-flex justify-content-start align-items-center mt-2 mb-3 mx-auto">
       <div className="d-flex align-items-center justify-content-center  w-25 date-container py-1">
-        <h2 className="text-wrap text-center p-2 m-0 px-0 px-sm-2 fs-5">{`${day} ${monthNames[parseInt(month)-1]}`} <br/> {`${year}`}</h2>
+        <h2 className="text-wrap text-center p-2 mt-2 mb-0 px-0 px-sm-2 fs-5">{`${day} ${monthNames[parseInt(month)-1]}`} {`${year}`}</h2>
       </div>
-      <div className="d-flex flex-column w-75 ms-2 pe-2 justify-content-center match-details-container">
-        <div className="d-flex flex-row justify-content-center align-items-center mt-3 mb-1 w-100">
+      <div className="d-flex flex-column w-75 ms-2 pe-2 justify-content-center match-details-container position-relative">
+        {available !== undefined ?
+          (<span className={`badge bg-${available<=3 ? 'danger':'secondary'} position-absolute top-0 start-0 translate-middle-x`}>{available} {available===1?'lugar disponible':'lugares disponibles'}</span>):(<></>)
+        }
+        
+
+        <div className="d-flex flex-row justify-content-center align-items-center mt-4 mb-1 w-100">
           <img src={`${ICONS_URL}pitch.svg`} alt="tipo-partido" className="icons-cancha field" />
           <h5 className="ms-2 my-0 overflow-hidden field">{field_name}</h5>
         </div>
         <hr className="my-1" />
         <div className="d-flex flex-row justify-content-around align-items-center my-1 w-100">
           {(time !== '' && time !== undefined) ? (<div className="time d-flex flex-column justify-content-center align-items-center me-1 flex-wrap">
-            <img src={`${ICONS_URL}time.svg`} alt="tipo-partido" className="icons-cancha time mb-1" />
-            <h5 className="my-0">{time}</h5>
+            <img src={`${ICONS_URL}clock.svg`} alt="tipo-partido" className="icons-cancha time mb-1" />
+            <h5 className="my-0">{formatted_time}</h5>
           </div>) : (<></>)}
           <div className="category d-flex flex-column justify-content-center align-items-center me-1 flex-wrap">
             <img 

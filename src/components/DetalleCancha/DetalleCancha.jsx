@@ -1,9 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './detallecancha.scss'
-import location from 'assets/icons/location.svg'
-import calendar from 'assets/icons/calendar.svg'
-import time from 'assets/icons/time.svg'
-import genre from 'assets/icons/genre.svg'
 import Divider from '@material-ui/core/Divider';
 import Btn from 'components/Buttons/CallActionBtn'
 import {isAuthenticated} from 'Constants/API'
@@ -74,7 +70,7 @@ const DetalleCancha = (props) => {
           </div>
           <div className="time-container my-4 d-flex justify-content-between  align-items-center">
             <div className="d-flex justify-content-start align-items-center">
-              <img className="match-icon" src="https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/time.svg" alt="hora"/>
+              <img className="match-icon" src="https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/clock.svg" alt="hora"/>
               <h5 className="my-0 ms-3">Horario:</h5>
             </div>
             <div>
