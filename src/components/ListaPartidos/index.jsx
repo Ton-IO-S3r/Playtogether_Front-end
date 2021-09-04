@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const ListaPartidos = ({games, total}) => {
   return (
     <div className="list-games mx-auto p-3">
-      <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
+      <div className="d-flex flex-row justify-content-center align-items-center p-3 ">
         <h5>Partidos activos encontrados:</h5>
         <h4 className="mx-3">{total}</h4>
       </div>

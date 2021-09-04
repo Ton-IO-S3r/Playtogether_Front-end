@@ -144,14 +144,14 @@ const Buscar = ({searchParams, setSearchParams}) => {
         <Row>
           <Col>
             <Form.Group controlId="formG">
-              <Form.Label for className="mb-0 fw-bold">Fecha:</Form.Label>
-              <div className="d-flex justify-content-between">
+              <Form.Label className="mb-0 fw-bold">Fecha:</Form.Label>
+              <div className="d-flex flex-column flex-lg-row justify-content-center align-items-center justify-content-lg-between">
                 <div className="date-picker-container p-1 mb-3 start">
                   <p className="text-start m-1">Desde:</p>
                   <InitialDateFilter toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
                   
                 </div>
-                <div className="date-picker-container p-1 mb-3 mx-1 end">
+                <div className="date-picker-container p-1 mb-3 mx-sm-0 mx-lg-1 end">
                   <p className="text-start m-1">Hasta:</p>
                   <FinalDateFilter toValue={finalValue} fromValue={initialValue} name="end_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
                 </div>
