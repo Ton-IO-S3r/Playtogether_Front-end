@@ -94,7 +94,7 @@ const PerfilModal = (props) => {
       return
     }
     if(playerData.photo[0].size > 2097125){
-      notifyWarning("Solo se permite el uso de imagenes menores a 2MB")
+      notifyWarning("Solo se permite el uso de imagenes menores a 2MB",2000)
       return
     }
     
@@ -126,7 +126,7 @@ const PerfilModal = (props) => {
           props.setToastParams({
             type: 'success',
             msg:'¡Tu perfil se actualizó correctamente!',
-            time:2000,
+            time:1000,
             activate: true
           })
           props.setProfileUpdated(true)
@@ -202,6 +202,10 @@ const PerfilModal = (props) => {
                  <div className="avatar my-2" onClick={()=>inputFile.current.click()} style={{backgroundImage: `url(${profileImg})`}}></div>
                  <input type="file" hidden={true} size="sm" ref={inputFile} name="photo" className="align-self-center" onChange={handleImageChange}/>
                 </Form.Group>
+                <Form.Group className="mb-2" controlId="formBasicEmail">
+                  {/* <Form.Label className="text-secondary mb-0">Correo electrónico</Form.Label> */}
+                  <Form.Control  className="text-muted text-center fst-italic" size="sm" name="email" defaultValue={userData.email} plaintext readOnly/>
+                </Form.Group>
                 <Form.Group className="mb-2" >
                   <Form.Label className="text-secondary mb-0">Nombre</Form.Label>
                   <Form.Control className="text-success" size="sm" type="text" name="first_name" placeholder="Nombre" defaultValue={userData.first_name} onChange={handleUserInputChange}/>
@@ -214,14 +218,10 @@ const PerfilModal = (props) => {
                   <Form.Label className="text-secondary mb-0">Nombre de usuario</Form.Label>
                   <Form.Control className="text-success" size="sm" type="text" name="username" placeholder="Nombre de usuario" defaultValue={userData.username} onChange={handleUserInputChange}/>
                 </Form.Group>
-                <Form.Group className="mb-2" controlId="formBasicEmail">
-                  <Form.Label className="text-secondary mb-0">Correo electrónico</Form.Label>
-                  <Form.Control  className="text-muted fst-italic" size="sm" name="email" defaultValue={userData.email} plaintext readOnly/>
-                </Form.Group>
-                <Form.Group className="mb-2" >
+                {/* <Form.Group className="mb-2" >
                   <Form.Label className="text-secondary mb-0">Nacionalidad</Form.Label>
                   <Form.Control className="text-success" size="sm" type="text" name="nationality" placeholder="Nacionalidad" defaultValue={playerData.nationality} onChange={handlePlayerInputChange}/>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group className="mb-2" controlId="formG">
                   <Form.Label className="text-secondary mb-0">Género:</Form.Label>
                   <div key={`inline-radio`} className="mb-3">

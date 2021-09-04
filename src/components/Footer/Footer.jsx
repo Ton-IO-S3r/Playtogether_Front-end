@@ -1,10 +1,7 @@
+import { ICONS_URL } from 'Constants/API'
 import React from 'react'
 //IMPORT ELEMENTOS DE BOOTSTRAP
 import {Container,Row,Col} from 'react-bootstrap'
-//IMPORT ICONOS
-import fb from 'assets/icons/facebook-icon.svg'
-import tw from 'assets/icons/twitter-icon.svg'
-import ig from 'assets/icons/ig-icon.svg'
 //IMPORT ESTILO DEL COMPONENTE
 import './footer.scss'
 
@@ -27,9 +24,9 @@ const Footer = (props) => {
                             <Col md="12" lg="6" className="footer-info my-4">
                                 <p className="mt-3 mt-lg-5 followus">Síguenos</p>
                                 <ul className="d-flex mt-3 justify-content-center social-network">
-                                    <li className="me-5"><img src={fb} alt="Facebook"/></li>
-                                    <li className="me-5 "><img src={tw} alt="Twitter"/></li>
-                                    <li><img src={ig} alt="Instagram"/></li>
+                                    <li className="me-5"><img src={`${ICONS_URL}facebook-icon.svg`} alt="Facebook"/></li>
+                                    <li className="me-5 "><img src={`${ICONS_URL}twitter-icon.svg`} alt="Twitter"/></li>
+                                    <li><img src={`${ICONS_URL}ig-icon.svg`} alt="Instagram"/></li>
                                 </ul>
                             </Col>
                             <Col xs md lg="12" className="footer-info">

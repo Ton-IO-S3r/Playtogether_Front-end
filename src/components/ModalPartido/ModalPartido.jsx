@@ -13,7 +13,6 @@ import Toast from 'components/Toast/Toast'
 import {notifyWarning,notifySuccess} from 'Functions/toastFunc'
 import 'react-toastify/dist/ReactToastify.css'
 import Btn from 'components/Buttons/CallActionBtn'
-import location from 'assets/icons/location.svg'
 import es from 'date-fns/locale/es';
 import "react-datepicker/dist/react-datepicker.css";
 import './ModalPartido.scss'
@@ -84,8 +83,8 @@ const ModalPartido = (props) => {
     if (response[0] === "Ese horario en la cancha seleccionada ya esta ocupado, selecciona otro horario!"){
         notifyWarning("Fecha No disponible, elige otra")
     }else{
-      notifySuccess("Partido creado con exito",3000)
-        setTimeout(function(){window.location.href=`/partidos/${response.id}`} , 3000); 
+      notifySuccess("Partido creado con exito",1000)
+        setTimeout(function(){window.location.href=`/partidos/${response.id}`} , 1000); 
       }
 
   }

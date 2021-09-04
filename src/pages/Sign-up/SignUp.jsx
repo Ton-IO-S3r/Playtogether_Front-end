@@ -87,7 +87,7 @@ const loginSignUp = async(username,first_name,last_name,email,password) => {
             <Container>
             <Row>
             <Col md="3" lg="4" xl="4" className="d-none d-md-block"></Col>
-                <Col md="6" lg="4" xl="4" className="">
+                <Col md="6" lg="4" xl="4" className="mt-5">
                   <Card className="flex-column p-3 mt-5 mb-5" content={
                     <Fragment>
                       <h1 className="h1-login mt-4 mb-4">Registrate</h1>

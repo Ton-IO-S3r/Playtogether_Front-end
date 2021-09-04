@@ -42,9 +42,9 @@ const ModalTeam = (props) => {
 
         const response = await updateMatch(team)
         console.log(response)
-        notifySuccess("Te has unido con exito",1000)
-        setTimeout(function(){window.location.reload()} , 1000); 
         
+        setTimeout(function(){window.location.reload()} , 750); 
+        notifySuccess("Te has unido con exito",750)
         console.log(response)
 
     }

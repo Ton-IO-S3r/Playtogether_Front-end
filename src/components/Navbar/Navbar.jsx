@@ -4,8 +4,7 @@ import Button from 'components/Buttons/CallActionBtn'
 //RUTAS
 import { Link } from 'react-router-dom'
 //IMAGENES
-import logo from 'assets/icons/PT_Logo.svg'
-import {photoAPI, AUTH_TOKEN, AUTH_ID, AUTH_PHOTO} from 'Constants/API'
+import {photoAPI, AUTH_TOKEN, AUTH_ID, AUTH_PHOTO, ICONS_URL} from 'Constants/API'
 //ESTILOS
 import './navbar.scss'
 
@@ -36,7 +35,7 @@ const Navbar = (props) => {
                 <div className="container p-0 ">
                     <nav className="navbar navbar-expand-lg navbar-ligh primary_color p-0">
                         <a className="navbar-brand m-0" href="#">
-                            <img src={logo} alt="Playtogether"  className="d-inline-block align-text-top"/>
+                            <img src={`${ICONS_URL}PT_Logo.svg`} alt="Playtogether"  className="d-inline-block align-text-top"/>
                         </a>
                         {
                             !AUTH_TOKEN ? <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to="/" >PlayTogether!</Link>

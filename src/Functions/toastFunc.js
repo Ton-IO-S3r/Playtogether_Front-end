@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
-const notifyWarning = (text)  =>{
+const notifyWarning = (text, autoclose=1000)  =>{
     toast.warn(`${text}`, {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: autoclose,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
