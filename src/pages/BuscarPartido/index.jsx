@@ -13,6 +13,7 @@ const BuscarPartido = () => {
   const [games,setGames] = useState([])
   const [totalGamesFound, setTotalGamesFound]=useState(0)
   const [searchParams,setSearchParams]=useState(new URLSearchParams())
+
   useEffect(() => {
     const getGamesList = async ()=> {
       try {
@@ -30,7 +31,6 @@ const BuscarPartido = () => {
       const dataFromServer = await getGamesList()
       setTotalGamesFound(dataFromServer.shift())
       setGames(dataFromServer)
-      console.log(dataFromServer)
 
     }
     getGamesData()
@@ -57,22 +57,6 @@ const BuscarPartido = () => {
           </Row>
         </Container>
       </Container>
-      {/* <PageContainer containerFClass="buscar-partidos-container g-1" backgroundImg={"background_2.jpg"} content={(
-        <>
-          <h1 className="py-3 mb-2">Partidos</h1>
-          
-          <Col sm={12} md={5}>
-            <Buscar searchParams={searchParams} setSearchParams={setSearchParams} />
-          </Col>
-          <Col sm={12} md={7}>
-            <ListaPartidos games={games}/>
-          </Col>
-          
-        </>
-        
-      )}>
-        
-      </PageContainer> */}
       <Footer />
     </>
   )

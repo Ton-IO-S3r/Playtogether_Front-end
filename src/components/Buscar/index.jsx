@@ -7,16 +7,21 @@ import ActionBtn from 'components/ActionBtn'
 import axios from 'axios'
 
 const Buscar = ({searchParams, setSearchParams}) => {
+  //Referencias a los campos de fecha
   const initialValue = useRef();
   const finalValue = useRef();
+  //Almacena las fechas conforme se van seleccionando
+  const [selected_dates, setSelected_dates] = useState({'start_date': '','end_date': ''})
+
+  //Estado para almacenar los datos del formulario para filtrar
   const [formData,setFormData]=useState({})
 
-  // const [fieldsList, setFieldsList] = useState([]);
+  
   const [football_type_list,setFootball_type_list] = useState([])
   const [football_typeCheckedItems, setFootball_typeCheckedItems] = useState({})
   const [field_names_list,setField_name_list] = useState([])
   const [field_name_CheckedItems, setField_name_CheckedItems] = useState({})
-  const [selected_dates, setSelected_dates] = useState({'start_date': '','end_date': ''})
+  
 
   
   useEffect(() => {
@@ -145,7 +150,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
           <Col>
             <Form.Group controlId="formG">
               <Form.Label className="mb-0 fw-bold">Fecha:</Form.Label>
-              <div className="d-flex flex-column flex-lg-row justify-content-center align-items-center justify-content-lg-between">
+              <div className="d-flex flex-column flex-xl-row justify-content-center align-items-center justify-content-xl-between">
                 <div className="date-picker-container p-1 mb-3 start">
                   <p className="text-start m-1">Desde:</p>
                   <InitialDateFilter toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>

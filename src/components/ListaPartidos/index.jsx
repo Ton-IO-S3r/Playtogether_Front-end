@@ -20,6 +20,7 @@ const ListaPartidos = ({games, total}) => {
                 match_type={game.field.football_type} 
                 category={game.category} 
                 time={game.time}
+                available={game.places_available}
               />
             </Link>
             

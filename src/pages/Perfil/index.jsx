@@ -99,8 +99,6 @@ const PerfilUsuario = () => {
     }
   }
 
-  console.log(userCreatedMatch)
-
   
   return (
     <>
