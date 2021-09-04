@@ -10,8 +10,8 @@ const cardCancha = (props) => {
             <Card className={card_style}>
                 <Card.Img className="card-img" variant="top" src={img} alt="..."/>
                 <Card.Body className="d-flex flex-column justify-content-between card-body">
-                    <Card.Title>{name}</Card.Title>
-                    <Card.Text>
+                    <Card.Title className="fw-bold" >{name}</Card.Title>
+                    <Card.Text className="text-truncate">
                         {address}
                     </Card.Text>
                     <Btn text="Elegir" onClick={onClick}/>

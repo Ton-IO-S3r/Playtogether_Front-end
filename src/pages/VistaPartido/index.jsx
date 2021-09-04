@@ -1,7 +1,6 @@
 import {React, useState,useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './vistapartido.scss'
-import background from 'assets/images/joshua-hoehne-kl6VSadl5mA-unsplash.jpg'
 import { Container, Row, Col } from 'react-bootstrap';
 import DetalleCancha from '../../components/DetalleCancha/DetalleCancha';
 import Equipos from '../../components/Equipos/Equipos';

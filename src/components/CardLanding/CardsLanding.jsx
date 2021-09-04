@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-// import find_games from '../assets/img/find_games.png'
 import './cardLanding.scss'
 
 const CardLanding = (props) => {

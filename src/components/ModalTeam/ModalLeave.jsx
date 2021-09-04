@@ -39,7 +39,7 @@ const ModalLeave = (props) => {
 
         const response = await updateMatch(inTeam)
         notifyWarning("Abandonaste el Partido")
-        setTimeout(function(){window.location.reload()} , 2000); 
+        setTimeout(function(){window.location.reload()} , 750); 
         console.log(response)
 
     }
