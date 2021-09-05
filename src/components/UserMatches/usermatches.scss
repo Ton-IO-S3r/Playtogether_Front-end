@@ -1,0 +1,27 @@
+.user-matches-container{
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  // max-width: 450px;
+  h4{
+    font-weight: 700;
+    color: #28804B;
+  }
+  .matches-list-container{
+    hr{
+      border: 1px solid #F2F2F2;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.50);
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .user-matches-container{
+    .matches-list-container{
+      max-height: 50vh;
+      overflow-y: scroll;
+      border-radius: 10px;
+    }
+  }
+
+} 

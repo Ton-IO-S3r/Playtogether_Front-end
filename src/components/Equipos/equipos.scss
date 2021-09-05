@@ -1,0 +1,31 @@
+.match-container{
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+  .container{
+    .row{
+      span.team-name{
+        font-size: 16px;
+        margin-top: 25px;
+      }
+    }
+  }
+  
+}
+span.team-name{
+  font-size: 14px;
+  font-weight: bold;
+}
+span.versus{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@media screen and (min-width:1024px){
+  span.team-name{
+    font-size: 20px;
+  }
+  span.versus{
+    font-size: 20px;
+  }
+}

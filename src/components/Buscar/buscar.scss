@@ -1,0 +1,19 @@
+.filter-games{
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  .date-filter-container{
+    .date-picker-container{
+      background-color: #fff;
+      .date-pick-container{
+        border-radius: 5px;
+        .date-picker{
+          width: 90%;
+        }
+      }
+    }
+  }
+  .type-category-filter-container{
+   
+    margin: 0 auto;
+  }
+}

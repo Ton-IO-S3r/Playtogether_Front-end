@@ -1,0 +1,42 @@
+.match-resume-cont{
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px #C1C1C1;
+  border-radius: 10px;
+  // max-width: 550px;
+  border: 1px solid #F2F2F2;
+  &:hover{
+    box-shadow: 0px 4px 10px #C4C4C4;
+    // h2{
+    //   font-weight: 700;
+    // }
+  }
+  .date-container{
+    border-radius: 10px 0 0 10px;
+    height: auto;
+    align-self: stretch;
+    background-color: #32A77A;
+    color: white;
+  }
+  .match-details-container{
+    // max-width: 250px;
+    div{
+      h5{
+        font-size: 16px;
+        &.field{
+          font-weight: 700;
+        }
+          
+        &.field{
+          text-align: left;
+          text-overflow:ellipsis;
+          overflow:hidden;
+          white-space:nowrap;
+        }
+      }
+      .icons-cancha{
+        height: 25px;
+      }
+    }
+    
+  }
+}

@@ -1,0 +1,74 @@
+.container-create{
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover !important;
+    height: 100vh
+}
+.carrousel-create{
+    margin-top: 30%;
+}
+h1.h1-create-game{
+    color: #FFFFFF;
+    font-weight: 600;
+    text-shadow: 5px 3px 4px rgba(0, 0, 0, 0.25);
+  }
+.card-create{
+    margin-left: 10px;
+}
+.arrow-carousel{
+    background-color: #ffffff00;
+    border: none;
+}
+
+.create-check{
+    font-size: 15px;
+}
+
+.card-img{
+    height: 170.40px;
+    object-fit: cover;
+}
+.card-body{
+    height: 214px;
+}
+
+p.p-create{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 5px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width:768px){
+    .container-create{
+        height: 100vh
+    }
+    .carrousel-create{
+        margin-top: 15%;
+    }
+}
+
+@media screen and (min-width:1024px){
+    .arrow-button{
+        background-color:#32a77aba  ;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+@media screen and (min-width:1444px){
+    .carrousel-create{
+        margin-top: 5%;
+    }
+    p.p-create{
+        
+        font-weight: normal;
+        font-size: 30px;
+       
+        
+    }
+}
+

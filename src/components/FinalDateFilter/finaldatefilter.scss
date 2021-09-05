@@ -1,0 +1,23 @@
+.date-picker-container{
+  border: 2px solid #32A77A;
+  border-radius: 10px;
+  width: 90%;
+  .date-pick{
+    border: none;
+    color:#32A77A;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    &:focus{
+      border: none;
+    }
+  }
+  
+}
+
+@media screen and (min-width: 1440px) {
+  .date-picker-container{
+    width: 45%;
+  }
+  
+}
