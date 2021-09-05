@@ -1,6 +1,7 @@
 applications:  
 - name: playtogether
   memory: 128M
+  path: build/
   random-route: false
   instances: 1
-  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
