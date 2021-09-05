@@ -169,7 +169,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
               <div className="type-filter-container mb-2">
                 <Form.Group className="mb-2" controlId="formG">
                   <Form.Label className="mb-1 fw-bold">Tipo de partido:</Form.Label>
-                  <div className="mb-3 d-flex justify-content-between w-100">
+                  <div className="mb-3 d-flex flex-wrap justify-content-between w-100">
                   {football_type_list.map((type, index) => (
                     
                     <Form.Check
@@ -190,7 +190,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
               <div className="category-filter-container mb-2">
                 <Form.Group className="mb-2" controlId="formG">
                   <Form.Label className="mb-1 fw-bold">Categoria:</Form.Label>
-                  <div className="mb-3 d-flex justify-content-between w-100">
+                  <div className="mb-3 d-flex flex-wrap justify-content-between w-100">
                     <Form.Check
                       inline
                       label="Varonil"
