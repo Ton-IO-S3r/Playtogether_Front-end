@@ -6,39 +6,9 @@ import { useState, useEffect } from 'react';
 import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
 
 const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCreated}) => {
-  // const [userCreatedMatch , setUserCreatedMatch] = useState({})
-  // const [totalMatchCreated, setTotalMatchCreated] = useState({})
   
-
-  // useEffect(() => {
-  //   const getUserMatches = async ()=>{
-  //     try {
-  //       const response = await fetch(`${API_URL}players/organized/`, {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "Authorization": `Token ${AUTH_TOKEN}`,
-  //         },
-  //       });
-  //       const data = await response.json();
-  //       setTotalMatchCreated(data.shift())
-  //       setUserMatch(data)
-        
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getUserMatches()
-  // },[])
- console.log(matchCreated)
-  // console.log(userMatch)
   return (
-    // <div className="user-matches-container text-center py-4 px-2 mx-auto ">
     
-    //   </div>
-      
-      
-      
-    // </div>
     <div className="user-matches-container text-center py-4 px-2 mx-auto ">
       <Tabs
   defaultActiveKey="partidosJugados"

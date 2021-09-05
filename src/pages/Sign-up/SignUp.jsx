@@ -59,16 +59,11 @@ const loginSignUp = async(username,first_name,last_name,email,password) => {
       notifyWarning("Campos Vacios")
       return
     }
-      // console.log(await JSON.stringify(username,password))
-      // console.log(await loginUser(username,password))
   
-      console.log(name)
-      console.log(lastName)
 
       //Se pasan los valores de los inputs a la funcion del POST
       const response = await loginSignUp(username,name,lastName,email,password);
 
-      console.log(response)
       //VALIDAR SI SE RECIBE UN USUARIO EXISTENTE
         if (response.username[0] === "A user with that username already exists.") {
           notifyWarning("El nombre de usuario ya existe, intenta con otro")
