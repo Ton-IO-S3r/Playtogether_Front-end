@@ -1,4 +1,4 @@
-const API_URL = "https://playtogether-app-backend.pykode.xyz/api/";
+const API_URL = "https://playtogether-backend.pykode.xyz/api/";
 // const API_URL = "http://localhost:8000/api/";
 const photoAPI = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/"
 const BACKGROUNDS_URL = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/bg/"

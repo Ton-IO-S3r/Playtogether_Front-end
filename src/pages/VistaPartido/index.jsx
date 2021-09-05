@@ -187,8 +187,6 @@ validateNumOfTeam ()
     setId(match.id)
   }
 
-  console.log(match.time)
-
 //VALIDA SI EL PARTIDO ESTA ACTIVO
   if (match.active === false){
     isActivate = false
