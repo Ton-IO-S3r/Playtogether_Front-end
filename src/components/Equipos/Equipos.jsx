@@ -54,8 +54,7 @@ const Equipos = (props) => {
     return players
     
   }
-
-  console.log(team)
+  
   return (
     <div className="match-container px-1 px-lg-1 pb-2 pt-2">
       <h5 className="fs-3 fw-bolder my-4">

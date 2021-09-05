@@ -56,8 +56,6 @@ const handleSubmit = async(e) => {
     notifyWarning("Nombre de usuario o contraseña incorrectos")
     return
   }
-    // console.log(await JSON.stringify(username,password))
-    // console.log(await loginUser(username,password))
 
     //Se pasan los valores de los inputs a la funcion del POST
     const response = await loginUser(username,password);
@@ -69,7 +67,6 @@ const handleSubmit = async(e) => {
       localStorage.setItem("id", response.user_id);
       localStorage.setItem("player_photo", response.player_photo)
       const id=localStorage.getItem("id")
-      console.log(response)
       //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
     	// window.location.href = `/usuarios/${id}`;
       window.location.href = `/usuarios/${id}`;
