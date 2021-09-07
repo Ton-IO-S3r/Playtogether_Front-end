@@ -14,3 +14,13 @@
     }
   }
 }
+@media only screen and (min-width: 768px) {
+  .list-games{
+    .matches-list-container{
+      max-height: 70vh;
+      overflow-y: scroll;
+      border-radius: 10px;
+    }
+  }
+
+} 
