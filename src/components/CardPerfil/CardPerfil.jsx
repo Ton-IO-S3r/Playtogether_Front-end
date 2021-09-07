@@ -26,7 +26,7 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
           </div>) :(<div className=" mb-4 edit-profile-icon"></div>)
           }
           
-          <h5>{user_first_name} {user_last_name}</h5>
+          <h5 className="text-capitalize">{user_first_name} {user_last_name}</h5>
           <p>@ {user_username}</p>
         </div>
         <div className="d-flex justify-content-around position-container">

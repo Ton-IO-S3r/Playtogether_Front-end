@@ -6,7 +6,7 @@ import { isAuthenticated } from 'Constants/API'
 
 const Equipos = (props) => {
   const { field, team } = props.match
-  const {onClick,showButton,onClickLeave,isActivate,teamsFull, inTeam} = props
+  const {onClick,showButton,onClickLeave,isActivate,teamsFull, inTeam, organizer} = props
 
   const [teamW, setTeamW] = useState(team[0])
   const [teamB, setTeamB] = useState(team[1])
@@ -36,7 +36,7 @@ const Equipos = (props) => {
       playersList.map((team_player)=>{
         players.push(
           <div className="">
-            <JugadorEquipo player_data={team_player} order={order}/>
+            <JugadorEquipo player_data={team_player} order={order} organizer={organizer}/>
           </div>
         )
         return players
@@ -46,7 +46,7 @@ const Equipos = (props) => {
     for (let i = playersList.length; i < playersByTeam; i++) {
       players.push(
         <div className="">
-          <JugadorEquipo player_data={{}} order={order}/>
+          <JugadorEquipo player_data={{}} order={order} organizer={organizer}/>
         </div>
       )
       
@@ -89,7 +89,7 @@ const Equipos = (props) => {
 
       <div className="d-flex justify-content-around">
         
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column justify-content-center">
         
             {
               setTeamPlayers(teamW.players,"order-lg-3")
@@ -98,7 +98,7 @@ const Equipos = (props) => {
             
             
           
-          <div className="d-flex flex-column">
+          <div className="d-flex flex-column justify-content-center">
           
             {
               setTeamPlayers(teamB.players,"")
