@@ -84,6 +84,7 @@ const VistaPartido = () => {
   const [nameWhite, setWhite] = useState("")
   //Almacenar Id del partido
   const [matchId,setId] = useState("")
+  const [organizer, setOrganizer] = useState("")
   //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
   const fieldServices = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/"
@@ -101,6 +102,8 @@ const VistaPartido = () => {
     try{
       const response = await fetch(`${API_URL}matches/${id}/`);
       const match = await response.json();
+      console.log(match)
+      setOrganizer(match.organizer)
       setMatch(match)
       setBlack(match.team[0].name)
   setWhite(match.team[1].name)
@@ -238,6 +241,8 @@ validateNumOfTeam ()
                 isActivate={isActivate}
                 teamsFull ={teamsFull}
                 inTeam = {result}
+
+                organizer={organizer}
               />
             </Col>
           </Row>

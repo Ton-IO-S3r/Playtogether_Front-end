@@ -4,6 +4,7 @@ import MatchResume from "components/MatchResume"
 import {Tabs, Tab} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
+import { Link } from 'react-router-dom';
 
 const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCreated}) => {
   return (
@@ -30,23 +31,23 @@ const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCre
           <div className="matches-list-container text-center">
             {
               matches.map((match, index) => (
-                <MatchResume 
-                  key={index.toString()} 
-                  date={match.date} 
-                  field_name={match.field.name} 
-                  match_type={match.field.football_type} 
-                  category={match.category} 
-                  time={''}
-                />
-                
+                <Link key={index.toString()} id={match.id} to={`/partidos/${match.id}`} className="game-link">
+                  <MatchResume 
+                    date={match.date} 
+                    field_name={match.field.name} 
+                    match_type={match.field.football_type} 
+                    category={match.category} 
+                    time={''}
+                  />
+                </Link>
               ))
             }
           </div>
         </Tab>
-        <Tab eventKey="misPartidos" title="Mis partidos">
+        <Tab eventKey="misPartidos" title="Partidos Organizados">
           <div className="d-flex flex-wrap justify-content-center align-items-center">
             <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
-            <h5>Partidos Creados:</h5>
+            <h5>Total de Partidos Organizados:</h5>
               <h4 className="mx-3">{numOfMatchCreated}</h4>
             </div>
           </div> 
@@ -54,15 +55,15 @@ const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCre
           <div className="matches-list-container text-center">
             { matchCreated.length > 0 ?
               matchCreated.map((match, index) => (
-                <MatchResume 
-                  key={index.toString()} 
-                  date={match.date} 
-                  field_name={match.field.name} 
-                  match_type={match.field.football_type} 
-                  category={match.category} 
-                  
-                />
-                
+                <Link key={index.toString()} id={match.id} to={`/partidos/${match.id}`} className="game-link">
+                  <MatchResume  
+                    date={match.date} 
+                    field_name={match.field.name} 
+                    match_type={match.field.football_type} 
+                    category={match.category} 
+                    
+                  />
+                </Link>
               ))
               :
               (<></>)

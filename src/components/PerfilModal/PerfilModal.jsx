@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
-import {AUTH_TOKEN, API_URL} from 'Constants/API'
+import {AUTH_TOKEN, API_URL, AUTH_ID} from 'Constants/API'
 import Toast from 'components/Toast/Toast'
 import {notifyWarning} from 'Functions/toastFunc'
 const userProfile = {
@@ -25,7 +25,6 @@ const userProfile = {
 }
 
 const PerfilModal = (props) => {
-  const {id} = useParams();
   const inputFile = useRef()
   
   const [userData, setUserData] = useState(userProfile.user_data)
@@ -43,7 +42,7 @@ const PerfilModal = (props) => {
 
   const getUser4Update = async ()=>{
     try {
-      const response = await fetch(`${API_URL}players/update/${id}/`, {
+      const response = await fetch(`${API_URL}players/update/${AUTH_ID}/`, {
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Token ${AUTH_TOKEN}`,
@@ -82,7 +81,7 @@ const PerfilModal = (props) => {
     setProfileImg(playerData.photo)
   },[playerData])
 
-  // FETCH A LA API PARA ACTUALIZAR LOS DATOS DEL USUARIO
+  // FETCH PARA ACTUALIZAR LOS DATOS DEL USUARIO
   const updateUserProfile = (event) => {
     event.preventDefault();
     const updateProfile = async (id)=>{
@@ -93,8 +92,8 @@ const PerfilModal = (props) => {
       notifyWarning("Por favor no dejes campos vacios")
       return
     }
-    if(playerData.photo[0].size > 2097125){
-      notifyWarning("Solo se permite el uso de imagenes menores a 2MB",2000)
+    if(playerData.photo[0].size > 1048576){
+      notifyWarning("Solo se permite el uso de imagenes menores a 1MB",2000)
       return
     }
     
@@ -143,7 +142,7 @@ const PerfilModal = (props) => {
       
       
     }
-    updateProfile(id)
+    updateProfile(AUTH_ID)
   }
 
   
@@ -214,10 +213,10 @@ const PerfilModal = (props) => {
                   <Form.Label className="text-secondary mb-0">Apellido</Form.Label>
                   <Form.Control className="text-success" size="sm" type="text" name="last_name" placeholder="Apellido" defaultValue={userData.last_name} onChange={handleUserInputChange}/>
                 </Form.Group>
-                <Form.Group className="mb-2" >
+                {/* <Form.Group className="mb-2" >
                   <Form.Label className="text-secondary mb-0">Nombre de usuario</Form.Label>
                   <Form.Control className="text-success" size="sm" type="text" name="username" placeholder="Nombre de usuario" defaultValue={userData.username} onChange={handleUserInputChange}/>
-                </Form.Group>
+                </Form.Group> */}
                 {/* <Form.Group className="mb-2" >
                   <Form.Label className="text-secondary mb-0">Nacionalidad</Form.Label>
                   <Form.Control className="text-success" size="sm" type="text" name="nationality" placeholder="Nacionalidad" defaultValue={playerData.nationality} onChange={handlePlayerInputChange}/>
