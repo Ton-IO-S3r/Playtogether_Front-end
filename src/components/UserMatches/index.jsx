@@ -43,10 +43,10 @@ const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCre
             }
           </div>
         </Tab>
-        <Tab eventKey="misPartidos" title="Mis partidos">
+        <Tab eventKey="misPartidos" title="Partidos Organizados">
           <div className="d-flex flex-wrap justify-content-center align-items-center">
             <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
-            <h5>Partidos Creados:</h5>
+            <h5>Total de Partidos Organizados:</h5>
               <h4 className="mx-3">{numOfMatchCreated}</h4>
             </div>
           </div> 

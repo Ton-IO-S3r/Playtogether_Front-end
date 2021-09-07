@@ -85,7 +85,7 @@ const PerfilUsuario = () => {
   }
   const getUserCreatedMatches = async ()=>{
     try {
-      const response = await fetch(`${API_URL}players/organized/`, {
+      const response = await fetch(`${API_URL}players/organized/${id}/`, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Token ${AUTH_TOKEN}`,
