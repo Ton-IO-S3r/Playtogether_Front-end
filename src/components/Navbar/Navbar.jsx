@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react'
 import { Spin as Hamburger} from 'hamburger-react'
 import Button from 'components/Buttons/CallActionBtn'
 //RUTAS
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 //IMAGENES
 import {photoAPI, AUTH_TOKEN, AUTH_ID, AUTH_PHOTO, ICONS_URL} from 'Constants/API'
 //ESTILOS
@@ -10,7 +10,6 @@ import './navbar.scss'
 
 const Navbar = (props) => {
     const [show, setShow] = useState(false)
-    
     let isLogin = false
      
     if (!AUTH_TOKEN && !AUTH_ID) {
@@ -40,7 +39,7 @@ const Navbar = (props) => {
                         {
                             !AUTH_TOKEN ? <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to="/" >PlayTogether!</Link>
                             :
-                            <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to={`/usuarios/${AUTH_ID}`} >PlayTogether!</Link>
+                            <Link className="navbar-brand me-auto p-2 bd-highlight playtogether" to="/partidos/" >PlayTogether!</Link>
                         }
                         
                         {/* <a className="navbar-brand me-auto p-2 bd-highlight playtogether" href="#">PlayTogether!</a> */}
@@ -66,13 +65,15 @@ const Navbar = (props) => {
                                 (
                                     <ul className="navbar-nav">
                                     <li className="nav-item align-self-center mx-3">
-                                        <Link className="search-games" to='/partidos'>Buscar Partidos</Link>
+                                        <Link className={`search-games ${window.location.pathname == "/partidos/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/partidos/'>Buscar Partidos</Link>
                                     </li>
                                     <li className="nav-item align-self-center mx-4">
-                                        <Link className="search-games" to='/crear-partido/'>Crear Partido</Link>
+                                    <Link className={`search-games ${window.location.href == "http://localhost:3000/crear-partido/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/crear-partido/'>Crear Partido</Link>
+                                        {/* <Link className="search-games" to='/crear-partido/'>Crear Partido</Link> */}
                                     </li>
                                     <div className="nav-photo" onClick={()=>{setShow(!show)}}>
                                     <img src={`${photoAPI}${AUTH_PHOTO}`} alt="user"/>
+                                   
                                     </div>
                                     </ul>
 

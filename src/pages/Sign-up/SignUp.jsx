@@ -89,24 +89,24 @@ const loginSignUp = async(username,first_name,last_name,email,password) => {
                       <p style={{color:"#8a8e92"}}><small>* Todos los campos son requeridos</small></p>
                       <Form className="d-flex flex-column" onSubmit={handleSubmit} >
                         <Form.Group className="mb-4" controlId="formBasicEmail">
-                          <Form.Label>Nombre de Usuario:</Form.Label>
-                          <Form.Control ref={usernRef}  type="text" placeholder="Nombre de usuario" />
+                          <Form.Label className="text-secondary">Nombre de Usuario:</Form.Label>
+                          <Form.Control className="text-success" ref={usernRef}  type="text" placeholder="Nombre de usuario" maxLength="20" />
                           </Form.Group>
                         <Form.Group className="mb-4" controlId="formBasicPassword">
-                          <Form.Label>Nombre:</Form.Label>
-                          <Form.Control ref={nameRef}  type="text" placeholder="Nombre" />
+                          <Form.Label className="text-secondary">Nombre:</Form.Label>
+                          <Form.Control className="text-success" ref={nameRef}  type="text" placeholder="Nombre" />
                         </Form.Group>
                         <Form.Group className="mb-4" controlId="formBasicPassword">
-                          <Form.Label>Apellido:</Form.Label>
-                          <Form.Control ref={lastnRef}  type="text" placeholder="Apellido" />
+                          <Form.Label className="text-secondary">Apellido:</Form.Label>
+                          <Form.Control className="text-success" ref={lastnRef}  type="text" placeholder="Apellido" />
                         </Form.Group>
                         <Form.Group className="mb-4" controlId="formBasicPassword">
-                          <Form.Label>Correo Electronico:</Form.Label>
-                          <Form.Control ref={emailRef}  type="email" placeholder="Correo electronico" />
+                          <Form.Label className="text-secondary">Correo Electronico:</Form.Label>
+                          <Form.Control className="text-success" ref={emailRef}  type="email" placeholder="Correo electronico" />
                         </Form.Group>
                         <Form.Group className="mb-4" controlId="formBasicPassword">
-                          <Form.Label>Contraseña:</Form.Label>
-                          <Form.Control ref={pwdRef}  type="password" placeholder="Contraseña" />
+                          <Form.Label className="text-secondary">Contraseña:</Form.Label>
+                          <Form.Control className="text-success" ref={pwdRef}  type="password" placeholder="Contraseña" />
                         </Form.Group>
                         <Button className="align-self-center mt-4 btn-login" type="submit" >
                           Unete
