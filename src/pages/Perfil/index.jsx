@@ -11,6 +11,8 @@ import Navbar from 'components/Navbar/Navbar';
 import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
 import Toast from 'components/Toast/Toast';
 import { notifySuccess, notifyWarning } from 'Functions/toastFunc';
+
+
 const user = 
   {
     "username": "",
@@ -49,7 +51,7 @@ const PerfilUsuario = () => {
     
     getUserMatches()
     getUserData()
-  },[profileUpdated])
+  },[profileUpdated,id])
 
   //SE DECLARAN PARAMETROS INCIALES PARA LA ACTIVACION DEL TOAST
   const [toastParams, setToastParams] = useState({
