@@ -1,11 +1,14 @@
 import './initialdatefilter.scss'
 import "flatpickr/dist/themes/dark.css";
 import Flatpickr from "react-flatpickr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const InitialDateFilter = ({fromValue, toValue, handleDateChange}) => {
+const InitialDateFilter = ({init_value, fromValue, toValue, handleDateChange}) => {
   const today = new Date()
-  const [date, setDate] = useState([today])
+  const [date, setDate] = useState(today)
+  useEffect(() => {
+    setDate(today)
+  }, [init_value])
   
   return (
     <Flatpickr 
