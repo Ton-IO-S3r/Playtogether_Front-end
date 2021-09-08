@@ -105,14 +105,25 @@ const PerfilModal = (props) => {
       };
       const url =`${API_URL}players/update/${id}/`;
       const formdata = new FormData();
-      formdata.append('user_data.username', userData.username)
-      formdata.append('user_data.first_name', userData.first_name)
-      formdata.append('user_data.last_name', userData.last_name)
-      
-      formdata.append('player_data.gender', playerData.gender)
-      formdata.append('player_data.nationality', playerData.nationality)
-      formdata.append('player_data.position', playerData.position)
-      
+
+      if (userData.username !== ''){
+        formdata.append('user_data.username', userData.username)
+      }
+      if (userData.first_name !== ''){
+        formdata.append('user_data.first_name', userData.first_name)
+      }
+      if (userData.last_name !== ''){
+        formdata.append('user_data.last_name', userData.last_name)
+      }
+      if (playerData.gender !== ''){
+        formdata.append('player_data.gender', playerData.gender)
+      }
+      if (playerData.nationality !== ''){
+        formdata.append('player_data.nationality', playerData.nationality)
+      }
+      if (playerData.position !== ''){
+        formdata.append('player_data.position', playerData.position)
+      }
       if (typeof playerData.photo[0] === "object") {
         formdata.append('player_data.photo', playerData.photo[0])
       }

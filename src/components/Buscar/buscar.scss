@@ -1,6 +1,12 @@
 .filter-games{
   background-color: #FFFFFF;
   border-radius: 10px;
+  .badge-limpiar-filtros{
+    width: fit-content;
+    top:0;
+    right: -80px;
+    display: none;
+  }
   .date-filter-container{
     .date-picker-container{
       background-color: #fff;
