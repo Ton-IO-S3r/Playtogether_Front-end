@@ -56,7 +56,6 @@ const ModalTeam = (props) => {
         
 
     }
-    console.log(teamFull)
     return (
         <>
     <Modal

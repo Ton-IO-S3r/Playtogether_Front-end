@@ -102,11 +102,11 @@ const VistaPartido = () => {
     try{
       const response = await fetch(`${API_URL}matches/${id}/`);
       const match = await response.json();
-      console.log(match)
+
       setOrganizer(match.organizer)
       setMatch(match)
       setBlack(match.team[0].name)
-  setWhite(match.team[1].name)
+      setWhite(match.team[1].name)
     }catch (error){
       console.log(error)
     }
