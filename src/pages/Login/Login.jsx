@@ -93,16 +93,16 @@ const handleSubmit = async(e) => {
                       <h1 className="h1-login mt-4 mb-4">Inicia Sesión</h1>
                       <Form className="d-flex flex-column" onSubmit={handleSubmit} >
                         <Form.Group className="mb-4" controlId="formBasicEmail">
-                          <Form.Label>Nombre de Usuario:</Form.Label>
+                          <Form.Label className="text-secondary">Nombre de Usuario:</Form.Label>
                           {/* <Form.Control value={username} onChange={(e)=>{setEmail(e.target.value)}} type="text" placeholder="Ingresa tu correo" /> */}
-                          <Form.Control ref={usernRef} type="text" placeholder="Ingresa tu Nombre de Usuario" />
+                          <Form.Control className="text-success" ref={usernRef} type="text" placeholder="Ingresa tu Nombre de Usuario" />
 
                         </Form.Group>
 
                         <Form.Group className="mb-5" controlId="formBasicPassword">
-                          <Form.Label>Contraseña:</Form.Label>
+                          <Form.Label className="text-secondary">Contraseña:</Form.Label>
                           {/* <Form.Control value={password} onChange={(e)=>{setPassword(e.target.value)}}  type="password" placeholder="Ingresa tu contraseña" /> */}
-                          <Form.Control ref={pwdRef} type="password" placeholder="Ingresa tu contraseña" />
+                          <Form.Control className="text-success" ref={pwdRef} type="password" placeholder="Ingresa tu contraseña" />
                         </Form.Group>
                         <Button className="align-self-center mt-4 btn-login" type="submit" >
                           Iniciar Sesión
