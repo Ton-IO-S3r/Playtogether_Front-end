@@ -1,11 +1,13 @@
 import './finaldatefilter.scss'
 import "flatpickr/dist/themes/dark.css";
 import Flatpickr from "react-flatpickr";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const FinalDateFilter = ({fromValue, toValue, handleDateChange}) => {
+const FinalDateFilter = ({init_value, fromValue, toValue, handleDateChange}) => {
   const [date, setDate] = useState('')
-  
+  useEffect(() => {
+    setDate('')
+  }, [init_value])
   return (
     <Flatpickr 
       value={date}

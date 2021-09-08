@@ -5,14 +5,16 @@ import './buscar.scss'
 import { Col, Container, Form, Row } from 'react-bootstrap'
 import ActionBtn from 'components/ActionBtn'
 import axios from 'axios'
+import { set } from 'date-fns'
 
 const Buscar = ({searchParams, setSearchParams}) => {
   //Referencias a los campos de fecha
   const initialValue = useRef();
   const finalValue = useRef();
+  const [dateInit,setDateInit] = useState(true);
   //Almacena las fechas conforme se van seleccionando
   const [selected_dates, setSelected_dates] = useState({'start_date': '','end_date': ''})
-
+  const [badgeDisplay, setBadgeDisplay]=useState('d-none')
   //Estado para almacenar los datos del formulario para filtrar
   const [formData,setFormData]=useState({})
 
@@ -78,6 +80,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
     {'femenil': false,'varonil': false,'mixto': false}
   )
   const handleCategoryCheckboxItems =  (e) => {
+    setBadgeDisplay('d-flex')
     const checkboxValue = e.target.value
     setCategoryCheckedItems({
       ...categoryCheckedItems,
@@ -86,6 +89,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
   }
 
   const handleTypeCheckboxItems =  (e) => {
+    setBadgeDisplay('d-flex')
     const checkboxValue = e.target.value
     setFootball_typeCheckedItems({
       ...football_typeCheckedItems,
@@ -94,6 +98,7 @@ const Buscar = ({searchParams, setSearchParams}) => {
   }
 
   const handleFieldNameCheckboxItems =  (e) => {
+    setBadgeDisplay('d-flex')
     const checkboxValue = e.target.value
     setField_name_CheckedItems({
       ...field_name_CheckedItems,
@@ -102,17 +107,26 @@ const Buscar = ({searchParams, setSearchParams}) => {
   }
   
   const handleDateChange = () => {
-    const initial_date = new Date(initialValue.current.props.value[0])
-    const final_date = new Date(finalValue.current.props.value[0])
+    let initial_date=''
+    let final_date=''
+    setBadgeDisplay('d-flex')
+    if (initialValue.current.props.value[0] === '' || initialValue.current.props.value[0] === undefined || finalValue.current.props.value[0] === '' || finalValue.current.props.value[0] === undefined){
+      setSelected_dates({
+        'start_date': '',
+        'end_date': ''
+      }) 
+    }else{
+      initial_date = new Date(initialValue.current.props.value[0])
+      final_date = new Date(finalValue.current.props.value[0])
 
-    // setSelected_dates({
-    //   ...selected_dates,
-    //   [name]: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
-    // })
-    setSelected_dates({
-      'start_date': `${initial_date.getFullYear()}-${initial_date.getMonth()+1}-${initial_date.getDate()}`,
-      'end_date': `${final_date.getFullYear()}-${final_date.getMonth()+1}-${final_date.getDate()}`
-    })    
+      setSelected_dates({
+        'start_date': `${initial_date.getFullYear()}-${initial_date.getMonth()+1}-${initial_date.getDate()}`,
+        'end_date': `${final_date.getFullYear()}-${final_date.getMonth()+1}-${final_date.getDate()}`
+      })  
+    }
+    
+    
+      
   }
 
   const handleSubmit = (e) =>{
@@ -139,7 +153,21 @@ const Buscar = ({searchParams, setSearchParams}) => {
     setSearchParams(queryParams)
   }
 
-  
+  const cleanFilters = () => {
+    // window.location.reload()
+    setBadgeDisplay('d-none')
+    setDateInit(!dateInit)
+    setSearchParams({})
+    setSelected_dates({
+      'start_date': '',
+      'end_date': ''
+    })
+    setFootball_typeCheckedItems({})
+    setCategoryCheckedItems({'femenil': false,'varonil': false,'mixto': false})
+    setField_name_CheckedItems({})
+    setSearchParams({})
+
+  }
 
   return (
     <Form className="filter-games p-3 mx-auto" onSubmit={(e)=>handleSubmit(e)}>
@@ -147,18 +175,26 @@ const Buscar = ({searchParams, setSearchParams}) => {
       <hr />
       <Container fluid className="d-flex justify-content-center">
         <Row>
-          <Col>
+          <Col >
+            <div className="position-relative">
+              <span onClick={() => cleanFilters()}  className={`badge-limpiar-filtros badge text-secondary fst-italic ${badgeDisplay} align-items-center position-absolute translate-middle`}>
+                Limpiar filtros  
+                <button type="button" className="btn-close btn-close" aria-label="Close" ></button>
+              </span>
+            </div>
+            
+          
             <Form.Group controlId="formG">
               <Form.Label className="mb-0 fw-bold">Fecha:</Form.Label>
               <div className="d-flex flex-column flex-xl-row justify-content-center align-items-center justify-content-xl-between">
                 <div className="date-picker-container p-1 mb-3 start">
                   <p className="text-start m-1">Desde:</p>
-                  <InitialDateFilter toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
+                  <InitialDateFilter init_value={dateInit} toValue={finalValue} fromValue={initialValue} name="start_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
                   
                 </div>
                 <div className="date-picker-container p-1 mb-3 mx-sm-0 mx-lg-1 end">
                   <p className="text-start m-1">Hasta:</p>
-                  <FinalDateFilter toValue={finalValue} fromValue={initialValue} name="end_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
+                  <FinalDateFilter init_value={dateInit} toValue={finalValue} fromValue={initialValue} name="end_date" formData={formData} setFormData={setFormData} handleDateChange={handleDateChange}/>
                 </div>
               </div>
               
