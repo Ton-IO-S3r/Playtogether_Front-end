@@ -68,7 +68,7 @@ const Navbar = (props) => {
                                         <Link className={`search-games ${window.location.pathname == "/partidos/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/partidos/'>Buscar Partidos</Link>
                                     </li>
                                     <li className="nav-item align-self-center mx-4">
-                                    <Link className={`search-games ${window.location.href == "http://localhost:3000/crear-partido/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/crear-partido/'>Crear Partido</Link>
+                                    <Link className={`search-games ${window.location.pathname == "/crear-partido/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/crear-partido/'>Crear Partido</Link>
                                         {/* <Link className="search-games" to='/crear-partido/'>Crear Partido</Link> */}
                                     </li>
                                     <div className="nav-photo" onClick={()=>{setShow(!show)}}>

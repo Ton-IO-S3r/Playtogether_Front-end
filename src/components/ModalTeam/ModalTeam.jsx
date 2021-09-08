@@ -26,7 +26,9 @@ const ModalTeam = (props) => {
                             }
                         ]
                 })
+            
             })
+            return await response.json()
         }catch (error){
             console.log(error)
         }   
@@ -40,11 +42,21 @@ const ModalTeam = (props) => {
         }
 
         const response = await updateMatch(team)
+        console.log(response)
+        if (response[0]=== "No puedes unirte a esta categoria, intenta otro partido"){
+            notifyWarning(`${response[0]}`,1500)
+            setTimeout(function(){window.location.href="/partidos/"} , 1500); 
+            
+            return
+        }else {
+            setTimeout(function(){window.location.reload()} , 750); 
+            notifySuccess("Te has unido con exito",750)
+        }
+
         
-        setTimeout(function(){window.location.reload()} , 750); 
-        notifySuccess("Te has unido con exito",750)
 
     }
+    console.log(teamFull)
     return (
         <>
     <Modal

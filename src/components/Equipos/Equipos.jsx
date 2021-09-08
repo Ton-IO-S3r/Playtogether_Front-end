@@ -30,13 +30,13 @@ const Equipos = (props) => {
 
   const playersByTeam = field.football_type.max_players/2
 
-  const setTeamPlayers = (playersList,order) =>{
+  const setTeamPlayers = (playersList,order,positionOrg) =>{
     const players=[]
     if(playersList.length > 0 && playersList.length <= playersByTeam ){
       playersList.map((team_player)=>{
         players.push(
           <div className="">
-            <JugadorEquipo player_data={team_player} order={order} organizer={organizer}/>
+            <JugadorEquipo player_data={team_player} order={order} organizer={organizer} positionOrg={positionOrg}/>
           </div>
         )
         return players
@@ -46,7 +46,7 @@ const Equipos = (props) => {
     for (let i = playersList.length; i < playersByTeam; i++) {
       players.push(
         <div className="">
-          <JugadorEquipo player_data={{}} order={order} organizer={organizer}/>
+          <JugadorEquipo player_data={{}} order={order} organizer={organizer} positionOrg={positionOrg}/>
         </div>
       )
       
@@ -92,7 +92,7 @@ const Equipos = (props) => {
         <div className="d-flex flex-column justify-content-center">
         
             {
-              setTeamPlayers(teamW.players,"order-lg-3")
+              setTeamPlayers(teamW.players,"order-lg-3","")
             }
         </div>
             
@@ -101,7 +101,7 @@ const Equipos = (props) => {
           <div className="d-flex flex-column justify-content-center">
           
             {
-              setTeamPlayers(teamB.players,"")
+              setTeamPlayers(teamB.players,"","-right")
             }
           </div>
             

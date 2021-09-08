@@ -154,7 +154,11 @@ let result = ""
 //VALIDA EQUIPOS LLENOS
 match.team.forEach((item) => {
 
-  if ((match.field.football_type.max_players === 16  && item.players.length === 8) || (match.field.football_type.max_players === 20  && item.players.length === 10) || (match.field.football_type.max_players === 28  && item.players.length === 14) ){
+  // if ((match.field.football_type.max_players === 16  && item.players.length === 8) || (match.field.football_type.max_players === 20  && item.players.length === 10) || (match.field.football_type.max_players === 28  && item.players.length === 14) ){
+  //   teamFullName = item.name
+
+  // }
+  if (item.players.length === (match.field.football_type.max_players/2)  ){
     teamFullName = item.name
 
   }
