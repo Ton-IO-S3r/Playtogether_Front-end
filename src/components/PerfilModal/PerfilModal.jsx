@@ -26,7 +26,6 @@ const userProfile = {
 
 const PerfilModal = (props) => {
   const inputFile = useRef()
-  
   const [userData, setUserData] = useState(userProfile.user_data)
   const [playerData, setPlayerData] = useState(userProfile.player_data)
   useEffect(() => {
@@ -189,6 +188,7 @@ const PerfilModal = (props) => {
 
 
   return (
+    
     <Modal
       show={props.show}
       onHide={props.onHide}

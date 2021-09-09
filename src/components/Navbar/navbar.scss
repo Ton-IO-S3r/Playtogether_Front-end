@@ -157,3 +157,5 @@ a.btn-outline:hover{
         margin-top: 1px;
     }
  }
+ .swing-in-top-bck{animation:swing-in-top-bck .6s cubic-bezier(.175,.885,.32,1.275) both}
+ @keyframes swing-in-top-bck{0%{transform:rotateX(70deg);transform-origin:top;opacity:0}100%{transform:rotateX(0deg);transform-origin:top;opacity:1}}

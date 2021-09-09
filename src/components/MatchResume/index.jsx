@@ -20,7 +20,7 @@ const MatchResume = ({date, time, field_name, match_type, category, available}) 
       </div>
       <div className="d-flex flex-column w-75 ms-2 pe-2 justify-content-center match-details-container position-relative">
         {available !== undefined ?
-          (<span className={`badge bg-${available<=3 ? 'danger':'secondary'} position-absolute top-0 start-0 translate-middle-x`}>{available} {available===1?'lugar disponible':'lugares disponibles'}</span>):(<></>)
+          (<span className={`badge bg-${available<=3 ? 'danger ':'secondary'} position-absolute top-0 start-0 translate-middle-x ${available<=3 ? 'blink-1':''} `}>{available} {available===1?'lugar disponible':'lugares disponibles'}</span>):(<></>)
         }
         
 

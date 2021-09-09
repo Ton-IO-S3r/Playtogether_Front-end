@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 //COMPONENTES
 import Hero from 'components/Header/Header'
+import Navbar from 'components/Navbar/Navbar'
 import Footer from 'components/Footer/Footer'
 import CardsLanding from 'components/CardLanding/CardsLanding'
 //RECURSOS
@@ -9,6 +10,7 @@ import { IMAGES_URL } from 'Constants/API'
 const Landing = () => {
     return (
     <Fragment>
+    <Navbar />
     <Hero/>
     <div className="d-flex justify-content-center mt-5 mb-5 align-items-center landing-text">
        

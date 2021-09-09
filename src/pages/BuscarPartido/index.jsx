@@ -7,12 +7,15 @@ import './index.scss'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import {BACKGROUNDS_URL} from 'Constants/API'
+import BeatLoader from "react-spinners/BeatLoader";
+import Loading from 'components/LoadingPage/Loading'
 
 const BuscarPartido = () => {
   
   const [games,setGames] = useState([])
   const [totalGamesFound, setTotalGamesFound]=useState(0)
   const [searchParams,setSearchParams]=useState(new URLSearchParams())
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getGamesList = async ()=> {
@@ -34,13 +37,22 @@ const BuscarPartido = () => {
 
     }
     getGamesData()
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    },1500)
   }, [searchParams])
 
   
   
 
   return (
-    <>
+    <div>
+    {
+      loading ?
+      <Loading text="Cargando Partidos"/>
+      :
+      <>
       <Navbar />
       <Container fluid className="buscar-partidos-container pt-2 pb-4" style={{backgroundImage: `url(${BACKGROUNDS_URL}background_2.jpg)`}}>
         <Container>
@@ -58,7 +70,10 @@ const BuscarPartido = () => {
         </Container>
       </Container>
       <Footer />
-    </>
+      </>
+    }
+      
+    </div>
   )
 }
 

@@ -10,6 +10,7 @@ import {useParams} from 'react-router-dom'
 import ModalTeam from 'components/ModalTeam/ModalTeam'
 import ModalLeave from 'components/ModalTeam/ModalLeave'
 import Toast from 'components/Toast/Toast'
+import Loading from 'components/LoadingPage/Loading'
 //API URL
 import {API_URL, imgField, AUTH_ID, BACKGROUNDS_URL} from 'Constants/API'
 
@@ -79,6 +80,7 @@ const VistaPartido = () => {
   //Estado de los modales
   const [modalShow, setModalShow] = useState(false);
   const [modalShowLeave, setModalShowLeave] = useState(false)
+  const [loading, setLoading] = useState(true);
   //Almacenar nombre de los equipos
   const [nameBlack, setBlack] = useState("")
   const [nameWhite, setWhite] = useState("")
@@ -134,6 +136,10 @@ const VistaPartido = () => {
   
   useEffect( ()=>{
     getMatch()
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    },500)
   },[])
  
 //VALIDA EN QUE EQUIPO SE ENCUENTRA EL USUARIO
@@ -202,6 +208,11 @@ validateNumOfTeam ()
   }
   return (
     <>
+    {
+      loading ? 
+      <Loading text="Cargando Partido"/>
+      :
+      <>
       <Navbar/>
       <Container fluid={true} className="vista-partido-container pt-2 pb-4" style={{backgroundImage: `url(${BACKGROUNDS_URL}background_4.jpg)`}}>
         <Container>
@@ -256,6 +267,9 @@ validateNumOfTeam ()
       <ModalTeam show={modalShow} onHide={() => setModalShow(false)} nameBlack={nameBlack} nameWhite={nameWhite} matchId={matchId} teamFull={teamFullName}/>
       <ModalLeave show={modalShowLeave} onHide={() => setModalShowLeave(false)} inTeam={inTeam} matchId={matchId}/>
       <Toast/>
+      </>
+    }
+      
     </>
     
   )

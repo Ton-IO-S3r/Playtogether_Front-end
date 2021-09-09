@@ -1,0 +1,21 @@
+.container-spinner{
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: #021c29;
+  }
+  .div-spinner{
+    margin-top: 50vh;
+    p{
+      color: white;
+      animation: text-blur-out 2.0s cubic-bezier(0.550, 0.085, 0.680, 0.530) infinite both;
+    }
+  }
+  @keyframes text-blur-out {
+    0% {
+      filter: blur(0.01);
+    }
+    100% {
+      filter: blur(12px) opacity(0%);
+    }
+  }

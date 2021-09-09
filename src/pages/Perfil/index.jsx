@@ -108,7 +108,7 @@ const PerfilUsuario = () => {
       <Container fluid={true} className="vista-perfil-container pt-2 pb-4" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUNDS_URL}background_3.jpg), no-repeat,fixed, center`}}>
         <Container>
         <Row className="gy-3 justify-content-center pb-5">
-          <h1 className="py-3 mb-2 title-page">Perfil de usuario</h1>
+          <h1 className="py-3 mb-2 title-page tracking-in-contract-bck-top">Perfil de usuario</h1>
           <p className="mt-4 p-create"></p>
             <Col sm={12} md={5} lg={5} className="p-0 p-md-1 p-lg-3">
               <CardPerfil 
