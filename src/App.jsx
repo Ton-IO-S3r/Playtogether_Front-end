@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 //RUTAS
 import {BrowserRouter as Router, Switch, Route}   from 'react-router-dom'
 //ESTILO BOOTSTRAP
@@ -12,12 +12,11 @@ import CreateGame from 'pages/CreateGame/CreateGame'
 import 'rsuite/lib/styles/index.less';
 import BuscarPartido from 'pages/BuscarPartido'
 import SignUp from 'pages/Sign-up/SignUp'
-
+import BeatLoader from "react-spinners/BeatLoader";
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute'
 
 
 function App() {
-  
   return (
     <div className="App">
       <Router>
