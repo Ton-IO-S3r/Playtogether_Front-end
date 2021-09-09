@@ -1,8 +1,9 @@
 import './jugadorequipo.scss'
 import { Link } from 'react-router-dom'
+import { photoAPI } from 'Constants/API'
 const JugadorEquipo = ({player_data,order,organizer,positionOrg}) => {
   
-  const user_noPicURL ="https://django-playtogether-media.s3.us-east-2.amazonaws.com/avatar_default.png"
+  const user_noPicURL =`${photoAPI}avatar_default.png`
   const user_pic_URL=player_data.photo
   
   if (Object.keys(player_data).length === 0) {

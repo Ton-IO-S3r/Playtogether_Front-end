@@ -12,7 +12,7 @@ import ModalLeave from 'components/ModalTeam/ModalLeave'
 import Toast from 'components/Toast/Toast'
 import Loading from 'components/LoadingPage/Loading'
 //API URL
-import {API_URL, imgField, AUTH_ID, BACKGROUNDS_URL} from 'Constants/API'
+import {API_URL, imgField, AUTH_ID, BACKGROUNDS_URL, ICONS_URL} from 'Constants/API'
 
 const VistaPartido = () => {
 
@@ -89,7 +89,6 @@ const VistaPartido = () => {
   const [organizer, setOrganizer] = useState("")
   //Almacenar nombre del equipo en el que se encuentra unido
   const [inTeam, setTeam] = useState("")
-  const fieldServices = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/"
   // INCIARALIZAR EL BOTON QUE SE VA A MOSTRAR
   let showButton = false
   //variable del partido esta activo
@@ -223,9 +222,9 @@ validateNumOfTeam ()
               <DetalleCancha 
               imgField={`${imgField}_${match.field.id}/img`}
               nameField={match.field.name}
-              servicesField={match.field.services.map(item=>(
-                <div className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
-                  <img className="match-icon mb-1" src={`${fieldServices}${item.toLowerCase()}.svg`} alt="..." />
+              servicesField={match.field.services.map((item,index)=>(
+                <div key={index.toString()} className="d-flex flex-column flex-wrap justify-content-center align-items-center icon-container">
+                  <img className="match-icon mb-1" src={`${ICONS_URL}${item.toLowerCase()}.svg`} alt="..." />
                   <p className="p-services mx-1">{item}</p>
                 </div>
               ))}
