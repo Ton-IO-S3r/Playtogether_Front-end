@@ -17,6 +17,7 @@
     background-color: #32A77A;
     color: white;
   }
+  
   .match-details-container{
     // max-width: 250px;
     div{
@@ -37,6 +38,9 @@
         height: 25px;
       }
     }
+    .blink-1{animation:blink-1 1.5s infinite both}
+    @keyframes blink-1{0%,50%,100%{opacity:1}25%,75%{opacity:0}}
     
   }
+  
 }

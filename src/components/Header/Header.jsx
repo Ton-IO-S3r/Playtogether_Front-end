@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Header = () => {
     return (
             <header>
-                <Navbar isLogin={false}/>
+                <div className="header-img">
                 <Hero/>
+                </div>
+                
 
             </header>
     )

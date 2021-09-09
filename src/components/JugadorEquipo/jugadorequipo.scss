@@ -1,5 +1,6 @@
 .jugador{
   // width: 40%;
+  height: 141px;
   position: relative;
   .user-img{
     width: 80px;
@@ -14,7 +15,6 @@
     background-color: #32A77A;
     transform: translate(-124%,-50%)!important;
   }
-  
   
 }
 
@@ -45,7 +45,9 @@ p.position{
 
 @media screen and (min-width:1024px){
   .jugador{
+    height: 80px;
     .badge-player{
+      
       transform: translate(-90%,-50%)!important;
     }
     .badge-player-right{

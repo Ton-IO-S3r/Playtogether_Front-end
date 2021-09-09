@@ -1,8 +1,9 @@
 import './jugadorequipo.scss'
 import { Link } from 'react-router-dom'
+import { photoAPI } from 'Constants/API'
 const JugadorEquipo = ({player_data,order,organizer,positionOrg}) => {
   
-  const user_noPicURL ="https://django-playtogether-media.s3.us-east-2.amazonaws.com/avatar_default.png"
+  const user_noPicURL =`${photoAPI}avatar_default.png`
   const user_pic_URL=player_data.photo
   
   if (Object.keys(player_data).length === 0) {
@@ -39,7 +40,7 @@ const JugadorEquipo = ({player_data,order,organizer,positionOrg}) => {
       
       <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center jugador mb-4">
         <div className={`${order} user-img`} style={{backgroundImage: `url(${user_pic_URL})`}}></div>
-          {organizer == player_data.user_data.user_id ? <span className={`position-absolute top-0 start-100  badge rounded-pill badge-player${positionOrg}`}>Organizador</span> : <></>}
+          {organizer == player_data.user_data.user_id ? <span className={`position-absolute top-0 start-100 bounce-top  badge rounded-pill badge-player${positionOrg}`}>Organizador</span> : <></>}
           <div className="d-flex flex-column mx-4 justify-content-center cont-text">
             <h5 className="mt-1 mb-0 username text-truncate">{player_data.user_data.username}</h5>
             <p className="position">{player_data.position}</p>

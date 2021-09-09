@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './detallecancha.scss'
 import Divider from '@material-ui/core/Divider';
 import Btn from 'components/Buttons/CallActionBtn'
-import {isAuthenticated} from 'Constants/API'
+import {ICONS_URL, isAuthenticated} from 'Constants/API'
 
 
 
@@ -26,7 +26,6 @@ const DetalleCancha = (props) => {
     teamsFull, 
     inTeam
   } = props
-  const iconGender = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/"
   
   // const [showA, setShowA] = useState(true);
   // const toggleShowA = () => setShowA(!showA);
@@ -54,14 +53,14 @@ const DetalleCancha = (props) => {
         </div>
         <Divider className="mb-4" variant="middle"/>
         <div className="d-flex justify-content-around align-items-center m-3">
-          <img src="https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/location.svg"/>
+          <img src={`${ICONS_URL}location.svg`}/>
           <p className="mb-0 address">{directionField}</p>
         </div>
         <Divider className="mb-4" variant="middle"/>
         <div className="mx-3">
           <div className="date-container my-4 d-flex justify-content-between align-items-center">
             <div className="d-flex justify-content-start align-items-center">
-              <img className="match-icon" src="https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/calendar.svg" alt="fecha"/>
+              <img className="match-icon" src={`${ICONS_URL}calendar.svg`} alt="fecha"/>
               <h5 className="my-0 ms-3">Fecha:</h5>
             </div>
             <div>
@@ -70,7 +69,7 @@ const DetalleCancha = (props) => {
           </div>
           <div className="time-container my-4 d-flex justify-content-between  align-items-center">
             <div className="d-flex justify-content-start align-items-center">
-              <img className="match-icon" src="https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/clock.svg" alt="hora"/>
+              <img className="match-icon" src={`${ICONS_URL}clock.svg`} alt="hora"/>
               <h5 className="my-0 ms-3">Horario:</h5>
             </div>
             <div>
@@ -79,7 +78,7 @@ const DetalleCancha = (props) => {
           </div>
           <div className="genre-container my-4 d-flex justify-content-between align-items-center">
             <div className="d-flex justify-content-start align-items-center">
-              <img className="match-icon" src={`${iconGender}${categoryMatch.toLowerCase()}.svg`} alt="categoria"/>
+              <img className="match-icon" src={`${ICONS_URL}${categoryMatch.toLowerCase()}.svg`} alt="categoria"/>
               <h5 className="my-0 ms-3">Categoria:</h5>
             </div>
             <div>

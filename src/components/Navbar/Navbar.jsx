@@ -30,7 +30,7 @@ const Navbar = (props) => {
     return (
         <Fragment>
         {/* AQUI INICIA LA NAVBAR */}
-            <div className="container-fluid navbar_pt primary_color">
+            <div className="container-fluid navbar_pt primary_color" >
                 <div className="container p-0 ">
                     <nav className="navbar navbar-expand-lg navbar-ligh primary_color p-0">
                         <a className="navbar-brand m-0" href="#">
@@ -71,7 +71,7 @@ const Navbar = (props) => {
                                     <Link className={`search-games ${window.location.pathname == "/crear-partido/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/crear-partido/'>Crear Partido</Link>
                                         {/* <Link className="search-games" to='/crear-partido/'>Crear Partido</Link> */}
                                     </li>
-                                    <div className="nav-photo" onClick={()=>{setShow(!show)}}>
+                                    <div className="nav-photo" onClick={()=>{setShow(!show)}} >
                                     <img src={`${photoAPI}${AUTH_PHOTO}`} alt="user"/>
                                    
                                     </div>
@@ -110,7 +110,7 @@ const Navbar = (props) => {
             (
 
 
-                <div className="navbar-nav">
+                <div className="navbar-nav swing-in-top-bck">
                     <div className="nav-item align-self-center mt-4 ">
                         <Link className="a-menu" to={`/usuarios/${AUTH_ID}`}>Ver Perfil</Link>
                     </div>
@@ -134,7 +134,7 @@ const Navbar = (props) => {
             </div>
         </div>
         {show ? (
-            <div className="floating-menu d-none d-lg-block" >
+            <div className="floating-menu d-none d-lg-block swing-in-top-bck" >
                 <div className="d-flex flex-column">
                     <Link className="align-self-center mt-4 a-menu" to={`/usuarios/${AUTH_ID}`}>Ver Perfil</Link>
                     <div className="align-self-center ">

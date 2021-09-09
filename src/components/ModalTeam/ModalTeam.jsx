@@ -2,14 +2,14 @@ import {React, useState} from 'react'
 import { Container, Row, Modal , Form} from 'react-bootstrap'
 import Btn from 'components/Buttons/CallActionBtn'
 import './ModalTeam.scss'
-import {API_URL, AUTH_TOKEN} from 'Constants/API'
+import {API_URL, AUTH_TOKEN, ICONS_URL} from 'Constants/API'
 import Toast from 'components/Toast/Toast'
 import {notifySuccess,notifyWarning} from 'Functions/toastFunc'
 
 const ModalTeam = (props) => {
     const {matchId,nameBlack,nameWhite,show,onHide,teamFull} = props
-    const teamBlack = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/teamBlack.svg"
-    const teamWhite = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/teamWhite.svg"
+    const teamBlack = `${ICONS_URL}teamBlack.svg`
+    const teamWhite = `${ICONS_URL}teamWhite.svg`
     const [team, setTeam] = useState(nameBlack)
     const updateMatch = async (name) =>{
         try{

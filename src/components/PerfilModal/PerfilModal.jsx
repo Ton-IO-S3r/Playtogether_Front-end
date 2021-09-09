@@ -1,4 +1,4 @@
-import { Modal } from 'react-bootstrap';
+import { Collapse, Modal } from 'react-bootstrap';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import './perfilmodal.scss'
 import { useState, useEffect } from 'react';
@@ -9,6 +9,8 @@ import { useRef } from 'react';
 import {AUTH_TOKEN, API_URL, AUTH_ID} from 'Constants/API'
 import Toast from 'components/Toast/Toast'
 import {notifyWarning} from 'Functions/toastFunc'
+import { BeatLoader } from 'react-spinners';
+import { width } from 'dom-helpers';
 const userProfile = {
   "user_data": {
       "username": "test",
@@ -26,7 +28,7 @@ const userProfile = {
 
 const PerfilModal = (props) => {
   const inputFile = useRef()
-  
+  const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState(userProfile.user_data)
   const [playerData, setPlayerData] = useState(userProfile.player_data)
   useEffect(() => {
@@ -84,16 +86,19 @@ const PerfilModal = (props) => {
   // FETCH PARA ACTUALIZAR LOS DATOS DEL USUARIO
   const updateUserProfile = (event) => {
     event.preventDefault();
+    setOpen(true)
     const updateProfile = async (id)=>{
       
     //VALIDAR CAMPOS VACIOS
     if (userData.username === '' || userData.first_name === '' || userData.last_name === '' || userData.email === ''){
       //ALERTA
       notifyWarning("Por favor no dejes campos vacios")
+      setOpen(false)
       return
     }
     if(playerData.photo[0].size > 1048576){
       notifyWarning("Solo se permite el uso de imagenes menores a 1MB",2000)
+      setOpen(false)
       return
     }
     
@@ -127,7 +132,7 @@ const PerfilModal = (props) => {
       if (typeof playerData.photo[0] === "object") {
         formdata.append('player_data.photo', playerData.photo[0])
       }
-
+      
       axios
         .patch(url, formdata, config)
         .then((res) =>{
@@ -140,6 +145,7 @@ const PerfilModal = (props) => {
             activate: true
           })
           props.setProfileUpdated(true)
+          setOpen(false)
           // notifySuccess("¡Tu perfil se actualizó correctamente!",2000)
           window.location.reload()
           
@@ -189,6 +195,7 @@ const PerfilModal = (props) => {
 
 
   return (
+    
     <Modal
       show={props.show}
       onHide={props.onHide}
@@ -198,7 +205,9 @@ const PerfilModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className="modal-perfil-usuario"
+      backdrop="static"
     >
+      
       <Modal.Header className="border-0" closeButton />
       <Modal.Title id="contained-modal-title-vcenter" className="text-center">
         Edita tu perfil
@@ -266,7 +275,13 @@ const PerfilModal = (props) => {
                   </Form.Select>
                 </Form.Group>
                 <div className="w-100 text-center">
-                  <ActionBtn action="Actualizar" btn_type="submit" btn_disable={false} />
+                  <ActionBtn 
+                    action="Actualizar" 
+                    btn_type="submit" 
+                    btn_disable={false} 
+                    aria-controls="collapse-loader"
+                    aria-expanded={open}
+                  />
                   
                 </div>
                 
@@ -278,6 +293,16 @@ const PerfilModal = (props) => {
         </Container>
       </Modal.Body>
       <Toast/>
+      <Collapse in={open}>
+        <div className="loader-container text-center" id="collapse-loader">
+          <div className="beatloader-container">
+            <BeatLoader />
+            <p>Actualizando...</p>
+          </div>
+        </div>
+      </Collapse>
+      
+      
     </Modal>
   )
 }
