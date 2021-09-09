@@ -2,7 +2,7 @@ import {React, useState,useEffect, useRef} from 'react'
 import {Col, Form,Modal, Row } from 'react-bootstrap';
 
 //API
-import {API_URL,ICONS_URL,AUTH_TOKEN} from 'Constants/API'
+import {API_URL,ICONS_URL,AUTH_TOKEN, imgField} from 'Constants/API'
 //elementos del FORM
 import Divider from '@material-ui/core/Divider';
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -36,7 +36,6 @@ const ModalPartido = (props) => {
   const date = `${startDate.getDate()}-${(startDate.getMonth() + 1)}-${startDate.getFullYear()}`
   // const [date, setDate] = useState(formattedDateModel)
   
-  const imgField = "https://django-playtogether-media.s3.us-east-2.amazonaws.com/field"
   const gameDate = useRef()
   const timeRef = useRef()
 
@@ -158,7 +157,7 @@ const ModalPartido = (props) => {
           </div>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-4 mb-4">
-          <img src="https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/icons/location.svg"/>
+          <img src={`${ICONS_URL}location.svg`}/>
           <p className="mb-0 address">{field.address}</p>
         </div>
         <Divider className="mb-4" variant="middle"/>
