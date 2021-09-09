@@ -14,7 +14,7 @@ const Landing = () => {
     <Hero/>
     <div className="d-flex justify-content-center mt-5 mb-5 align-items-center landing-text">
        
-        <p className="mt-2  px-4 px-lg-0"><strong>PlayTogether!</strong> `Surge de la necesidad de relacionarse y unir personas a través del deporte, facilitando el acceso a partidos y a la creación de estos.</p>
+        <p className="mt-2  px-4 px-lg-0"><strong>PlayTogether!</strong> Surge de la necesidad de relacionarse y unir personas a través del deporte, facilitando el acceso a partidos y a la creación de estos.</p>
         
         </div>
     <div className="container-fluid container-text p-3 pb-4">
