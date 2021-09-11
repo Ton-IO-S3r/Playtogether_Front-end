@@ -17,7 +17,12 @@ const BuscarPartido = () => {
   const [searchParams,setSearchParams]=useState(new URLSearchParams())
   const [loading, setLoading] = useState(true);
 
+  
+  
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    },1500)
     const getGamesList = async ()=> {
       try {
         const request = {
@@ -30,6 +35,8 @@ const BuscarPartido = () => {
         console.log(error);
       }
     }
+    
+    
     const getGamesData = async () => {
       const dataFromServer = await getGamesList()
       setTotalGamesFound(dataFromServer.shift())
@@ -37,10 +44,8 @@ const BuscarPartido = () => {
 
     }
     getGamesData()
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    },1500)
+    
+    
   }, [searchParams])
 
   
