@@ -127,8 +127,12 @@
 // .title-page{
 //   margin-top: 20%;
 // }
-.nav-link{
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   color: #32A77A;
+  
+}
+.nav-link{
+  color: #495057
 }
 .nav-link:focus, .nav-link:hover {
   color: #32A77A;

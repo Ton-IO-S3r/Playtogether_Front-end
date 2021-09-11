@@ -129,7 +129,7 @@ const ModalPartido = (props) => {
       <Modal.Header className="border-0" closeButton />
       <Modal.Body>
       <Modal.Title id="contained-modal-title-vcenter" className="text-center mb-4">
-        Crear Partido
+        Partidos disponibles
       </Modal.Title>
       <div>
         <Row>
