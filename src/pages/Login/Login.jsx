@@ -66,10 +66,17 @@ const handleSubmit = async(e) => {
 	  	localStorage.setItem("token", response.token);
       localStorage.setItem("id", response.user_id);
       localStorage.setItem("player_photo", response.player_photo)
+      localStorage.setItem('staff', response.field_admin)
       const id=localStorage.getItem("id")
-      //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
-    	// window.location.href = `/usuarios/${id}`;
-      window.location.href = `/usuarios/${id}`;
+      const isStaff = JSON.parse(localStorage.getItem("staff"))
+      if (isStaff){
+        window.location.href= `/admin/${id}`;
+      }else{
+        //SE REDIRIGE A LA PAGINA DE BUSCAR PARTIDO
+        // window.location.href = `/usuarios/${id}`;
+        window.location.href = `/usuarios/${id}`;
+      }
+      
 	  }else{
       //SI NO SE RECIBE EL TOKEN DE ACCESO SE MANDA ALERTA CON ERROR DE CREDENCIALES
       notifyWarning("Nombre de usuario o contraseña incorrectos")
