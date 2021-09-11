@@ -24,7 +24,7 @@ const ListaPartidos = ({games, total}) => {
               />
             </Link>
             
-          ))): (<></>)
+          ))): (<div><p className="fw-bold text-center">No se encontraron partidos 😞, selecciona otra opcion. ⚽</p></div>)
         }
       </div>
     </div>
