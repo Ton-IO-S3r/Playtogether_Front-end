@@ -124,7 +124,7 @@ const AdministradorCancha = () => {
                   />
                 </Col>
                 <Col sm={12} md={7} lg={8} className="p-0 p-md-1 p-lg-3">
-                  <AdminGames/>
+                  <AdminGames field={fieldAdminData.administrators.field}/>
                 </Col>
               </>
             :
