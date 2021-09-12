@@ -11,7 +11,8 @@ import DatePicker from 'react-datepicker';
 import TimePicker from 'rc-time-picker';
 import ActionBtn from 'components/ActionBtn';
 
-const AdminGames = () => {
+const AdminGames = ({field}) => {
+  const [pendingGames, setPendingGames] = useState(field.pending_matches)
   return (
     <div className="admin-games-container text-center py-4 px-2 mx-auto ">
       <Tabs
@@ -36,20 +37,27 @@ const AdminGames = () => {
                 </div>
               </Form.Group>
               <div className="d-flex align-items-end text-center mb-3">
-                  <ActionBtn 
-                    action="Añadir partido" 
-                    btn_type="submit" 
-                    btn_disable={false} 
-                    aria-controls="collapse-loader"
-                    // aria-expanded={open}
-                  />
-                </div>
+                <ActionBtn 
+                  action="Añadir partido" 
+                  btn_type="submit" 
+                  btn_disable={false} 
+                  aria-controls="collapse-loader"
+                  // aria-expanded={open}
+                />
+              </div>
             </Form>
           </div>
             
           <hr />
           <div className="matches-list-container text-center">
-            
+            {
+              pendingGames.length > 0 ? 
+                pendingGames.map((game,index)=>{
+                  console.log(game)
+                })
+              :
+              <></>
+            }
           </div>
         </Tab>
         <Tab eventKey="historialPartidos" title="Historial de Partidos">
