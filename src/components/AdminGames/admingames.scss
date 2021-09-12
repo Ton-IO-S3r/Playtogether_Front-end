@@ -1,0 +1,64 @@
+.admin-games-container{
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  // max-width: 450px;
+  h4{
+    font-weight: 700;
+    color: #28804B;
+  }
+  .matches-list-container{
+    hr{
+      border: 1px solid #F2F2F2;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.50);
+    }
+    .game-link{
+      color: #000;
+      .match-resume-cont{
+        .date-container{
+          background-color: #32A77A;
+          color: white;
+        }
+      }
+    }
+  }
+  .date-picker-container{
+    border: 2px solid #32A77A;
+    border-radius: 10px;
+    // width: 90%;
+    .date-pick{
+      border:none;
+      border-radius: 10px;
+      color:#28804B;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      
+    }
+  }
+  .time-picker-container{
+    border: 2px solid #32A77A;
+    border-radius: 10px;
+    // width: 90%;
+    .time-pick{
+      border:none;
+      border-radius: 10px;
+      color:#28804B;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .user-matches-container{
+    .matches-list-container{
+      max-height: 50vh;
+      overflow-y: scroll;
+      border-radius: 10px;
+    }
+  }
+
+} 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 //RUTAS
 import {BrowserRouter as Router, Switch, Route}   from 'react-router-dom'
 //ESTILO BOOTSTRAP
@@ -12,8 +12,8 @@ import CreateGame from 'pages/CreateGame/CreateGame'
 import 'rsuite/lib/styles/index.less';
 import BuscarPartido from 'pages/BuscarPartido'
 import SignUp from 'pages/Sign-up/SignUp'
-import BeatLoader from "react-spinners/BeatLoader";
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute'
+import AdministradorCancha from 'pages/AdministradorCancha'
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
           <Route exact path="/" component={Landing}/>
           <Route path="/login" component={Login}/>
           <ProtectedRoute  path="/usuarios/:id" component={PerfilUsuario}/>
+          <ProtectedRoute  path="/admin/:id" component={AdministradorCancha}/>
           <Route path="/partidos/:id" component={VistaPartido}/>
           <Route path="/partidos/" component={BuscarPartido}/>
           <ProtectedRoute path="/crear-partido/" component={CreateGame}/>

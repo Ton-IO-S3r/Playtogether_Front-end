@@ -1,7 +1,7 @@
 header{
     
-    background: url(https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/hero-mobile.png),no-repeat;
-    // background: url(https://pt-media-s3.s3.us-east-2.amazonaws.com/assets/images/hero-mobile.png),no-repeat;
+    // background: url(https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/hero-mobile.png),no-repeat;
+    background: url(https://pt-media-s3.s3.us-east-2.amazonaws.com/assets/images/hero-mobile.png),no-repeat;
     background-repeat: no-repeat;
     background-size: cover;
     height: 50vh;
@@ -21,8 +21,8 @@ header{
 //MEDIAS SCREEN DESKTOP
 @media screen and (min-width:768px){
     header{
-        background-image: url(https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/hero_img.jpg);
-        // background-image: url(https://pt-media-s3.s3.us-east-2.amazonaws.com/assets/images/hero_img.jpg);
+        // background-image: url(https://django-playtogether-media.s3.us-east-2.amazonaws.com/assets/images/hero_img.jpg);
+        background-image: url(https://pt-media-s3.s3.us-east-2.amazonaws.com/assets/images/hero_img.jpg);
         background-repeat: no-repeat;
         background-position: center;
         height: 70vh;
