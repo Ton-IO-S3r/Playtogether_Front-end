@@ -10,22 +10,19 @@ import UpdateAdminModal from 'components/UpdateAdminModal';
 
 // const background_img=Math.floor((Math.random() * 5)+1);
 const CardAdmin = ({
-    // admin_avatar, 
-    // admin_name, 
-    // admin_username, 
-    // admin_date_joined, 
-    // admin_field,
     fieldAdminData,
     setFieldAdminData,
     toastParams, 
     setToastParams, 
     profileUpdated, 
-    setProfileUpdated
+    setProfileUpdated,
+    modalShow,
+    setModalShow
   }) => {
   
   //Params
   const {id} = useParams()
-  const [modalShow, setModalShow] = useState(false);
+  // const [modalShow, setModalShow] = useState(false);
   const CARD_BACKGROUND_URL = `${IMAGES_URL}profile_card_back_admin.jpg`
   return (
     <div className="card-admin text-center mx-auto d-flex flex-column justify-content-end" style={{backgroundImage: `url(${CARD_BACKGROUND_URL})`}}>

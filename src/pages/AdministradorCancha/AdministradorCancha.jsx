@@ -79,6 +79,8 @@ const AdministradorCancha = () => {
     time: 0,
     activate:false
   })
+  const [modalShow, setModalShow] = useState(false);
+
   useEffect(() => {
     if (toastParams.activate && toastParams.type === 'success') {
       notifySuccess(toastParams.msg, toastParams.time)
@@ -101,17 +103,12 @@ const AdministradorCancha = () => {
                 <p className="mt-4 p-create"></p>
                 <Col sm={12} md={5} lg={4} className="p-0 p-md-1 p-lg-3">
                   <CardAdmin 
-                    // admin_avatar={`${fieldAdminData.administrators.photo}`} 
-                    // admin_name={fieldAdminData.first_name}
-                    // admin_username={fieldAdminData.username}
-                    // admin_date_joined={fieldAdminData.date_joined.split("T")[0].split("-").reverse().join("/")}
-                    // admin_field={fieldAdminData.administrators.field}
-                    // profileUpdated = {profileUpdated}
-                    // setProfileUpdated = {setProfileUpdated}
                     fieldAdminData={fieldAdminData}
                     setFieldAdminData={fieldAdminData}
                     toastParams={toastParams}
                     setToastParams = {setToastParams}
+                    modalShow = {modalShow}
+                    setModalShow = {setModalShow}
                   />
                   <hr/>
                   <CanchaAdmin 
@@ -121,6 +118,7 @@ const AdministradorCancha = () => {
                     type={fieldAdminData.administrators.field.football_type}
                     img={fieldAdminData.administrators.field.photo}
                     services={fieldAdminData.administrators.field.services}
+                    setModalShow={setModalShow}
                   />
                 </Col>
                 <Col sm={12} md={7} lg={8} className="p-0 p-md-1 p-lg-3">
