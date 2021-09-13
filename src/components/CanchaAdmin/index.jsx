@@ -3,11 +3,10 @@ import Btn from 'components/Buttons/CallActionBtn'
 import './cancha_admin.scss'
 import { ICONS_URL, photoAPI } from 'Constants/API'
 import ToogleBtn from 'components/ToogleBtn/ToogleBtn'
+import ActionBtn from 'components/ActionBtn'
 
 
-const CanchaAdmin = ({name,cost,address,type,img,services}) => {
-  
-  
+const CanchaAdmin = ({name,cost,address,type,img,services,setModalShow}) => {
   
   return (
     <>
@@ -15,6 +14,7 @@ const CanchaAdmin = ({name,cost,address,type,img,services}) => {
           <Row className="g-0">
             <Col sm={12}>
               <Card.Header className="text-start pt-3">
+                <h3>Mi cancha</h3>
                 <img className="img-fluid rounded-top card-img-bottom field-img" src={`${photoAPI}default_field.png`} alt="..."/>
                 {name === "" ? 
                   (<></>)
@@ -41,12 +41,14 @@ const CanchaAdmin = ({name,cost,address,type,img,services}) => {
                   {name === '' || name === null ?
                     <>
                       <h5> Aun no das de alta tu cancha.</h5>
-                      <p>
-                        <button type="button" className="btn btn-link py-0 ps-0 pe-1 link-success shadow-none">
-                          Edita tu perfil
-                        </button>
-                        para agregarla.
-                      </p>
+                      <p>Edita tu perfil para agregarla.</p>
+                      <ActionBtn 
+                        action="Editar" 
+                        btn_type="button" 
+                        btn_disable={false} 
+                        aria-controls="collapse-loader"
+                        clic_func = {()=>{setModalShow(true)}}
+                      />
                     </>
                     
                     

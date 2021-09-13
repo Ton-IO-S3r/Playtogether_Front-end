@@ -1,6 +1,31 @@
 button.action-btn{
-  background-color: #32A77A;
-  border-color: #32A77A;
-  color: #ffffff;
-  width: 200px;
+  &.btn-w-200{
+    width: 200px;
+  }
+  &.btn-w-50c{
+    width: 50%;
+  }
+  &.btn-w-75c{
+    width: 75%;
+    padding: 0;
+  }
+  &.btn-w-100c{
+    width: 100%;
+    padding: 0;
+  }
+  &.delete{
+    background-color: #E1E1E1;
+    border-color: #C8C8C8;
+    color: #BD4545;
+  }
+  &.cancel{
+    background-color: #FFFFFF;
+    border-color: #000000;
+    color: #28804B;
+  }
+  &.accept{
+    background-color: #32A77A;
+    border-color: #32A77A;
+    color: #ffffff;
+  }
 }

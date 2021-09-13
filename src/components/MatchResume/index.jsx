@@ -25,13 +25,13 @@ const MatchResume = ({date, time, field_name, match_type, category, available}) 
         
 
         <div className="d-flex flex-row justify-content-center align-items-center mt-4 mb-1 w-100">
-          <img src={`${ICONS_URL}pitch.svg`} alt="tipo-partido" className="icons-cancha field" />
+          <img src={`${ICONS_URL}pitch.svg`} alt="cancha" className="icons-cancha field" />
           <h5 className="ms-2 my-0 overflow-hidden field">{field_name}</h5>
         </div>
         <hr className="my-1" />
         <div className="d-flex flex-row justify-content-around align-items-center my-1 w-100">
           {(time !== '' && time !== undefined) ? (<div className="time d-flex flex-column justify-content-center align-items-center me-1 flex-wrap">
-            <img src={`${ICONS_URL}clock.svg`} alt="tipo-partido" className="icons-cancha time mb-1" />
+            <img src={`${ICONS_URL}clock.svg`} alt="hora" className="icons-cancha time mb-1" />
             <h5 className="my-0">{formatted_time}</h5>
           </div>) : (<></>)}
           <div className="category d-flex flex-column justify-content-center align-items-center me-1 flex-wrap">
@@ -43,7 +43,7 @@ const MatchResume = ({date, time, field_name, match_type, category, available}) 
             <h5 className="my-0">{category}</h5>
           </div> 
           <div className="type d-flex flex-column justify-content-center align-items-center me-1 flex-wrap">
-            <img src={`${ICONS_URL}vs.svg`} alt="tipo-partido" className="icons-cancha type mb-1" />
+            <img src={`${ICONS_URL}vs.svg`} alt="VS" className="icons-cancha type mb-1" />
             <h5 className="my-0">{match_type}</h5>
           </div>
         </div>

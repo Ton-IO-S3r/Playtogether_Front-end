@@ -279,21 +279,21 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
                     </Form.Group>
                     <div className="d-flex flex-wrap flex-row justify-content-between align-items-center ms-md- w-100">
                       <Form.Group className="mb-2 w-100" >
-                        <Form.Label className="text-secondary mb-0 fw-bold">Domicilio:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="address" placeholder="Domicilio" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
-                      </Form.Group>
-                      {/* <Form.Group className="mb-2 w-100" >
-                        <Form.Label className="text-secondary mb-0 fw-bold">Domicilio:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="address" placeholder="Domicilio" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                        <Form.Label className="text-secondary mb-0 fw-bold">Calle:</Form.Label>
+                        <Form.Control className="text-success" size="sm" type="text" name="street" placeholder="Calle" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
                       </Form.Group>
                       <Form.Group className="mb-2 w-100" >
-                        <Form.Label className="text-secondary mb-0 fw-bold">Domicilio:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="address" placeholder="Domicilio" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                        <Form.Label className="text-secondary mb-0 fw-bold">Número:</Form.Label>
+                        <Form.Control className="text-success" size="sm" type="text" name="street_number" placeholder="Número" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
                       </Form.Group>
                       <Form.Group className="mb-2 w-100" >
-                        <Form.Label className="text-secondary mb-0 fw-bold">Domicilio:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="address" placeholder="Domicilio" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/> 
-                      </Form.Group>*/}
+                        <Form.Label className="text-secondary mb-0 fw-bold">Municipio/Localidad:</Form.Label>
+                        <Form.Control className="text-success" size="sm" type="text" name="town" placeholder="Municipio" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                      </Form.Group>
+                      <Form.Group className="mb-2 w-100" >
+                        <Form.Label className="text-secondary mb-0 fw-bold">Estado:</Form.Label>
+                        <Form.Control className="text-success" size="sm" type="text" name="city" placeholder="Estado" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                      </Form.Group>
                       <Form.Group className="mb-2" >
                         <Form.Label className="text-secondary mb-0 fw-bold">Costo:</Form.Label>
                         <Form.Control className="text-success" size="sm" type="number" name="rent_cost" placeholder="Precio por partido" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>

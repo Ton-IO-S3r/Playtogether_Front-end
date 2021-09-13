@@ -1,0 +1,115 @@
+.pending-game-container{
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px #C1C1C1;
+  border-radius: 10px;
+  // max-width: 550px;
+  border: 1px solid #F2F2F2;
+  &:hover{
+    box-shadow: 0px 4px 10px #C4C4C4;
+    // h2{
+    //   font-weight: 700;
+    // }
+  }
+  .user-container{
+    border-radius: 10px 0 0 10px;
+    height: 100%;
+    align-self: stretch;
+    background-color: #32A77A;
+    color: white;
+    h5{
+      font-size: 0.8rem;
+    }
+    &.nouser{
+      background-color: #666867;
+    }
+    .jugador{
+      // width: 40%;
+      height: auto;
+      position: relative;
+      .user-img{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+  
+  .match-details-container{
+    // max-width: 250px;
+    div{
+      h5{
+        color: #28804B;
+        font-size: 0.8rem;
+        &.field{
+          font-weight: 700;
+        }
+          
+        &.field{
+          text-align: left;
+          text-overflow:ellipsis;
+          overflow:hidden;
+          white-space:nowrap;
+        }
+      }
+      .icons-cancha{
+        height: 20px;
+      }
+    }
+    .schedule-container{
+      width: 50%;
+    } 
+    .btns-container{
+      width: 50%;
+      .btn{
+        width: 80%;
+        padding: 2px;
+      }
+      .delete{
+        background-color: #E1E1E1;
+        border-color: #C8C8C8;
+        color: #BD4545;
+      }
+      .cancel{
+        background-color: #FFFFFF;
+        border-color: #000000;
+        color: #28804B;
+      }
+      .accept{
+        background-color: #32A77A;
+        border-color: #32A77A;
+        color: #ffffff;
+      }
+    }
+    .blink-1{animation:blink-1 1.5s infinite both}
+    @keyframes blink-1{0%,50%,100%{opacity:1}25%,75%{opacity:0}}
+    
+  }
+  
+}
+
+@media screen and (min-width: 768px) {
+  .pending-game-container{
+    .match-details-container{
+      
+      .schedule-container{
+        width: 100%; 
+        .date p, .time p{
+          font-size: 0.8rem;
+          margin: 0%;
+        }
+      }
+      .btns-container{
+        width: 100%;
+        .btn{
+          width: 30%;
+        }
+      }
+    }
+    
+  }
+  
+}
