@@ -1,3 +1,6 @@
+//variables
+@import "variables";
+
 *{
     padding: 0;
     margin: 0;
@@ -14,25 +17,25 @@
  
   
   .button-call-to-mobile{
-    background-color: #32A77A ;
+    background-color: $secundary_color ;
     color: #FFF;
     font-style: normal;
     font-weight: bold;
   
   }
   .form-control:focus{
-    border-color: #32A77A ;
+    border-color: $secundary_color ;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #28804B ;
-  border-color: #28804B ;
+  background-color: $base_color ;
+  border-color: $base_color;
 }
 .btn-check:focus+.btn-primary, .btn-primary:focus {
   color: #fff;
-  background-color: #28804B;
-  border-color: #28804b;
+  background-color: $base_color;
+  border-color: $base_color;
   box-shadow: 0 0 0 0.25rem #22e67037;
 }
 .alert-danger {
@@ -60,20 +63,20 @@
 
 //datepicker
 .react-datepicker__day--selected{
-  background-color: #32A77A;
+  background-color: $secundary_color ;
 }
 .react-datepicker__day-name{
   color:#FFF;
 }
 .react-datepicker__header {
-  background-color: #32A77A;
-  border-bottom: #28804B;
+  background-color: $secundary_color ;
+  border-bottom: $secundary_color ;
 }
 .react-datepicker__current-month{
   color:#FFF;
 }
 .react-datepicker{
-  border-color: #28804B;
+  border-color: $base_color;
   border-radius: 8px;
 }
 .react-datepicker__navigation:hover *::before, .react-datepicker__navigation-icon::before{
@@ -94,13 +97,13 @@
   -webkit-appearance: none;
   appearance: none;
   border-radius: .25rem;
-  transition: #32A77A 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:$secundary_color  0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 
 }
 
 .rc-time-picker-input:focus{
-  border-color: #32A77A ;
+  border-color: $secundary_color ;
 }
 
 .rc-time-picker {
@@ -108,13 +111,13 @@
 }
 
 .form-check-input:checked {
-  background-color: #32a77a;
-  border-color: #32a77a;
+  background-color: $secundary_color ;
+  border-color: $secundary_color ;
 }
 //toast
 
 .Toastify__toast--success {
-  background-color: #32A77A;
+  background-color: $secundary_color ;
 }
 
 //alerts
@@ -127,11 +130,15 @@
 // .title-page{
 //   margin-top: 20%;
 // }
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: $secundary_color ;
+  
+}
 .nav-link{
-  color: #32A77A;
+  color: #495057
 }
 .nav-link:focus, .nav-link:hover {
-  color: #32A77A;
+  color: $secundary_color ;
 }
 
 // @media screen and (min-width: 768px){
@@ -159,3 +166,6 @@
   }
 }
 
+.modal-title{
+  color:$base_color;
+}

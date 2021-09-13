@@ -2,8 +2,8 @@ import {React, useState,useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './vistapartido.scss'
 import { Container, Row, Col } from 'react-bootstrap';
-import DetalleCancha from '../../components/DetalleCancha/DetalleCancha';
-import Equipos from '../../components/Equipos/Equipos';
+import DetalleCancha from 'components/DetalleCancha/DetalleCancha';
+import Equipos from 'components/Equipos/Equipos';
 import Navbar from 'components/Navbar/Navbar';
 import Footer from 'components/Footer/Footer';
 import {useParams} from 'react-router-dom'

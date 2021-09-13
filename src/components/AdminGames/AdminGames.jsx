@@ -157,9 +157,9 @@ const field_fake = {
 }
 
 const AdminGames = ({field}) => {
-  // const [pendingGames, setPendingGames] = useState(field.pending_matches)
   const [pendingGames, setPendingGames] = useState(field_fake.pending_matches)
-  console.log(pendingGames)
+  const [totalMatch, setTotalMatch] = useState(field.total_match_history)
+  const [matchHistory, setMatchHistory] = useState(field.match_history)
   return (
     <div className="admin-games-container text-center py-4 px-2 mx-auto ">
       <Tabs
@@ -213,7 +213,32 @@ const AdminGames = ({field}) => {
           </div>
         </Tab>
         <Tab eventKey="historialPartidos" title="Historial de Partidos">
-          
+        <div className="d-flex flex-wrap justify-content-center align-items-center">
+            <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
+            <h5 className="fw-bold">Historial de Partidos:</h5>
+              <h4 className="mx-3">{totalMatch}</h4>
+            </div>
+          </div> 
+          <hr />
+          <div className="history-match text-center">
+            { matchHistory.length > 0 ?
+              matchHistory.map((match, index) => (
+                <Link key={index.toString()} id={match.id} to={`/partidos/${match.id}`} className="game-link">
+                  <MatchResume  
+                    date={match.date} 
+                    field_name={match.field.name} 
+                    match_type={match.field.football_type} 
+                    category={match.category} 
+                    
+                  />
+                </Link>
+              ))
+              :
+              (<p className="text-center fw-bold">Aun no generas historial, da de alta partidos.</p>)
+            }
+           
+
+          </div>
         </Tab>
       </Tabs>
     </div>
