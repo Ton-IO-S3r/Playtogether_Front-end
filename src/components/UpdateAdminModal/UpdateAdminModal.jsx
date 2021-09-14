@@ -193,6 +193,7 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
       ...services_CheckedItems,
       [e.target.value]: !services_CheckedItems[`${checkboxValue}`]
     })
+    Object.entries(services_CheckedItems)
   }
   const handlePlayerInputChange = (e) => {
     // if (e.target.name === "position") {
