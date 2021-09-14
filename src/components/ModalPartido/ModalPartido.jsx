@@ -1,8 +1,8 @@
 import {React, useState,useEffect, useRef} from 'react'
-import {Col, Form,Modal, Row } from 'react-bootstrap';
+import {Col, Form,Modal, Row} from 'react-bootstrap';
 
 //API
-import {API_URL,ICONS_URL,AUTH_TOKEN, imgField} from 'Constants/API'
+import {API_URL,ICONS_URL,AUTH_TOKEN,AUTH_ID, imgField} from 'Constants/API'
 import MatchResume from 'components/MatchResume'
 //elementos del FORM
 import Divider from '@material-ui/core/Divider';
@@ -24,109 +24,91 @@ registerLocale("es", es)
 const ModalPartido = (props) => {
   //CONSTANTES
   const {id,show} = props
-  const [field,setField] = useState({"football_type":{
-    "name":""
-  }})
-  const [gender, setGender] = useState("varonil")
+  const [field,setField] = useState({
+    "id": 2,
+    "name": "Planeta gol",
+    "rent_cost": 1000,
+    "address": "  ",
+    "football_type": {
+        "id": 1,
+        "name": "Fut5",
+        "duration": 40,
+        "max_players": 16,
+        "min_players": 10
+    },
+    "services": [
+        "Bebederos",
+        "Estacionamiento",
+        "Arbitraje"
+    ],
+    "matches": [
+        {
+            "id": 1,
+            "field": {
+                "name": "Planeta gol",
+                "football_type": "Fut5"
+            },
+            "date": "2021-12-26",
+            "time": "08:00:00",
+            "category": "mixto",
+            "places_available": 16,
+            "active": true,
+            "organizer": null,
+            "accepted": true
+        }
+    ]
+})
   const [services, setServices] = useState([])
-  const [startDate, setStartDate] = useState(new Date());
-  const [time, setTime] = useState(moment())
   const [idMatch, setId] = useState("")
-  let i=0
+  const [matches, setMatches] = useState([])
 
-  //VARIABLES
- 
-  const date = `${startDate.getDate()}-${(startDate.getMonth() + 1)}-${startDate.getFullYear()}`
-  // const [date, setDate] = useState(formattedDateModel)
-  
-  const gameDate = useRef()
-  const timeRef = useRef()
-
-  //RETRIEVE FIELD
-  
-
-  //POST PARTIDO
-  const createGame = async(field,date,time,category)=> {
+  const organizeMatch = async (id,organizer,category) => {
     try{
-      const response = await fetch(`${API_URL}matches/create/`, {
-        method: "POST",
-        headers: {
+      const response = await fetch(`${API_URL}match_update/${id}/`,{
+        method:"PATCH",
+        headers:{
           "Content-Type": "application/json",
-          'Authorization': `Token ${AUTH_TOKEN}`
+          'Authorization': `Token ${AUTH_TOKEN}`,
         },
         body: JSON.stringify({
-          field,
-          date,
-          time,
+          organizer,
           category
-          
-        }),
-      });
-      if (response.ok === true){
-        
-        
-        
-      }else{
-        notifyWarning("No se creo el partido con los datos proporcionados")
-      }
-      return await response.json();
-      
-    } catch (error){
+        })
+      })
+      return response
+    }catch(error){
       console.log(error)
     }
   }
+  
+  const handleIdMatch = async (e) =>{
+    e.preventDefault()
+    
+    const response = await organizeMatch(idMatch,AUTH_ID,)
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    //INPUTS
-    //Se pasan los valores de los inputs a la funcion del POST
-    const response = await createGame(id,date,time,gender);
-   
-    if (response[0] === "Ese horario en la cancha seleccionada ya esta ocupado, selecciona otro horario!"){
-        notifyWarning("Fecha No disponible, elige otra")
-    }else{
-      notifySuccess("Partido creado con exito",1000)
-        setTimeout(function(){window.location.href=`/partidos/${response.id}`} , 1000); 
-      }
 
   }
-
-  //ESTABLECER HORA
-  const handleValueTime = (time) =>{
-    setTime(time && time.format('HH:mm'));
-  };
-
-  const handleIdMatch = (e) =>{
-    e.preventDefault()
-
-    setId("5")
+  const getFieldDetail = async () => {
+    try {
+      const response = await fetch(`${API_URL}fields/${id}/`);
+      const field = await response.json();
+      
+      setField(field)
+      console.log(field.matches)
+      setServices(field.services)
+      setMatches(field.matches)
+    } catch (error) {
+      console.log(error);
+    }
   }
   useEffect(()=>{
-    const getFieldDetail = async () => {
-      try {
-        const response = await fetch(`${API_URL}fields/${id}/`);
-        const field = await response.json();
-        
-        setField(field)
-        console.log(field.football_type)
-        setServices(field.services)
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getFieldDetail()
+   
     if (show){
       getFieldDetail()
       
     }
-  },[show])
-  // useEffect(async ()=>{
-  //   await getFieldDetail()
-  //   if (show){
-  //    await getFieldDetail()
-  //   }
-  // },[show])
-  console.log(idMatch)
+  },[show,MatchResume])
+ 
   return (
     <div>
             <Modal
@@ -172,107 +154,36 @@ const ModalPartido = (props) => {
           </div>
           </Col>
           <Col lg="7" className="p-0 p-md-3">
-         
-        {/* <Form>
-            <Form.Group className="mb-3 d-flex flex-column" controlId="createGame">
-            <div className="d-flex flex-column align-items-center">
-            <div className="d-flex align-items-center mb-3">
-              <Form.Label className="me-2">Fecha: </Form.Label>
-              <DatePicker disabledKeyboardNavigation  ref={gameDate} className="form-control"  dateFormat="dd-MMMM-yyyy" selected={startDate} locale="es" onChange={(date) => {setStartDate(date)}} minDate={new Date()} />  
-            </div>
-            <div className="d-flex align-items-center mb-4">
-              <Form.Label className="me-3">Hora: </Form.Label>
-              <TimePicker ref={timeRef} placeholder="--:--" disabledHours={() => [0, 1, 2, 3, 4, 5]} showSecond={false} minuteStep={30} hideDisabledOptions onChange={handleValueTime}/>
-            </div>
-            </div>
-            
-            <div className="d-flex align-items-center create-check justify-content-between justify-content-md-around" onChange={(e)=>{setGender(e.target.value)}}>
-            <Form.Check value="varonil" as='input' label="Varonil" name="gender" type="radio" id="masc" checked={gender === "varonil" ? true : false}/>
-            <Form.Check value="femenil" as='input' label="Femenil" name="gender" type="radio" id="fem" checked={gender === "femenil" ? true : false}/>
-            <Form.Check value="mixto" as='input' label="Mixto" name="gender" type="radio" id="mix" checked={gender === "mixto" ? true : false}/>
-
-            </div>
-            <Btn text="Crear" onClick={handleSubmit}/>
-            </Form.Group>
-        </Form> */}
         <div className="d-flex flex-column mt-5 mt-md-0 card-modal px-2 pt-2">
-        <h5 className="text-center mt-1 fw-bold" style={{color:"#32A77A"}}>Partidos disponibles: 8</h5>
+        <h5 className="text-center mt-1 fw-bold" style={{color:"#32A77A"}}>Partidos disponibles: {matches.length}</h5>
         <p className="text-secondary fst-italic indication">Da click para elegir el partido.</p>
         <div className="match-list-modal mb-4">
-        
-        <div onClick={handleIdMatch}>
-        <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
+        {
+          matches.length > 0 ? 
+          matches.map((match,index) => (
+            <div onClick={()=>(setId(match.id))}>
+                <MatchResume 
+                key={index.toString()}
+                date={match.date} 
+                field_name={match.field.name} 
+                match_type={match.field.football_type} 
+                category={""} 
+                time={match.time}
                 
               />
-        </div>
-              
-              <div onClick={()=>(setId("9"))}>
-              <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
-                
-              />
-              </div>
-              
-              <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
-                
-              />
-              <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
-                
-              />
-              <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
-                
-              />
-              <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
-                
-              />
-               <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
-                
-              />
-               <MatchResume 
-                date={"10/11/2021"} 
-                field_name={"Fucho"} 
-                match_type={"4vs4"} 
-                category={"femenil"} 
-                time={"18:00"}
-                
-              />
-           
+            </div>
+          ))
+          :
+          <div><p className="text-center">No hay partidos disponibles</p></div>
+        }
      
         </div>
+        <Form.Select aria-label="Default select example">
+          <option>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </Form.Select>
         <Btn text="Organizar" className=" mb-1"/>
         </div>
         

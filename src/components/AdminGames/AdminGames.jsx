@@ -11,6 +11,8 @@ import DatePicker from 'react-datepicker';
 import TimePicker from 'rc-time-picker';
 import ActionBtn from 'components/ActionBtn';
 import PendingGame from 'components/PendingGame/PendingGame';
+import ModalMatchAction from 'components/ModalMatchAction/ModalMatchAction';
+import { set } from 'date-fns';
 
 const field_fake = {
   "name": "planet gol roma norte",
@@ -84,7 +86,7 @@ const field_fake = {
   ],
   "pending_matches": [
       {
-        "id": 6,
+        "id":  6,
         "field": {
             "name": "planet gol roma norte",
             "football_type": "Fut7"
@@ -160,6 +162,70 @@ const AdminGames = ({field}) => {
   const [pendingGames, setPendingGames] = useState(field_fake.pending_matches)
   const [totalMatch, setTotalMatch] = useState(field.total_match_history)
   const [matchHistory, setMatchHistory] = useState(field.match_history)
+  const [modalShow, setModalShow] = useState(false);
+  const [title, setTitle]= useState("")
+  const [action, setAction] = useState("")
+  const [textBtn, setTextBtn] = useState("")
+  const [actionBtn, setActionBtn] = useState(()=>{})
+
+  const updateMatch = async (id,organizer,accepted) => {
+    try{
+      const response = await fetch(`${API_URL}match_update/${id}/`,{
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        },
+        body: JSON.stringify({
+          organizer,
+          accepted,
+
+        })
+        
+      })
+      return response
+    }catch (error){
+      console.log(error)
+    }
+  }
+
+  const deleteMatch = async (id) => {
+    try{
+      const response = await fetch(`${API_URL}field_manager/match_update/${id}/`,{
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        }
+      })
+      return response
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  const handleAccept = async (id) =>{
+    let accepted = true
+    const response = await updateMatch(id)
+    console.log("partido aceptado")
+    setModalShow(false)
+  }
+  const handleDeny = async (id) =>{
+    let accepted=false
+    let organizer=""
+    const response = await updateMatch(id,organizer,accepted)
+    console.log("partido denegado")
+    setModalShow(false)
+  }
+  const handleDelete = async (id) =>{
+    const response = await deleteMatch(id)
+    console.log("partido eliminado")
+    setModalShow(false)
+  }
+
+  
+
+
   return (
     <div className="admin-games-container text-center py-4 px-2 mx-auto ">
       <Tabs
@@ -203,6 +269,27 @@ const AdminGames = ({field}) => {
                     date={game.date}
                     time={game.time}
                     organizer={game.organizer}
+                    accept={()=>{
+                      setModalShow(true)
+                      setTitle("Aceptar Partido")
+                      setAction(`Aceptar el partido?`)
+                      setTextBtn("Aceptar")
+                      setActionBtn(()=>(handleAccept(game.id)))}}
+                    deny={
+                      ()=>{
+                      setModalShow(true)
+                      setTitle("Denegar Partido")
+                      setAction(`Rechazar el partido?`)
+                      setTextBtn("Rechazar")
+                      setActionBtn(()=>(handleDeny(game.id)))}}
+                    elimn={()=>{
+                      setModalShow(true)
+                      setTitle("Eliminar Partido")
+                      setAction(`Eliminar el partido?`)
+                      setTextBtn("Eliminar")
+                      setActionBtn(()=>(handleDelete(game.id)))}}
+                    
+                    
                   />
                 ))
               :
@@ -241,7 +328,9 @@ const AdminGames = ({field}) => {
           </div>
         </Tab>
       </Tabs>
+      <ModalMatchAction show={modalShow} onHide={()=> setModalShow(false)} title={title} action={action} actionBtn={actionBtn} textBtn={textBtn}/>
     </div>
+    
   )
 }
 

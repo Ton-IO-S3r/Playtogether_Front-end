@@ -15,6 +15,7 @@ import CardAdmin from 'components/CardAdmin';
 import CanchaAdmin from 'components/CanchaAdmin';
 import AdminGames from 'components/AdminGames/AdminGames';
 
+
 const admin = 
   {
     "username": "",
@@ -122,7 +123,7 @@ const AdministradorCancha = () => {
                   />
                 </Col>
                 <Col sm={12} md={7} lg={8} className="p-0 p-md-1 p-lg-3">
-                  <AdminGames field={fieldAdminData.managers.field}/>
+                  <AdminGames field={fieldAdminData.managers.field} />
                 </Col>
               </>
             :
