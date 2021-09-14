@@ -20,7 +20,7 @@ const admin =
     "username": "",
     "first_name": "",
     "date_joined": "",
-    "administrators": {
+    "managers": {
       "photo":"",
       "field":{
         "name":"",
@@ -57,7 +57,7 @@ const AdministradorCancha = () => {
   },[])
   const getFieldAdmin = async () => {
     try {
-      const response = await fetch(`${API_URL}fieldadmin/${id}/`, {
+      const response = await fetch(`${API_URL}field_manager/${id}/`, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Token ${AUTH_TOKEN}`,
@@ -112,17 +112,17 @@ const AdministradorCancha = () => {
                   />
                   <hr/>
                   <CanchaAdmin 
-                    name={fieldAdminData.administrators.field.name}
-                    cost={fieldAdminData.administrators.field.rent_cost}
-                    address={fieldAdminData.administrators.field.address}
-                    type={fieldAdminData.administrators.field.football_type}
-                    img={fieldAdminData.administrators.field.photo}
-                    services={fieldAdminData.administrators.field.services}
+                    name={fieldAdminData.managers.field.name}
+                    cost={fieldAdminData.managers.field.rent_cost}
+                    address={fieldAdminData.managers.field.address}
+                    type={fieldAdminData.managers.field.football_type}
+                    img={fieldAdminData.managers.field.photo}
+                    services={fieldAdminData.managers.field.services}
                     setModalShow={setModalShow}
                   />
                 </Col>
                 <Col sm={12} md={7} lg={8} className="p-0 p-md-1 p-lg-3">
-                  <AdminGames field={fieldAdminData.administrators.field}/>
+                  <AdminGames field={fieldAdminData.managers.field}/>
                 </Col>
               </>
             :

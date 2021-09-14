@@ -15,7 +15,10 @@ const CanchaAdmin = ({name,cost,address,type,img,services,setModalShow}) => {
             <Col sm={12}>
               <Card.Header className="text-start pt-3">
                 <h3>Mi cancha</h3>
-                <img className="img-fluid rounded-top card-img-bottom field-img" src={`${photoAPI}default_field.png`} alt="..."/>
+                <img 
+                  className="img-fluid rounded-top card-img-bottom field-img" 
+                  src={img} alt="..."/>
+                  
                 {name === "" ? 
                   (<></>)
                 :
