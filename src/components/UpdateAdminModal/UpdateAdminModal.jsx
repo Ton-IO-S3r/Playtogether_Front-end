@@ -10,64 +10,44 @@ import {AUTH_TOKEN, API_URL, AUTH_ID} from 'Constants/API'
 import Toast from 'components/Toast/Toast'
 import {notifyWarning} from 'Functions/toastFunc'
 import { BeatLoader } from 'react-spinners';
-const admin = 
-  {
-    "username": "",
-    "first_name": "",
-    "date_joined": "",
-    "administrators": {
-      "photo":"",
-      "field":{
-        "name":"",
-        "rent_cost":0,
-        "address":null,
-        "football_type":1,
-        "photo":"",
-        "services":[],
-        "show":false,
-        "total_match_history":0,
-        "match_history":[],
-        "pending_matches":[]
-      }
-    }
-  }
 
 const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toastParams, setToastParams, profileUpdated, setProfileUpdated}) => {
   const inputAdminFile = useRef()
   const inputFieldFile = useRef()
   const [open, setOpen] = useState(false);
+  
   const [adminData, setAdminData] = useState({...fieldAdminData})
-  console.log(adminData)
   useEffect(()=>{
     setAdminData(fieldAdminData)
   },[show])
-  // useEffect(() => {
-    // const getUserProfileData = async () => {
-    //   const dataFromServer = await getUser4Update()
-    //   setUserData(dataFromServer.user_data)
-    //   setPlayerData(dataFromServer.player_data)
-    // } 
-    
-    // getUserProfileData()
-  // }, [])
 
-
-  // const getUser4Update = async ()=>{
-  //   try {
-  //     const response = await fetch(`${API_URL}players/update/${AUTH_ID}/`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         'Authorization': `Token ${AUTH_TOKEN}`,
-  //       },
-  //     });
-  //     const data = await response.json();
-  //     return data
-      
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  const [adminUpdateData, setAdminUpdateData]= useState()
+  useEffect(()=>{
+    const getAdminData = async () => {
+      const dataFromServer = await getUpdateData()
+      setAdminUpdateData(dataFromServer)
+    }
+    getAdminData();
+  },[])
   
+  
+  const getUpdateData = async () => {
+    try {
+      const response = await fetch(`${API_URL}field_manager/update/${AUTH_ID}/`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        },
+      });
+      const data = await response.json();
+      console.log(data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  //Se declara el estado para almacenar tipos de futbol
   const [footballTypes,setFootballTypes] = useState([])
   useEffect(()=>{
     const getFieldTypes = async () => {
@@ -76,7 +56,7 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
     } 
     getFieldTypes()
   },[])
-
+  //Hace la peticion a la API de los tipos de partidos
   const getFieldTypesData = async () =>{
     try {
       const response = await axios(`${API_URL}footballtypes/`)
@@ -87,6 +67,7 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
       console.log(error);
     }
   }
+  //Estado para almacenar los servicios
   const [services,setServices] = useState([])
   useEffect(()=>{
     const getServicesList = async () => {
@@ -95,7 +76,7 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
     } 
     getServicesList()
   },[])
-
+  //Peticion a la API para obtener los tipos de servicios
   const getServicesData = async () =>{
     try {
       const response = await axios(`${API_URL}service/`)
@@ -108,15 +89,126 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
   }
   
   
-  const [adminImg, setAdminImg] = useState(adminData.administrators.photo)
+  const [adminImg, setAdminImg] = useState(adminData.managers.photo)
   useEffect(()=>{
-    setAdminImg(adminData.administrators.photo)
+    setAdminImg(adminData.managers.photo)
   },[adminData])
 
-  const [fieldImg, setFieldImg] = useState(adminData.administrators.field.photo)
+  const [fieldImg, setFieldImg] = useState(adminData.managers.field.photo)
   useEffect(()=>{
-    setFieldImg(adminData.administrators.field.photo)
+    setFieldImg(adminData.managers.field.photo)
+    console.log(fieldImg)
   },[adminData])
+
+  
+  const handleAdminImageChange = (e) => {
+    
+    setAdminUpdateData({
+      ...adminUpdateData,
+      managers:{
+        ...adminUpdateData.managers,
+        [e.target.name]:e.target.files
+      }
+    })
+    if(e.target.files.length !== 0){
+      setAdminImg(URL.createObjectURL(e.target.files[0]))
+    }
+  }
+  const handleFieldImageChange = (e) => {
+    setAdminUpdateData({
+      ...adminUpdateData,
+      managers:{
+        ...adminUpdateData.managers,
+        field:{
+          ...adminUpdateData.managers.field,
+          [e.target.name]:e.target.files
+        }
+      }
+    })
+    if(e.target.files.length !== 0){
+      setFieldImg(URL.createObjectURL(e.target.files[0]))
+    }
+  }
+
+  const handleAdminNameInputChange = (e) => {
+    setAdminUpdateData({
+      ...adminUpdateData,
+      [e.target.name]:e.target.value
+        
+    })
+  }
+  const handleFieldInputChange = (e) => {
+    if (e.target.name === 'rent_cost' || e.target.name === 'football_type'){
+      setAdminUpdateData({
+        ...adminUpdateData,
+        managers:{
+          ...adminUpdateData.managers,
+          field:{
+            ...adminUpdateData.managers.field,
+            [e.target.name]:parseFloat(e.target.value)
+          }
+        }
+          
+      })
+    }else{
+      setAdminUpdateData({
+        ...adminUpdateData,
+        managers:{
+          ...adminUpdateData.managers,
+          field:{
+            ...adminUpdateData.managers.field,
+            [e.target.name]:e.target.value
+          }
+        }
+          
+      })
+    }
+  }
+  const handleFieldAddressInputChange = (e) => {
+    setAdminUpdateData({
+      ...adminUpdateData,
+      managers:{
+        ...adminUpdateData.managers,
+        field:{
+          ...adminUpdateData.managers.field,
+          address:{
+            ...adminUpdateData.managers.field.address,
+            [e.target.name]: e.target.value
+          }
+        }
+      }
+        
+    })
+  }
+
+  //Creamos un objeto y funcion para manejar los checkboxes de servicios
+  const [services_CheckedItems, setServices_CheckedItems] = useState([])
+  const setServicesCheckObject = (services_list) => {
+    const services_val_list = services_list.map(service_name=>[service_name,false])
+    setServices_CheckedItems(Object.fromEntries(services_val_list))
+  }
+  const handleServicesCheckboxItems =  (e) => {
+    const checkboxValue = e.target.value
+    setServices_CheckedItems({
+      ...services_CheckedItems,
+      [e.target.value]: !services_CheckedItems[`${checkboxValue}`]
+    })
+    Object.entries(services_CheckedItems)
+  }
+  const handlePlayerInputChange = (e) => {
+    // if (e.target.name === "position") {
+    //   setPlayerData({
+    //     ...playerData,
+    //     [e.target.name]: parseInt(e.target.value)
+    //   })
+    // } else{
+    //   setPlayerData({
+    //     ...playerData,
+    //     [e.target.name]: e.target.value
+    //   })
+    // }
+    console.log(e.target)
+  }
 
   // FETCH PARA ACTUALIZAR LOS DATOS DEL USUARIO
   const updateUserProfile = (event) => {
@@ -131,7 +223,7 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
       setOpen(false)
       return
     }
-    if(adminData.administrators.photo[0].size > 1048576){
+    if(adminData.managers.photo[0].size > 1048576){
       notifyWarning("Solo se permite el uso de imagenes menores a 1MB",2000)
       setOpen(false)
       return
@@ -152,8 +244,8 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
       if (adminData.first_name !== ''){
         formdata.append('user_data.first_name', adminData.first_name)
       }
-      if (typeof adminData.administrators.photo[0] === "object") {
-        formdata.append('player_data.photo', adminData.administrators.photo[0])
+      if (typeof adminData.managers.photo[0] === "object") {
+        formdata.append('player_data.photo', adminData.managers.photo[0])
       }
       
       axios
@@ -184,54 +276,6 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
     }
     updateProfile(AUTH_ID)
   }
-
-  
-  
-  
-  const handleUserInputChange = (e) => {
-    setAdminData({
-      ...adminData,
-      [e.target.name]: e.target.value
-    })
-  }
-  const handlePlayerInputChange = (e) => {
-    // if (e.target.name === "position") {
-    //   setPlayerData({
-    //     ...playerData,
-    //     [e.target.name]: parseInt(e.target.value)
-    //   })
-    // } else{
-    //   setPlayerData({
-    //     ...playerData,
-    //     [e.target.name]: e.target.value
-    //   })
-    // }
-    console.log(e.target)
-  }
-
-  const handleAdminImageChange = (e) => {
-    // setAdminData({
-    //   ...adminData,
-    //   [e.target.name]: e.target.files
-    // })
-    if(e.target.files.length !== 0){
-      setAdminImg(URL.createObjectURL(e.target.files[0]))
-    }
-  }
-  const handleFieldImageChange = (e) => {
-    // setAdminData({
-    //   ...adminData,
-    //   [e.target.name]: e.target.files
-    // })
-    if(e.target.files.length !== 0){
-      setFieldImg(URL.createObjectURL(e.target.files[0]))
-    }
-  }
-
-  const handleServicesCheckboxItems = (e)=>{
-    console.log(e.target)
-  }
-
   return (
     
     <Modal
@@ -259,7 +303,7 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
                 {/* <h5>Datos de usuario</h5> */}
                 <Form.Group controlId="formFileSm" className="profile-pic mb-0 d-flex flex-column justify-content-center align-items-center">
                  <div className="avatar my-2" onClick={()=>inputAdminFile.current.click()} style={{backgroundImage: `url(${adminImg})`}}></div>
-                 <input type="file" hidden={true} size="sm" ref={inputAdminFile} name="adminData.administrators.photo" className="align-self-center" onChange={handleAdminImageChange}/>
+                 <input type="file" hidden={true} size="sm" ref={inputAdminFile} name="photo" className="align-self-center" onChange={handleAdminImageChange}/>
                 </Form.Group>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
                   {/* <Form.Label className="text-secondary mb-0">Correo electrónico</Form.Label> */}
@@ -267,7 +311,7 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
                 </Form.Group>
                 <Form.Group className="mb-2" >
                   <Form.Label className="text-secondary mb-0 fw-bold">Nombre del administrador:</Form.Label>
-                  <Form.Control className="text-success" size="sm" type="text" name="first_name" placeholder="Nombre" defaultValue={adminData.first_name} onChange={handleUserInputChange}/>
+                  <Form.Control className="text-success" size="sm" type="text" name="manager_name" placeholder="Nombre" defaultValue={adminData.first_name} onChange={handleAdminNameInputChange}/>
                 </Form.Group>
                 <hr/>
                 <div className="field-data-container p-3">
@@ -275,32 +319,36 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
                   <div className="d-flex flex-wrap align-items-center justify-content-center">
                     <Form.Group controlId="formFileSm" className="field-pic-group mb-3 d-flex flex-column justify-content-center align-items-center w-100">
                       <div className="field-img my-2" onClick={()=>inputFieldFile.current.click()} style={{backgroundImage: `url(${fieldImg})`}}></div>
-                      <input type="file" hidden={true} size="sm" ref={inputFieldFile} name="adminData.administrators.field.photo" className="align-self-center" onChange={handleFieldImageChange}/>
+                      <input type="file" hidden={true} size="sm" ref={inputFieldFile} name="photo" className="align-self-center" onChange={handleFieldImageChange}/>
                     </Form.Group>
                     <div className="d-flex flex-wrap flex-row justify-content-between align-items-center ms-md- w-100">
                       <Form.Group className="mb-2 w-100" >
+                        <Form.Label className="text-secondary mb-0 fw-bold">Nombre de la cancha:</Form.Label>
+                        <Form.Control className="text-success" size="sm" type="text" name="name" placeholder="Nmbre de la cancha" defaultValue={adminData.managers.field.name} onChange={handleFieldInputChange}/>
+                      </Form.Group>
+                      <Form.Group className="mb-2 w-100" >
                         <Form.Label className="text-secondary mb-0 fw-bold">Calle:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="street" placeholder="Calle" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                        <Form.Control className="text-success" size="sm" type="text" name="street" placeholder="Calle" defaultValue={adminData.managers.field.street} onChange={handleFieldAddressInputChange}/>
                       </Form.Group>
                       <Form.Group className="mb-2 w-100" >
                         <Form.Label className="text-secondary mb-0 fw-bold">Número:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="street_number" placeholder="Número" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                        <Form.Control className="text-success" size="sm" type="text" name="street_number" placeholder="Número" defaultValue={adminData.managers.field.street_number} onChange={handleFieldAddressInputChange}/>
                       </Form.Group>
                       <Form.Group className="mb-2 w-100" >
                         <Form.Label className="text-secondary mb-0 fw-bold">Municipio/Localidad:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="town" placeholder="Municipio" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                        <Form.Control className="text-success" size="sm" type="text" name="town" placeholder="Municipio" defaultValue={adminData.managers.field.town} onChange={handleFieldAddressInputChange}/>
                       </Form.Group>
                       <Form.Group className="mb-2 w-100" >
                         <Form.Label className="text-secondary mb-0 fw-bold">Estado:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="text" name="city" placeholder="Estado" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                        <Form.Control className="text-success" size="sm" type="text" name="city" placeholder="Estado" defaultValue={adminData.managers.field.city} onChange={handleFieldAddressInputChange}/>
                       </Form.Group>
                       <Form.Group className="mb-2" >
                         <Form.Label className="text-secondary mb-0 fw-bold">Costo:</Form.Label>
-                        <Form.Control className="text-success" size="sm" type="number" name="rent_cost" placeholder="Precio por partido" defaultValue={adminData.administrators.field.address} onChange={handleUserInputChange}/>
+                        <Form.Control className="text-success" size="sm" type="number" name="rent_cost" placeholder="Precio por partido" defaultValue={adminData.managers.field.address} onChange={handleFieldInputChange}/>
                       </Form.Group>
                       <Form.Group className="mb-2">
                         <Form.Label className="text-secondary mb-0 fw-bold">Tipo de cancha:</Form.Label>
-                        <Form.Select size="sm" name="position" defaultValue={0} onChange={handlePlayerInputChange}>
+                        <Form.Select size="sm" name="football_type" defaultValue={0} onChange={handleFieldInputChange}>
                           <option value='0'>Elige el tipo de cancha...</option>
                           {footballTypes.map((type, index)=>{
                             return (<option key={index.toString()} value={type.id} >{type.name}</option>)
@@ -318,73 +366,18 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
                               name="services"
                               type="checkbox"
                               id={`check-${item.service}`}
-                              value={item.service}
-                              checked={false}
+                              value={item.id}
+                              checked={services_CheckedItems[`${item.id}`] || false}
                               onChange={handleServicesCheckboxItems}
                             />
                           ))}
                           
-                          {/* <Form.Check
-                            inline
-                            label="Regaderas"
-                            name="services"
-                            type="checkbox"
-                            id={`check-showers`}
-                            value="regaderas"
-                            checked={false}
-                            onChange={handleServicesCheckboxItems}
-                          />
-                          <Form.Check
-                            inline
-                            label="Arbitraje"
-                            name="services"
-                            type="checkbox"
-                            id={`check-referee`}
-                            value="arbitraje"
-                            checked={false}
-                            onChange={handleServicesCheckboxItems}
-                          /> */}
                         </div>
                       </Form.Group>
                     </div>
                   </div>
                 </div>
                 
-                
-                
-                {/* <Form.Group className="mb-2" controlId="formG">
-                  <Form.Label className="text-secondary mb-0">Género:</Form.Label>
-                  <div key={`inline-radio`} className="mb-3">
-                    <Form.Check
-                      inline
-                      label="Masculino"
-                      name="gender"
-                      type="radio"
-                      id={`radio-male`}
-                      value="masculino"
-                      checked={playerData.gender === "masculino"}
-                      onChange={handlePlayerInputChange}
-                    />
-                    <Form.Check
-                      inline
-                      label="Femenino"
-                      name="gender"
-                      type="radio"
-                      id={`radio-female`}
-                      value="femenino"
-                      checked={playerData.gender === "femenino"}
-                      onChange={handlePlayerInputChange}
-                    />
-                  </div>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                  <Form.Label className="text-secondary mb-0">Posición:</Form.Label>
-                  <Form.Select size="sm" name="position" defaultValue={playerData.position} onChange={handlePlayerInputChange}>
-                    {positions.map((position, index)=>{
-                      return (<option key={index.toString()} value={position.id}>{position.position_name}</option>)
-                    })}
-                  </Form.Select>
-                </Form.Group> */}
                 <div className="w-100 text-center">
                   <ActionBtn 
                     action="Actualizar" 

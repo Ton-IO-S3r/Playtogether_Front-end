@@ -28,7 +28,7 @@ const CardAdmin = ({
     <div className="card-admin text-center mx-auto d-flex flex-column justify-content-end" style={{backgroundImage: `url(${CARD_BACKGROUND_URL})`}}>
       <div className="data-container px-4">
         <div className="head d-flex flex-column align-items-center">
-          <div className="avatar mt" style={{backgroundImage: `url(${fieldAdminData.administrators.photo})`}}></div>
+          <div className="avatar mt" style={{backgroundImage: `url(${fieldAdminData.managers.photo})`}}></div>
           {
             id === AUTH_ID ? (<div className="edit-admin-icon">
             <IconButton onClick={() => setModalShow(true)}>

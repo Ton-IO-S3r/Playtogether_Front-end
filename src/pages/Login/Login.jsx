@@ -66,7 +66,7 @@ const handleSubmit = async(e) => {
 	  	localStorage.setItem("token", response.token);
       localStorage.setItem("id", response.user_id);
       localStorage.setItem("player_photo", response.player_photo)
-      localStorage.setItem('staff', response.field_admin)
+      localStorage.setItem('staff', response.field_manager)
       const id=localStorage.getItem("id")
       const isStaff = JSON.parse(localStorage.getItem("staff"))
       if (isStaff){
