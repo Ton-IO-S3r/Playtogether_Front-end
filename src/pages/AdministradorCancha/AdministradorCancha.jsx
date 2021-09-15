@@ -14,6 +14,7 @@ import Loading from 'components/LoadingPage/Loading'
 import CardAdmin from 'components/CardAdmin';
 import CanchaAdmin from 'components/CanchaAdmin';
 import AdminGames from 'components/AdminGames/AdminGames';
+import axios from 'axios';
 
 const admin = 
   {
@@ -25,10 +26,10 @@ const admin =
       "field":{
         "name":"",
         "rent_cost":0,
-        "address":null,
+        "address":{},
         "football_type":1,
         "photo":"",
-        "services":[],
+        "fields_services":[],
         "show":false,
         "total_match_history":0,
         "match_history":[],
@@ -40,21 +41,67 @@ const admin =
 const AdministradorCancha = () => {
   const {id} = useParams();
   const [fieldAdminData, setFieldAdminData] = useState(admin);
-  // const [profileUpdated,setProfileUpdated] = useState(false);
+  const [profileUpdated,setProfileUpdated] = useState(false);
   // const [userCreatedMatch , setUserCreatedMatch] = useState({})
   // const [totalMatchCreated, setTotalMatchCreated] = useState({})
   
+  const [servicesList, setServicesList]=useState([])
+  const [servicesObj,setServicesObj] = useState({})
+  useEffect(()=>{
+    const getServicesObj = async () => {
+      const dataFromServer = await getServicesData()
+      setServicesObj(Object.fromEntries(dataFromServer.map((item)=>[item.id,item.service])))
+      setServicesList(dataFromServer)
+    } 
+    getServicesObj()
+    
+  },[])
+  //Peticion a la API para obtener los tipos de servicios
+  const getServicesData = async () =>{
+    try {
+      const response = await axios(`${API_URL}service/`)
+      const data = await response.data;
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //Se declara el estado para almacenar tipos de futbol
+  const [footballTypes,setFootballTypes] = useState([])
+  useEffect(()=>{
+    const getFieldTypes = async () => {
+      const dataFromServer = await getFieldTypesData()
+      const types_names = Object.fromEntries(dataFromServer.map(item=>[item.id,item.name])) 
+      console.log(types_names)
+      setFootballTypes(types_names)
+      
+
+    } 
+    getFieldTypes()
+  },[])
+  //Hace la peticion a la API de los tipos de partidos
+  const getFieldTypesData = async () =>{
+    try {
+      const response = await axios(`${API_URL}footballtypes/`)
+      const data = await response.data;
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     const getFieldAdminData = async () => {
       const dataFromServer = await getFieldAdmin()
       setFieldAdminData(dataFromServer)
-      console.log(dataFromServer)
     }
-    console.log(AUTH_STAFF)
     getFieldAdminData()
     
+  },[profileUpdated])
   // },[profileUpdated,id])
-  },[])
   const getFieldAdmin = async () => {
     try {
       const response = await fetch(`${API_URL}field_manager/${id}/`, {
@@ -64,7 +111,6 @@ const AdministradorCancha = () => {
         },
       });
       const data = await response.json();
-      
       return data
       
     } catch (error) {
@@ -104,20 +150,28 @@ const AdministradorCancha = () => {
                 <Col sm={12} md={5} lg={4} className="p-0 p-md-1 p-lg-3">
                   <CardAdmin 
                     fieldAdminData={fieldAdminData}
-                    setFieldAdminData={fieldAdminData}
+                    setFieldAdminData={setFieldAdminData}
                     toastParams={toastParams}
                     setToastParams = {setToastParams}
                     modalShow = {modalShow}
                     setModalShow = {setModalShow}
+                    profileUpdated={profileUpdated}
+                    setProfileUpdated={setProfileUpdated}
+                    servicesObj={servicesObj}
+                    servicesList={servicesList}
+                    
                   />
                   <hr/>
                   <CanchaAdmin 
+                    fieldAdminData={fieldAdminData}
                     name={fieldAdminData.managers.field.name}
                     cost={fieldAdminData.managers.field.rent_cost}
                     address={fieldAdminData.managers.field.address}
-                    type={fieldAdminData.managers.field.football_type}
+                    type={footballTypes[fieldAdminData.managers.field.football_type]}
                     img={fieldAdminData.managers.field.photo}
-                    services={fieldAdminData.managers.field.services}
+                    services={fieldAdminData.managers.field.fields_services}
+                    show_field={fieldAdminData.managers.field.show}
+                    servicesObj={servicesObj}
                     setModalShow={setModalShow}
                   />
                 </Col>
