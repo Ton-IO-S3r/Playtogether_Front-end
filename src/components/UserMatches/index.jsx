@@ -7,6 +7,8 @@ import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
 import { Link } from 'react-router-dom';
 
 const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCreated}) => {
+  console.log(matchCreated)
+  const badgeMatch = (<div className="d-flex align-items-center"><p className="m-0 me-2">Partidos Organizados</p><span class={`${numOfMatchCreated === 0 ? "d-none" : "d-block"} badge  bg-pt`}>{numOfMatchCreated}</span></div>)
   return (
     <div className="user-matches-container text-center py-4 px-2 mx-auto ">
       <Tabs
@@ -44,11 +46,13 @@ const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCre
             }
           </div>
         </Tab>
-        <Tab eventKey="misPartidos" title="Partidos Organizados">
+        <Tab eventKey="misPartidos" title={badgeMatch}>
+        
           <div className="d-flex flex-wrap justify-content-center align-items-center">
             <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
             <h5>Total de Partidos Organizados:</h5>
               <h4 className="mx-3">{numOfMatchCreated}</h4>
+              
             </div>
           </div> 
           <hr />
@@ -61,7 +65,8 @@ const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCre
                     field_name={match.field.name} 
                     match_type={match.field.football_type} 
                     category={match.category} 
-                    
+                    available={(match.places_available != undefined && match.accepted == false) ? (match.places_available=undefined)  : (match.places_available) }
+                    accepted={match.accepted}
                   />
                 </Link>
               ))

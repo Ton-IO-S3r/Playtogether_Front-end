@@ -18,6 +18,7 @@ import es from 'date-fns/locale/es';
 import "react-datepicker/dist/react-datepicker.css";
 import './ModalPartido.scss'
 import 'rc-time-picker/assets/index.css';
+import { set } from 'date-fns';
 registerLocale("es", es)
 
 
@@ -61,6 +62,7 @@ const ModalPartido = (props) => {
   const [services, setServices] = useState([])
   const [idMatch, setId] = useState("")
   const [matches, setMatches] = useState([])
+  const [category,setCategory] = useState("")
 
   const organizeMatch = async (id,organizer,category) => {
     try{
@@ -81,10 +83,19 @@ const ModalPartido = (props) => {
     }
   }
   
-  const handleIdMatch = async (e) =>{
+  const handleOrganize= async (e) =>{
     e.preventDefault()
-    
-    const response = await organizeMatch(idMatch,AUTH_ID,)
+
+    if(idMatch === "" && category === ""){
+      notifyWarning("Selecciona el partido y la categoria")
+      return
+    }
+
+    const response = await organizeMatch(idMatch,AUTH_ID,category)
+  //   console.log(idMatch)
+  // console.log(category)
+  notifySuccess("Partido organizado con exito",1000)
+  setTimeout(function(){window.location.href=`/partidos/${idMatch}`} , 1000); 
 
 
   }
@@ -105,9 +116,12 @@ const ModalPartido = (props) => {
    
     if (show){
       getFieldDetail()
+      setCategory("")
+      setId("")
       
     }
-  },[show,MatchResume])
+  },[show])
+  
  
   return (
     <div>
@@ -161,13 +175,14 @@ const ModalPartido = (props) => {
         {
           matches.length > 0 ? 
           matches.map((match,index) => (
-            <div onClick={()=>(setId(match.id))}>
+            <div onClick={(e)=>(setId(match.id))}>
                 <MatchResume 
                 key={index.toString()}
                 date={match.date} 
                 field_name={match.field.name} 
                 match_type={match.field.football_type} 
                 category={""} 
+                displayC={"d-none"}
                 time={match.time}
                 
               />
@@ -176,15 +191,15 @@ const ModalPartido = (props) => {
           :
           <div><p className="text-center">No hay partidos disponibles</p></div>
         }
-     
         </div>
-        <Form.Select aria-label="Default select example">
-          <option>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <hr/>
+        <Form.Label>Selecciona la categoria:</Form.Label>
+        <Form.Select aria-label="Default select example" as="select" onChange={(e)=>(setCategory(e.target.value))}>
+          <option value="varonil" selected={category == "varonil" ? true:false}>Varonil</option>
+          <option value="femenil" selected={category == "femenil" ? true:false}>Femenil</option>
+          <option value="mixto" selected={category == "mixto" ? true:false}>Mixto</option>
         </Form.Select>
-        <Btn text="Organizar" className=" mb-1"/>
+        <Btn text="Organizar" className=" mb-1" onClick={handleOrganize}/>
         </div>
         
           </Col>
