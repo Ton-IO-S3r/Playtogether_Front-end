@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { green } from '@material-ui/core/colors';
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core';
+import { API_URL, AUTH_ID, AUTH_TOKEN } from 'Constants/API';
 
 const GreenSwitch = withStyles((theme)=>({
   root: {
@@ -35,16 +36,45 @@ const GreenSwitch = withStyles((theme)=>({
   },
 }))(Switch);
 
-const ToogleBtn = () => {
-  const [state, setState] = React.useState({
-    checkedA: false,
-  });
+const ToogleBtn = ({fieldActive,setFieldActive}) => {
+  // useEffect(()=>{
+  //   const setFieldStatus = async()=>{
+  //     const data = await updateFieldStatus(fieldActive)
+  //     setFieldActive(data.show)
+  //   }
+  //   setFieldStatus();
+  // },[fieldActive])
+
+  const updateFieldStatus = async (field_val) => {
+    try{
+      const response = await fetch(`${API_URL}field_manager/field_show/${AUTH_ID}/`,{
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Token ${AUTH_TOKEN}`,
+        },
+        body: JSON.stringify({
+          "show": field_val   
+        })
+      })
+      if (response.status === 200) {
+        setFieldActive(field_val)
+      }
+    }catch (error){
+        console.log(error)
+    }   
+  }
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    // console.log(state.checkedA)
+    // setState({ ...state, [event.target.name]: event.target.checked });
+    
+    
+    updateFieldStatus(event.target.checked)
+
   };
   return (
     
-    <GreenSwitch checked={state.checkedA} onChange={handleChange} name="checkedA" />
+    <GreenSwitch checked={fieldActive} onChange={handleChange} name="checkedA" />
     
   )
 }

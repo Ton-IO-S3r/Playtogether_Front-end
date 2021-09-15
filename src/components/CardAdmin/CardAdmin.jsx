@@ -17,7 +17,9 @@ const CardAdmin = ({
     profileUpdated, 
     setProfileUpdated,
     modalShow,
-    setModalShow
+    setModalShow,
+    servicesObj,
+    servicesList,
   }) => {
   
   //Params
@@ -54,6 +56,8 @@ const CardAdmin = ({
         setToastParams={setToastParams}
         profileUpdated={profileUpdated}
         setProfileUpdated={setProfileUpdated}
+        servicesObj={servicesObj}
+        servicesList={servicesList}
       />
     </div>
   )
