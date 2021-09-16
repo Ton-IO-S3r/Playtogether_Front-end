@@ -38,7 +38,7 @@ const AdminGames = (props) => {
   const [actionBtn, setActionBtn] = useState(()=>()=>{})
   const [listPending, setListPending] = useState("list")
   const [listHistory, setListHistory] = useState("")
-  const [updateDate, setUpdateDate] = useState(moment())
+  const [updateDate, setUpdateDate] = useState(moment().add(1,'days'))
   const [updateTime, setUpdateTime] = useState(moment())
 
   
@@ -114,7 +114,6 @@ const AdminGames = (props) => {
   },[field.pending_matches])
 
   const createNewGame = (e) => {
-    console.log('ejecuntando')
     e.preventDefault()
     
     const selected_date_formatted = updateDate.format('DD-MM-YYYY')
@@ -132,6 +131,13 @@ const AdminGames = (props) => {
     const postNewGame = async (date, time)=>{
       const response = await postGame(date,time)
     }
+    !field.show ? setToastParams({
+      type: 'warning',
+      msg:'¡Tu cancha no es visible. Activala para poder crear un partido!',
+      time:1500,
+      activate: true
+    })
+    :
     postNewGame(selected_date_formatted,selected_time_formatted)
   }
   const postGame = async (date,time) =>{
@@ -193,7 +199,7 @@ const AdminGames = (props) => {
                       value={updateDate} 
                       onChange={(date)=> handleSelectedDate(date)}
                       format="DD/MM/YYYY"
-                      minDate={new Date()}
+                      minDate={moment().add(1,'days')}
                     />
                   </ThemeProvider>
                 </Col>
