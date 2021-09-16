@@ -39,6 +39,17 @@
         font-weight: 700;
         margin-top: 45px;
       }
+      .badge-follow{
+        transform: translate(-200%,90%)!important;
+      }
+      .followers{
+        background-color: rgba(50, 167, 122, 0.32);
+        border-radius: 10px;
+        height: 25px;
+        .total-follow{
+          color: #32A77A;
+        }
+      }
     }
     .position-container{
       font-size: 16px;
@@ -67,6 +78,9 @@
           height: 150px;
           width: 150px;
         }
+        .badge-follow{
+          transform: translate(-220%,45%)!important;
+        }
       }
     }
   }
@@ -79,6 +93,9 @@
         .avatar{
           height: 175px;
           width: 175px;
+        }
+        .badge-follow{
+          transform: translate(-430%,90%)!important;
         }
       }
     }

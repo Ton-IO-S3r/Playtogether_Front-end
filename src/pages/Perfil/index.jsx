@@ -35,11 +35,14 @@ const PerfilUsuario = () => {
   const [profileUpdated,setProfileUpdated] = useState(false);
   const [userCreatedMatch , setUserCreatedMatch] = useState({})
   const [totalMatchCreated, setTotalMatchCreated] = useState({})
+  const [teammate,setTeamMates] = useState([])
   
   useEffect(() => {
     const getUserData = async () => {
       const dataFromServer = await getUser()
       setUserData(dataFromServer)
+      setTeamMates(dataFromServer.players.teammates)
+
       // localStorage.setItem("player_photo",dataFromServer.players.photo.split(".com/")[1])
     }
     const getUserMatches = async () =>{
@@ -78,7 +81,7 @@ const PerfilUsuario = () => {
         },
       });
       const data = await response.json();
-
+      console.log(data)
       return data
       
     } catch (error) {
@@ -94,6 +97,7 @@ const PerfilUsuario = () => {
         },
       });
       const data = await response.json();
+      
       return data
       
     } catch (error) {
@@ -118,6 +122,7 @@ const PerfilUsuario = () => {
                 user_username={userData.username}
                 user_position={userData.players.position}
                 user_dominant_foot={userData.players.dominant_food}
+                teammates={teammate}
                 user_date_joined={userData.date_joined.split("T")[0].split("-").reverse().join("/")}
                 profileUpdated = {profileUpdated}
                 setProfileUpdated = {setProfileUpdated}
