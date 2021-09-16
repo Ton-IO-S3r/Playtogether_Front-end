@@ -122,7 +122,7 @@ const PerfilUsuario = () => {
                 user_username={userData.username}
                 user_position={userData.players.position}
                 user_dominant_foot={userData.players.dominant_food}
-                teammates={teammate}
+                
                 user_date_joined={userData.date_joined.split("T")[0].split("-").reverse().join("/")}
                 profileUpdated = {profileUpdated}
                 setProfileUpdated = {setProfileUpdated}
