@@ -2,7 +2,7 @@ import { ICONS_URL } from 'Constants/API';
 import React from 'react'
 import './matchresume.scss'
 
-const MatchResume = ({date, time, field_name, match_type, category, available, displayC="d-block",accepted=true}) => {
+const MatchResume = ({date, time, field_name, match_type, category, available, displayC="d-block",accepted=true, index}) => {
   let formatted_time=""
   if(time !== '' && time !== undefined){
     const time_array = time.split(':')
@@ -15,7 +15,7 @@ const MatchResume = ({date, time, field_name, match_type, category, available, d
   let [year,month,day] = date.split("-")
   console.log(accepted)
   return (
-    <div className="match-resume-cont d-flex justify-content-start align-items-center mt-2 mb-3 mx-auto">
+    <div tabIndex={index} className="match-resume-cont d-flex justify-content-start align-items-center mt-2 mb-3 mx-auto">
       <div className="d-flex align-items-center justify-content-center  w-25 date-container py-1">
         <h2 className="text-wrap text-center p-2 mt-2 mb-0 px-0 px-sm-2 fs-5">{`${day} ${monthNames[parseInt(month)-1]}`} {`${year}`}</h2>
       </div>
