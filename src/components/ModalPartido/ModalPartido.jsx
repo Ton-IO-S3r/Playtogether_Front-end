@@ -198,6 +198,7 @@ const ModalPartido = (props) => {
               }}>
                 <MatchResume 
                 key={index.toString()}
+                index={index.toString()}
                 date={match.date} 
                 field_name={match.field.name} 
                 match_type={match.field.football_type} 
