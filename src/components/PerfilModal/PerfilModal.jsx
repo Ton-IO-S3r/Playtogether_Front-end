@@ -31,6 +31,7 @@ const PerfilModal = (props) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState(userProfile.user_data)
   const [playerData, setPlayerData] = useState(userProfile.player_data)
+  const [disabledBtn,setDisabledBtn] = useState(true)
   useEffect(() => {
     const getUserProfileData = async () => {
       const dataFromServer = await getUser4Update()
@@ -40,7 +41,13 @@ const PerfilModal = (props) => {
     
     getUserProfileData()
   }, [])
-
+  useEffect(()=>{
+    if(playerData.gender.length <= 0 || playerData.position === null || playerData.position === 0 ){
+      setDisabledBtn(true)
+    }else{
+      setDisabledBtn(false)
+    }
+  },[disabledBtn, playerData.position])
 
   const getUser4Update = async ()=>{
     try {
@@ -110,29 +117,29 @@ const PerfilModal = (props) => {
       };
       const url =`${API_URL}players/update/${id}/`;
       const formdata = new FormData();
-
-      if (userData.username !== ''){
+      console.log(playerData)
+      if (userData.username !== '' || userData.username !== null){
         formdata.append('user_data.username', userData.username)
       }
-      if (userData.first_name !== ''){
+      if (userData.first_name !== '' || userData.first_name !== null){
         formdata.append('user_data.first_name', userData.first_name)
       }
-      if (userData.last_name !== ''){
+      if (userData.last_name !== '' || userData.last_name !== null){
         formdata.append('user_data.last_name', userData.last_name)
       }
-      if (playerData.gender !== ''){
+      if (playerData.gender.length > 0 && playerData.gender !== null && playerData.gender !== undefined){
+        console.log(typeof playerData.gender)
         formdata.append('player_data.gender', playerData.gender)
       }
-      if (playerData.nationality !== ''){
-        formdata.append('player_data.nationality', playerData.nationality)
-      }
-      if (playerData.position !== ''){
+      if (playerData.position !== 0 && playerData.position !== null && playerData.position !== undefined){
         formdata.append('player_data.position', playerData.position)
       }
-      if (typeof playerData.photo[0] === "object") {
+      if (typeof playerData.photo[0] === "object" || playerData.photo[0] === null || playerData.photo[0] === undefined) {
         formdata.append('player_data.photo', playerData.photo[0])
       }
-      
+      for (var value of formdata.values()) {
+        console.log(value);
+     }
       axios
         .patch(url, formdata, config)
         .then((res) =>{
@@ -166,12 +173,19 @@ const PerfilModal = (props) => {
   
   
   const handleUserInputChange = (e) => {
+    setDisabledBtn(false)
     setUserData({
       ...userData,
       [e.target.name]: e.target.value
     })
   }
   const handlePlayerInputChange = (e) => {
+    if (parseInt(e.target.value) === 0){
+      setDisabledBtn(true)
+    }else{
+
+      setDisabledBtn(false)
+    }
     if (e.target.name === "position") {
       setPlayerData({
         ...playerData,
@@ -186,6 +200,7 @@ const PerfilModal = (props) => {
   }
 
   const handleImageChange = (e) => {
+    setDisabledBtn(false)
     setPlayerData({
       ...playerData,
       [e.target.name]: e.target.files
@@ -269,8 +284,9 @@ const PerfilModal = (props) => {
                 <Form.Group className="mb-2">
                   <Form.Label className="text-secondary mb-0">Posición:</Form.Label>
                   <Form.Select size="sm" name="position" defaultValue={playerData.position} onChange={handlePlayerInputChange}>
+                    <option key={0} value={0}>Elige una opción...</option>
                     {positions.map((position, index)=>{
-                      return (<option key={index.toString()} value={position.id}>{position.position_name}</option>)
+                      return (<option key={(index+1).toString()} value={position.id}>{position.position_name}</option>)
                     })}
                   </Form.Select>
                 </Form.Group>
@@ -278,7 +294,7 @@ const PerfilModal = (props) => {
                   <ActionBtn 
                     action="Actualizar" 
                     btn_type="submit" 
-                    btn_disable={false} 
+                    btn_disable={disabledBtn} 
                     aria-controls="collapse-loader"
                     aria-expanded={open}
                   />
