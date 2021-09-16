@@ -1,165 +1,33 @@
 // const { default: MatchResume } = require("components/MatchResume")
 import './admingames.scss'
-import "flatpickr/dist/themes/dark.css";
 import MatchResume from "components/MatchResume"
 import {Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
 import { Link } from 'react-router-dom';
-import Flatpickr from 'react-flatpickr';
-import DatePicker from 'react-datepicker';
-import TimePicker from 'rc-time-picker';
+// import MomentUtils from '@date-io/moment';
+// import DatePicker from 'react-datepicker';
+import {TimePicker, DatePicker} from '@material-ui/pickers'
+import moment from 'moment';
+// import TimePicker from 'rc-time-picker';
 import ActionBtn from 'components/ActionBtn';
 import PendingGame from 'components/PendingGame/PendingGame';
 import ModalMatchAction from 'components/ModalMatchAction/ModalMatchAction';
-import { set } from 'date-fns';
+import { ThemeProvider } from '@material-ui/styles';
+import { createTheme } from '@material-ui/core';
+import { notifySuccess, notifyWarning } from 'Functions/toastFunc';
+import axios from 'axios';
 
-const field_fake = {
-  "name": "planet gol roma norte",
-  "rent_cost": 900,
-  "address": null,
-  "football_type": 1,
-  "photo": "https://django-playtogether-media.s3.amazonaws.com/field_default.jpg",
-  "services": [
-      "Arbitraje"
-  ],
-  "show": false,
-  "total_match_history": 3,
-  "match_history": [
-      {
-          "id": 1,
-          "field": {
-              "name": "planet gol roma norte",
-              "football_type": "Fut7"
-          },
-          "date": "2021-12-29",
-          "time": "08:00:00",
-          "category": "mixto",
-          "places_available": 18,
-          "organizer": {
-              "id": 2,
-              "date_joined": "2021-09-09T17:27:26.958226-05:00",
-              "username": "ferbra",
-              "fields_count": 0,
-              "matches_count": 0
-          },
-          "accepted": true
-      },
-      {
-          "id": 2,
-          "field": {
-              "name": "planet gol roma norte",
-              "football_type": "Fut7"
-          },
-          "date": "2021-12-28",
-          "time": "08:00:00",
-          "category": "mixto",
-          "places_available": 18,
-          "organizer": {
-              "id": 2,
-              "date_joined": "2021-09-09T17:27:26.958226-05:00",
-              "username": "ferbra",
-              "fields_count": 0,
-              "matches_count": 0
-          },
-          "accepted": true
-      },
-      {
-          "id": 3,
-          "field": {
-              "name": "planet gol roma norte",
-              "football_type": "Fut7"
-          },
-          "date": "2021-12-27",
-          "time": "08:00:00",
-          "category": "mixto",
-          "places_available": 18,
-          "organizer": {
-              "id": 2,
-              "date_joined": "2021-09-09T17:27:26.958226-05:00",
-              "username": "ferbra",
-              "fields_count": 0,
-              "matches_count": 0
-          },
-          "accepted": true
-      }
-  ],
-  "pending_matches": [
-      {
-        "id":  6,
-        "field": {
-            "name": "planet gol roma norte",
-            "football_type": "Fut7"
-        },
-        "date": "2021-12-26",
-        "time": "08:00:00",
-        "category": "mixto",
-        "places_available": 18,
-        "organizer": null,
-        "accepted": false
-      },
-      {
-        "id": 1,
-        "field": {
-            "name": "planet gol roma norte",
-            "football_type": "Fut7"
-        },
-        "date": "2021-12-29",
-        "time": "08:00:00",
-        "category": "mixto",
-        "places_available": 18,
-        "organizer": {
-            "id": 7,
-            "date_joined": "2021-09-09T17:27:26.958226-05:00",
-            "username": "ferbra",
-            "fields_count": 0,
-            "matches_count": 0
-        },
-        "accepted": false
+const DateTimePickersTheme = createTheme({
+  palette:{
+    primary: {
+      main:'#28804B',
     },
-    {
-        "id": 2,
-        "field": {
-            "name": "planet gol roma norte",
-            "football_type": "Fut7"
-        },
-        "date": "2021-12-28",
-        "time": "08:00:00",
-        "category": "mixto",
-        "places_available": 18,
-        "organizer": {
-            "id": 9,
-            "date_joined": "2021-09-09T17:27:26.958226-05:00",
-            "username": "ferbra",
-            "fields_count": 0,
-            "matches_count": 0
-        },
-        "accepted": false
-    },
-    {
-        "id": 3,
-        "field": {
-            "name": "planet gol roma norte",
-            "football_type": "Fut7"
-        },
-        "date": "2021-12-27",
-        "time": "08:00:00",
-        "category": "mixto",
-        "places_available": 18,
-        "organizer": {
-            "id": 7,
-            "date_joined": "2021-09-09T17:27:26.958226-05:00",
-            "username": "ferbra",
-            "fields_count": 0,
-            "matches_count": 0
-        },
-        "accepted": false
-    }
-  ]
-}
+  }
+})
 
 const AdminGames = (props) => {
-  const {field,matchUpdate,setMatchUpdate} = props
+  const {field,matchUpdate,setMatchUpdate, toastParams, setToastParams, profileUpdated, setProfileUpdated} = props
   // const [pendingGames, setPendingGames] = useState(field.pending_matches)
   const [totalMatch, setTotalMatch] = useState(field.total_match_history)
   // const [matchHistory, setMatchHistory] = useState(field.match_history)
@@ -170,8 +38,10 @@ const AdminGames = (props) => {
   const [actionBtn, setActionBtn] = useState(()=>()=>{})
   const [listPending, setListPending] = useState("list")
   const [listHistory, setListHistory] = useState("")
+  const [updateDate, setUpdateDate] = useState(moment())
+  const [updateTime, setUpdateTime] = useState(moment())
 
-
+  
   const updateMatch = async (id,organizer,accepted) => {
     try{
       const response = await fetch(`${API_URL}match_update/${id}/`,{
@@ -231,11 +101,76 @@ const AdminGames = (props) => {
     setMatchUpdate(true)
     
   }
+  const handleSelectedDate = (date) => {
+    setUpdateDate(date)
+  }
+  const handleSelectedTime = (time_val) => {
+    setUpdateTime(time_val)
+    // const time_val && time_val.format('HH:mm'))
+  }
 
   useEffect(()=>{
     
   },[field.pending_matches])
 
+  const createNewGame = (e) => {
+    console.log('ejecuntando')
+    e.preventDefault()
+    
+    const selected_date_formatted = updateDate.format('DD-MM-YYYY')
+    const selected_time_formatted = updateTime.format('HH:mm') 
+    if(selected_date_formatted === '' || selected_time_formatted===''){
+      setToastParams({
+        type: 'warning',
+        msg:'¡La fecha y/o la hora son incorrectos. Intentalo nuevamente!',
+        time:1000,
+        activate: true
+      })
+      notifyWarning('La fecha y/o hora son inválidos. Intentalo nuevamente')
+      return
+    }
+    const postNewGame = async (date, time)=>{
+      const response = await postGame(date,time)
+    }
+    postNewGame(selected_date_formatted,selected_time_formatted)
+  }
+  const postGame = async (date,time) =>{
+    const config = {
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${AUTH_TOKEN}`
+      },
+    };
+    const url =`${API_URL}field_manager/match_creation/`;
+    const date_data = {
+      'field': field.id,
+      'date': date,
+      'time': time
+    }
+    try {
+
+      const response = await axios.post(url,date_data,config)
+      const data = response.data;
+      setToastParams({
+        type: 'success',
+        msg:'¡Tu partido se creo con éxito!',
+        time:1000,
+        activate: true
+      })
+      setProfileUpdated(!profileUpdated)
+      
+    } catch (error) {
+      console.log(error);
+      if(error.response.data[0] === 'Ese horario en la cancha seleccionada ya esta ocupado, selecciona otro horario!'){
+        setToastParams({
+          type: 'warning',
+          msg: error.response.data[0],
+          time:2000,
+          activate: true
+        })
+      }
+    }
+  }
 
   return (
     <div className="admin-games-container text-center py-4 px-2 mx-auto ">
@@ -247,15 +182,32 @@ const AdminGames = (props) => {
       >
         <Tab eventKey="partidosCreados" title="Administrar partidos">
           <div className="d-flex flex-wrap justify-content-center align-items-center">
-            <Form className="d-flex justify-content-center flex-wrap">
+            <Form className="d-flex justify-content-center flex-wrap" onSubmit={createNewGame}>
               <Row className="justify-content-center align-items-end">
                 <Col xs={8} md={6} lg={4}>
-                  <Form.Label className="me-2">Fecha: </Form.Label>
-                  <DatePicker disabledKeyboardNavigation className="form-control"  dateFormat="dd-MMMM-yyyy" locale="es" minDate={new Date()} /> 
+                  {/* <Form.Label className="me-2">Fecha: </Form.Label> */}
+                  {/* <DatePicker disabledKeyboardNavigation className="form-control"  dateFormat="dd-MMMM-yyyy" locale="es" minDate={new Date()} selected={updateDate} onChange={(date)=> handleSelectedDate(date)}/>  */}
+                  <ThemeProvider theme={DateTimePickersTheme}>
+                    <DatePicker 
+                    label="Fecha:"
+                      value={updateDate} 
+                      onChange={(date)=> handleSelectedDate(date)}
+                      format="DD/MM/YYYY"
+                      minDate={new Date()}
+                    />
+                  </ThemeProvider>
                 </Col>
                 <Col xs={4} md={3} lg={3}>
-                  <Form.Label className="me-2">Hora: </Form.Label>
-                  <TimePicker placeholder="--:--" disabledHours={() => [0, 1, 2, 3, 4, 5]} showSecond={false} minuteStep={30} hideDisabledOptions />
+                  {/* <Form.Label className="me-2">Hora: </Form.Label> */}
+                  {/* <TimePicker placeholder="--:--" disabledHours={() => [0, 1, 2, 3, 4, 5]} showSecond={false} minuteStep={30} hideDisabledOptions inputReadOnly value={updateTime} onChange={(updateTime) => handleSelectedTime(updateTime)}/> */}
+                  <ThemeProvider theme={DateTimePickersTheme}>
+                    <TimePicker 
+                      label="Hora:"
+                      value={updateTime} 
+                      onChange={(updateTime) => handleSelectedTime(updateTime)}
+                    />
+
+                  </ThemeProvider>
                 </Col>
                 <Col xs={12} md={12} lg={4}>
                   <ActionBtn 
