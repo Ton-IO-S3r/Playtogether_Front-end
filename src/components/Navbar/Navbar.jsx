@@ -4,7 +4,7 @@ import Button from 'components/Buttons/CallActionBtn'
 //RUTAS
 import { Link, NavLink } from 'react-router-dom'
 //IMAGENES
-import {photoAPI, AUTH_TOKEN, AUTH_ID, AUTH_PHOTO, ICONS_URL} from 'Constants/API'
+import {photoAPI, AUTH_TOKEN, AUTH_ID, AUTH_PHOTO, ICONS_URL,AUTH_STAFF} from 'Constants/API'
 //ESTILOS
 import './navbar.scss'
 
@@ -26,7 +26,7 @@ const Navbar = (props) => {
         window.location.href = "/";
 
     }
-    
+
     return (
         <Fragment>
         {/* AQUI INICIA LA NAVBAR */}
@@ -65,10 +65,10 @@ const Navbar = (props) => {
                                 (
                                     <ul className="navbar-nav">
                                     <li className="nav-item align-self-center mx-3">
-                                        <Link className={`search-games ${window.location.pathname == "/partidos/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/partidos/'>Buscar Partidos</Link>
+                                        <Link className={`${AUTH_STAFF === true ? 'd-none' : 'd-block'} search-games ${window.location.pathname == "/partidos/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/partidos/'>Buscar Partidos</Link>
                                     </li>
                                     <li className="nav-item align-self-center mx-4">
-                                    <Link className={`search-games ${window.location.pathname == "/crear-partido/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/crear-partido/'>Crear Partido</Link>
+                                    <Link className={`${AUTH_STAFF === true ? 'd-none' : 'd-block'} search-games ${window.location.pathname == "/crear-partido/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/crear-partido/'>Organizar Partido</Link>
                                         {/* <Link className="search-games" to='/crear-partido/'>Crear Partido</Link> */}
                                     </li>
                                     <div className="nav-photo" onClick={()=>{setShow(!show)}} >
@@ -112,13 +112,15 @@ const Navbar = (props) => {
 
                 <div className="navbar-nav swing-in-top-bck">
                     <div className="nav-item align-self-center mt-4 ">
-                        <Link className="a-menu" to={`/usuarios/${AUTH_ID}`}>Ver Perfil</Link>
+                     <Link className="a-menu" to={AUTH_STAFF ? `/admin/${AUTH_ID}` : `/usuarios/${AUTH_ID}`} >Ver Perfil</Link>
+                          
+                        
                     </div>
                     <div className="nav-item align-self-center mt-4 ">
                         <Link className="a-menu" to='/partidos/'>Buscar Partidos</Link>
                     </div>
                     <div className="nav-item align-self-center mt-4 ">
-                        <Link className="a-menu" to='/crear-partido/'>Crear Partidos</Link>
+                        <Link className="a-menu" to='/crear-partido/'>Organizar Partidos</Link>
                     </div>
                     <div className="d-flex justify-content-center mt-3 mb-3">
                         <div className="nav-item align-self-center ">
@@ -136,7 +138,9 @@ const Navbar = (props) => {
         {show ? (
             <div className="floating-menu d-none d-lg-block swing-in-top-bck" >
                 <div className="d-flex flex-column">
-                    <Link className="align-self-center mt-4 a-menu" to={`/usuarios/${AUTH_ID}`}>Ver Perfil</Link>
+                <Link className="align-self-center mt-4 a-menu" to={AUTH_STAFF ? `/admin/${AUTH_ID}` : `/usuarios/${AUTH_ID}` }>Ver Perfil</Link>
+                         
+                    
                     <div className="align-self-center ">
                         {/* <Link type="button" className=" btn-outline" >Cerrar Sesion</Link> */}
                         <Button className="btn-outline" style={{backgroundColor: "transparent",color: "#28804B"}} onClick={handleLogOut} text="Cerrar Sesion"/>

@@ -22,6 +22,11 @@ const lastnRef = useRef()
 const emailRef = useRef()
 const pwdRef = useRef()
 
+const userManagerRef = useRef()
+const nameManagerRef = useRef()
+const emailManagerRef = useRef()
+const pwdManagerRef = useRef()
+
 //FUNCION PARA HACER REGISTRO A LA API (POST)
 const SignUpPlayer = async(username,first_name,last_name,email,password) => {
     try{
@@ -46,7 +51,7 @@ const SignUpPlayer = async(username,first_name,last_name,email,password) => {
   }
 const SignUpField = async(username,first_name,email,password) => {
     try{
-      const response = await fetch(`${API_URL}signup_fieldadmin/`, {
+      const response = await fetch(`${API_URL}signup_field_manager/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,10 +103,10 @@ const SignUpField = async(username,first_name,email,password) => {
     const handleSubmitField = async(e) => {
       e.preventDefault();
       //INPUTS
-      const username = usernRef.current.value 
-      const name = nameRef.current.value 
-      const email = emailRef.current.value 
-      const password = pwdRef.current.value 
+      const username = userManagerRef .current.value 
+      const name = nameManagerRef.current.value 
+      const email = emailManagerRef.current.value 
+      const password = pwdManagerRef.current.value 
     
       //VALIDAR CAMPOS VACIOS
       if (username === '' || name === '' || email === '' || password === ''){
@@ -176,19 +181,19 @@ const SignUpField = async(username,first_name,email,password) => {
                           <Form className="d-flex flex-column" onSubmit={handleSubmitField} >
                             <Form.Group className="mb-4" controlId="formBasicEmail">
                               <Form.Label className="text-secondary">Nombre de Usuario:</Form.Label>
-                              <Form.Control className="text-success" ref={usernRef}  type="text" placeholder="Nombre de usuario" maxLength="20" />
+                              <Form.Control className="text-success" ref={userManagerRef}  type="text" placeholder="Nombre de usuario" maxLength="20" />
                               </Form.Group>
                             <Form.Group className="mb-4" controlId="formBasicPassword">
                               <Form.Label className="text-secondary">Nombre de Administrador:</Form.Label>
-                              <Form.Control className="text-success" ref={nameRef}  type="text" placeholder="Nombre" />
+                              <Form.Control className="text-success" ref={nameManagerRef}  type="text" placeholder="Nombre" />
                             </Form.Group>
                             <Form.Group className="mb-4" controlId="formBasicPassword">
                               <Form.Label className="text-secondary">Correo Electronico:</Form.Label>
-                              <Form.Control className="text-success" ref={emailRef}  type="email" placeholder="Correo electronico" />
+                              <Form.Control className="text-success" ref={emailManagerRef}  type="email" placeholder="Correo electronico" />
                             </Form.Group>
                             <Form.Group className="mb-5" controlId="formBasicPassword">
                               <Form.Label className="text-secondary">Contraseña:</Form.Label>
-                              <Form.Control className="text-success" ref={pwdRef}  type="password" placeholder="Contraseña" />
+                              <Form.Control className="text-success" ref={pwdManagerRef}  type="password" placeholder="Contraseña" />
                             </Form.Group>
                             
                             <Button className="align-self-center mt-5 btn-login" type="submit" >

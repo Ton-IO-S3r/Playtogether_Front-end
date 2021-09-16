@@ -11,6 +11,8 @@ import DatePicker from 'react-datepicker';
 import TimePicker from 'rc-time-picker';
 import ActionBtn from 'components/ActionBtn';
 import PendingGame from 'components/PendingGame/PendingGame';
+import ModalMatchAction from 'components/ModalMatchAction/ModalMatchAction';
+import { set } from 'date-fns';
 
 const field_fake = {
   "name": "planet gol roma norte",
@@ -84,7 +86,7 @@ const field_fake = {
   ],
   "pending_matches": [
       {
-        "id": 6,
+        "id":  6,
         "field": {
             "name": "planet gol roma norte",
             "football_type": "Fut7"
@@ -156,10 +158,85 @@ const field_fake = {
   ]
 }
 
-const AdminGames = ({field}) => {
-  const [pendingGames, setPendingGames] = useState(field_fake.pending_matches)
+const AdminGames = (props) => {
+  const {field,matchUpdate,setMatchUpdate} = props
+  // const [pendingGames, setPendingGames] = useState(field.pending_matches)
   const [totalMatch, setTotalMatch] = useState(field.total_match_history)
-  const [matchHistory, setMatchHistory] = useState(field.match_history)
+  // const [matchHistory, setMatchHistory] = useState(field.match_history)
+  const [modalShow, setModalShow] = useState(false);
+  const [title, setTitle]= useState("")
+  const [action, setAction] = useState("")
+  const [textBtn, setTextBtn] = useState("")
+  const [actionBtn, setActionBtn] = useState(()=>()=>{})
+  const [listPending, setListPending] = useState("list")
+  const [listHistory, setListHistory] = useState("")
+
+
+  const updateMatch = async (id,organizer,accepted) => {
+    try{
+      const response = await fetch(`${API_URL}match_update/${id}/`,{
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        },
+        body: JSON.stringify({
+          organizer,
+          accepted,
+
+        })
+        
+      })
+      return response
+    }catch (error){
+      console.log(error)
+    }
+  }
+
+  const deleteMatch = async (id) => {
+    try{
+      const response = await fetch(`${API_URL}field_manager/match_update/${id}/`,{
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        }
+      })
+      return response
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  const handleAccept = async (id,organizer) =>{
+    console.log(organizer)
+    let accepted = true
+    const response = await updateMatch(id,organizer,accepted)
+    setModalShow(false)
+    setMatchUpdate(true)
+    
+    
+  }
+  const handleDeny = async (id) =>{
+    let accepted=false
+    let organizer=""
+    const response = await updateMatch(id,organizer,accepted)
+    setModalShow(false)
+    setMatchUpdate(true)
+    
+  }
+  const handleDelete = async (id) =>{
+    const response = await deleteMatch(id)
+    setModalShow(false)
+    setMatchUpdate(true)
+    
+  }
+
+  useEffect(()=>{
+    
+  },[field.pending_matches])
+
+
   return (
     <div className="admin-games-container text-center py-4 px-2 mx-auto ">
       <Tabs
@@ -194,15 +271,38 @@ const AdminGames = ({field}) => {
           </div>
             
           <hr />
+          
           <div className="matches-list-container text-center">
-            {
-              pendingGames.length > 0 ? 
-                pendingGames.map((game,index)=>(
+            { field.pending_matches.length > 0 ? 
+              field.pending_matches.map((game,index)=>(
                   <PendingGame
                     key={index.toString()}
                     date={game.date}
                     time={game.time}
                     organizer={game.organizer}
+                    accept={()=>{
+                      setModalShow(true)
+                      setTitle("Aceptar Partido")
+                      setAction(`Aceptar el partido?`)
+                      setTextBtn("Aceptar")
+                      setActionBtn(()=>()=>handleAccept(game.id,game.organizer.id))
+                      }}
+                    deny={
+                      ()=>{
+                      setModalShow(true)
+                      setTitle("Denegar Partido")
+                      setAction(`Rechazar el partido?`)
+                      setTextBtn("Rechazar")
+                      setActionBtn(()=>()=>(handleDeny(game.id)))}}
+                    elimn={()=>{
+                      setModalShow(true)
+                      setTitle("Eliminar Partido")
+                      setAction(`Eliminar el partido?`)
+                      setTextBtn("Eliminar")
+                      setActionBtn(()=>()=>(handleDelete(game.id)))
+                      }}
+                    
+                    
                   />
                 ))
               :
@@ -221,8 +321,8 @@ const AdminGames = ({field}) => {
           </div> 
           <hr />
           <div className="history-match text-center">
-            { matchHistory.length > 0 ?
-              matchHistory.map((match, index) => (
+            { field.match_history.length > 0 ?
+              field.match_history.map((match, index) => (
                 <Link key={index.toString()} id={match.id} to={`/partidos/${match.id}`} className="game-link">
                   <MatchResume  
                     date={match.date} 
@@ -241,8 +341,9 @@ const AdminGames = ({field}) => {
           </div>
         </Tab>
       </Tabs>
+      <ModalMatchAction show={modalShow} onHide={()=> setModalShow(false)} title={title} action={action} actionBtn={actionBtn} textBtn={textBtn}/>
     </div>
+    
   )
 }
-
 export default AdminGames

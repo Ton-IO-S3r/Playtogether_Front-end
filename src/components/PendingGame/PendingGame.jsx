@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import './pending_game.scss'
 
-const PendingGame = ({date, time, game_id, organizer}) => {
+const PendingGame = ({date, time, game_id, organizer,accept,deny,elimn}) => {
   let formatted_time=""
   if(time !== '' && time !== undefined){
     const time_array = time.split(':')
@@ -55,9 +55,9 @@ const PendingGame = ({date, time, game_id, organizer}) => {
                 </div>
               </div>
               <div className="btns-container d-flex flex-column flex-md-row align-items-center justify-content-around my-sm-1">
-                <Button className="accept mb-1 mb-md-0 " size="sm">Aceptar</Button>
-                <Button className="cancel mb-1 mb-md-0 " size="sm">Rechazar</Button>
-                <Button className="delete mb-1 mb-md-0 " size="sm">Eliminar</Button>
+                <Button className="accept mb-1 mb-md-0 " size="sm" onClick={accept}>Aceptar</Button>
+                <Button className="cancel mb-1 mb-md-0 " size="sm" onClick={deny}>Rechazar</Button>
+                <Button className="delete mb-1 mb-md-0 " size="sm" onClick={elimn}>Eliminar</Button>
                 
               </div>
             </div>
@@ -90,7 +90,7 @@ const PendingGame = ({date, time, game_id, organizer}) => {
                 </div>
               </div>
               <div className="btns-container d-flex align-items-center justify-content-around my-md-1">
-                <Button className="delete" size="sm">Eliminar</Button>
+                <Button className="delete" size="sm" onClick={elimn}>Eliminar</Button>
                 
               </div>
             </div>
