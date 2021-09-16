@@ -8,7 +8,7 @@ import ModalPerfil from 'components/PerfilModal/PerfilModal'
 import {AUTH_ID, IMAGES_URL, ICONS_URL} from 'Constants/API'
 
 const background_img=Math.floor((Math.random() * 5)+1);
-const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, toastParams, setToastParams, profileUpdated, setProfileUpdated}) => {
+const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, user_position, user_dominant_foot, user_date_joined, toastParams, setToastParams, profileUpdated, setProfileUpdated,teammateList}) => {
   //Params
   const id = useParams().id
   const [modalShow, setModalShow] = useState(false);
@@ -33,16 +33,16 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
           
           <h5 className="text-capitalize">{user_first_name} {user_last_name}</h5>
           <p>@ {user_username}</p>
-          {/* <div className="d-flex mb-4">
+          <div className="d-flex mb-4">
             <div className="d-flex mx-1 justify-content-between align-items-center followers">
                 <img className="mx-2" src={`${ICONS_URL}followers.svg`}/>
-                <p className="mx-2 mb-0 p-0 total-follow">{teammates.length}</p>
+                <p className="mx-2 mb-0 p-0 total-follow">{teammateList.total_followers}</p>
             </div>
             <div className="d-flex mx-1 justify-content-between align-items-center followers">
                 <img className="mx-2" src={`${ICONS_URL}followed.svg`}/>
-                <p className="mx-2 mb-0 p-0 total-follow">1000</p>
+                <p className="mx-2 mb-0 p-0 total-follow">{teammateList.total_followings}</p>
             </div>
-        </div> */}
+        </div>
         {
           id !== AUTH_ID ? 
           <span class="badge position-absolute top-0 start-100 bounce-top badge-follow">

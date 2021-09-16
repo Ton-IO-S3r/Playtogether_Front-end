@@ -35,13 +35,12 @@ const PerfilUsuario = () => {
   const [profileUpdated,setProfileUpdated] = useState(false);
   const [userCreatedMatch , setUserCreatedMatch] = useState({})
   const [totalMatchCreated, setTotalMatchCreated] = useState({})
-  const [teammate,setTeamMates] = useState([])
+  const [teammateList,setTeamMatesList] = useState({})
   
   useEffect(() => {
     const getUserData = async () => {
       const dataFromServer = await getUser()
       setUserData(dataFromServer)
-      setTeamMates(dataFromServer.players.teammates)
 
       // localStorage.setItem("player_photo",dataFromServer.players.photo.split(".com/")[1])
     }
@@ -51,9 +50,15 @@ const PerfilUsuario = () => {
       setUserCreatedMatch(matchesCreated)
       
     }
+
+    const getTeamMates = async () => {
+      const matesList = await getUserTeamMates()
+      setTeamMatesList(matesList)
+    }
     
     getUserMatches()
     getUserData()
+    getTeamMates()
   },[profileUpdated,id])
 
   //SE DECLARAN PARAMETROS INCIALES PARA LA ACTIVACION DEL TOAST
@@ -104,6 +109,22 @@ const PerfilUsuario = () => {
       console.log(error);
     }
   }
+  const getUserTeamMates = async ()=>{
+    try {
+      const response = await fetch(`${API_URL}players/teammates_list/${id}/`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        },
+      });
+      const data = await response.json();
+      
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   
   return (
@@ -122,7 +143,7 @@ const PerfilUsuario = () => {
                 user_username={userData.username}
                 user_position={userData.players.position}
                 user_dominant_foot={userData.players.dominant_food}
-                
+                teammateList={teammateList}
                 user_date_joined={userData.date_joined.split("T")[0].split("-").reverse().join("/")}
                 profileUpdated = {profileUpdated}
                 setProfileUpdated = {setProfileUpdated}
