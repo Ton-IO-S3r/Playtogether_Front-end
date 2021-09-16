@@ -44,6 +44,7 @@ const AdministradorCancha = () => {
   const [fieldAdminData, setFieldAdminData] = useState(admin);
   const [profileUpdated,setProfileUpdated] = useState(false);
   const [matchUpdate, setMatchUpdate] = useState(false)
+  const [fieldActive,setFieldActive]=useState(false)
   // const [userCreatedMatch , setUserCreatedMatch] = useState({})
   // const [totalMatchCreated, setTotalMatchCreated] = useState({})
   
@@ -99,10 +100,11 @@ const AdministradorCancha = () => {
     const getFieldAdminData = async () => {
       const dataFromServer = await getFieldAdmin()
       setFieldAdminData(dataFromServer)
+      setFieldActive(dataFromServer.managers.field.show)
     }
     getFieldAdminData()
     
-  },[profileUpdated,matchUpdate])
+  },[profileUpdated,matchUpdate, fieldActive])
   // },[profileUpdated,id])
   const getFieldAdmin = async () => {
     try {
@@ -172,7 +174,9 @@ const AdministradorCancha = () => {
                     type={footballTypes[fieldAdminData.managers.field.football_type]}
                     img={fieldAdminData.managers.field.photo}
                     services={fieldAdminData.managers.field.fields_services}
-                    show_field={fieldAdminData.managers.field.show}
+                    // show_field={fieldAdminData.managers.field.show}
+                    fieldActive={fieldActive}
+                    setFieldActive={setFieldActive}
                     servicesObj={servicesObj}
                     setModalShow={setModalShow}
                   />
