@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const UserMatches = ({matches, fields, num_matches , matchCreated, numOfMatchCreated}) => {
   console.log(matchCreated)
-  const badgeMatch = (<div className="d-flex align-items-center"><p className="m-0 me-2">Partidos Organizados</p><span class={`${numOfMatchCreated === 0 ? "d-none" : "d-block"} badge  bg-pt`}>{numOfMatchCreated}</span></div>)
+  const badgeMatch = (<div className="d-flex align-items-center"><p className="m-0 me-2">Partidos Organizados</p><span className={`${numOfMatchCreated === 0 ? "d-none" : "d-block"} badge  bg-pt`}>{numOfMatchCreated}</span></div>)
   return (
     <div className="user-matches-container text-center py-4 px-2 mx-auto ">
       <Tabs

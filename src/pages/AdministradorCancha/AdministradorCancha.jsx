@@ -104,7 +104,7 @@ const AdministradorCancha = () => {
     }
     getFieldAdminData()
     
-  },[profileUpdated,matchUpdate, fieldActive])
+  },[profileUpdated, matchUpdate, fieldActive])
   // },[profileUpdated,id])
   const getFieldAdmin = async () => {
     try {
@@ -182,7 +182,15 @@ const AdministradorCancha = () => {
                   />
                 </Col>
                 <Col sm={12} md={7} lg={8} className="p-0 p-md-1 p-lg-3">
-                  <AdminGames field={fieldAdminData.managers.field} matchUpdate={matchUpdate} setMatchUpdate={setMatchUpdate}/>
+                  <AdminGames 
+                    field={fieldAdminData.managers.field} 
+                    matchUpdate={matchUpdate} 
+                    setMatchUpdate={setMatchUpdate}
+                    toastParams={toastParams}
+                    setToastParams = {setToastParams}
+                    profileUpdated={profileUpdated}
+                    setProfileUpdated = {setProfileUpdated}
+                  />
                 </Col>
               </>
             :
@@ -197,6 +205,7 @@ const AdministradorCancha = () => {
         </Container>
       </Container>
       <Footer/>
+      <Toast/>
     </> 
     
   )

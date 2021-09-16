@@ -56,10 +56,9 @@ const CardPerfil = ({avatar, user_first_name, user_last_name, user_username, use
         <div className="d-flex justify-content-around position-container">
           <p>Posición:</p> <h6 className="text-capitalize">{user_position}</h6>
         </div>
-        <div className="d-flex justify-content-around foot-container">
+        {/* <div className="d-flex justify-content-around foot-container">
           <p>Perfil:</p> <h6 className="text-capitalize">{user_dominant_foot}</h6>
-        </div>
-        
+        </div> */}
         <p className="date-joined-p">Jugando fútbol desde: <strong>{user_date_joined}</strong></p>
       </div>
 

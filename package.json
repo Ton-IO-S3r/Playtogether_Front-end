@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/moment": "1.x",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/pickers": "^3.3.10",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -13,6 +15,7 @@
     "date-fns": "^2.23.0",
     "flatpickr": "^4.6.9",
     "hamburger-react": "^2.4.1",
+    "moment": "^2.29.1",
     "node-sass": "4.14.1",
     "rc-time-picker": "^3.7.3",
     "react": "^17.0.2",
