@@ -15,7 +15,7 @@ const IMAGES_URL = "https://pt-media-s3.s3.us-east-2.amazonaws.com/assets/images
 
 const AUTH_TOKEN = localStorage.getItem("token");
 const AUTH_ID = localStorage.getItem("id")
-const AUTH_STAFF = JSON.parse(localStorage.getItem("staff"))
+const AUTH_STAFF = localStorage.getItem("staff")
 const AUTH_PHOTO = localStorage.getItem("player_photo")
 const isAuthenticated = localStorage.getItem("token");
 export {API_URL, photoAPI,AUTH_TOKEN,AUTH_ID,imgField, ICONS_URL, AUTH_PHOTO,isAuthenticated,BACKGROUNDS_URL, IMAGES_URL, AUTH_STAFF}

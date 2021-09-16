@@ -205,6 +205,8 @@ validateNumOfTeam ()
   }else{
     isActivate = true
   }
+
+  console.log(match)
   return (
     <>
     {
@@ -244,6 +246,7 @@ validateNumOfTeam ()
               isActivate={isActivate}
               teamsFull ={teamsFull}
               inTeam = {result}
+              isAccepted={match.accepted}
               />
             </Col>
             <Col sm={12} md={7} className="p-0 p-lg-3">
@@ -257,6 +260,7 @@ validateNumOfTeam ()
                 inTeam = {result}
 
                 organizer={organizer}
+                isAccepted={match.accepted}
               />
             </Col>
           </Row>

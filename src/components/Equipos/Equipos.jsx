@@ -2,11 +2,11 @@ import './equipos.scss'
 import JugadorEquipo from '../JugadorEquipo'
 import { useEffect, useState } from 'react'
 import Btn from 'components/Buttons/CallActionBtn'
-import { isAuthenticated } from 'Constants/API'
+import { isAuthenticated, AUTH_STAFF } from 'Constants/API'
 
 const Equipos = (props) => {
   const { field, team } = props.match
-  const {onClick,showButton,onClickLeave,isActivate,teamsFull, inTeam, organizer} = props
+  const {onClick,showButton,onClickLeave,isActivate,teamsFull, inTeam, organizer,isAccepted} = props
 
   const [teamW, setTeamW] = useState(team[0])
   const [teamB, setTeamB] = useState(team[1])
@@ -126,12 +126,14 @@ const Equipos = (props) => {
       } */}
 
       {
-        isActivate === false ? (<div className="alert alert-warning">Partido finalizado</div>) 
-        : 
-        (teamsFull === true && inTeam !== "" ? ( !isAuthenticated ? (<Btn className="mb-3 d-lg-none" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className="d-lg-none" text="Unirse" onClick={onClick}/> : <Btn className="d-lg-none" text="Dejar" onClick={onClickLeave}/>)) 
+        isAccepted === false ? <div className="alert alert-warning flex-fill" style={{textAlign: "center"}}>Partido en espera de ser aceptado</div>
         :
-        (teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success" >Partido lleno</div> : ( !isAuthenticated ? (<Btn className="mb-3 d-lg-none" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className="d-lg-none" text="Unirse" onClick={onClick}/> : <Btn className="d-lg-none" text="Dejar" onClick={onClickLeave}/>)) )
-        )
+        (isActivate === false ? (<div className="alert alert-secondary">Partido finalizado</div>) 
+        : 
+        (teamsFull === true && inTeam !== "" ? ( !isAuthenticated ? (<Btn className="mb-3 d-lg-none" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className={`${ AUTH_STAFF === true ? 'd-none' : 'd-lg-none' } `} text="Unirse" onClick={onClick}/> : <Btn className="d-lg-none" text="Dejar" onClick={onClickLeave}/>)) 
+        :
+        (teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success" >Partido lleno</div> : ( !isAuthenticated ? (<Btn className="mb-3 d-lg-none" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className={`${AUTH_STAFF === true ? 'd-none' : 'd-lg-none' } `} text="Unirse" onClick={onClick}/> : <Btn className="d-lg-none" text="Dejar" onClick={onClickLeave}/>)) )
+        ))
       } 
 
       

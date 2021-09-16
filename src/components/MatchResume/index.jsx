@@ -2,7 +2,7 @@ import { ICONS_URL } from 'Constants/API';
 import React from 'react'
 import './matchresume.scss'
 
-const MatchResume = ({date, time, field_name, match_type, category, available}) => {
+const MatchResume = ({date, time, field_name, match_type, category, available, displayC="d-block",accepted=true}) => {
   let formatted_time=""
   if(time !== '' && time !== undefined){
     const time_array = time.split(':')
@@ -13,6 +13,7 @@ const MatchResume = ({date, time, field_name, match_type, category, available}) 
   const monthNames = ["ene", "feb", "mar", "abr", "may", "jun",
   "jul", "ago", "sep", "oct", "nov", "dic"];
   let [year,month,day] = date.split("-")
+  console.log(accepted)
   return (
     <div className="match-resume-cont d-flex justify-content-start align-items-center mt-2 mb-3 mx-auto">
       <div className="d-flex align-items-center justify-content-center  w-25 date-container py-1">
@@ -21,6 +22,9 @@ const MatchResume = ({date, time, field_name, match_type, category, available}) 
       <div className="d-flex flex-column w-75 ms-2 pe-2 justify-content-center match-details-container position-relative">
         {available !== undefined ?
           (<span className={`badge bg-${available<=3 ? 'danger ':'secondary'} position-absolute top-0 start-0 translate-middle-x ${available<=3 ? 'blink-1':''} `}>{available} {available===1?'lugar disponible':'lugares disponibles'}</span>):(<></>)
+        }
+        {accepted === false ?
+          (<span className={`badge bg-warning secondary position-absolute top-0 start-0 translate-middle-x  `}>Partido en aprobacion</span>):(<></>)
         }
         
 
@@ -34,7 +38,7 @@ const MatchResume = ({date, time, field_name, match_type, category, available}) 
             <img src={`${ICONS_URL}clock.svg`} alt="hora" className="icons-cancha time mb-1" />
             <h5 className="my-0">{formatted_time}</h5>
           </div>) : (<></>)}
-          <div className="category d-flex flex-column justify-content-center align-items-center me-1 flex-wrap">
+          <div className={`category d-flex ${displayC} flex-column justify-content-center align-items-center me-1 flex-wrap`}>
             <img 
               src={`${ICONS_URL}${category.toLowerCase()}.svg`} 
               alt="tipo-partido" 

@@ -16,6 +16,7 @@ import CanchaAdmin from 'components/CanchaAdmin';
 import AdminGames from 'components/AdminGames/AdminGames';
 import axios from 'axios';
 
+
 const admin = 
   {
     "username": "",
@@ -42,6 +43,7 @@ const AdministradorCancha = () => {
   const {id} = useParams();
   const [fieldAdminData, setFieldAdminData] = useState(admin);
   const [profileUpdated,setProfileUpdated] = useState(false);
+  const [matchUpdate, setMatchUpdate] = useState(false)
   // const [userCreatedMatch , setUserCreatedMatch] = useState({})
   // const [totalMatchCreated, setTotalMatchCreated] = useState({})
   
@@ -100,7 +102,7 @@ const AdministradorCancha = () => {
     }
     getFieldAdminData()
     
-  },[profileUpdated])
+  },[profileUpdated,matchUpdate])
   // },[profileUpdated,id])
   const getFieldAdmin = async () => {
     try {
@@ -176,7 +178,7 @@ const AdministradorCancha = () => {
                   />
                 </Col>
                 <Col sm={12} md={7} lg={8} className="p-0 p-md-1 p-lg-3">
-                  <AdminGames field={fieldAdminData.managers.field}/>
+                  <AdminGames field={fieldAdminData.managers.field} matchUpdate={matchUpdate} setMatchUpdate={setMatchUpdate}/>
                 </Col>
               </>
             :
