@@ -8,9 +8,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 
-const CanchaAdmin = ({fieldAdminData,name,cost,address,type,img,services,setModalShow, servicesObj, show_field}) => {
-  //Estado para almacenar los servicios
-  const [fieldActive,setFieldActive]=useState(show_field)
+const CanchaAdmin = ({fieldAdminData, fieldActive, setFieldActive, name,cost,address,type,img,services,setModalShow, servicesObj, show_field}) => {
+  // const [fieldActive,setFieldActive]=useState(show_field)
   
   useEffect(()=>{
     setFieldActive(fieldAdminData.managers.field.show)

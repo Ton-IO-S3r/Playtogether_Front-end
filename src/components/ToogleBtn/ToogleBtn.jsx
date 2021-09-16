@@ -37,13 +37,6 @@ const GreenSwitch = withStyles((theme)=>({
 }))(Switch);
 
 const ToogleBtn = ({fieldId,fieldActive,setFieldActive}) => {
-  // useEffect(()=>{
-  //   const setFieldStatus = async()=>{
-  //     const data = await updateFieldStatus(fieldActive)
-  //     setFieldActive(data.show)
-  //   }
-  //   setFieldStatus();
-  // },[fieldActive])
 
   const updateFieldStatus = async (field_val) => {
     try{
