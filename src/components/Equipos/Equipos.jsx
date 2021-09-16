@@ -12,7 +12,6 @@ const Equipos = (props) => {
   const [teamB, setTeamB] = useState(team[1])
   // const [modalShow, setModalShow] = useState(false);
   const [availablePlaces, setAvailablePlaces] = useState(0)
-
   useEffect(()=>{
     if (team[0].name.includes("a")){
       setTeamW(team[0])
@@ -54,7 +53,6 @@ const Equipos = (props) => {
     return players
     
   }
-  
   return (
     <div className="match-container px-1 px-lg-1 pb-2 pt-2">
       <h5 className="fs-3 fw-bolder my-4">

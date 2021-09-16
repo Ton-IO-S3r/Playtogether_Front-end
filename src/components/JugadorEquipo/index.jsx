@@ -5,7 +5,6 @@ const JugadorEquipo = ({player_data,order,organizer,positionOrg}) => {
   
   const user_noPicURL =`${photoAPI}avatar_default.png`
   const user_pic_URL=player_data.photo
-  
   if (Object.keys(player_data).length === 0) {
     return (
       // <div className="d-flex flex-column justify-content-center align-items-center jugador mb-3">

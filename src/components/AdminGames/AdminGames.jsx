@@ -65,7 +65,7 @@ const AdminGames = (props) => {
 
   const deleteMatch = async (id) => {
     try{
-      const response = await fetch(`${API_URL}field_manager/match_update/${id}/`,{
+      const response = await fetch(`${API_URL}match_update/${id}/`,{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -259,7 +259,7 @@ const AdminGames = (props) => {
                 ))
               :
               <>
-                <h2>Aún no has creado ningún partido.</h2>
+              <p className="text-center fw-bold">Aún no has creado ningún partido</p>
               </>
             }
           </div>
@@ -268,7 +268,7 @@ const AdminGames = (props) => {
         <div className="d-flex flex-wrap justify-content-center align-items-center">
             <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
             <h5 className="fw-bold">Historial de Partidos:</h5>
-              <h4 className="mx-3">{totalMatch}</h4>
+              <h4 className="mx-3">{field.total_match_history}</h4>
             </div>
           </div> 
           <hr />
@@ -286,7 +286,7 @@ const AdminGames = (props) => {
                 </Link>
               ))
               :
-              (<p className="text-center fw-bold">Aun no generas historial, da de alta partidos.</p>)
+              (<p className="text-center fw-bold">Aún no generas historial, da de alta partidos.</p>)
             }
            
 
