@@ -74,7 +74,7 @@ const CreateGame = (props) => {
                       <Col md="1" lg="1" xl="1" className="d-none d-md-block"></Col>
                       <Col md="10" lg="10" xl="10">
                       
-                      <Carousel className="carrousel-create" breakPoints={breakPoints} renderArrow={myArrow}  >
+                      <Carousel className="carrousel-create" breakPoints={breakPoints} renderArrow={myArrow} pagination={false} >
                       {/* enableAutoPlay autoPlaySpeed={5000} */}
                       
 

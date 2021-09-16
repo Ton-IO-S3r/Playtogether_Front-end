@@ -116,10 +116,10 @@ const Navbar = (props) => {
                           
                         
                     </div>
-                    <div className="nav-item align-self-center mt-4 ">
+                    <div className={`nav-item align-self-center mt-4`}>
                         <Link className="a-menu" to='/partidos/'>Buscar Partidos</Link>
                     </div>
-                    <div className="nav-item align-self-center mt-4 ">
+                    <div className={`${AUTH_STAFF === true ? 'd-none': 'd-block'} nav-item align-self-center mt-4`}>
                         <Link className="a-menu" to='/crear-partido/'>Organizar Partidos</Link>
                     </div>
                     <div className="d-flex justify-content-center mt-3 mb-3">

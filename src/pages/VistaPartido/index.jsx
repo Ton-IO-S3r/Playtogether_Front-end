@@ -206,7 +206,6 @@ validateNumOfTeam ()
     isActivate = true
   }
 
-  console.log(match)
   return (
     <>
     {

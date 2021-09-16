@@ -63,6 +63,8 @@ const ModalPartido = (props) => {
   const [idMatch, setId] = useState("")
   const [matches, setMatches] = useState([])
   const [category,setCategory] = useState("")
+  const [date, setDate] = useState("")
+  const [time, setTime] = useState("")
 
   const organizeMatch = async (id,organizer,category) => {
     try{
@@ -86,7 +88,7 @@ const ModalPartido = (props) => {
   const handleOrganize= async (e) =>{
     e.preventDefault()
 
-    if(idMatch === "" && category === ""){
+    if(idMatch === "" || category === ""){
       notifyWarning("Selecciona el partido y la categoria")
       return
     }
@@ -105,7 +107,6 @@ const ModalPartido = (props) => {
       const field = await response.json();
       
       setField(field)
-      console.log(field.matches)
       setServices(field.services)
       setMatches(field.matches)
     } catch (error) {
@@ -113,15 +114,23 @@ const ModalPartido = (props) => {
     }
   }
   useEffect(()=>{
-   
     if (show){
       getFieldDetail()
       setCategory("")
       setId("")
+      setDate("")
+      setTime("")
       
     }
   },[show])
-  
+
+  let formatted_time=""
+  if(time !== '' && time !== undefined){
+    const time_array = time.split(':')
+    time_array.pop()
+    formatted_time = time_array.join(':')
+  }
+  let [year,month,day] = date.split("-")
  
   return (
     <div>
@@ -171,11 +180,22 @@ const ModalPartido = (props) => {
         <div className="d-flex flex-column mt-5 mt-md-0 card-modal px-2 pt-2">
         <h5 className="text-center mt-1 fw-bold" style={{color:"#32A77A"}}>Partidos disponibles: {matches.length}</h5>
         <p className="text-secondary fst-italic indication">Da click para elegir el partido.</p>
+        {
+          date !== "" && time !== ""  ?
+          <p className="text-secondary fst-italic indication">Patido seleccionado: {`Fecha: ${day}-${month}-${year}  Hora: ${formatted_time}` }</p>
+          :
+          <></>
+        }
+        
         <div className="match-list-modal mb-4">
         {
           matches.length > 0 ? 
           matches.map((match,index) => (
-            <div onClick={(e)=>(setId(match.id))}>
+            <div onClick={(e)=>{
+              setId(match.id) 
+              setDate(match.date)
+              setTime(match.time)
+              }}>
                 <MatchResume 
                 key={index.toString()}
                 date={match.date} 
@@ -195,6 +215,7 @@ const ModalPartido = (props) => {
         <hr/>
         <Form.Label>Selecciona la categoria:</Form.Label>
         <Form.Select aria-label="Default select example" as="select" onChange={(e)=>(setCategory(e.target.value))}>
+          <option value="" >Elegir categoria</option>
           <option value="varonil" selected={category == "varonil" ? true:false}>Varonil</option>
           <option value="femenil" selected={category == "femenil" ? true:false}>Femenil</option>
           <option value="mixto" selected={category == "mixto" ? true:false}>Mixto</option>
