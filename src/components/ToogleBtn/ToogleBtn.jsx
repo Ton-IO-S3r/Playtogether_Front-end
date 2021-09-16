@@ -36,7 +36,7 @@ const GreenSwitch = withStyles((theme)=>({
   },
 }))(Switch);
 
-const ToogleBtn = ({fieldActive,setFieldActive}) => {
+const ToogleBtn = ({fieldId,fieldActive,setFieldActive}) => {
   // useEffect(()=>{
   //   const setFieldStatus = async()=>{
   //     const data = await updateFieldStatus(fieldActive)
@@ -47,7 +47,7 @@ const ToogleBtn = ({fieldActive,setFieldActive}) => {
 
   const updateFieldStatus = async (field_val) => {
     try{
-      const response = await fetch(`${API_URL}field_manager/field_show/${AUTH_ID}/`,{
+      const response = await fetch(`${API_URL}field_manager/field_show/${fieldId}/`,{
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

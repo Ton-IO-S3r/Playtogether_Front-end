@@ -37,7 +37,7 @@ const CanchaAdmin = ({fieldAdminData,name,cost,address,type,img,services,setModa
                     </Card.Text>
                     <div className="d-flex align-items-center justify-content-center">
                       <span className="mx-2">Off</span>
-                      <ToogleBtn fieldActive={fieldActive} setFieldActive={setFieldActive}/>
+                      <ToogleBtn fieldId={fieldAdminData.managers.field.id} fieldActive={fieldActive} setFieldActive={setFieldActive}/>
                       <span className="mx-2">On</span>
                     </div>
                   </>
