@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './detallecancha.scss'
 import Divider from '@material-ui/core/Divider';
 import Btn from 'components/Buttons/CallActionBtn'
-import {ICONS_URL, isAuthenticated} from 'Constants/API'
+import {ICONS_URL, isAuthenticated, AUTH_STAFF} from 'Constants/API'
 
 
 
@@ -115,9 +115,9 @@ const DetalleCancha = (props) => {
         :
         (isActivate === false ? (<div className="alert alert-secondary flex-fill" style={{textAlign: "center"}}>Partido finalizado</div>) 
         : 
-        (teamsFull === true && inTeam !== "" ? ( !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>)) 
+        (teamsFull === true && inTeam !== "" ? ( !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className={`${AUTH_STAFF === true ? 'd-none' : 'd-block' } mb-3`} text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>)) 
         :
-        (teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success flex-fill" style={{textAlign: "center"}}>Partido lleno</div> : ( !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className="mb-3" text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>)) )
+        (teamsFull === true && !inTeam !== ""  ? <div className="alert alert-success flex-fill" style={{textAlign: "center"}}>Partido lleno</div> : ( !isAuthenticated ? (<Btn className="mb-3" text="Unirse" onClick={()=>{window.location.href = `/login`;}}/>) : (showButton === false ? <Btn className={`${AUTH_STAFF === true ? 'd-none' : 'd-block' } mb-3`} text="Unirse" onClick={onClick}/> : <Btn className="mb-3" text="Dejar" onClick={onClickLeave}/>)) )
         ))
       } 
     </div>

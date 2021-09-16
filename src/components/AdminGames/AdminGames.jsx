@@ -158,15 +158,19 @@ const field_fake = {
   ]
 }
 
-const AdminGames = ({field}) => {
-  const [pendingGames, setPendingGames] = useState(field_fake.pending_matches)
+const AdminGames = (props) => {
+  const {field,matchUpdate,setMatchUpdate} = props
+  // const [pendingGames, setPendingGames] = useState(field.pending_matches)
   const [totalMatch, setTotalMatch] = useState(field.total_match_history)
-  const [matchHistory, setMatchHistory] = useState(field.match_history)
+  // const [matchHistory, setMatchHistory] = useState(field.match_history)
   const [modalShow, setModalShow] = useState(false);
   const [title, setTitle]= useState("")
   const [action, setAction] = useState("")
   const [textBtn, setTextBtn] = useState("")
-  const [actionBtn, setActionBtn] = useState(()=>{})
+  const [actionBtn, setActionBtn] = useState(()=>()=>{})
+  const [listPending, setListPending] = useState("list")
+  const [listHistory, setListHistory] = useState("")
+
 
   const updateMatch = async (id,organizer,accepted) => {
     try{
@@ -204,26 +208,33 @@ const AdminGames = ({field}) => {
     }
   }
 
-  const handleAccept = async (id) =>{
+  const handleAccept = async (id,organizer) =>{
+    console.log(organizer)
     let accepted = true
-    const response = await updateMatch(id)
-    console.log("partido aceptado")
+    const response = await updateMatch(id,organizer,accepted)
     setModalShow(false)
+    setMatchUpdate(true)
+    
+    
   }
   const handleDeny = async (id) =>{
     let accepted=false
     let organizer=""
     const response = await updateMatch(id,organizer,accepted)
-    console.log("partido denegado")
     setModalShow(false)
+    setMatchUpdate(true)
+    
   }
   const handleDelete = async (id) =>{
     const response = await deleteMatch(id)
-    console.log("partido eliminado")
     setModalShow(false)
+    setMatchUpdate(true)
+    
   }
 
-  
+  useEffect(()=>{
+    
+  },[field.pending_matches])
 
 
   return (
@@ -260,10 +271,10 @@ const AdminGames = ({field}) => {
           </div>
             
           <hr />
+          
           <div className="matches-list-container text-center">
-            {
-              pendingGames.length > 0 ? 
-                pendingGames.map((game,index)=>(
+            { field.pending_matches.length > 0 ? 
+              field.pending_matches.map((game,index)=>(
                   <PendingGame
                     key={index.toString()}
                     date={game.date}
@@ -274,20 +285,22 @@ const AdminGames = ({field}) => {
                       setTitle("Aceptar Partido")
                       setAction(`Aceptar el partido?`)
                       setTextBtn("Aceptar")
-                      setActionBtn(()=>(handleAccept(game.id)))}}
+                      setActionBtn(()=>()=>handleAccept(game.id,game.organizer.id))
+                      }}
                     deny={
                       ()=>{
                       setModalShow(true)
                       setTitle("Denegar Partido")
                       setAction(`Rechazar el partido?`)
                       setTextBtn("Rechazar")
-                      setActionBtn(()=>(handleDeny(game.id)))}}
+                      setActionBtn(()=>()=>(handleDeny(game.id)))}}
                     elimn={()=>{
                       setModalShow(true)
                       setTitle("Eliminar Partido")
                       setAction(`Eliminar el partido?`)
                       setTextBtn("Eliminar")
-                      setActionBtn(()=>(handleDelete(game.id)))}}
+                      setActionBtn(()=>()=>(handleDelete(game.id)))
+                      }}
                     
                     
                   />
@@ -308,8 +321,8 @@ const AdminGames = ({field}) => {
           </div> 
           <hr />
           <div className="history-match text-center">
-            { matchHistory.length > 0 ?
-              matchHistory.map((match, index) => (
+            { field.match_history.length > 0 ?
+              field.match_history.map((match, index) => (
                 <Link key={index.toString()} id={match.id} to={`/partidos/${match.id}`} className="game-link">
                   <MatchResume  
                     date={match.date} 
@@ -333,5 +346,4 @@ const AdminGames = ({field}) => {
     
   )
 }
-
 export default AdminGames
