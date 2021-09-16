@@ -8,9 +8,10 @@ import CardPerfil from 'components/CardPerfil';
 import UserMatches from 'components/UserMatches';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
-import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL} from 'Constants/API'
+import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL, AUTH_ID} from 'Constants/API'
 import Toast from 'components/Toast/Toast';
 import { notifySuccess, notifyWarning } from 'Functions/toastFunc';
+import ModalFollow from 'components/ModalFollow/ModalFollow.jsx'
 
 
 const user = 
@@ -35,13 +36,17 @@ const PerfilUsuario = () => {
   const [profileUpdated,setProfileUpdated] = useState(false);
   const [userCreatedMatch , setUserCreatedMatch] = useState({})
   const [totalMatchCreated, setTotalMatchCreated] = useState({})
-  const [teammate,setTeamMates] = useState([])
-  
+  const [teammateList,setTeamMatesList] = useState({})
+  const [modalShow, setModalShow] = useState(false);
+  const [followers, setFollowers] = useState([])
+  const [followings, setFollowings] = useState([])
+  const [list, setList] = useState([])
+  const [followSection, setfollowSection] = useState("")
+  let follow = false
   useEffect(() => {
     const getUserData = async () => {
       const dataFromServer = await getUser()
       setUserData(dataFromServer)
-      setTeamMates(dataFromServer.players.teammates)
 
       // localStorage.setItem("player_photo",dataFromServer.players.photo.split(".com/")[1])
     }
@@ -51,10 +56,18 @@ const PerfilUsuario = () => {
       setUserCreatedMatch(matchesCreated)
       
     }
+
+    const getTeamMates = async () => {
+      const matesList = await getUserTeamMates()
+      setTeamMatesList(matesList)
+      setFollowers(matesList.list_followers)
+      setFollowings(matesList.list_followings)
+    }
     
     getUserMatches()
     getUserData()
-  },[profileUpdated,id])
+    getTeamMates()
+  },[profileUpdated,id,follow])
 
   //SE DECLARAN PARAMETROS INCIALES PARA LA ACTIVACION DEL TOAST
   const [toastParams, setToastParams] = useState({
@@ -104,7 +117,69 @@ const PerfilUsuario = () => {
       console.log(error);
     }
   }
+  const getUserTeamMates = async ()=>{
+    try {
+      const response = await fetch(`${API_URL}players/teammates_list/${id}/`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        },
+      });
+      const data = await response.json();
+      
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+  const getUserTeamMatesPatch = async ()=>{
+    try {
+      const response = await fetch(`${API_URL}players/teammates/${id}/`, {
+        method:"PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${AUTH_TOKEN}`,
+        },
+      });
+      const data = await response.json();
+      
+      return data
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  followers.forEach(item => {
+    if (item.id == AUTH_ID){
+        follow = true
+        
+    }else{
+      follow = false
+      
+    }
+})
+  const handleFollow = (e) => {
+    e.preventDefault()
+    const response = getUserTeamMatesPatch()
+    setProfileUpdated(true)
+  }
+
+  const handleFollowers = () => {
+    setList(followers)
+    setfollowSection("Seguidores")
+    setModalShow(true)
+  }
+
+  const handleFollowings = () => {
+    setList(followings)
+    setfollowSection("Seguidos")
+    setModalShow(true)
+  }
+
+  
   
   return (
     <>
@@ -122,12 +197,17 @@ const PerfilUsuario = () => {
                 user_username={userData.username}
                 user_position={userData.players.position}
                 user_dominant_foot={userData.players.dominant_food}
-                
+                teammateList={teammateList}
                 user_date_joined={userData.date_joined.split("T")[0].split("-").reverse().join("/")}
                 profileUpdated = {profileUpdated}
                 setProfileUpdated = {setProfileUpdated}
                 toastParams={toastParams}
                 setToastParams = {setToastParams}
+                followers={followers}
+                follow={follow}
+                onClick={handleFollow}
+                handleFollowers={handleFollowers}
+                handleFollowings={handleFollowings}
               />
             </Col>
             <Col sm={12} md={7} lg={7} className="p-0 p-md-1 p-lg-3">
@@ -138,6 +218,7 @@ const PerfilUsuario = () => {
       </Container>
       <Footer/>
       <Toast />
+      <ModalFollow show={modalShow} onHide={() => setModalShow(false)} followSection={followSection} list={list}/>
     </>
   )
 }
