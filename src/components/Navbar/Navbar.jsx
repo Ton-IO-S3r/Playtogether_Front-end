@@ -23,6 +23,7 @@ const Navbar = (props) => {
         localStorage.removeItem('token')
         localStorage.removeItem('id')
         localStorage.removeItem('player_photo')
+        localStorage.removeItem('staff')
         window.location.href = "/";
 
     }

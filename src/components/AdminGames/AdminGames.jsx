@@ -79,11 +79,11 @@ const AdminGames = (props) => {
   }
 
   const handleAccept = async (id,organizer) =>{
-    console.log(organizer)
     let accepted = true
     const response = await updateMatch(id,organizer,accepted)
     setModalShow(false)
     setMatchUpdate(true)
+    console.log("aceptado")
     
     
   }
@@ -111,7 +111,7 @@ const AdminGames = (props) => {
 
   useEffect(()=>{
     
-  },[field.pending_matches])
+  },[field.managers.field.pending_matches])
 
   const createNewGame = (e) => {
     e.preventDefault()
@@ -131,7 +131,7 @@ const AdminGames = (props) => {
     const postNewGame = async (date, time)=>{
       const response = await postGame(date,time)
     }
-    !field.show ? setToastParams({
+    !field.managers.field.show ? setToastParams({
       type: 'warning',
       msg:'¡Tu cancha no es visible. Activala para poder crear un partido!',
       time:1500,
@@ -149,7 +149,7 @@ const AdminGames = (props) => {
     };
     const url =`${API_URL}field_manager/match_creation/`;
     const date_data = {
-      'field': field.id,
+      'field': field.managers.field.id,
       'date': date,
       'time': time
     }
@@ -177,7 +177,6 @@ const AdminGames = (props) => {
       }
     }
   }
-
   return (
     <div className="admin-games-container text-center py-4 px-2 mx-auto ">
       <Tabs
@@ -231,8 +230,8 @@ const AdminGames = (props) => {
           <hr />
           
           <div className="matches-list-container text-center">
-            { field.pending_matches.length > 0 ? 
-              field.pending_matches.map((game,index)=>(
+            { field.managers.field.pending_matches.length > 0 ? 
+              field.managers.field.pending_matches.map((game,index)=>(
                   <PendingGame
                     key={index.toString()}
                     date={game.date}
@@ -274,13 +273,13 @@ const AdminGames = (props) => {
         <div className="d-flex flex-wrap justify-content-center align-items-center">
             <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
             <h5 className="fw-bold">Historial de Partidos:</h5>
-              <h4 className="mx-3">{field.total_match_history}</h4>
+              <h4 className="mx-3">{field.managers.field.total_match_history}</h4>
             </div>
           </div> 
           <hr />
           <div className="history-match text-center">
-            { field.match_history.length > 0 ?
-              field.match_history.map((match, index) => (
+            { field.managers.field.match_history.length > 0 ?
+              field.managers.field.match_history.map((match, index) => (
                 <Link key={index.toString()} id={match.id} to={`/partidos/${match.id}`} className="game-link">
                   <MatchResume  
                     date={match.date} 

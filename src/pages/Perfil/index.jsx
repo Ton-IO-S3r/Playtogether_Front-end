@@ -152,15 +152,18 @@ const PerfilUsuario = () => {
     }
   }
 
-  followers.forEach(item => {
-    if (item.id == AUTH_ID){
-        follow = true
+  if (followers !== undefined){
+    followers.forEach(item => {
+      if (item.id == AUTH_ID){
+          follow = true
+          
+      }else{
+        follow = false
         
-    }else{
-      follow = false
-      
-    }
-})
+      }
+  })
+  }
+  
   const handleFollow = (e) => {
     e.preventDefault()
     const response = getUserTeamMatesPatch()
