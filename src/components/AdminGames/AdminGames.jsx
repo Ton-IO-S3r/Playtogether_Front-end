@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 // import MomentUtils from '@date-io/moment';
 // import DatePicker from 'react-datepicker';
 import {TimePicker, DatePicker} from '@material-ui/pickers'
+import Toast from 'components/Toast/Toast'
 import moment from 'moment';
 // import TimePicker from 'rc-time-picker';
 import ActionBtn from 'components/ActionBtn';
@@ -79,11 +80,11 @@ const AdminGames = (props) => {
   }
 
   const handleAccept = async (id,organizer) =>{
-    console.log(organizer)
     let accepted = true
     const response = await updateMatch(id,organizer,accepted)
     setModalShow(false)
-    setMatchUpdate(true)
+    setProfileUpdated(!profileUpdated)
+    notifySuccess("Partido Aceptado",1000)
     
     
   }
@@ -92,13 +93,15 @@ const AdminGames = (props) => {
     let organizer=""
     const response = await updateMatch(id,organizer,accepted)
     setModalShow(false)
-    setMatchUpdate(true)
+    setProfileUpdated(!profileUpdated)
+    notifySuccess("Partido Negado",1000)
     
   }
   const handleDelete = async (id) =>{
     const response = await deleteMatch(id)
     setModalShow(false)
-    setMatchUpdate(true)
+    setProfileUpdated(!profileUpdated)
+    notifySuccess("Partido Eliminado",1000)
     
   }
   const handleSelectedDate = (date) => {
@@ -111,7 +114,7 @@ const AdminGames = (props) => {
 
   useEffect(()=>{
     
-  },[field.pending_matches])
+  },[field.managers.field.pending_matches])
 
   const createNewGame = (e) => {
     e.preventDefault()
@@ -131,7 +134,7 @@ const AdminGames = (props) => {
     const postNewGame = async (date, time)=>{
       const response = await postGame(date,time)
     }
-    !field.show ? setToastParams({
+    !field.managers.field.show ? setToastParams({
       type: 'warning',
       msg:'¡Tu cancha no es visible. Activala para poder crear un partido!',
       time:1500,
@@ -149,7 +152,7 @@ const AdminGames = (props) => {
     };
     const url =`${API_URL}field_manager/match_creation/`;
     const date_data = {
-      'field': field.id,
+      'field': field.managers.field.id,
       'date': date,
       'time': time
     }
@@ -177,7 +180,6 @@ const AdminGames = (props) => {
       }
     }
   }
-
   return (
     <div className="admin-games-container text-center py-4 px-2 mx-auto ">
       <Tabs
@@ -231,8 +233,8 @@ const AdminGames = (props) => {
           <hr />
           
           <div className="matches-list-container text-center">
-            { field.pending_matches.length > 0 ? 
-              field.pending_matches.map((game,index)=>(
+            { field.managers.field.pending_matches.length > 0 ? 
+              field.managers.field.pending_matches.map((game,index)=>(
                   <PendingGame
                     key={index.toString()}
                     date={game.date}
@@ -241,7 +243,7 @@ const AdminGames = (props) => {
                     accept={()=>{
                       setModalShow(true)
                       setTitle("Aceptar Partido")
-                      setAction(`Aceptar el partido?`)
+                      setAction(`¿Aceptar el partido?`)
                       setTextBtn("Aceptar")
                       setActionBtn(()=>()=>handleAccept(game.id,game.organizer.id))
                       }}
@@ -249,13 +251,13 @@ const AdminGames = (props) => {
                       ()=>{
                       setModalShow(true)
                       setTitle("Denegar Partido")
-                      setAction(`Rechazar el partido?`)
+                      setAction(`¿Rechazar el partido?`)
                       setTextBtn("Rechazar")
                       setActionBtn(()=>()=>(handleDeny(game.id)))}}
                     elimn={()=>{
                       setModalShow(true)
                       setTitle("Eliminar Partido")
-                      setAction(`Eliminar el partido?`)
+                      setAction(`¿Eliminar el partido?`)
                       setTextBtn("Eliminar")
                       setActionBtn(()=>()=>(handleDelete(game.id)))
                       }}
@@ -274,13 +276,13 @@ const AdminGames = (props) => {
         <div className="d-flex flex-wrap justify-content-center align-items-center">
             <div className="d-flex flex-row justify-content-around align-items-center p-3 ">
             <h5 className="fw-bold">Historial de Partidos:</h5>
-              <h4 className="mx-3">{field.total_match_history}</h4>
+              <h4 className="mx-3">{field.managers.field.total_match_history}</h4>
             </div>
           </div> 
           <hr />
           <div className="history-match text-center">
-            { field.match_history.length > 0 ?
-              field.match_history.map((match, index) => (
+            { field.managers.field.match_history.length > 0 ?
+              field.managers.field.match_history.map((match, index) => (
                 <Link key={index.toString()} id={match.id} to={`/partidos/${match.id}`} className="game-link">
                   <MatchResume  
                     date={match.date} 
@@ -299,6 +301,7 @@ const AdminGames = (props) => {
           </div>
         </Tab>
       </Tabs>
+      <Toast/>
       <ModalMatchAction show={modalShow} onHide={()=> setModalShow(false)} title={title} action={action} actionBtn={actionBtn} textBtn={textBtn}/>
     </div>
     
