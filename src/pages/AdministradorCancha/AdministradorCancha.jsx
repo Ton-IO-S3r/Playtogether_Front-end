@@ -7,10 +7,9 @@ import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
-import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL, AUTH_STAFF, AUTH_ID} from 'Constants/API'
+import {AUTH_TOKEN, API_URL, BACKGROUNDS_URL, AUTH_ID} from 'Constants/API'
 import Toast from 'components/Toast/Toast';
 import { notifySuccess, notifyWarning } from 'Functions/toastFunc';
-import Loading from 'components/LoadingPage/Loading'
 import CardAdmin from 'components/CardAdmin';
 import CanchaAdmin from 'components/CanchaAdmin';
 import AdminGames from 'components/AdminGames/AdminGames';
@@ -77,7 +76,6 @@ const AdministradorCancha = () => {
     const getFieldTypes = async () => {
       const dataFromServer = await getFieldTypesData()
       const types_names = Object.fromEntries(dataFromServer.map(item=>[item.id,item.name])) 
-      console.log(types_names)
       setFootballTypes(types_names)
       
 
@@ -99,9 +97,12 @@ const AdministradorCancha = () => {
   useEffect(() => {
     const getFieldAdminData = async () => {
       const dataFromServer = await getFieldAdmin()
-      setFieldAdminData(dataFromServer)
-      setFieldActive(dataFromServer.managers.field.show)
+      setTimeout(() => {
+        setFieldAdminData(dataFromServer)
+        setFieldActive(dataFromServer.managers.field.show)
+      }, 1000);
     }
+    
     getFieldAdminData()
     
   },[profileUpdated, matchUpdate, fieldActive])

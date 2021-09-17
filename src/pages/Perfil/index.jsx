@@ -153,7 +153,7 @@ const PerfilUsuario = () => {
 
   if (followers !== undefined){
     followers.forEach(item => {
-      if (item.id == AUTH_ID){
+      if (item.id === AUTH_ID){
           follow = true
           
       }else{
