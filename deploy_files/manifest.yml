@@ -1,5 +1,5 @@
 applications:  
-- name: playtogether
+- name: playtogetherAPP
   memory: 128M
   random-route: false
   instances: 1
