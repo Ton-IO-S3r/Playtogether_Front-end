@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import { Spin as Hamburger} from 'hamburger-react'
 import Button from 'components/Buttons/CallActionBtn'
 //RUTAS
@@ -9,6 +9,10 @@ import {photoAPI, AUTH_TOKEN, AUTH_ID, AUTH_PHOTO, ICONS_URL,AUTH_STAFF} from 'C
 import './navbar.scss'
 
 const Navbar = (props) => {
+    const [profile_picture, setProfile_Picture]= useState(props.profilePic)
+    useEffect(() => {
+      setProfile_Picture(props.profilePic)
+    }, [props.profilePic])
     const [show, setShow] = useState(false)
     let isLogin = false
      
@@ -17,6 +21,7 @@ const Navbar = (props) => {
     }else{
         isLogin = true
     }
+
 
     const handleLogOut = () =>{
        
@@ -73,7 +78,7 @@ const Navbar = (props) => {
                                         {/* <Link className="search-games" to='/crear-partido/'>Crear Partido</Link> */}
                                     </li>
                                     <div className="nav-photo" onClick={()=>{setShow(!show)}} >
-                                    <img src={`${photoAPI}${AUTH_PHOTO}`} alt="user"/>
+                                    <img src={`${profile_picture}`} alt="user"/>
                                    
                                     </div>
                                     </ul>

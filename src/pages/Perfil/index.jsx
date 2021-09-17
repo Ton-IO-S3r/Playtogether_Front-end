@@ -185,7 +185,7 @@ const PerfilUsuario = () => {
   
   return (
     <>
-      <Navbar />
+      <Navbar profilePic = {userData.players.photo}/>
       <Container fluid={true} className="vista-perfil-container pt-2 pb-4" style={{background:`linear-gradient(129deg, rgba(2,0,36,0.8883928571428571) 0%, rgba(61,99,19,0.5578606442577031) 100%), url(${BACKGROUNDS_URL}background_3.jpg), no-repeat,fixed, center`}}>
         <Container>
         <Row className="gy-3 justify-content-center pb-5">

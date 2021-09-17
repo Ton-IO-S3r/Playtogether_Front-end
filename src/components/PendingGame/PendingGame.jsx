@@ -18,7 +18,7 @@ const PendingGame = ({date, time, game_id, organizer,accept,deny,elimn}) => {
   
   return (
     
-    <Container fluid className="px-0">
+    <Container fluid className="px-0 mb-3">
       {organizer !== null ? (
         <Row className="pending-game-container mt-2 mb-3 gx-0">
           <Col xs={4}>
