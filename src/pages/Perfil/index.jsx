@@ -63,11 +63,10 @@ const PerfilUsuario = () => {
       setFollowers(matesList.list_followers)
       setFollowings(matesList.list_followings)
     }
-    
     getUserMatches()
     getUserData()
     getTeamMates()
-  },[profileUpdated,id,follow])
+  },[profileUpdated,id])
 
   //SE DECLARAN PARAMETROS INCIALES PARA LA ACTIVACION DEL TOAST
   const [toastParams, setToastParams] = useState({
@@ -167,7 +166,7 @@ const PerfilUsuario = () => {
   const handleFollow = (e) => {
     e.preventDefault()
     const response = getUserTeamMatesPatch()
-    setProfileUpdated(true)
+    setProfileUpdated(!profileUpdated)
   }
 
   const handleFollowers = () => {

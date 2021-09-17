@@ -66,7 +66,7 @@ const Navbar = (props) => {
                                 (
                                     <ul className="navbar-nav">
                                     <li className="nav-item align-self-center mx-3">
-                                        <Link className={`${AUTH_STAFF === true ? 'd-none' : 'd-block'} search-games ${window.location.pathname == "/partidos/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/partidos/'>Buscar Partidos</Link>
+                                        <Link className={`search-games ${window.location.pathname == "/partidos/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/partidos/'>Buscar Partidos</Link>
                                     </li>
                                     <li className="nav-item align-self-center mx-4">
                                     <Link className={`${AUTH_STAFF === true ? 'd-none' : 'd-block'} search-games ${window.location.pathname == "/crear-partido/" ? "fw-bold text-decoration-underline" : "fw-light"}`} to='/crear-partido/'>Organizar Partido</Link>

@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 // import MomentUtils from '@date-io/moment';
 // import DatePicker from 'react-datepicker';
 import {TimePicker, DatePicker} from '@material-ui/pickers'
+import Toast from 'components/Toast/Toast'
 import moment from 'moment';
 // import TimePicker from 'rc-time-picker';
 import ActionBtn from 'components/ActionBtn';
@@ -82,8 +83,8 @@ const AdminGames = (props) => {
     let accepted = true
     const response = await updateMatch(id,organizer,accepted)
     setModalShow(false)
-    setMatchUpdate(true)
-    console.log("aceptado")
+    setProfileUpdated(!profileUpdated)
+    notifySuccess("Partido Aceptado",1000)
     
     
   }
@@ -92,13 +93,15 @@ const AdminGames = (props) => {
     let organizer=""
     const response = await updateMatch(id,organizer,accepted)
     setModalShow(false)
-    setMatchUpdate(true)
+    setProfileUpdated(!profileUpdated)
+    notifySuccess("Partido Negado",1000)
     
   }
   const handleDelete = async (id) =>{
     const response = await deleteMatch(id)
     setModalShow(false)
-    setMatchUpdate(true)
+    setProfileUpdated(!profileUpdated)
+    notifySuccess("Partido Eliminado",1000)
     
   }
   const handleSelectedDate = (date) => {
@@ -240,7 +243,7 @@ const AdminGames = (props) => {
                     accept={()=>{
                       setModalShow(true)
                       setTitle("Aceptar Partido")
-                      setAction(`Aceptar el partido?`)
+                      setAction(`¿Aceptar el partido?`)
                       setTextBtn("Aceptar")
                       setActionBtn(()=>()=>handleAccept(game.id,game.organizer.id))
                       }}
@@ -248,13 +251,13 @@ const AdminGames = (props) => {
                       ()=>{
                       setModalShow(true)
                       setTitle("Denegar Partido")
-                      setAction(`Rechazar el partido?`)
+                      setAction(`¿Rechazar el partido?`)
                       setTextBtn("Rechazar")
                       setActionBtn(()=>()=>(handleDeny(game.id)))}}
                     elimn={()=>{
                       setModalShow(true)
                       setTitle("Eliminar Partido")
-                      setAction(`Eliminar el partido?`)
+                      setAction(`¿Eliminar el partido?`)
                       setTextBtn("Eliminar")
                       setActionBtn(()=>()=>(handleDelete(game.id)))
                       }}
@@ -298,6 +301,7 @@ const AdminGames = (props) => {
           </div>
         </Tab>
       </Tabs>
+      <Toast/>
       <ModalMatchAction show={modalShow} onHide={()=> setModalShow(false)} title={title} action={action} actionBtn={actionBtn} textBtn={textBtn}/>
     </div>
     
