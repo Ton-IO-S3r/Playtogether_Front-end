@@ -63,11 +63,10 @@ const PerfilUsuario = () => {
       setFollowers(matesList.list_followers)
       setFollowings(matesList.list_followings)
     }
-    
     getUserMatches()
     getUserData()
     getTeamMates()
-  },[profileUpdated,id,follow])
+  },[profileUpdated,id])
 
   //SE DECLARAN PARAMETROS INCIALES PARA LA ACTIVACION DEL TOAST
   const [toastParams, setToastParams] = useState({
@@ -152,19 +151,22 @@ const PerfilUsuario = () => {
     }
   }
 
-  followers.forEach(item => {
-    if (item.id == AUTH_ID){
-        follow = true
+  if (followers !== undefined){
+    followers.forEach(item => {
+      if (item.id == AUTH_ID){
+          follow = true
+          
+      }else{
+        follow = false
         
-    }else{
-      follow = false
-      
-    }
-})
+      }
+  })
+  }
+  
   const handleFollow = (e) => {
     e.preventDefault()
     const response = getUserTeamMatesPatch()
-    setProfileUpdated(true)
+    setProfileUpdated(!profileUpdated)
   }
 
   const handleFollowers = () => {
