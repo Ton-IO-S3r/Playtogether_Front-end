@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import ActionBtn from 'components/ActionBtn';
 import axios from 'axios';
 import { useRef } from 'react';
-import {AUTH_TOKEN, API_URL, AUTH_ID} from 'Constants/API'
+import {AUTH_TOKEN, API_URL, AUTH_ID, photoAPI} from 'Constants/API'
 import Toast from 'components/Toast/Toast'
 import {notifyWarning} from 'Functions/toastFunc'
 import { BeatLoader } from 'react-spinners';
@@ -222,6 +222,11 @@ const UpdateAdminModal = ({fieldAdminData,setFieldAdminData, onHide, show, toast
       ){
       //ALERTA
       notifyWarning("Por favor no dejes campos vacios")
+      setOpen(false)
+      return
+    }
+    if( adminUpdateData.managers.field.photo === `${photoAPI}default_field.png`){
+      notifyWarning("Por favor elige una imagen para tu cancha")
       setOpen(false)
       return
     }
